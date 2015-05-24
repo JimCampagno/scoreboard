@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SBSetupViewController.h
 //  scoreboard
 //
 //  Created by Jim Campagno on 5/24/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface SBSetupViewController : UIViewController
 
 @end
-

@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		7D45F3841B126AA30053F47F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3831B126AA30053F47F /* main.m */; };
 		7D45F3871B126AA30053F47F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3861B126AA30053F47F /* AppDelegate.m */; };
-		7D45F38A1B126AA30053F47F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3891B126AA30053F47F /* ViewController.m */; };
 		7D45F38D1B126AA30053F47F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F38B1B126AA30053F47F /* Main.storyboard */; };
 		7D45F38F1B126AA30053F47F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F38E1B126AA30053F47F /* Images.xcassets */; };
 		7D45F3921B126AA30053F47F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F3901B126AA30053F47F /* LaunchScreen.xib */; };
 		7D45F39E1B126AA30053F47F /* scoreboardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F39D1B126AA30053F47F /* scoreboardTests.m */; };
+		7D45F3AC1B1271120053F47F /* SBSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3AB1B1271120053F47F /* SBSetupViewController.m */; };
+		7D45F3AF1B1286120053F47F /* SBUILabelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3AE1B1286120053F47F /* SBUILabelHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +33,16 @@
 		7D45F3831B126AA30053F47F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7D45F3851B126AA30053F47F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7D45F3861B126AA30053F47F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7D45F3881B126AA30053F47F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7D45F3891B126AA30053F47F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7D45F38C1B126AA30053F47F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7D45F38E1B126AA30053F47F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7D45F3911B126AA30053F47F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7D45F3971B126AA30053F47F /* scoreboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = scoreboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D45F39C1B126AA30053F47F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D45F39D1B126AA30053F47F /* scoreboardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = scoreboardTests.m; sourceTree = "<group>"; };
+		7D45F3AA1B1271120053F47F /* SBSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSetupViewController.h; sourceTree = "<group>"; };
+		7D45F3AB1B1271120053F47F /* SBSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSetupViewController.m; sourceTree = "<group>"; };
+		7D45F3AD1B1286120053F47F /* SBUILabelHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUILabelHelper.h; sourceTree = "<group>"; };
+		7D45F3AE1B1286120053F47F /* SBUILabelHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUILabelHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +86,10 @@
 			children = (
 				7D45F3851B126AA30053F47F /* AppDelegate.h */,
 				7D45F3861B126AA30053F47F /* AppDelegate.m */,
-				7D45F3881B126AA30053F47F /* ViewController.h */,
-				7D45F3891B126AA30053F47F /* ViewController.m */,
+				7D45F3AD1B1286120053F47F /* SBUILabelHelper.h */,
+				7D45F3AE1B1286120053F47F /* SBUILabelHelper.m */,
+				7D45F3AA1B1271120053F47F /* SBSetupViewController.h */,
+				7D45F3AB1B1271120053F47F /* SBSetupViewController.m */,
 				7D45F38B1B126AA30053F47F /* Main.storyboard */,
 				7D45F38E1B126AA30053F47F /* Images.xcassets */,
 				7D45F3901B126AA30053F47F /* LaunchScreen.xib */,
@@ -219,9 +224,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D45F38A1B126AA30053F47F /* ViewController.m in Sources */,
 				7D45F3871B126AA30053F47F /* AppDelegate.m in Sources */,
+				7D45F3AC1B1271120053F47F /* SBSetupViewController.m in Sources */,
 				7D45F3841B126AA30053F47F /* main.m in Sources */,
+				7D45F3AF1B1286120053F47F /* SBUILabelHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +422,7 @@
 				7D45F3A31B126AA30053F47F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7D45F3A41B126AA30053F47F /* Build configuration list for PBXNativeTarget "scoreboardTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +431,7 @@
 				7D45F3A61B126AA30053F47F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
