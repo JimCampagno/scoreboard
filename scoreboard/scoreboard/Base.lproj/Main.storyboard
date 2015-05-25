@@ -31,7 +31,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VM-md-5Mi" userLabel="DisplayJoinGameCode">
                                 <rect key="frame" x="16" y="161" width="568" height="155"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETJ-mx-yPA" userLabel="oneDigit">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETJ-mx-yPA" userLabel="oneDigit">
                                         <rect key="frame" x="59" y="57" width="40" height="42"/>
                                         <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
@@ -41,7 +41,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFY-KD-9In" userLabel="twoDigit">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFY-KD-9In" userLabel="twoDigit">
                                         <rect key="frame" x="138" y="57" width="40" height="42"/>
                                         <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
@@ -51,7 +51,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gf7-l4-4ts" userLabel="threeDigit">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gf7-l4-4ts" userLabel="threeDigit">
                                         <rect key="frame" x="216" y="57" width="40" height="42"/>
                                         <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
@@ -61,7 +61,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXR-te-UpJ" userLabel="fourDigit">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXR-te-UpJ" userLabel="fourDigit">
                                         <rect key="frame" x="295" y="57" width="40" height="42"/>
                                         <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
@@ -71,7 +71,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIn-ao-Inv" userLabel="fiveDigit">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIn-ao-Inv" userLabel="fiveDigit">
                                         <rect key="frame" x="374" y="57" width="40" height="42"/>
                                         <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
@@ -81,7 +81,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzJ-z0-dB6" userLabel="sixDigit">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzJ-z0-dB6" userLabel="sixDigit">
                                         <rect key="frame" x="453" y="57" width="40" height="42"/>
                                         <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
@@ -91,7 +91,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUx-NI-haz">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUx-NI-haz">
                                         <rect key="frame" x="234" y="109" width="101" height="38"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="Ouk-LL-ncZ"/>
@@ -101,6 +101,9 @@
                                         <state key="normal" title="CONNECT">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="connect:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ryd-pO-ae4"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -113,7 +116,7 @@
                                     <constraint firstItem="IzJ-z0-dB6" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="9bY-uT-Z7J"/>
                                     <constraint firstItem="KXR-te-UpJ" firstAttribute="width" secondItem="KXR-te-UpJ" secondAttribute="height" multiplier="47:49" id="BLy-Ri-g8z"/>
                                     <constraint firstItem="Gf7-l4-4ts" firstAttribute="width" secondItem="Gf7-l4-4ts" secondAttribute="height" multiplier="47:49" id="DLO-Zn-i80"/>
-                                    <constraint firstItem="ETJ-mx-yPA" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="ELj-1b-FAi"/>
+                                    <constraint firstItem="ETJ-mx-yPA" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" id="ELj-1b-FAi"/>
                                     <constraint firstItem="EIn-ao-Inv" firstAttribute="width" secondItem="EIn-ao-Inv" secondAttribute="height" multiplier="47:49" id="FSC-3G-GxO"/>
                                     <constraint firstItem="EFY-KD-9In" firstAttribute="width" secondItem="EFY-KD-9In" secondAttribute="height" multiplier="47:49" id="GLT-c1-7s7"/>
                                     <constraint firstItem="pUx-NI-haz" firstAttribute="bottom" secondItem="5VM-md-5Mi" secondAttribute="bottom" constant="-8" id="KT6-W4-fHt"/>
@@ -143,6 +146,9 @@
                                 <state key="normal" title="CREATE GAME">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createGame:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vAb-9h-opu"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZD-2g-G3E">
                                 <rect key="frame" x="16" y="405" width="568" height="30"/>
@@ -150,7 +156,15 @@
                                 <state key="normal" title="JOIN GAME">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="joinGame:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="WH7-su-oXs"/>
+                                </connections>
                             </button>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Xv-GY-ipr" userLabel="storeDigits">
+                                <rect key="frame" x="287.5" y="120" width="26" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -160,6 +174,8 @@
                             <constraint firstItem="fZD-2g-G3E" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="HPh-BM-vIa"/>
                             <constraint firstItem="ueS-eC-LeI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="PV2-P6-jq6"/>
                             <constraint firstItem="ueS-eC-LeI" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="TAH-XW-Zxe"/>
+                            <constraint firstItem="4Xv-GY-ipr" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="0.5" id="VKk-hz-yyR"/>
+                            <constraint firstItem="4Xv-GY-ipr" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="0.45" id="a7B-BT-RhU"/>
                             <constraint firstItem="5VM-md-5Mi" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="bf7-CM-u2u"/>
                             <constraint firstItem="fZD-2g-G3E" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="1.4" id="dAg-Ww-hYV"/>
                             <constraint firstItem="5VM-md-5Mi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="dRn-PY-RVi"/>
@@ -171,7 +187,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="connectProp" destination="pUx-NI-haz" id="g5k-Lb-zFc"/>
+                        <outlet property="displayJoinGameDigits" destination="5VM-md-5Mi" id="cgO-MF-SxX"/>
                         <outlet property="enterName" destination="u2f-Ay-Hv6" id="tZ0-qJ-elz"/>
+                        <outlet property="invisibleDigits" destination="4Xv-GY-ipr" id="mfa-IX-kDO"/>
                         <outletCollection property="joinGameNumbers" destination="ETJ-mx-yPA" id="PtM-eg-Tgw"/>
                         <outletCollection property="joinGameNumbers" destination="EFY-KD-9In" id="dYY-f6-s8r"/>
                         <outletCollection property="joinGameNumbers" destination="Gf7-l4-4ts" id="i7x-cz-ApR"/>

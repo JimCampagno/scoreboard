@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SBSetupViewController : UIViewController
+@interface SBSetupViewController : UIViewController <UITextFieldDelegate>
 
 @end
