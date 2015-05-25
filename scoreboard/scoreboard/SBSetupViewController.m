@@ -8,6 +8,7 @@
 
 #import "SBSetupViewController.h"
 #import "SBUILabelHelper.h"
+#import <Firebase/Firebase.h>
 
 @interface SBSetupViewController ()
 
@@ -38,6 +39,29 @@
     self.displayJoinGameDigits.alpha = 0;
     
     [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
+    
+    
+    
+    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://boiling-heat-4798.firebaseio.com"];
+    
+    
+    [[ref childByAppendingPath:@"rooms"] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+
+        
+        NSDictionary *jim = @{  @"name": @"JIM",
+                            @"coolness": @"10"};
+        
+        NSDictionary *ant = @{  @"name": @"ANT",
+                                @"coolness": @"0"};
+        
+        NSDictionary *listOfMorons = @{ @"jim": jim, @"ant": ant};
+        
+
+        [currentData setValue:listOfMorons];
+        return [FTransactionResult successWithValue:currentData];
+    }];
+    
+    
     
 }
 
@@ -87,7 +111,7 @@
     
     
     [self animateCreateButtonDown];
-
+    
     [self animateJoinButtonOnTap];
     
     //    [self.invisibleDigits becomeFirstResponder];
@@ -185,20 +209,28 @@
                          self.joinGameProp.frame = CGRectMake(self.joinGameProp.frame.origin.x + 0, self.joinGameProp.frame.origin.y - 200, self.joinGameProp.frame.size.width, self.joinGameProp.frame.size.height);
                          
                          self.displayJoinGameDigits.alpha = 0;
-
-
+                         
+                         
                          
                      }
                      completion:^ (BOOL finished) {
-                         
-                         
-                         
                      }];
-
+    
+    
     
 }
 
 
+
+- (void)setupFireBase {
+    
+    // Create a reference to a Firebase location
+    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://boiling-heat-4798.firebaseio.com"];
+    
+    // Write data to Firebase
+    [myRootRef setValue:@"Do you have data? You'll love Firebase."];
+    
+}
 /*
  #pragma mark - Navigation
  
