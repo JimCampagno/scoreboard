@@ -33,7 +33,6 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETJ-mx-yPA" userLabel="oneDigit">
                                         <rect key="frame" x="59" y="57" width="40" height="42"/>
-                                        <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ETJ-mx-yPA" secondAttribute="height" multiplier="47:49" id="MyH-Ea-17P"/>
                                         </constraints>
@@ -43,7 +42,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFY-KD-9In" userLabel="twoDigit">
                                         <rect key="frame" x="138" y="57" width="40" height="42"/>
-                                        <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="EFY-KD-9In" secondAttribute="height" multiplier="47:49" id="Wwq-ck-Gd0"/>
                                         </constraints>
@@ -53,7 +51,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gf7-l4-4ts" userLabel="threeDigit">
                                         <rect key="frame" x="216" y="57" width="40" height="42"/>
-                                        <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Gf7-l4-4ts" secondAttribute="height" multiplier="47:49" id="Sry-cG-kTO"/>
                                         </constraints>
@@ -63,7 +60,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXR-te-UpJ" userLabel="fourDigit">
                                         <rect key="frame" x="295" y="57" width="40" height="42"/>
-                                        <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="KXR-te-UpJ" secondAttribute="height" multiplier="47:49" id="Y8e-w9-N0L"/>
                                         </constraints>
@@ -73,7 +69,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIn-ao-Inv" userLabel="fiveDigit">
                                         <rect key="frame" x="374" y="57" width="40" height="42"/>
-                                        <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="EIn-ao-Inv" secondAttribute="height" multiplier="47:49" id="fvh-IB-siJ"/>
                                         </constraints>
@@ -83,7 +78,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzJ-z0-dB6" userLabel="sixDigit">
                                         <rect key="frame" x="453" y="57" width="40" height="42"/>
-                                        <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="IzJ-z0-dB6" secondAttribute="height" multiplier="47:49" id="8XI-A4-cHE"/>
                                         </constraints>
@@ -103,41 +97,27 @@
                                         </state>
                                         <connections>
                                             <action selector="connect:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ryd-pO-ae4"/>
+                                            <action selector="connectProp:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9fT-aI-a3q"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="0.63" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="KXR-te-UpJ" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="1.11111" id="1Tz-qQ-guO"/>
                                     <constraint firstItem="Gf7-l4-4ts" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="5PM-PV-6zn"/>
-                                    <constraint firstItem="IzJ-z0-dB6" firstAttribute="width" secondItem="IzJ-z0-dB6" secondAttribute="height" multiplier="47:49" id="61M-Tx-PRp"/>
                                     <constraint firstItem="EIn-ao-Inv" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="6tR-85-tos"/>
-                                    <constraint firstItem="IzJ-z0-dB6" firstAttribute="width" secondItem="IzJ-z0-dB6" secondAttribute="height" multiplier="47:49" id="7CX-xz-QNz"/>
                                     <constraint firstItem="IzJ-z0-dB6" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="9bY-uT-Z7J"/>
-                                    <constraint firstItem="KXR-te-UpJ" firstAttribute="width" secondItem="KXR-te-UpJ" secondAttribute="height" multiplier="47:49" id="BLy-Ri-g8z"/>
-                                    <constraint firstItem="Gf7-l4-4ts" firstAttribute="width" secondItem="Gf7-l4-4ts" secondAttribute="height" multiplier="47:49" id="DLO-Zn-i80"/>
                                     <constraint firstItem="ETJ-mx-yPA" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" id="ELj-1b-FAi"/>
-                                    <constraint firstItem="EIn-ao-Inv" firstAttribute="width" secondItem="EIn-ao-Inv" secondAttribute="height" multiplier="47:49" id="FSC-3G-GxO"/>
-                                    <constraint firstItem="EFY-KD-9In" firstAttribute="width" secondItem="EFY-KD-9In" secondAttribute="height" multiplier="47:49" id="GLT-c1-7s7"/>
                                     <constraint firstItem="pUx-NI-haz" firstAttribute="bottom" secondItem="5VM-md-5Mi" secondAttribute="bottom" constant="-8" id="KT6-W4-fHt"/>
                                     <constraint firstItem="IzJ-z0-dB6" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="1.66667" id="KYa-UA-DZx"/>
-                                    <constraint firstItem="IzJ-z0-dB6" firstAttribute="width" secondItem="IzJ-z0-dB6" secondAttribute="height" multiplier="47:49" id="PKP-El-AU8"/>
-                                    <constraint firstItem="IzJ-z0-dB6" firstAttribute="width" secondItem="IzJ-z0-dB6" secondAttribute="height" multiplier="47:49" id="RJk-Rt-G7U"/>
                                     <constraint firstItem="EFY-KD-9In" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="0.555555" id="Tca-GO-MoW"/>
                                     <constraint firstItem="KXR-te-UpJ" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="VXc-6c-IZJ"/>
                                     <constraint firstItem="EFY-KD-9In" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="a5A-IW-9F9"/>
-                                    <constraint firstItem="EIn-ao-Inv" firstAttribute="width" secondItem="EIn-ao-Inv" secondAttribute="height" multiplier="47:49" id="eYQ-Qw-qXV"/>
                                     <constraint firstAttribute="height" constant="155" id="hkH-vm-eGA"/>
                                     <constraint firstItem="pUx-NI-haz" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" constant="0.5" id="jgT-CT-Oak"/>
                                     <constraint firstItem="EIn-ao-Inv" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="1.38889" id="kC8-57-TWb"/>
                                     <constraint firstItem="Gf7-l4-4ts" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="0.833333" id="keJ-0h-yuI"/>
-                                    <constraint firstItem="IzJ-z0-dB6" firstAttribute="width" secondItem="IzJ-z0-dB6" secondAttribute="height" multiplier="47:49" id="oW0-HT-Dl0"/>
-                                    <constraint firstItem="KXR-te-UpJ" firstAttribute="width" secondItem="KXR-te-UpJ" secondAttribute="height" multiplier="47:49" id="qKF-L6-9C6"/>
-                                    <constraint firstItem="EIn-ao-Inv" firstAttribute="width" secondItem="EIn-ao-Inv" secondAttribute="height" multiplier="47:49" id="siJ-PB-7fB"/>
-                                    <constraint firstItem="Gf7-l4-4ts" firstAttribute="width" secondItem="Gf7-l4-4ts" secondAttribute="height" multiplier="47:49" id="t6q-dX-p22"/>
                                     <constraint firstItem="ETJ-mx-yPA" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="0.277778" id="uCb-h7-rss"/>
-                                    <constraint firstItem="EIn-ao-Inv" firstAttribute="width" secondItem="EIn-ao-Inv" secondAttribute="height" multiplier="47:49" id="ynQ-EF-oEs"/>
-                                    <constraint firstItem="KXR-te-UpJ" firstAttribute="width" secondItem="KXR-te-UpJ" secondAttribute="height" multiplier="47:49" id="z6g-Au-mpf"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueS-eC-LeI">
@@ -187,7 +167,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="connectProp" destination="pUx-NI-haz" id="g5k-Lb-zFc"/>
                         <outlet property="displayJoinGameDigits" destination="5VM-md-5Mi" id="cgO-MF-SxX"/>
                         <outlet property="enterName" destination="u2f-Ay-Hv6" id="tZ0-qJ-elz"/>
                         <outlet property="invisibleDigits" destination="4Xv-GY-ipr" id="mfa-IX-kDO"/>

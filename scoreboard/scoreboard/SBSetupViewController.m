@@ -32,6 +32,8 @@
     
     self.invisibleDigits.delegate = self;
     
+    self.displayJoinGameDigits.alpha = 0;
+    
     [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
     
 }
@@ -80,6 +82,11 @@
     [self.invisibleDigits becomeFirstResponder];
     
     NSLog(@"The joinGame button was pressed.");
+
+    [UIView animateWithDuration:2.0 animations:^{
+        self.displayJoinGameDigits.alpha = 1;
+    }];
+    
 }
 
 - (NSMutableArray *)holdingTheDigits {
