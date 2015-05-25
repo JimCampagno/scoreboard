@@ -21,6 +21,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *invisibleDigits;
 @property (strong, nonatomic) NSMutableArray *holdingTheDigits;
 @property (weak, nonatomic) IBOutlet UIButton *connectProp;
+@property (weak, nonatomic) IBOutlet UIButton *joinGameProp;
+@property (weak, nonatomic) IBOutlet UIButton *createGameProp;
+- (IBAction)cancel:(id)sender;
 
 @end
 
@@ -48,7 +51,7 @@
         
         if ([self.holdingTheDigits count] >= 1) {
             UILabel *label = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
-            label.text = @"";
+            label.text = @"-";
             [self.holdingTheDigits removeLastObject];
             self.connectProp.enabled = NO;
         }
@@ -75,17 +78,25 @@
 - (IBAction)createGame:(id)sender {
     
     NSLog(@"The createGame button was pressed.");
+    
+    [self animateCreateButtonDown];
+    [self animateJoinButtonDown];
 }
 
 - (IBAction)joinGame:(id)sender {
     
-    [self.invisibleDigits becomeFirstResponder];
     
-    NSLog(@"The joinGame button was pressed.");
+    [self animateCreateButtonDown];
 
-    [UIView animateWithDuration:2.0 animations:^{
-        self.displayJoinGameDigits.alpha = 1;
-    }];
+    [self animateJoinButtonOnTap];
+    
+    //    [self.invisibleDigits becomeFirstResponder];
+    //    NSLog(@"The joinGame button was pressed.");
+    
+    //    [UIView animateWithDuration:2.0 animations:^{
+    //        self.displayJoinGameDigits.alpha = 1;
+    //
+    //    }];
     
 }
 
@@ -98,6 +109,96 @@
 }
 
 
+- (void)animateCreateButtonDown {
+    
+    [UIView animateWithDuration:0.8
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         
+                         self.createGameProp.frame = CGRectMake(self.createGameProp.frame.origin.x + 0, self.createGameProp.frame.origin.y + 200, self.createGameProp.frame.size.width, self.createGameProp.frame.size.height);
+                         self.createGameProp.alpha = 0.0;
+                         
+                     }
+                     completion:^ (BOOL finished) {
+                         
+                     }];
+}
+
+- (void)animateJoinButtonDown {
+    
+    
+    
+    [UIView animateWithDuration:0.8
+                          delay:0.34
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         
+                         self.joinGameProp.frame = CGRectMake(self.joinGameProp.frame.origin.x + 0, self.joinGameProp.frame.origin.y + 200, self.joinGameProp.frame.size.width, self.joinGameProp.frame.size.height);
+                         self.joinGameProp.alpha = 0.0;
+                         
+                     }
+                     completion:^ (BOOL finished) {
+                         
+                     }];
+}
+
+- (void)animateJoinButtonOnTap {
+    
+    [UIView animateWithDuration:0.8
+                          delay:0.34
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         
+                         self.joinGameProp.frame = CGRectMake(self.joinGameProp.frame.origin.x + 0, self.joinGameProp.frame.origin.y + 200, self.joinGameProp.frame.size.width, self.joinGameProp.frame.size.height);
+                         self.joinGameProp.alpha = 0.0;
+                         
+                     }
+                     completion:^ (BOOL finished) {
+                         
+                         [self.invisibleDigits becomeFirstResponder];
+                         NSLog(@"The joinGame button was pressed.");
+                         
+                         [UIView animateWithDuration:0.2 animations:^{
+                             self.displayJoinGameDigits.alpha = 1;
+                             
+                         }];
+                         
+                         
+                     }];
+}
+
+- (void)bringButtonsBackAfterCancelTapped {
+    
+    [self.view endEditing:YES];
+    
+    [UIView animateWithDuration:0.8
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         
+                         self.createGameProp.alpha = 1;
+                         self.joinGameProp.alpha = 1;
+                         
+                         self.createGameProp.frame = CGRectMake(self.createGameProp.frame.origin.x + 0, self.createGameProp.frame.origin.y - 200, self.createGameProp.frame.size.width, self.createGameProp.frame.size.height);
+                         
+                         self.joinGameProp.frame = CGRectMake(self.joinGameProp.frame.origin.x + 0, self.joinGameProp.frame.origin.y - 200, self.joinGameProp.frame.size.width, self.joinGameProp.frame.size.height);
+                         
+                         self.displayJoinGameDigits.alpha = 0;
+
+
+                         
+                     }
+                     completion:^ (BOOL finished) {
+                         
+                         
+                         
+                     }];
+
+    
+}
+
+
 /*
  #pragma mark - Navigation
  
@@ -107,4 +208,9 @@
  // Pass the selected object to the new view controller.
  }
  */
+- (IBAction)cancel:(id)sender {
+    
+    
+    [self bringButtonsBackAfterCancelTapped];
+}
 @end

@@ -97,13 +97,23 @@
                                         </state>
                                         <connections>
                                             <action selector="connect:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ryd-pO-ae4"/>
-                                            <action selector="connectProp:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9fT-aI-a3q"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ob-hI-Zt8">
+                                        <rect key="frame" x="499" y="0.0" width="61" height="30"/>
+                                        <state key="normal" title="CANCEL">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancel:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Bb9-tu-Dak"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="0.63" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="KXR-te-UpJ" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="1.11111" id="1Tz-qQ-guO"/>
+                                    <constraint firstItem="8ob-hI-Zt8" firstAttribute="top" secondItem="5VM-md-5Mi" secondAttribute="top" id="1sp-Eg-FDu"/>
+                                    <constraint firstAttribute="trailing" secondItem="8ob-hI-Zt8" secondAttribute="trailing" constant="8" id="4mC-jf-Whr"/>
                                     <constraint firstItem="Gf7-l4-4ts" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="5PM-PV-6zn"/>
                                     <constraint firstItem="EIn-ao-Inv" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="6tR-85-tos"/>
                                     <constraint firstItem="IzJ-z0-dB6" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="9bY-uT-Z7J"/>
@@ -121,7 +131,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueS-eC-LeI">
-                                <rect key="frame" x="16" y="360" width="568" height="30"/>
+                                <rect key="frame" x="16" y="210" width="568" height="30"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="0.63" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="CREATE GAME">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -131,7 +141,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZD-2g-G3E">
-                                <rect key="frame" x="16" y="405" width="568" height="30"/>
+                                <rect key="frame" x="16" y="285" width="568" height="30"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="0.63" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="JOIN GAME">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -141,14 +151,14 @@
                                 </connections>
                             </button>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Xv-GY-ipr" userLabel="storeDigits">
-                                <rect key="frame" x="287.5" y="120" width="26" height="30"/>
+                                <rect key="frame" x="287" y="120" width="26" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ueS-eC-LeI" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="1.25" id="2GO-bc-gVQ"/>
+                            <constraint firstItem="ueS-eC-LeI" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="0.75" id="2GO-bc-gVQ"/>
                             <constraint firstItem="ueS-eC-LeI" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="9Ly-qb-0e9"/>
                             <constraint firstItem="5VM-md-5Mi" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Evh-FY-nUs"/>
                             <constraint firstItem="fZD-2g-G3E" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="HPh-BM-vIa"/>
@@ -157,7 +167,7 @@
                             <constraint firstItem="4Xv-GY-ipr" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="0.5" id="VKk-hz-yyR"/>
                             <constraint firstItem="4Xv-GY-ipr" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="0.45" id="a7B-BT-RhU"/>
                             <constraint firstItem="5VM-md-5Mi" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="bf7-CM-u2u"/>
-                            <constraint firstItem="fZD-2g-G3E" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="1.4" id="dAg-Ww-hYV"/>
+                            <constraint firstItem="fZD-2g-G3E" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="dAg-Ww-hYV"/>
                             <constraint firstItem="5VM-md-5Mi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="dRn-PY-RVi"/>
                             <constraint firstItem="fZD-2g-G3E" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="hdz-jV-Z17"/>
                             <constraint firstItem="u2f-Ay-Hv6" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="0.5" id="rIg-PM-HHA"/>
@@ -167,9 +177,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="connectProp" destination="pUx-NI-haz" id="2Re-QT-dxR"/>
+                        <outlet property="createGameProp" destination="ueS-eC-LeI" id="CBn-aT-EVb"/>
                         <outlet property="displayJoinGameDigits" destination="5VM-md-5Mi" id="cgO-MF-SxX"/>
                         <outlet property="enterName" destination="u2f-Ay-Hv6" id="tZ0-qJ-elz"/>
                         <outlet property="invisibleDigits" destination="4Xv-GY-ipr" id="mfa-IX-kDO"/>
+                        <outlet property="joinGameProp" destination="fZD-2g-G3E" id="mdo-HM-FrB"/>
                         <outletCollection property="joinGameNumbers" destination="ETJ-mx-yPA" id="PtM-eg-Tgw"/>
                         <outletCollection property="joinGameNumbers" destination="EFY-KD-9In" id="dYY-f6-s8r"/>
                         <outletCollection property="joinGameNumbers" destination="Gf7-l4-4ts" id="i7x-cz-ApR"/>

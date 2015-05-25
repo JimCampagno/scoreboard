@@ -12,8 +12,9 @@
 
 + (void)setupBorderOfLabelsWithArrayOfLabels:(NSArray *)labels {
     for (UILabel *label in labels) {
-        label.layer.borderWidth = 1.0;
-        label.layer.borderColor = [UIColor blueColor].CGColor;
+//        label.layer.borderWidth = 1.0;
+//        label.layer.borderColor = [UIColor blueColor].CGColor;
+        label.text = @"-";
     }
 }
 
