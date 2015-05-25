@@ -9,6 +9,8 @@
 #import "SBSetupViewController.h"
 #import "SBUILabelHelper.h"
 #import <Firebase/Firebase.h>
+#import "SBConstants.h"
+#import "FirebaseAPIclient.h"
 
 @interface SBSetupViewController ()
 
@@ -30,6 +32,8 @@
 
 @implementation SBSetupViewController
 
+
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -41,27 +45,43 @@
     [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
     
     
-    
-    Firebase *ref = [[Firebase alloc] initWithUrl: @"https://boiling-heat-4798.firebaseio.com"];
-    
-    
-    [[ref childByAppendingPath:@"rooms"] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+    NSInteger random = arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE;
+    NSInteger random2 = arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE;
+    NSInteger random3 = arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE;
+    NSInteger random4 = arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE;
 
-        
-        NSDictionary *jim = @{  @"name": @"JIM",
-                            @"coolness": @"10"};
-        
-        NSDictionary *ant = @{  @"name": @"ANT",
-                                @"coolness": @"0"};
-        
-        NSDictionary *listOfMorons = @{ @"jim": jim, @"ant": ant};
-        
 
-        [currentData setValue:listOfMorons];
+
+    
+    NSLog(@"%lu", random);
+    NSLog(@"%lu", random2);
+
+    NSLog(@"%lu", random3);
+
+    NSLog(@"%lu", random4);
+
+
+    
+    
+    
+    
+    
+//    self.baseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
+    
+    
+    [[self.firebaseRef childByAppendingPath:FIREBASE_CHILD] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+
+        NSDictionary *storingCurrentData = currentData.value;
+        
+        NSLog(@"Is this working %@", storingCurrentData);
+        
+//        NSDictionary *jimbo = @{  @"name": @"CUTE BOY",
+//                            @"coolness": @"1000"};
+//        
+//        NSDictionary *listOfMorons = @{ @"frank": jimbo};
+//        [currentData setValue:listOfMorons];
         return [FTransactionResult successWithValue:currentData];
     }];
-    
-    
     
 }
 
@@ -220,17 +240,14 @@
     
 }
 
-
-
-- (void)setupFireBase {
+- (Firebase *)firebaseRef {
     
-    // Create a reference to a Firebase location
-    Firebase *myRootRef = [[Firebase alloc] initWithUrl:@"https://boiling-heat-4798.firebaseio.com"];
-    
-    // Write data to Firebase
-    [myRootRef setValue:@"Do you have data? You'll love Firebase."];
-    
+    if (!_firebaseRef) {
+        _firebaseRef= [[Firebase alloc] initWithUrl: FIREBASE_URL];
+    }
+    return _firebaseRef;
 }
+
 /*
  #pragma mark - Navigation
  
@@ -242,7 +259,13 @@
  */
 - (IBAction)cancel:(id)sender {
     
-    
     [self bringButtonsBackAfterCancelTapped];
+
+    [self.holdingTheDigits removeAllObjects];
+    
+    for (UILabel *label in self.joinGameNumbers) {
+        
+        label.text = @"-";
+    }
 }
 @end

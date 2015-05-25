@@ -10,4 +10,11 @@
 
 @interface SBConstants : NSObject
 
+extern NSString *const FIREBASE_URL;
+extern NSString *const FIREBASE_CHILD;
+extern unsigned int const MIN_VALUE;
+extern unsigned int const MAX_VALUE;
+
+
+
 @end

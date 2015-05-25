@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6B647E1806F53B817493F3C7 /* libPods-scoreboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222343B35E078E5138A9B551 /* libPods-scoreboard.a */; };
 		7D16630B1B136987002A2BF0 /* SBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D16630A1B136987002A2BF0 /* SBConstants.m */; };
+		7D16630E1B136B01002A2BF0 /* FirebaseAPIclient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D16630D1B136B01002A2BF0 /* FirebaseAPIclient.m */; };
 		7D45F3841B126AA30053F47F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3831B126AA30053F47F /* main.m */; };
 		7D45F3871B126AA30053F47F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3861B126AA30053F47F /* AppDelegate.m */; };
 		7D45F38D1B126AA30053F47F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F38B1B126AA30053F47F /* Main.storyboard */; };
@@ -34,6 +35,8 @@
 		2A1C5B47474595727EFC8D4B /* Pods-scoreboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scoreboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scoreboard/Pods-scoreboard.debug.xcconfig"; sourceTree = "<group>"; };
 		7D1663091B136987002A2BF0 /* SBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBConstants.h; sourceTree = "<group>"; };
 		7D16630A1B136987002A2BF0 /* SBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBConstants.m; sourceTree = "<group>"; };
+		7D16630C1B136B01002A2BF0 /* FirebaseAPIclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseAPIclient.h; sourceTree = "<group>"; };
+		7D16630D1B136B01002A2BF0 /* FirebaseAPIclient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirebaseAPIclient.m; sourceTree = "<group>"; };
 		7D45F37E1B126AA30053F47F /* scoreboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scoreboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D45F3821B126AA30053F47F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D45F3831B126AA30053F47F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,6 +99,8 @@
 			children = (
 				7D45F3851B126AA30053F47F /* AppDelegate.h */,
 				7D45F3861B126AA30053F47F /* AppDelegate.m */,
+				7D1663091B136987002A2BF0 /* SBConstants.h */,
+				7D16630A1B136987002A2BF0 /* SBConstants.m */,
 				7D45F3AD1B1286120053F47F /* SBUILabelHelper.h */,
 				7D45F3AE1B1286120053F47F /* SBUILabelHelper.m */,
 				7D45F3AA1B1271120053F47F /* SBSetupViewController.h */,
@@ -104,8 +109,8 @@
 				7D45F38E1B126AA30053F47F /* Images.xcassets */,
 				7D45F3901B126AA30053F47F /* LaunchScreen.xib */,
 				7D45F3811B126AA30053F47F /* Supporting Files */,
-				7D1663091B136987002A2BF0 /* SBConstants.h */,
-				7D16630A1B136987002A2BF0 /* SBConstants.m */,
+				7D16630C1B136B01002A2BF0 /* FirebaseAPIclient.h */,
+				7D16630D1B136B01002A2BF0 /* FirebaseAPIclient.m */,
 			);
 			path = scoreboard;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 				7D45F3AC1B1271120053F47F /* SBSetupViewController.m in Sources */,
 				7D16630B1B136987002A2BF0 /* SBConstants.m in Sources */,
 				7D45F3841B126AA30053F47F /* main.m in Sources */,
+				7D16630E1B136B01002A2BF0 /* FirebaseAPIclient.m in Sources */,
 				7D45F3AF1B1286120053F47F /* SBUILabelHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,4 +10,10 @@
 
 @implementation SBConstants
 
+NSString *const FIREBASE_URL = @"https://boiling-heat-4798.firebaseio.com";
+NSString *const FIREBASE_CHILD = @"rooms";
+unsigned int const MIN_VALUE = 100000;
+unsigned int const MAX_VALUE = 999999;
+
+
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Firebase/Firebase.h>
 
 @interface SBSetupViewController : UIViewController <UITextFieldDelegate>
+
+@property (strong, nonatomic) Firebase *firebaseRef;
 
 @end
