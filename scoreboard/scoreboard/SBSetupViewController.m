@@ -49,8 +49,6 @@
     self.displayJoinGameDigits.alpha = 0;
     
     [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
-    
-    [FirebaseAPIclient createRoomWithFirebaseReference:self.firebaseRef];
 }
 
 -(void)dismissKeyboard {
@@ -104,6 +102,25 @@
                          [self animateCreateButtonDown];
                          [self animateJoinButtonDown];
                      }];
+    
+    
+    
+    
+    
+    
+    NSString *storeNameInField = self.enterName.text;
+    
+    SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text];
+    
+    NSLog(@"The current user is %@", currentUser.name);
+    
+    SBRoom *newRoom = [[SBRoom alloc] initWithUser:currentUser];
+    
+    [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef andRoom:newRoom];
+    
+    
+    
+    
     
     
     

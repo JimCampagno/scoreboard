@@ -23,7 +23,6 @@
     if (self) {
         
         [self.users addObject:user];
-        self.roomNumber = [SBConstants randomRoomNumber];
     }
     
     return self;
@@ -42,22 +41,21 @@
     }
 }
 
-+ (NSDictionary *)createRoomWithData:(SBRoom *)data {
++ (NSArray *)createRoomWithData:(SBRoom *)data {
     
-    NSDictionary *result = [[NSDictionary alloc] init];
+    NSArray *result = [[NSArray alloc] init];
     
     SBUser *currentUser = [[SBUser alloc] init];
     currentUser = data.users[0];
     
-    result = @{ data.roomNumber: @{ @"name": currentUser.name,
-                                    @"hp": currentUser.hp,
-                                    @"vp": currentUser.vp }
-                };
+    result = @[ @{ @"name": currentUser.name,
+                   @"monster": currentUser.monster,
+                   @"hp": currentUser.hp,
+                   @"vp": currentUser.vp } ];
     
     return result;
     
 }
-
 
 - (NSMutableArray *)users {
     

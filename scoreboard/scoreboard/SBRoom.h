@@ -11,21 +11,12 @@
 
 @interface SBRoom : NSObject
 
-@property (strong, nonatomic) NSString *roomNumber;
 @property (strong, nonatomic) NSMutableArray *users;
 
 - (instancetype)init;
 - (instancetype)initWithUser:(SBUser *)user;
-
 - (void)addUser:(SBUser *)user;
 - (void)addArrayOfUsers:(NSArray *)users;
-
-+ (NSDictionary *)createRoomWithData:(SBRoom *)data;
-
-
-
-
-// Room#, staging users, string of all the monsters.
-// Room object, stagingUser is another object with a name & a monster name. an array of stagins uers, and an array of unused monsters - "monsters" of your array of monster.  "stagingUsers"
++ (NSArray *)createRoomWithData:(SBRoom *)data;
 
 @end

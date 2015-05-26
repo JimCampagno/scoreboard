@@ -11,11 +11,11 @@
 @interface SBUser : NSObject
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *monsterName;
+@property (strong, nonatomic) NSString *monster;
 @property (strong, nonatomic) NSNumber *hp;
 @property (strong, nonatomic) NSNumber *vp;
 
 - (instancetype)init;
-- (instancetype)initWithName:(NSString *)name andMonsterName:(NSString *)monsterName;
+- (instancetype)initWithName:(NSString *)name;
 
 @end

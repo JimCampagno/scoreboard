@@ -11,31 +11,51 @@
 
 @implementation FirebaseAPIclient
 
-+ (void)createRoomWithFirebaseReference:(Firebase *)ref {
-    [[ref childByAppendingPath:FIREBASE_CHILD]
-     runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-         
-//         NSString *roomNumber = [@([SBConstants randomRoomNumber]) stringValue];
-//         SBRoom *newRoom = [[SBRoom alloc] init];
-//         
-//         
-//         NSDictionary *establishRoom = @{ @"test": newRoom };
-//         [currentData setValue:establishRoom];
-         
-         
-//         NSDictionary *storingCurrentData = currentData.value;
-//         NSLog(@"Is this working %@", storingCurrentData);
-//         
-//         NSDictionary *jimbo = @{
-//                                 @"name" : @"CUTE BOY",
-//                                 @"coolness" : @"1000"
-//                                 };
-//         
-//         NSDictionary *listOfMorons = @{ @"232323" : jimbo };
-//         [currentData setValue:listOfMorons];
-         
-         return [FTransactionResult successWithValue:currentData];
-     }];
++ (void)createGameOnFirebaseWithRef:(Firebase *)ref andRoom:(SBRoom *)room {
+    
+    [ref runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+        
+        NSArray *newRoom = [SBRoom createRoomWithData:room];
+        
+        [[currentData childDataByAppendingPath:[SBConstants randomRoomNumber]] setValue:newRoom];
+        
+        return [FTransactionResult successWithValue:currentData];
+    }];
+    
+    
+    
+    //]
+    //    [[ref childByAppendingPath:FIREBASE_CHILD]
+    //     runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+    //
+    //         NSDictionary *newRoom = [SBRoom createRoomWithData:room];
+    //         Firebase *newRef = [ref childByAppendingPath: room.roomNumber];
+    //         [newRef setValue: newRoom];
+    //
+    //
+    //
+    ////         [currentData setValue:newRoom];
+    //         return [FTransactionResult successWithValue:currentData];
+    
+    //         NSString *roomNumber = [@([SBConstants randomRoomNumber]) stringValue];
+    //         SBRoom *newRoom = [[SBRoom alloc] init];
+    //
+    //
+    //         NSDictionary *establishRoom = @{ @"test": newRoom };
+    //         [currentData setValue:establishRoom];
+    
+    
+    //         NSDictionary *storingCurrentData = currentData.value;
+    //         NSLog(@"Is this working %@", storingCurrentData);
+    //
+    //         NSDictionary *jimbo = @{
+    //                                 @"name" : @"CUTE BOY",
+    //                                 @"coolness" : @"1000"
+    //                                 };
+    //
+    //         //         NSDictionary *listOfMorons = @{ @"232323" : jimbo };
+    //         //         [currentData setValue:listOfMorons];
+    //     }];
 }
 
 

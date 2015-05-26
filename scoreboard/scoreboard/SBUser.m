@@ -12,17 +12,17 @@
 
 - (instancetype)init {
     
-    return [self initWithName:@"" andMonsterName:@""];
+    return [self initWithName:@""];
 }
 
-- (instancetype)initWithName:(NSString *)name andMonsterName:(NSString *)monsterName {
-    
+- (instancetype)initWithName:(NSString *)name;
+ {
     self = [super init];
     
     if (self) {
         
         self.name = name;
-        self.monsterName = monsterName;
+        self.monster = @"BIG BAD DAD!";
         self.hp = @10;
         self.vp = @0;
     }

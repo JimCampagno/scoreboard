@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <Firebase/Firebase.h>
 #import "SBConstants.h"
+#import "SBRoom.h"
 
 @interface FirebaseAPIclient : NSObject
 
-+ (void)createRoomWithFirebaseReference:(Firebase *)ref;
++ (void)createGameOnFirebaseWithRef:(Firebase *)ref andRoom:(SBRoom *)room;
 
 @end
