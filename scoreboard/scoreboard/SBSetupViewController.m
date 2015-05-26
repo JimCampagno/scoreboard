@@ -11,6 +11,7 @@
 #import <Firebase/Firebase.h>
 #import "SBConstants.h"
 #import "FirebaseAPIclient.h"
+#import "SBRoom.h"
 
 @interface SBSetupViewController ()
 
@@ -38,52 +39,24 @@
     
     [super viewDidLoad];
     
-    self.invisibleDigits.delegate = self;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
     
+    [self.view addGestureRecognizer:tap];
+    
+    self.invisibleDigits.delegate = self;
     self.displayJoinGameDigits.alpha = 0;
     
     [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
     
-    
-    NSInteger random = arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE;
-    NSInteger random2 = arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE;
-    NSInteger random3 = arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE;
-    NSInteger random4 = arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE;
-
-
-
-    
-    NSLog(@"%lu", random);
-    NSLog(@"%lu", random2);
-
-    NSLog(@"%lu", random3);
-
-    NSLog(@"%lu", random4);
-
-
-    
-    
-    
-    
-    
-//    self.baseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
-    
-    
-    [[self.firebaseRef childByAppendingPath:FIREBASE_CHILD] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-
-        NSDictionary *storingCurrentData = currentData.value;
-        
-        NSLog(@"Is this working %@", storingCurrentData);
-        
-//        NSDictionary *jimbo = @{  @"name": @"CUTE BOY",
-//                            @"coolness": @"1000"};
-//        
-//        NSDictionary *listOfMorons = @{ @"frank": jimbo};
-//        [currentData setValue:listOfMorons];
-        return [FTransactionResult successWithValue:currentData];
-    }];
-    
+    [FirebaseAPIclient createRoomWithFirebaseReference:self.firebaseRef];
 }
+
+-(void)dismissKeyboard {
+    [self.enterName resignFirstResponder];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -123,24 +96,34 @@
     
     NSLog(@"The createGame button was pressed.");
     
-    [self animateCreateButtonDown];
-    [self animateJoinButtonDown];
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         [self dismissKeyboard];
+                     }
+                     completion:^ (BOOL finished) {
+                         [self animateCreateButtonDown];
+                         [self animateJoinButtonDown];
+                     }];
+    
+    
+    
+    
+    
+    
+    
 }
 
 - (IBAction)joinGame:(id)sender {
     
     
-    [self animateCreateButtonDown];
-    
-    [self animateJoinButtonOnTap];
-    
-    //    [self.invisibleDigits becomeFirstResponder];
-    //    NSLog(@"The joinGame button was pressed.");
-    
-    //    [UIView animateWithDuration:2.0 animations:^{
-    //        self.displayJoinGameDigits.alpha = 1;
-    //
-    //    }];
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         [self dismissKeyboard];
+                     }
+                     completion:^ (BOOL finished) {
+                         [self animateCreateButtonDown];
+                           [self animateJoinButtonOnTap];
+                     }];
     
 }
 
@@ -170,8 +153,6 @@
 }
 
 - (void)animateJoinButtonDown {
-    
-    
     
     [UIView animateWithDuration:0.8
                           delay:0.34
@@ -230,13 +211,9 @@
                          
                          self.displayJoinGameDigits.alpha = 0;
                          
-                         
-                         
                      }
                      completion:^ (BOOL finished) {
                      }];
-    
-    
     
 }
 
@@ -260,11 +237,10 @@
 - (IBAction)cancel:(id)sender {
     
     [self bringButtonsBackAfterCancelTapped];
-
+    self.connectProp.enabled = NO;
     [self.holdingTheDigits removeAllObjects];
     
     for (UILabel *label in self.joinGameNumbers) {
-        
         label.text = @"-";
     }
 }

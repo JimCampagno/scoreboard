@@ -15,6 +15,8 @@ extern NSString *const FIREBASE_CHILD;
 extern unsigned int const MIN_VALUE;
 extern unsigned int const MAX_VALUE;
 
++ (NSString *)randomRoomNumber;
+
 
 
 @end

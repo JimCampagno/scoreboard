@@ -15,5 +15,10 @@ NSString *const FIREBASE_CHILD = @"rooms";
 unsigned int const MIN_VALUE = 100000;
 unsigned int const MAX_VALUE = 999999;
 
++ (NSString *)randomRoomNumber {
+    NSString *random = [@(arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE) stringValue];
+    return random;
+}
+
 
 @end

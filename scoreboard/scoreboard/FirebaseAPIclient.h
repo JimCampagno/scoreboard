@@ -12,6 +12,6 @@
 
 @interface FirebaseAPIclient : NSObject
 
-+ (void)instantiateBaseFirebaseURLWithFirebaseObject:(Firebase *)firebaseRef;
++ (void)createRoomWithFirebaseReference:(Firebase *)ref;
 
 @end
