@@ -17,6 +17,4 @@ extern unsigned int const MAX_VALUE;
 
 + (NSString *)randomRoomNumber;
 
-
-
 @end

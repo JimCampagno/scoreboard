@@ -22,7 +22,7 @@
     if (self) {
         
         self.name = name;
-        self.monster = @"BIG BAD DAD!";
+        self.monster = @"Frodo";
         self.hp = @10;
         self.vp = @0;
     }

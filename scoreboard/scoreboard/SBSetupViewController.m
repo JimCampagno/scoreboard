@@ -38,6 +38,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    [self setupView];
+}
+
+- (void)setupView {
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -88,6 +92,14 @@
 - (IBAction)connect:(id)sender {
     
     NSLog(@"The connect button was pressed!");
+    
+        [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
+   
+    
+    
+    
+   
+    
 }
 
 - (IBAction)createGame:(id)sender {
@@ -103,35 +115,12 @@
                          [self animateJoinButtonDown];
                      }];
     
-    
-    
-    
-    
-    
-    NSString *storeNameInField = self.enterName.text;
-    
     SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text];
-    
-    NSLog(@"The current user is %@", currentUser.name);
-    
     SBRoom *newRoom = [[SBRoom alloc] initWithUser:currentUser];
-    
     [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef andRoom:newRoom];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 - (IBAction)joinGame:(id)sender {
-    
     
     [UIView animateWithDuration:0.3
                      animations:^{

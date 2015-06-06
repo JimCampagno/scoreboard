@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter name here" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="u2f-Ay-Hv6">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter name here" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="u2f-Ay-Hv6">
                                 <rect key="frame" x="150" y="52" width="300" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Fzv-CE-jvP"/>
@@ -189,10 +189,66 @@
                         <outletCollection property="joinGameNumbers" destination="KXR-te-UpJ" id="bcb-yt-GBk"/>
                         <outletCollection property="joinGameNumbers" destination="EIn-ao-Inv" id="hZQ-6c-OqV"/>
                         <outletCollection property="joinGameNumbers" destination="IzJ-z0-dB6" id="Xd4-C7-Aar"/>
+                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="GameScreenSegue" modalTransitionStyle="flipHorizontal" id="TfR-Cx-Rkb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ANY-VD-GXY">
+            <objects>
+                <viewController id="tIU-nx-yfq" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="09X-X6-S6t"/>
+                        <viewControllerLayoutGuide type="bottom" id="ejB-Ho-y4o"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wzg-cH-89h" userLabel="Gamescreen View">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJB-AL-n88">
+                                <rect key="frame" x="16" y="170" width="280" height="121"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jly-tO-LRy">
+                                <rect key="frame" x="304" y="170" width="280" height="121"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fWp-5H-cYe">
+                                <rect key="frame" x="16" y="299" width="280" height="121"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wVs-FP-itR">
+                                <rect key="frame" x="304" y="299" width="280" height="121"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M44-bb-D5O">
+                                <rect key="frame" x="16" y="428" width="280" height="121"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oEA-ab-oLs">
+                                <rect key="frame" x="304" y="428" width="280" height="121"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJz-5s-qDy" userLabel="MainScorecard">
+                                <rect key="frame" x="16" y="20" width="568" height="130"/>
+                                <color key="backgroundColor" red="1" green="0.21234012059999999" blue="0.15240593450000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eJz-5s-qDy" firstAttribute="trailing" secondItem="wzg-cH-89h" secondAttribute="trailingMargin" id="eJT-aY-WVz" userLabel="MainSC Trailing"/>
+                            <constraint firstItem="eJz-5s-qDy" firstAttribute="top" secondItem="09X-X6-S6t" secondAttribute="bottom" id="g4N-Bu-YIj" userLabel="MainSC Top"/>
+                            <constraint firstItem="eJz-5s-qDy" firstAttribute="centerX" secondItem="wzg-cH-89h" secondAttribute="centerX" id="nQP-p0-h5n" userLabel="MainSC Center X"/>
+                            <constraint firstItem="eJz-5s-qDy" firstAttribute="leading" secondItem="wzg-cH-89h" secondAttribute="leadingMargin" id="pIP-7W-IqU" userLabel="MainSC Leading"/>
+                            <constraint firstItem="eJz-5s-qDy" firstAttribute="bottom" secondItem="ejB-Ho-y4o" secondAttribute="top" multiplier="0.25" id="vgN-nR-3Gi" userLabel="MainSC Bottom"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t92-lS-65i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1269" y="265"/>
         </scene>
     </scenes>
 </document>

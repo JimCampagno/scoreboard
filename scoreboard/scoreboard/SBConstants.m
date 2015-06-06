@@ -20,5 +20,4 @@ unsigned int const MAX_VALUE = 999999;
     return random;
 }
 
-
 @end
