@@ -212,18 +212,18 @@
                                 <color key="backgroundColor" red="1" green="0.21234012059999999" blue="0.15240593450000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-gP-ZxZ" userLabel="Right Container View">
-                                <rect key="frame" x="300" y="188" width="284" height="392"/>
+                                <rect key="frame" x="300" y="188" width="284" height="404"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="trailing" secondItem="wzg-cH-89h" secondAttribute="trailingMargin" id="08X-pr-X2C"/>
-                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="bottom" constant="8" id="RRn-eO-C3d"/>
-                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.5" constant="-16" id="bWC-Wd-B89"/>
+                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="trailing" secondItem="wzg-cH-89h" secondAttribute="trailingMargin" id="08X-pr-X2C" userLabel="Right CV - Trailing"/>
+                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="bottom" constant="8" id="RRn-eO-C3d" userLabel="Right CV - Vertical"/>
+                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.5" constant="-16" id="bWC-Wd-B89" userLabel="Right CV - Width"/>
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="trailing" secondItem="wzg-cH-89h" secondAttribute="trailingMargin" id="eJT-aY-WVz" userLabel="MainSC Trailing"/>
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="top" secondItem="09X-X6-S6t" secondAttribute="bottom" id="g4N-Bu-YIj" userLabel="MainSC Top"/>
-                            <constraint firstItem="ejB-Ho-y4o" firstAttribute="top" secondItem="cPe-gP-ZxZ" secondAttribute="bottom" constant="20" id="g7q-ux-juX"/>
+                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="bottom" secondItem="ejB-Ho-y4o" secondAttribute="top" constant="-8" id="g7q-ux-juX" userLabel="Right CV - VerticalB"/>
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="centerX" secondItem="wzg-cH-89h" secondAttribute="centerX" id="nQP-p0-h5n" userLabel="MainSC Center X"/>
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="leading" secondItem="wzg-cH-89h" secondAttribute="leadingMargin" id="pIP-7W-IqU" userLabel="MainSC Leading"/>
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="bottom" secondItem="ejB-Ho-y4o" secondAttribute="top" multiplier="0.3" id="vgN-nR-3Gi" userLabel="MainSC Bottom"/>
