@@ -222,13 +222,29 @@
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="129.5"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-oW-eVT" userLabel="player3">
+                                        <rect key="frame" x="0.0" y="137.5" width="280" height="129.5"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVm-fg-JMZ" userLabel="player5">
+                                        <rect key="frame" x="0.0" y="274" width="280" height="129.5"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="u6j-n3-LDs" firstAttribute="top" secondItem="2e6-Di-eqh" secondAttribute="top" id="1hg-u5-w4o" userLabel="player1 - Top"/>
+                                    <constraint firstItem="k6w-oW-eVT" firstAttribute="height" secondItem="2e6-Di-eqh" secondAttribute="height" multiplier="0.33" constant="-4" id="GAX-Ba-Oez" userLabel="player3 - Height"/>
+                                    <constraint firstItem="k6w-oW-eVT" firstAttribute="centerY" secondItem="2e6-Di-eqh" secondAttribute="centerY" id="I2h-Kd-oYi" userLabel="player3 - CenterY"/>
+                                    <constraint firstItem="jVm-fg-JMZ" firstAttribute="centerX" secondItem="2e6-Di-eqh" secondAttribute="centerX" id="OOO-ud-bTq" userLabel="player5 - CenterX"/>
+                                    <constraint firstItem="k6w-oW-eVT" firstAttribute="width" secondItem="2e6-Di-eqh" secondAttribute="width" id="Oyl-HR-X9a" userLabel="player3 - Width"/>
+                                    <constraint firstItem="jVm-fg-JMZ" firstAttribute="bottom" secondItem="2e6-Di-eqh" secondAttribute="bottom" id="Yef-Fm-DKZ" userLabel="player5 - Bottom"/>
+                                    <constraint firstItem="jVm-fg-JMZ" firstAttribute="height" secondItem="2e6-Di-eqh" secondAttribute="height" multiplier="0.33" constant="-4" id="bfn-CP-FmN" userLabel="player5 - Height"/>
                                     <constraint firstItem="u6j-n3-LDs" firstAttribute="centerX" secondItem="2e6-Di-eqh" secondAttribute="centerX" id="gsb-sL-9YU" userLabel="player1 - CenterX"/>
                                     <constraint firstItem="u6j-n3-LDs" firstAttribute="width" secondItem="2e6-Di-eqh" secondAttribute="width" id="lfJ-iN-OEF" userLabel="player1 - Width"/>
+                                    <constraint firstItem="k6w-oW-eVT" firstAttribute="centerX" secondItem="2e6-Di-eqh" secondAttribute="centerX" id="nsr-hj-Cna" userLabel="player3 - CenterX"/>
                                     <constraint firstItem="u6j-n3-LDs" firstAttribute="height" secondItem="2e6-Di-eqh" secondAttribute="height" multiplier="0.33" constant="-4" id="pgl-6h-bDE" userLabel="player1 - Height"/>
+                                    <constraint firstItem="jVm-fg-JMZ" firstAttribute="width" secondItem="2e6-Di-eqh" secondAttribute="width" id="r4y-CG-oeo" userLabel="player5 - Width"/>
                                 </constraints>
                             </view>
                         </subviews>
