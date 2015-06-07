@@ -212,22 +212,50 @@
                                 <color key="backgroundColor" red="1" green="0.21234012059999999" blue="0.15240593450000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-gP-ZxZ" userLabel="Right Container View">
-                                <rect key="frame" x="304" y="188" width="280" height="404"/>
+                                <rect key="frame" x="308" y="188" width="276" height="404"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iyJ-by-eGr" userLabel="player2">
+                                        <rect key="frame" x="0.0" y="0.0" width="276" height="129.5"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fhv-nM-dLd" userLabel="player4">
+                                        <rect key="frame" x="0.0" y="137" width="276" height="129.5"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waC-Tn-aRJ" userLabel="player6">
+                                        <rect key="frame" x="0.0" y="274" width="276" height="129.5"/>
+                                        <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="waC-Tn-aRJ" firstAttribute="height" secondItem="cPe-gP-ZxZ" secondAttribute="height" multiplier="0.33" constant="-4" id="3Dj-DP-Hkm" userLabel="player6 - Height"/>
+                                    <constraint firstItem="Fhv-nM-dLd" firstAttribute="centerY" secondItem="cPe-gP-ZxZ" secondAttribute="centerY" id="3NO-20-3m1" userLabel="player4 - CenterY"/>
+                                    <constraint firstItem="Fhv-nM-dLd" firstAttribute="centerX" secondItem="cPe-gP-ZxZ" secondAttribute="centerX" id="CWJ-sx-RVA" userLabel="player4 - CenterX"/>
+                                    <constraint firstItem="iyJ-by-eGr" firstAttribute="centerX" secondItem="cPe-gP-ZxZ" secondAttribute="centerX" id="GAy-XS-uOZ" userLabel="player2 - CenterX"/>
+                                    <constraint firstItem="waC-Tn-aRJ" firstAttribute="bottom" secondItem="cPe-gP-ZxZ" secondAttribute="bottom" id="RYN-Dp-54i" userLabel="player6 - Bottom"/>
+                                    <constraint firstItem="Fhv-nM-dLd" firstAttribute="height" secondItem="cPe-gP-ZxZ" secondAttribute="height" multiplier="0.33" constant="-4" id="S1K-p7-wCX" userLabel="player4 - Height"/>
+                                    <constraint firstItem="iyJ-by-eGr" firstAttribute="top" secondItem="cPe-gP-ZxZ" secondAttribute="top" id="SmH-W6-yiT" userLabel="player2 - Top"/>
+                                    <constraint firstItem="iyJ-by-eGr" firstAttribute="height" secondItem="cPe-gP-ZxZ" secondAttribute="height" multiplier="0.33" constant="-4" id="eWP-tC-SSJ" userLabel="player2 - Height"/>
+                                    <constraint firstItem="waC-Tn-aRJ" firstAttribute="width" secondItem="cPe-gP-ZxZ" secondAttribute="width" id="p7v-CJ-6oO" userLabel="player6 - Width"/>
+                                    <constraint firstItem="iyJ-by-eGr" firstAttribute="width" secondItem="cPe-gP-ZxZ" secondAttribute="width" id="poh-7T-RGf" userLabel="player2 - Width"/>
+                                    <constraint firstItem="waC-Tn-aRJ" firstAttribute="centerX" secondItem="cPe-gP-ZxZ" secondAttribute="centerX" id="vCj-1g-EwO" userLabel="player6 - CenterX"/>
+                                    <constraint firstItem="Fhv-nM-dLd" firstAttribute="width" secondItem="cPe-gP-ZxZ" secondAttribute="width" id="wJp-4E-oZU" userLabel="player4 - WIdth"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2e6-Di-eqh" userLabel="Left Container View">
-                                <rect key="frame" x="16" y="188" width="280" height="404"/>
+                                <rect key="frame" x="16" y="188" width="276" height="404"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6j-n3-LDs" userLabel="player1">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="129.5"/>
-                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="276" height="129.5"/>
+                                        <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-oW-eVT" userLabel="player3">
-                                        <rect key="frame" x="0.0" y="137.5" width="280" height="129.5"/>
-                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="137.5" width="276" height="129.5"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVm-fg-JMZ" userLabel="player5">
-                                        <rect key="frame" x="0.0" y="274" width="280" height="129.5"/>
+                                        <rect key="frame" x="0.0" y="274" width="276" height="129.5"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
@@ -254,8 +282,8 @@
                             <constraint firstItem="2e6-Di-eqh" firstAttribute="leading" secondItem="wzg-cH-89h" secondAttribute="leadingMargin" id="2la-bM-3vh" userLabel="Left CV - Leading"/>
                             <constraint firstItem="2e6-Di-eqh" firstAttribute="bottom" secondItem="ejB-Ho-y4o" secondAttribute="top" constant="-8" id="8rn-EQ-kJ9" userLabel="Left CV - VerticalB"/>
                             <constraint firstItem="cPe-gP-ZxZ" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="bottom" constant="8" id="RRn-eO-C3d" userLabel="Right CV - Vertical"/>
-                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.5" constant="-20" id="bWC-Wd-B89" userLabel="Right CV - Width"/>
-                            <constraint firstItem="2e6-Di-eqh" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.5" constant="-20" id="duL-VJ-gXV" userLabel="Left CV - Width"/>
+                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.5" constant="-24" id="bWC-Wd-B89" userLabel="Right CV - Width"/>
+                            <constraint firstItem="2e6-Di-eqh" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.5" constant="-24" id="duL-VJ-gXV" userLabel="Left CV - Width"/>
                             <constraint firstItem="2e6-Di-eqh" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="bottom" constant="8" id="dww-5h-TnM" userLabel="Left CV - VerticalB"/>
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="trailing" secondItem="wzg-cH-89h" secondAttribute="trailingMargin" id="eJT-aY-WVz" userLabel="MainSC Trailing"/>
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="top" secondItem="09X-X6-S6t" secondAttribute="bottom" id="g4N-Bu-YIj" userLabel="MainSC Top"/>
