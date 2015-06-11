@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tIU-nx-yfq">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -195,10 +195,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--Game Screen View Controller-->
         <scene sceneID="ANY-VD-GXY">
             <objects>
-                <viewController id="tIU-nx-yfq" sceneMemberID="viewController">
+                <viewController id="tIU-nx-yfq" customClass="SBGameScreenViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="09X-X6-S6t"/>
                         <viewControllerLayoutGuide type="bottom" id="ejB-Ho-y4o"/>
@@ -251,7 +251,7 @@
                                         <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-oW-eVT" userLabel="player3">
-                                        <rect key="frame" x="0.0" y="137.5" width="276" height="129.5"/>
+                                        <rect key="frame" x="0.0" y="137" width="276" height="129.5"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVm-fg-JMZ" userLabel="player5">
@@ -293,10 +293,13 @@
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="bottom" secondItem="ejB-Ho-y4o" secondAttribute="top" multiplier="0.3" id="vgN-nR-3Gi" userLabel="MainSC Bottom"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mainMonsterView" destination="eJz-5s-qDy" id="6dk-5x-IZn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t92-lS-65i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1269" y="265"/>
+            <point key="canvasLocation" x="981" y="322"/>
         </scene>
     </scenes>
 </document>
