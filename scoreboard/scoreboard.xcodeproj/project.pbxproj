@@ -14,6 +14,7 @@
 		7D16630E1B136B01002A2BF0 /* FirebaseAPIclient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D16630D1B136B01002A2BF0 /* FirebaseAPIclient.m */; };
 		7D1663111B13B13E002A2BF0 /* SBRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1663101B13B13E002A2BF0 /* SBRoom.m */; };
 		7D1663191B13B26B002A2BF0 /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1663181B13B26B002A2BF0 /* SBUser.m */; };
+		7D29689C1B2E28C8000E1C7C /* SBPlayerScorecard.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D29689B1B2E28C8000E1C7C /* SBPlayerScorecard.m */; };
 		7D45F3841B126AA30053F47F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3831B126AA30053F47F /* main.m */; };
 		7D45F3871B126AA30053F47F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3861B126AA30053F47F /* AppDelegate.m */; };
 		7D45F38D1B126AA30053F47F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F38B1B126AA30053F47F /* Main.storyboard */; };
@@ -48,6 +49,8 @@
 		7D1663101B13B13E002A2BF0 /* SBRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRoom.m; sourceTree = "<group>"; };
 		7D1663171B13B26A002A2BF0 /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
 		7D1663181B13B26B002A2BF0 /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
+		7D29689A1B2E28C8000E1C7C /* SBPlayerScorecard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlayerScorecard.h; sourceTree = "<group>"; };
+		7D29689B1B2E28C8000E1C7C /* SBPlayerScorecard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayerScorecard.m; sourceTree = "<group>"; };
 		7D45F37E1B126AA30053F47F /* scoreboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scoreboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D45F3821B126AA30053F47F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D45F3831B126AA30053F47F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				7D45F3AB1B1271120053F47F /* SBSetupViewController.m */,
 				5BCAF1011B237F5D0096C88F /* SBGameScreenViewController.h */,
 				5BCAF1021B237F5D0096C88F /* SBGameScreenViewController.m */,
+				7D29689A1B2E28C8000E1C7C /* SBPlayerScorecard.h */,
+				7D29689B1B2E28C8000E1C7C /* SBPlayerScorecard.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				7D45F3AC1B1271120053F47F /* SBSetupViewController.m in Sources */,
 				7D1663191B13B26B002A2BF0 /* SBUser.m in Sources */,
 				7D16630B1B136987002A2BF0 /* SBConstants.m in Sources */,
+				7D29689C1B2E28C8000E1C7C /* SBPlayerScorecard.m in Sources */,
 				7D45F3841B126AA30053F47F /* main.m in Sources */,
 				7D16630E1B136B01002A2BF0 /* FirebaseAPIclient.m in Sources */,
 				7D45F3AF1B1286120053F47F /* SBUILabelHelper.m in Sources */,

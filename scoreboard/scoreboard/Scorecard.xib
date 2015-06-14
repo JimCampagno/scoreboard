@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SBPlayerScorecard">
             <rect key="frame" x="0.0" y="0.0" width="434" height="323"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -35,9 +35,18 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE" userLabel="MAIN - holding top/bottom PV">
                     <rect key="frame" x="260" y="0.0" width="174" height="323"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
                             <rect key="frame" x="30" y="16" width="144" height="130"/>
+                            <subviews>
+                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-aE-agV" userLabel="Top Picker View">
+                                    <rect key="frame" x="-88" y="-16" width="320" height="162"/>
+                                </pickerView>
+                            </subviews>
                             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="Dga-aE-agV" firstAttribute="centerX" secondItem="MhE-Mp-bZm" secondAttribute="centerX" id="QsS-D3-EqX" userLabel="Top Picker View - Center X"/>
+                                <constraint firstItem="Dga-aE-agV" firstAttribute="centerY" secondItem="MhE-Mp-bZm" secondAttribute="centerY" id="l5l-nh-HLg" userLabel="Top Picker View - Center Y"/>
+                            </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="Ueg-FQ-rtm">
                             <rect key="frame" x="0.0" y="227" width="30" height="30"/>
@@ -53,24 +62,33 @@
                                 <constraint firstAttribute="width" constant="30" id="ydp-F0-bwZ"/>
                             </constraints>
                         </imageView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
                             <rect key="frame" x="30" y="177" width="144" height="130"/>
+                            <subviews>
+                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
+                                    <rect key="frame" x="-88" y="-16" width="320" height="162"/>
+                                </pickerView>
+                            </subviews>
                             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="Xe3-3W-iEg" firstAttribute="centerX" secondItem="sCA-Ec-FRv" secondAttribute="centerX" id="CMN-rx-naz" userLabel="Bottom Picker View - Center X"/>
+                                <constraint firstItem="Xe3-3W-iEg" firstAttribute="centerY" secondItem="sCA-Ec-FRv" secondAttribute="centerY" id="oUS-wY-xHR" userLabel="Bottom Picker View - Center Y"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="leading" secondItem="Ueg-FQ-rtm" secondAttribute="trailing" id="6h7-XM-a53" userLabel="Bottom PV View - Leading"/>
                         <constraint firstItem="Ueg-FQ-rtm" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="DhR-ZJ-BaT" userLabel="Heart - Center Y"/>
-                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" id="HHO-Wf-iae"/>
+                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" id="HHO-Wf-iae" userLabel="Top PV View - Trailing"/>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" id="Uny-k1-UH6" userLabel="Bottom PV View - Trailing"/>
                         <constraint firstItem="Ueg-FQ-rtm" firstAttribute="leading" secondItem="9mj-Ng-cHE" secondAttribute="leading" id="W2X-9E-QAJ" userLabel="Heart - Leading"/>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="cfg-Z4-Kgz" userLabel="Bottom PV View - Center Y"/>
                         <constraint firstItem="YZu-pP-hk8" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" id="csi-AX-qzi" userLabel="Star - Center Y"/>
-                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="height" secondItem="9mj-Ng-cHE" secondAttribute="height" multiplier="0.4" id="jJc-Bp-R2l"/>
+                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="height" secondItem="9mj-Ng-cHE" secondAttribute="height" multiplier="0.4" id="jJc-Bp-R2l" userLabel="Top PV View - Height"/>
                         <constraint firstItem="YZu-pP-hk8" firstAttribute="leading" secondItem="9mj-Ng-cHE" secondAttribute="leading" id="okO-KD-aZe" userLabel="Star - Leading"/>
-                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="leading" secondItem="YZu-pP-hk8" secondAttribute="trailing" id="uVG-9W-dQB"/>
-                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" id="wFc-XX-RW9"/>
+                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="leading" secondItem="YZu-pP-hk8" secondAttribute="trailing" id="uVG-9W-dQB" userLabel="Top PV View - Leading"/>
+                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" id="wFc-XX-RW9" userLabel="Top PV View - Center Y"/>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="height" secondItem="9mj-Ng-cHE" secondAttribute="height" multiplier="0.4" id="z2Q-lw-Z7E" userLabel="Bottom PV View - Height"/>
                     </constraints>
                 </view>
@@ -95,7 +113,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="154" y="134.5"/>
+            <point key="canvasLocation" x="70" y="66.5"/>
         </view>
     </objects>
     <resources>
