@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIView *mainMonsterView;
 @property (weak, nonatomic) IBOutlet UIPickerView *picker;
 
-@property (strong, nonatomic) NSMutableArray *pickerData;
+@property (strong, nonatomic) NSArray *pickerData;
 
 @end
 
@@ -29,14 +29,16 @@
     
     
     
-
-//    CGFloat width = CGRectGetWidth(self.mainMonsterView.bounds);
-//    CGFloat height = CGRectGetHeight(self.mainMonsterView.bounds);
     
-   
-
     
-//    NSLog(@"The width is : %f and the height is %f", width, height);
+    
+    //    CGFloat width = CGRectGetWidth(self.mainMonsterView.bounds);
+    //    CGFloat height = CGRectGetHeight(self.mainMonsterView.bounds);
+    
+    
+    
+    
+    //    NSLog(@"The width is : %f and the height is %f", width, height);
     
     
     
@@ -54,19 +56,54 @@
 }
 
 
-- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+//- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+//
+//    [[pickerView.subviews objectAtIndex:1] setBackgroundColor:[UIColor blueColor]];
+//    [[pickerView.subviews objectAtIndex:2] setBackgroundColor:[UIColor blueColor]];
+//
+//    return self.pickerData[row];
+//}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSString *title = self.pickerData[row];
+    NSAttributedString *attTitle = [[NSAttributedString alloc] initWithString:title
+                                                                   attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     
-    return self.pickerData[row];
+    [[pickerView.subviews objectAtIndex:1] setBackgroundColor:[UIColor redColor]];
+    [[pickerView.subviews objectAtIndex:2] setBackgroundColor:[UIColor redColor]];
+    
+    return attTitle;
+    
 }
 
+//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+//
+//    [[pickerView.subviews objectAtIndex:1] setBackgroundColor:[UIColor blueColor]];
+//    [[pickerView.subviews objectAtIndex:2] setBackgroundColor:[UIColor blueColor]];
+//
+//
+//}
 
-- (NSMutableArray *)pickerData {
+
+
+
+- (NSArray *)pickerData {
+    
     if (!_pickerData) {
         
-        _pickerData = [[NSMutableArray alloc] init];
-        _pickerData = [@[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8"] mutableCopy];
+        _pickerData = [[NSArray alloc] init];
+        
+        NSMutableArray *holdingData = [[NSMutableArray alloc] init];
+        
+        for (NSInteger i = 0 ; i < 21 ; i++) {
+            
+            [holdingData addObject:[NSString stringWithFormat:@"%ld", i]];
+        }
+        
+        _pickerData = [holdingData copy];
     }
-    
+
     return _pickerData;
 }
 
@@ -74,7 +111,7 @@
     
     CGFloat width = CGRectGetWidth(self.mainMonsterView.bounds);
     CGFloat height = CGRectGetHeight(self.mainMonsterView.bounds);
-//    NSLog(@"The width is : %f and the height is %f", width, height);
+    //    NSLog(@"The width is : %f and the height is %f", width, height);
     UIImageView *dot =[[UIImageView alloc] initWithFrame:CGRectMake(0,height/6,height/1.5,height/1.5)];
     dot.backgroundColor = [UIColor blackColor];
     [self.mainMonsterView addSubview:dot];
@@ -97,7 +134,7 @@
     bottomLabel.text = @"BOTTOM";
     [self.mainMonsterView addSubview:bottomLabel];
     
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
