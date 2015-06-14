@@ -35,22 +35,44 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE" userLabel="MAIN - holding top/bottom PV">
                     <rect key="frame" x="260" y="0.0" width="174" height="323"/>
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
-                            <rect key="frame" x="70" y="0.0" width="100" height="100"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
+                            <rect key="frame" x="30" y="16" width="144" height="130"/>
                             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
-                            <rect key="frame" x="70" y="223" width="100" height="100"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="Ueg-FQ-rtm">
+                            <rect key="frame" x="0.0" y="227" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="OYU-bb-JcA"/>
+                                <constraint firstAttribute="width" constant="30" id="Ool-f1-M7O"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="YZu-pP-hk8">
+                            <rect key="frame" x="0.0" y="66" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="9iY-fR-b2C"/>
+                                <constraint firstAttribute="width" constant="30" id="ydp-F0-bwZ"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
+                            <rect key="frame" x="30" y="177" width="144" height="130"/>
                             <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="YZu-pP-hk8">
-                            <rect key="frame" x="0.0" y="25" width="50" height="50"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="Ueg-FQ-rtm">
-                            <rect key="frame" x="0.0" y="248" width="50" height="50"/>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="sCA-Ec-FRv" firstAttribute="leading" secondItem="Ueg-FQ-rtm" secondAttribute="trailing" id="6h7-XM-a53" userLabel="Bottom PV View - Leading"/>
+                        <constraint firstItem="Ueg-FQ-rtm" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="DhR-ZJ-BaT" userLabel="Heart - Center Y"/>
+                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" id="HHO-Wf-iae"/>
+                        <constraint firstItem="sCA-Ec-FRv" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" id="Uny-k1-UH6" userLabel="Bottom PV View - Trailing"/>
+                        <constraint firstItem="Ueg-FQ-rtm" firstAttribute="leading" secondItem="9mj-Ng-cHE" secondAttribute="leading" id="W2X-9E-QAJ" userLabel="Heart - Leading"/>
+                        <constraint firstItem="sCA-Ec-FRv" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="cfg-Z4-Kgz" userLabel="Bottom PV View - Center Y"/>
+                        <constraint firstItem="YZu-pP-hk8" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" id="csi-AX-qzi" userLabel="Star - Center Y"/>
+                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="height" secondItem="9mj-Ng-cHE" secondAttribute="height" multiplier="0.4" id="jJc-Bp-R2l"/>
+                        <constraint firstItem="YZu-pP-hk8" firstAttribute="leading" secondItem="9mj-Ng-cHE" secondAttribute="leading" id="okO-KD-aZe" userLabel="Star - Leading"/>
+                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="leading" secondItem="YZu-pP-hk8" secondAttribute="trailing" id="uVG-9W-dQB"/>
+                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" id="wFc-XX-RW9"/>
+                        <constraint firstItem="sCA-Ec-FRv" firstAttribute="height" secondItem="9mj-Ng-cHE" secondAttribute="height" multiplier="0.4" id="z2Q-lw-Z7E" userLabel="Bottom PV View - Height"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
