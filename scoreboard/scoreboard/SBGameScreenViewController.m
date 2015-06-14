@@ -7,6 +7,7 @@
 //
 
 #import "SBGameScreenViewController.h"
+#import "Scorecard.h"
 
 @interface SBGameScreenViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *mainUserName;
@@ -16,16 +17,33 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *picker;
 
 @property (strong, nonatomic) NSArray *pickerData;
+@property (strong, nonatomic) IBOutlet Scorecard *player2;
 
 @end
 
 @implementation SBGameScreenViewController
 
+
+
+-(void)awakeFromNib {
+    
+    
+    NSLog(@"Are you loading from nibs");
+    
+    
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.picker.dataSource = self;
     self.picker.delegate = self;
+    
+    
+    
+    
+    
+
     
     
     
@@ -108,6 +126,25 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    
+    
+    CGFloat widthJ = CGRectGetWidth(self.player2.bounds);
+    CGFloat heightJ = CGRectGetHeight(self.player2.bounds);
+        NSLog(@"The width is : %f and the height is %f", widthJ, heightJ);
+    
+    
+    
+ 
+    //    NSLog(@"The width is : %f and the height is %f", width, height);
+    Scorecard *playerTwoStuff =[[Scorecard alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    self.player2.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.player2 addSubview:playerTwoStuff];
+    
+    [self.player2 setNeedsUpdateConstraints];
+
+    
+    
     
     CGFloat width = CGRectGetWidth(self.mainMonsterView.bounds);
     CGFloat height = CGRectGetHeight(self.mainMonsterView.bounds);

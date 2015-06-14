@@ -5,9 +5,18 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Scorecard">
+            <connections>
+                <outlet property="bottomPicker" destination="Xe3-3W-iEg" id="iaX-uM-YUi"/>
+                <outlet property="monsterImage" destination="9eV-Dq-2HO" id="5nz-1n-2H7"/>
+                <outlet property="monsterName" destination="SkQ-Nh-BIf" id="RMS-Wj-YRZ"/>
+                <outlet property="playerName" destination="rfw-sK-C8Z" id="jId-ng-anv"/>
+                <outlet property="topPicker" destination="Dga-aE-agV" id="LbN-XT-J5m"/>
+                <outlet property="view" destination="iN0-l3-epB" id="EHk-ce-SwH"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SBPlayerScorecard">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="434" height="323"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -113,7 +122,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="70" y="66.5"/>
+            <point key="canvasLocation" x="-208" y="-464.5"/>
         </view>
     </objects>
     <resources>
