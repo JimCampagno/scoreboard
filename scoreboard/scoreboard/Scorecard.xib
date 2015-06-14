@@ -20,8 +20,11 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfw-sK-C8Z">
-                    <rect key="frame" x="72" y="303" width="113" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfw-sK-C8Z">
+                    <rect key="frame" x="0.0" y="303" width="260" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="kuP-EV-GQ6" userLabel="Player Name - Height"/>
+                    </constraints>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -29,8 +32,8 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="captain_fish_384" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Dq-2HO" userLabel="Monster Image">
                     <rect key="frame" x="0.0" y="28" width="260" height="267"/>
                 </imageView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE" userLabel="MAIN - holding top/bottom PV">
-                    <rect key="frame" x="264" y="0.0" width="170" height="323"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE" userLabel="MAIN - holding top/bottom PV">
+                    <rect key="frame" x="260" y="0.0" width="174" height="323"/>
                     <subviews>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
                             <rect key="frame" x="70" y="0.0" width="100" height="100"/>
@@ -53,13 +56,20 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1qm-Hj-cxm" userLabel="Monster Image - Center Y"/>
+                <constraint firstItem="9mj-Ng-cHE" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="3HR-cv-7tC" userLabel="Right View - Bottom"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="top" secondItem="SkQ-Nh-BIf" secondAttribute="bottom" constant="8" symbolic="YES" id="5V1-a9-Feu" userLabel="Monster Image - Top"/>
+                <constraint firstItem="9mj-Ng-cHE" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="6rn-O6-Q3O" userLabel="Right View - Trailing"/>
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BK2-2m-ymQ" userLabel="Monster Name - Top"/>
+                <constraint firstItem="9mj-Ng-cHE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FWW-2O-jvI" userLabel="Right View - Top"/>
+                <constraint firstItem="rfw-sK-C8Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QQq-NE-I3b" userLabel="Player Name - Leading"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UQq-Hb-hSd" userLabel="Monster Image - Leading"/>
+                <constraint firstItem="rfw-sK-C8Z" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="VSC-vz-fDr" userLabel="Player Name - Bottom"/>
+                <constraint firstItem="rfw-sK-C8Z" firstAttribute="width" secondItem="9eV-Dq-2HO" secondAttribute="width" id="mvj-t4-Pgs" userLabel="Player Name - Width"/>
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ozw-gs-JoA" userLabel="Monster Name - Leading"/>
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="width" secondItem="9eV-Dq-2HO" secondAttribute="width" id="p8L-f9-hCl" userLabel="Monster Name - Width"/>
+                <constraint firstItem="9mj-Ng-cHE" firstAttribute="leading" secondItem="9eV-Dq-2HO" secondAttribute="trailing" id="td4-PL-0Xm" userLabel="Right View - Leading"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" multiplier="0.6" id="wTY-d7-h3X" userLabel="Monster Image - Trailing"/>
-                <constraint firstItem="9eV-Dq-2HO" firstAttribute="bottom" secondItem="rfw-sK-C8Z" secondAttribute="top" constant="8" symbolic="YES" id="ygI-eR-Ywh" userLabel="Monster Image - Bottom"/>
+                <constraint firstItem="9eV-Dq-2HO" firstAttribute="bottom" secondItem="rfw-sK-C8Z" secondAttribute="top" constant="-8" id="ygI-eR-Ywh" userLabel="Monster Image - Bottom"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
