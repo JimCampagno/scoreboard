@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,27 +11,56 @@
             <rect key="frame" x="0.0" y="0.0" width="434" height="323"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Monster Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkQ-Nh-BIf">
-                    <rect key="frame" x="72" y="0.0" width="113" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monster Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkQ-Nh-BIf">
+                    <rect key="frame" x="0.0" y="0.0" width="260" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="OZt-5U-LkM" userLabel="Monster Name - Height"/>
+                    </constraints>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE">
-                    <rect key="frame" x="264" y="0.0" width="170" height="323"/>
-                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="captain_fish_384" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Dq-2HO" userLabel="Monster Image">
-                    <rect key="frame" x="0.0" y="28" width="256" height="267"/>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfw-sK-C8Z">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfw-sK-C8Z">
                     <rect key="frame" x="72" y="303" width="113" height="20"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="captain_fish_384" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Dq-2HO" userLabel="Monster Image">
+                    <rect key="frame" x="0.0" y="28" width="260" height="267"/>
+                </imageView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE" userLabel="MAIN - holding top/bottom PV">
+                    <rect key="frame" x="264" y="0.0" width="170" height="323"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
+                            <rect key="frame" x="70" y="0.0" width="100" height="100"/>
+                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
+                            <rect key="frame" x="70" y="223" width="100" height="100"/>
+                            <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="YZu-pP-hk8">
+                            <rect key="frame" x="0.0" y="25" width="50" height="50"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="Ueg-FQ-rtm">
+                            <rect key="frame" x="0.0" y="248" width="50" height="50"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="9eV-Dq-2HO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1qm-Hj-cxm" userLabel="Monster Image - Center Y"/>
+                <constraint firstItem="9eV-Dq-2HO" firstAttribute="top" secondItem="SkQ-Nh-BIf" secondAttribute="bottom" constant="8" symbolic="YES" id="5V1-a9-Feu" userLabel="Monster Image - Top"/>
+                <constraint firstItem="SkQ-Nh-BIf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BK2-2m-ymQ" userLabel="Monster Name - Top"/>
+                <constraint firstItem="9eV-Dq-2HO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UQq-Hb-hSd" userLabel="Monster Image - Leading"/>
+                <constraint firstItem="SkQ-Nh-BIf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ozw-gs-JoA" userLabel="Monster Name - Leading"/>
+                <constraint firstItem="SkQ-Nh-BIf" firstAttribute="width" secondItem="9eV-Dq-2HO" secondAttribute="width" id="p8L-f9-hCl" userLabel="Monster Name - Width"/>
+                <constraint firstItem="9eV-Dq-2HO" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" multiplier="0.6" id="wTY-d7-h3X" userLabel="Monster Image - Trailing"/>
+                <constraint firstItem="9eV-Dq-2HO" firstAttribute="bottom" secondItem="rfw-sK-C8Z" secondAttribute="top" constant="8" symbolic="YES" id="ygI-eR-Ywh" userLabel="Monster Image - Bottom"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="154" y="134.5"/>
@@ -38,5 +68,7 @@
     </objects>
     <resources>
         <image name="captain_fish_384" width="384" height="384"/>
+        <image name="heart" width="256" height="256"/>
+        <image name="star" width="256" height="256"/>
     </resources>
 </document>
