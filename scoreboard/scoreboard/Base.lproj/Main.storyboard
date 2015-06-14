@@ -194,6 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="262" y="322"/>
         </scene>
         <!--Game Screen View Controller-->
         <scene sceneID="ANY-VD-GXY">
@@ -215,15 +216,15 @@
                                 <rect key="frame" x="308" y="188" width="276" height="404"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iyJ-by-eGr" userLabel="player2">
-                                        <rect key="frame" x="0.0" y="0.0" width="276" height="129.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="276" height="130"/>
                                         <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fhv-nM-dLd" userLabel="player4">
-                                        <rect key="frame" x="0.0" y="137" width="276" height="129.5"/>
+                                        <rect key="frame" x="0.0" y="137" width="276" height="130"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waC-Tn-aRJ" userLabel="player6">
-                                        <rect key="frame" x="0.0" y="274" width="276" height="129.5"/>
+                                        <rect key="frame" x="0.0" y="274" width="276" height="130"/>
                                         <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
@@ -247,15 +248,26 @@
                                 <rect key="frame" x="16" y="188" width="276" height="404"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6j-n3-LDs" userLabel="player1">
-                                        <rect key="frame" x="0.0" y="0.0" width="276" height="129.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="276" height="130"/>
+                                        <subviews>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iu6-Wy-6ZF">
+                                                <rect key="frame" x="-37" y="-48" width="320" height="216"/>
+                                            </pickerView>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="iu6-Wy-6ZF" secondAttribute="trailing" constant="-7" id="4mA-pa-NYf"/>
+                                            <constraint firstItem="iu6-Wy-6ZF" firstAttribute="top" secondItem="u6j-n3-LDs" secondAttribute="top" constant="-48" id="Jx1-jc-ym3"/>
+                                            <constraint firstAttribute="bottom" secondItem="iu6-Wy-6ZF" secondAttribute="bottom" constant="-38" id="ade-6R-s3l"/>
+                                            <constraint firstItem="iu6-Wy-6ZF" firstAttribute="leading" secondItem="u6j-n3-LDs" secondAttribute="leading" constant="-37" id="gCW-i2-nWL"/>
+                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-oW-eVT" userLabel="player3">
-                                        <rect key="frame" x="0.0" y="137" width="276" height="129.5"/>
+                                        <rect key="frame" x="0.0" y="137" width="276" height="130"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVm-fg-JMZ" userLabel="player5">
-                                        <rect key="frame" x="0.0" y="274" width="276" height="129.5"/>
+                                        <rect key="frame" x="0.0" y="274" width="276" height="130"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
@@ -295,11 +307,12 @@
                     </view>
                     <connections>
                         <outlet property="mainMonsterView" destination="eJz-5s-qDy" id="6dk-5x-IZn"/>
+                        <outlet property="picker" destination="iu6-Wy-6ZF" id="QQp-Ln-HRn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t92-lS-65i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="981" y="322"/>
+            <point key="canvasLocation" x="955" y="322"/>
         </scene>
     </scenes>
 </document>

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SBGameScreenViewController : UIViewController
+@interface SBGameScreenViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @end
