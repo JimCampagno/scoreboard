@@ -33,36 +33,40 @@
 {
     _customSBConstraints = [[NSMutableArray alloc] init];
     
-    UIView *view = nil;
+//    UIView *view = nil;
     NSArray *objects = [[NSBundle mainBundle] loadNibNamed:@"Scorecard"
                                                      owner:self
                                                    options:nil];
-    for (id object in objects) {
-        if ([object isKindOfClass:[UIView class]]) {
-            view = object;
-            break;
-        }
-    }
+//    for (id object in objects) {
+//        if ([object isKindOfClass:[UIView class]]) {
+//            view = object;
+//            break;
+//        }
+//    }
+//    
+//    if (view != nil) {
+//        _containerView = view;
+//        view.translatesAutoresizingMaskIntoConstraints = NO;
+//        [self addSubview:view];
+//        [self setNeedsUpdateConstraints];
+//    }
     
-    if (view != nil) {
-        _containerView = view;
-        view.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:view];
-        [self setNeedsUpdateConstraints];
-    }
+    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:self.view];
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)updateConstraints
 {
-    if (self.containerView != nil) {
-        UIView *view = self.containerView;
+//    if (self.containerView != nil) {
+        UIView *view = self.view;
         NSDictionary *views = NSDictionaryOfVariableBindings(view);
         
         [self.customSBConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat: @"H:|[view]|" options:0 metrics:nil views:views]];
         [self.customSBConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|[view]|" options:0 metrics:nil views:views]];
         
         [self addConstraints:self.customSBConstraints];
-    }
+//    }
     
     [super updateConstraints];
 }
