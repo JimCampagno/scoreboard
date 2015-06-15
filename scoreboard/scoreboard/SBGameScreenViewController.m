@@ -28,7 +28,9 @@
 -(void)awakeFromNib {
     
     
+    
     NSLog(@"Are you loading from nibs");
+    
     
     
     
@@ -38,6 +40,9 @@
     
     self.picker.dataSource = self;
     self.picker.delegate = self;
+    
+    
+
     
     
     
@@ -128,20 +133,20 @@
 -(void)viewDidAppear:(BOOL)animated {
     
     
-    CGFloat widthJ = CGRectGetWidth(self.player2.bounds);
-    CGFloat heightJ = CGRectGetHeight(self.player2.bounds);
-        NSLog(@"The width is : %f and the height is %f", widthJ, heightJ);
-    
-    
-    
- 
-    //    NSLog(@"The width is : %f and the height is %f", width, height);
-    Scorecard *playerTwoStuff =[[Scorecard alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    self.player2.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self.player2 addSubview:playerTwoStuff];
-    
-    [self.player2 setNeedsUpdateConstraints];
+//    CGFloat widthJ = CGRectGetWidth(self.player2.bounds);
+//    CGFloat heightJ = CGRectGetHeight(self.player2.bounds);
+//        NSLog(@"The width is : %f and the height is %f", widthJ, heightJ);
+//    
+//    
+//    
+// 
+//    //    NSLog(@"The width is : %f and the height is %f", width, height);
+//    Scorecard *playerTwoStuff =[[Scorecard alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+//    self.player2.translatesAutoresizingMaskIntoConstraints = NO;
+//    
+//    [self.player2 addSubview:playerTwoStuff];
+//    
+//    [self.player2 setNeedsUpdateConstraints];
 
     
     

@@ -18,4 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *topPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *bottomPicker;
 
+@property (strong, nonatomic) NSMutableArray *customSBConstraints;
+@property (strong, nonatomic) UIView *containerView;
+
+
 @end

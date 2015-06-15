@@ -11,62 +11,59 @@
 @implementation Scorecard
 
 
-
-
-//-(id)initWithCoder:(NSCoder *)aDecoder
-//{
-//    self = [super initWithCoder:aDecoder];
-//    if(!self){
-//        return nil;
-//    }
-//    
-//    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-//                                  owner:self
-//                                options:nil];
-//    
-//    [self addSubview:self.view];
-//    
-//    return self;
-//}
-
-
--(instancetype)initWithFrame:(CGRect)frame
-{
-    
-//    Scorecard *playerTwoStuff =[[Scorecard alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    
-    CGRect thing = CGRectMake(0, 0, 183.0, 161.0);
-    
-    
-    
-    self = [super initWithFrame:thing];
-    if(self) {
-        [self commonInit];
-    }
-    
-    return self;
-}
-
--(instancetype)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if(self) {
+    if (self) {
         [self commonInit];
     }
-    
     return self;
 }
 
--(void)commonInit
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class])
-                                  owner:self
-                                options:nil];
-    
-    
-    
-    [self addSubview:_view];
-    
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
 }
 
+- (void)commonInit
+{
+    _customSBConstraints = [[NSMutableArray alloc] init];
+    
+    UIView *view = nil;
+    NSArray *objects = [[NSBundle mainBundle] loadNibNamed:@"Scorecard"
+                                                     owner:self
+                                                   options:nil];
+    for (id object in objects) {
+        if ([object isKindOfClass:[UIView class]]) {
+            view = object;
+            break;
+        }
+    }
+    
+    if (view != nil) {
+        _containerView = view;
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:view];
+        [self setNeedsUpdateConstraints];
+    }
+}
+
+- (void)updateConstraints
+{
+    if (self.containerView != nil) {
+        UIView *view = self.containerView;
+        NSDictionary *views = NSDictionaryOfVariableBindings(view);
+        
+        [self.customSBConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat: @"H:|[view]|" options:0 metrics:nil views:views]];
+        [self.customSBConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|[view]|" options:0 metrics:nil views:views]];
+        
+        [self addConstraints:self.customSBConstraints];
+    }
+    
+    [super updateConstraints];
+}
 @end
