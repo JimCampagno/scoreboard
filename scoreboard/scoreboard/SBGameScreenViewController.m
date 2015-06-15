@@ -10,58 +10,30 @@
 #import "Scorecard.h"
 
 @interface SBGameScreenViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *mainUserName;
-@property (weak, nonatomic) IBOutlet UILabel *mainMonsterName;
-@property (weak, nonatomic) IBOutlet UIImageView *mainMonsterImage;
+
 @property (weak, nonatomic) IBOutlet UIView *mainMonsterView;
-@property (weak, nonatomic) IBOutlet UIPickerView *picker;
+
+@property (weak, nonatomic) IBOutlet Scorecard *player1;
+@property (weak, nonatomic) IBOutlet Scorecard *player2;
+@property (weak, nonatomic) IBOutlet Scorecard *player3;
+@property (weak, nonatomic) IBOutlet Scorecard *player4;
+@property (weak, nonatomic) IBOutlet Scorecard *player5;
+@property (weak, nonatomic) IBOutlet Scorecard *player6;
+
+
 
 @property (strong, nonatomic) NSArray *pickerData;
-@property (strong, nonatomic) IBOutlet Scorecard *player2;
 
 @end
 
 @implementation SBGameScreenViewController
 
 
-
--(void)awakeFromNib {
-    
-    
-    
-    NSLog(@"Are you loading from nibs");
-    
-    
-    
-    
-}
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
-    self.picker.dataSource = self;
-    self.picker.delegate = self;
-    
-    
 
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    //    CGFloat width = CGRectGetWidth(self.mainMonsterView.bounds);
-    //    CGFloat height = CGRectGetHeight(self.mainMonsterView.bounds);
-    
-    
-    
-    
-    //    NSLog(@"The width is : %f and the height is %f", width, height);
     
     
     

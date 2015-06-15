@@ -246,32 +246,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2e6-Di-eqh" userLabel="Left Container View">
                                 <rect key="frame" x="16" y="188" width="276" height="404"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6j-n3-LDs" userLabel="player1">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6j-n3-LDs" userLabel="player1" customClass="Scorecard">
                                         <rect key="frame" x="0.0" y="0.0" width="276" height="130"/>
-                                        <subviews>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJZ-xT-TBT" userLabel="holding picker view">
-                                                <rect key="frame" x="166" y="0.0" width="110" height="65"/>
-                                                <subviews>
-                                                    <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iu6-Wy-6ZF">
-                                                        <rect key="frame" x="-4" y="0.0" width="114" height="65"/>
-                                                    </pickerView>
-                                                </subviews>
-                                                <color key="backgroundColor" red="1" green="0.84772183919999999" blue="0.85966266449999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="centerY" secondItem="iu6-Wy-6ZF" secondAttribute="centerY" id="UQc-6Y-qlJ"/>
-                                                    <constraint firstAttribute="centerX" secondItem="iu6-Wy-6ZF" secondAttribute="centerX" constant="2" id="Zak-Ij-TKb"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
                                         <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="AJZ-xT-TBT" firstAttribute="width" secondItem="u6j-n3-LDs" secondAttribute="width" multiplier="0.4" id="Vqb-PJ-bPV"/>
-                                            <constraint firstItem="AJZ-xT-TBT" firstAttribute="bottom" secondItem="u6j-n3-LDs" secondAttribute="bottom" multiplier="0.5" id="lg9-fM-elZ"/>
-                                            <constraint firstItem="AJZ-xT-TBT" firstAttribute="trailing" secondItem="u6j-n3-LDs" secondAttribute="trailing" id="u3c-tD-SkY"/>
-                                            <constraint firstItem="AJZ-xT-TBT" firstAttribute="top" secondItem="u6j-n3-LDs" secondAttribute="top" id="z83-F1-Ybg"/>
-                                        </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-oW-eVT" userLabel="player3">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-oW-eVT" userLabel="player3" customClass="Scorecard">
                                         <rect key="frame" x="0.0" y="137" width="276" height="130"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
@@ -316,8 +295,12 @@
                     </view>
                     <connections>
                         <outlet property="mainMonsterView" destination="eJz-5s-qDy" id="6dk-5x-IZn"/>
-                        <outlet property="picker" destination="iu6-Wy-6ZF" id="QQp-Ln-HRn"/>
-                        <outlet property="player2" destination="iyJ-by-eGr" id="diS-fk-5gG"/>
+                        <outlet property="player1" destination="u6j-n3-LDs" id="QFJ-CE-ujv"/>
+                        <outlet property="player2" destination="iyJ-by-eGr" id="Mxh-0m-9dx"/>
+                        <outlet property="player3" destination="k6w-oW-eVT" id="5rH-bQ-eqU"/>
+                        <outlet property="player4" destination="Fhv-nM-dLd" id="djK-MO-fXG"/>
+                        <outlet property="player5" destination="jVm-fg-JMZ" id="fkM-IP-YQw"/>
+                        <outlet property="player6" destination="waC-Tn-aRJ" id="LFj-rE-G8K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t92-lS-65i" userLabel="First Responder" sceneMemberID="firstResponder"/>
