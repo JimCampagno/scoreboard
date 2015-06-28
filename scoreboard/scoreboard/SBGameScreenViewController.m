@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet Scorecard *player5;
 @property (weak, nonatomic) IBOutlet Scorecard *player6;
 
+@property (strong, nonatomic) NSArray *playerScorecards;
+
 
 
 @property (strong, nonatomic) NSArray *pickerData;
@@ -32,6 +34,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+
+    
     
 
     
@@ -39,16 +43,16 @@
     
 }
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    
-    return 1;
-}
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
-    
-    return [self.pickerData count];
-}
+//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+//    
+//    return 1;
+//}
+//
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+//    
+//    
+//    return [self.pickerData count];
+//}
 
 
 //- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -59,18 +63,18 @@
 //    return self.pickerData[row];
 //}
 
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    NSString *title = self.pickerData[row];
-    NSAttributedString *attTitle = [[NSAttributedString alloc] initWithString:title
-                                                                   attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-    
-    [[pickerView.subviews objectAtIndex:1] setBackgroundColor:[UIColor redColor]];
-    [[pickerView.subviews objectAtIndex:2] setBackgroundColor:[UIColor redColor]];
-    
-    return attTitle;
-    
-}
+//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+//{
+//    NSString *title = self.pickerData[row];
+//    NSAttributedString *attTitle = [[NSAttributedString alloc] initWithString:title
+//                                                                   attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+//    
+//    [[pickerView.subviews objectAtIndex:1] setBackgroundColor:[UIColor redColor]];
+//    [[pickerView.subviews objectAtIndex:2] setBackgroundColor:[UIColor redColor]];
+//    
+//    return attTitle;
+//    
+//}
 
 //- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
 //
@@ -83,24 +87,24 @@
 
 
 
-- (NSArray *)pickerData {
-    
-    if (!_pickerData) {
-        
-        _pickerData = [[NSArray alloc] init];
-        
-        NSMutableArray *holdingData = [[NSMutableArray alloc] init];
-        
-        for (NSInteger i = 0 ; i < 21 ; i++) {
-            
-            [holdingData addObject:[NSString stringWithFormat:@"%ld", i]];
-        }
-        
-        _pickerData = [holdingData copy];
-    }
-
-    return _pickerData;
-}
+//- (NSArray *)pickerData {
+//    
+//    if (!_pickerData) {
+//        
+//        _pickerData = [[NSArray alloc] init];
+//        
+//        NSMutableArray *holdingData = [[NSMutableArray alloc] init];
+//        
+//        for (NSInteger i = 0 ; i < 21 ; i++) {
+//            
+//            [holdingData addObject:[NSString stringWithFormat:@"%ld", i]];
+//        }
+//        
+//        _pickerData = [holdingData copy];
+//    }
+//
+//    return _pickerData;
+//}
 
 -(void)viewDidAppear:(BOOL)animated {
     
@@ -153,6 +157,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+
+-(void)jimsIsCool {
+    
+    NSLog(@"Jim is the best.");
 }
 
 
