@@ -107,13 +107,14 @@
     
     NSLog(@"The connect button was pressed!");
     
-    [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *roomToJoin) {
+    
+    [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         
-        if ([roomToJoin exists]) {
+        if ([snapshot exists]) {
             
             NSLog(@"The room exists");
             
-            self.roomOfPeopleToPassForward  = [SBRoom createRoomWithData:roomToJoin];
+            self.roomOfPeopleToPassForward  = [SBRoom createRoomWithData:snapshot];
             
             for (SBUser *user in self.roomOfPeopleToPassForward) {
                 
@@ -127,10 +128,37 @@
             
             NSLog(@"We dead");
         }
-        
+
     } withCancelBlock:^(NSError *error) {
-             NSLog(@"We have an error in the connect method: %@", error.description);
-         }];
+        
+        NSLog(@"We have an error in the connect method: %@", error.description);
+
+    }];
+    
+//    [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *roomToJoin) {
+//        
+//        if ([roomToJoin exists]) {
+//            
+//            NSLog(@"The room exists");
+//            
+//            self.roomOfPeopleToPassForward  = [SBRoom createRoomWithData:roomToJoin];
+//            
+//            for (SBUser *user in self.roomOfPeopleToPassForward) {
+//                
+//                NSLog(@"The name of the user is %@", user.name);
+//                NSLog(@"The name of the monster is %@", user.monster);
+//                NSLog(@"The health points is %@", user.hp);
+//                NSLog(@"The victory points is %@", user.vp);
+//            }
+//            
+//        } else {
+//            
+//            NSLog(@"We dead");
+//        }
+//        
+//    } withCancelBlock:^(NSError *error) {
+//             NSLog(@"We have an error in the connect method: %@", error.description);
+//         }];
     
     
     
