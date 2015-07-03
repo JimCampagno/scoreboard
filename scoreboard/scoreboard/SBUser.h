@@ -16,6 +16,9 @@
 @property (strong, nonatomic) NSNumber *vp;
 
 - (instancetype)init;
-- (instancetype)initWithName:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name
+                 monsterName:(NSString *)monsterName
+                          hp:(NSNumber *)hp
+                          vp:(NSNumber *)vp;
 
 @end

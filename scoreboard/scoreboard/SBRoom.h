@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Firebase/Firebase.h>
 #import "SBUser.h"
 
 @interface SBRoom : NSObject
@@ -17,6 +18,6 @@
 - (instancetype)initWithUser:(SBUser *)user;
 - (void)addUser:(SBUser *)user;
 - (void)addArrayOfUsers:(NSArray *)users;
-+ (NSArray *)createRoomWithData:(SBRoom *)data;
++ (NSArray *)createRoomWithData:(FDataSnapshot *)data;
 
 @end

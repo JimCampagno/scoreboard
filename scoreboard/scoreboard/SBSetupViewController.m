@@ -29,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *createGameProp;
 - (IBAction)cancel:(id)sender;
 
+@property (strong, nonatomic) NSArray *roomOfPeopleToPassForward;
+
 @end
 
 @implementation SBSetupViewController
@@ -65,6 +67,14 @@
     [super didReceiveMemoryWarning];
 }
 
+- (NSArray *)roomOfPeopleToPassForward {
+    
+    if (!_roomOfPeopleToPassForward) {
+        _roomOfPeopleToPassForward = [[NSArray alloc] init];
+    }
+    return _roomOfPeopleToPassForward;
+}
+
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if ([string isEqualToString:@""]) {
@@ -92,21 +102,34 @@
 
 - (IBAction)connect:(id)sender {
     
+    //699737
+
+    
     NSLog(@"The connect button was pressed!");
-    
-    NSLog(@"%@", self.invisibleDigits.text);
-    
     
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *roomToJoin) {
         
-
-        NSLog(@"Just NSLogging the snapshot/roomToJoin: %@", roomToJoin);
+        if ([roomToJoin exists]) {
+            
+            NSLog(@"The room exists");
+            
+            self.roomOfPeopleToPassForward  = [SBRoom createRoomWithData:roomToJoin];
+            
+            for (SBUser *user in self.roomOfPeopleToPassForward) {
+                
+                NSLog(@"The name of the user is %@", user.name);
+                NSLog(@"The name of the monster is %@", user.monster);
+                NSLog(@"The health points is %@", user.hp);
+                NSLog(@"The victory points is %@", user.vp);
+            }
+            
+        } else {
+            
+            NSLog(@"We dead");
+        }
         
-        NSLog(@"NSLogging the key, %@", roomToJoin.key);
-        
-        NSLog(@"What's here: %ld", roomToJoin.childrenCount);
-        
-        
+    } withCancelBlock:^(NSError *error) {
+             NSLog(@"We have an error in the connect method: %@", error.description);
          }];
     
     
@@ -128,7 +151,7 @@
                          [self animateJoinButtonDown];
                      }];
     
-    SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text];
+    SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:@"" hp:@10 vp:@0];
     SBRoom *newRoom = [[SBRoom alloc] initWithUser:currentUser];
     [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef andRoom:newRoom];
 }
@@ -238,17 +261,6 @@
     
 }
 
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 - (IBAction)cancel:(id)sender {
     
     [self bringButtonsBackAfterCancelTapped];
@@ -258,5 +270,14 @@
     for (UILabel *label in self.joinGameNumbers) {
         label.text = @"-";
     }
+}
+
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
 @end

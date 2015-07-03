@@ -41,19 +41,23 @@
     }
 }
 
-+ (NSArray *)createRoomWithData:(SBRoom *)data {
++ (NSArray *)createRoomWithData:(FDataSnapshot *)data {
     
-    NSArray *result = [[NSArray alloc] init];
+    NSMutableArray *result = [[NSMutableArray alloc] init];
     
-    SBUser *currentUser = [[SBUser alloc] init];
-    currentUser = data.users[0];
+    for (NSDictionary *person in data.value) {
+        
+        SBUser *currentPerson = [[SBUser alloc] initWithName:person[@"name"]
+                                                 monsterName:person[@"monster"]
+                                                          hp:person[@"hp"]
+                                                          vp:person[@"vp"]];
+        
+        [result addObject:currentPerson];
+    }
     
-    result = @[ @{ @"name": currentUser.name,
-                   @"monster": currentUser.monster,
-                   @"hp": currentUser.hp,
-                   @"vp": currentUser.vp } ];
+    NSArray *completeRoom = [result copy];
     
-    return result;
+    return completeRoom;
     
 }
 
