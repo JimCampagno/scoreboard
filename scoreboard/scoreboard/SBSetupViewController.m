@@ -94,12 +94,6 @@
     NSLog(@"The connect button was pressed!");
     
         [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
-   
-    
-    
-    
-   
-    
 }
 
 - (IBAction)createGame:(id)sender {

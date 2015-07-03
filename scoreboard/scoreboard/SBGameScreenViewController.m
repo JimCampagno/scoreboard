@@ -21,9 +21,6 @@
 @property (weak, nonatomic) IBOutlet Scorecard *player6;
 
 @property (strong, nonatomic) NSArray *playerScorecards;
-
-
-
 @property (strong, nonatomic) NSArray *pickerData;
 
 @end
@@ -34,13 +31,28 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [self setUpContainerOfScorecards];
+    
+    [self.player1 setupScorecardWithMonsterName:@"Jimbo"
+                                     playerName:@"BadMan"
+                                   monsterImage:nil];
+    [self.player2 setupScorecardWithMonsterName:@"Frodo"
+                                     playerName:@"Ant"
+                                   monsterImage:nil];
+    
+    
+    for (Scorecard *sc in self.playerScorecards) {
+        
+        NSLog(@"The name is %@", sc.monsterName.text);
+    }
 
-    
-    
 
+}
+
+- (void)setUpContainerOfScorecards {
     
-    
-    
+    _playerScorecards = @[self.player1, self.player2, self.player3, self.player4, self.player5, self.player6];
 }
 
 //-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -160,10 +172,6 @@
 }
 
 
--(void)jimsIsCool {
-    
-    NSLog(@"Jim is the best.");
-}
 
 
 
