@@ -18,6 +18,7 @@
     if (self) {
         [self commonInit];
         [self setupPickerViewsDelegateAndDataSource];
+        
     }
     return self;
 }
@@ -28,6 +29,8 @@
     if (self) {
         [self commonInit];
         [self setupPickerViewsDelegateAndDataSource];
+        
+
     }
     return self;
 }
@@ -45,6 +48,8 @@
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.view];
     [self setNeedsUpdateConstraints];
+    
+
     
 }
 
@@ -77,9 +82,6 @@
     
     _health = [hp copy];
     _victoryPoints = [vp copy];
-
-    
-    
 }
 
 - (void)setupPickerViewsDelegateAndDataSource {
@@ -118,6 +120,7 @@
         return [self.health count];
     }
     
+    
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView
@@ -132,8 +135,15 @@
         return [NSString stringWithFormat:@"%@", [self.health[row] stringValue]];
 
     }
-    
 }
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+
+    return 30;
+}
+
+//// selection. in this case, it means showing the appropriate row in the middle
+//- (void)selectRow:(NSInteger)row inComponent:(NSInteger)component animated:(BOOL)animated;  // scrolls the specified row to center.
 
 
 

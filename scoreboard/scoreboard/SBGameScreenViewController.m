@@ -42,6 +42,10 @@
                                    monsterImage:nil];
     
     
+//    [self.player1.bottomPicker selectRow:10 inComponent:0 animated:NO];
+
+    
+    
 
 
 
