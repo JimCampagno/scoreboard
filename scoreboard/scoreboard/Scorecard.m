@@ -17,6 +17,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self commonInit];
+        [self setupPickerViewsDelegateAndDataSource];
     }
     return self;
 }
@@ -26,6 +27,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self commonInit];
+        [self setupPickerViewsDelegateAndDataSource];
     }
     return self;
 }
@@ -65,7 +67,7 @@
     NSMutableArray *vp = [[NSMutableArray alloc] init];
     
     for (NSInteger i = 0 ; i < 21 ; i++) {
-        if (i > 10) {
+        if (i > 12) {
             [vp addObject:@(i)];
         } else {
             [vp addObject:@(i)];
@@ -78,6 +80,14 @@
 
     
     
+}
+
+- (void)setupPickerViewsDelegateAndDataSource {
+    
+    self.topPicker.delegate = self;
+    self.bottomPicker.delegate = self;
+    self.topPicker.dataSource = self;
+    self.bottomPicker.dataSource = self;
 }
 
 #pragma mark - Setting up the object with names and image
@@ -93,59 +103,38 @@
 
 #pragma mark - UIPickerview Delegate/Datasource methods
 
-// returns the number of 'columns' to display.
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     
-    
-    
     return 1;
-    
-    
-    
 }
 
-// returns the # of rows in each component..
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component {
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     
     if ([pickerView isEqual:_topPicker]) {
         
+        return [self.victoryPoints count];
+    } else {
         
+        return [self.health count];
     }
     
-    
-    
-    return 10;
 }
 
-//- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-//
-//    [[pickerView.subviews objectAtIndex:1] setBackgroundColor:[UIColor blueColor]];
-//    [[pickerView.subviews objectAtIndex:2] setBackgroundColor:[UIColor blueColor]];
-//
-//    return self.pickerData[row];
-//}
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component {
+    
+    if ([pickerView isEqual:_topPicker]) {
+        
+        return [NSString stringWithFormat:@"%@", [self.victoryPoints[row] stringValue]];
+    } else {
+        
+        return [NSString stringWithFormat:@"%@", [self.health[row] stringValue]];
 
-//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-//{
-//    NSString *title = self.pickerData[row];
-//    NSAttributedString *attTitle = [[NSAttributedString alloc] initWithString:title
-//                                                                   attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-//
-//    [[pickerView.subviews objectAtIndex:1] setBackgroundColor:[UIColor redColor]];
-//    [[pickerView.subviews objectAtIndex:2] setBackgroundColor:[UIColor redColor]];
-//
-//    return attTitle;
-//
-//}
+    }
+    
+}
 
-//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
-//
-//    [[pickerView.subviews objectAtIndex:1] setBackgroundColor:[UIColor blueColor]];
-//    [[pickerView.subviews objectAtIndex:2] setBackgroundColor:[UIColor blueColor]];
-//
-//
-//}
 
 
 

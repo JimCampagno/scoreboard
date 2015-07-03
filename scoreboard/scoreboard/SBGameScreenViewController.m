@@ -42,10 +42,7 @@
                                    monsterImage:nil];
     
     
-    for (Scorecard *sc in self.playerScorecards) {
-        
-        NSLog(@"The name is %@", sc.monsterName.text);
-    }
+
 
 
 }
