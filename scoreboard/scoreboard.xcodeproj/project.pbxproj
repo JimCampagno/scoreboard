@@ -162,6 +162,7 @@
 		7D45F3801B126AA30053F47F /* scoreboard */ = {
 			isa = PBXGroup;
 			children = (
+				7D6E720D1B470B8E0092D827 /* Views */,
 				7D1663161B13B1DD002A2BF0 /* ViewControllers */,
 				7D1663151B13B1C5002A2BF0 /* Constants */,
 				7D1663141B13B1AA002A2BF0 /* Delegates */,
@@ -175,14 +176,9 @@
 		7D45F3811B126AA30053F47F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7D45F38B1B126AA30053F47F /* Main.storyboard */,
 				7D45F38E1B126AA30053F47F /* Images.xcassets */,
-				7D45F3901B126AA30053F47F /* LaunchScreen.xib */,
 				7D45F3821B126AA30053F47F /* Info.plist */,
 				7D45F3831B126AA30053F47F /* main.m */,
-				5BCAF1111B2A70A60096C88F /* Scorecard.xib */,
-				7D2968A21B2E2FA7000E1C7C /* Scorecard.h */,
-				7D2968A31B2E2FA7000E1C7C /* Scorecard.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -202,6 +198,18 @@
 				7D45F39C1B126AA30053F47F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7D6E720D1B470B8E0092D827 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5BCAF1111B2A70A60096C88F /* Scorecard.xib */,
+				7D2968A21B2E2FA7000E1C7C /* Scorecard.h */,
+				7D2968A31B2E2FA7000E1C7C /* Scorecard.m */,
+				7D45F38B1B126AA30053F47F /* Main.storyboard */,
+				7D45F3901B126AA30053F47F /* LaunchScreen.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		9A6AE255DB7D31A7C5828CBF /* Frameworks */ = {

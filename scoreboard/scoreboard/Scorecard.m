@@ -139,11 +139,8 @@
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
 
-    return 30;
+    return 40;
 }
-
-//// selection. in this case, it means showing the appropriate row in the middle
-//- (void)selectRow:(NSInteger)row inComponent:(NSInteger)component animated:(BOOL)animated;  // scrolls the specified row to center.
 
 
 

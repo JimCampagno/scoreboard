@@ -39,6 +39,7 @@
     
     [super viewDidLoad];
     [self setupView];
+    _firebaseRef= [[Firebase alloc] initWithUrl: FIREBASE_URL];
 }
 
 - (void)setupView {
@@ -93,7 +94,25 @@
     
     NSLog(@"The connect button was pressed!");
     
-        [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
+    NSLog(@"%@", self.invisibleDigits.text);
+    
+    
+    [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *roomToJoin) {
+        
+
+        NSLog(@"Just NSLogging the snapshot/roomToJoin: %@", roomToJoin);
+        
+        NSLog(@"NSLogging the key, %@", roomToJoin.key);
+        
+        NSLog(@"What's here: %ld", roomToJoin.childrenCount);
+        
+        
+         }];
+    
+    
+    
+//        [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
+    
 }
 
 - (IBAction)createGame:(id)sender {
@@ -124,6 +143,8 @@
                          [self animateCreateButtonDown];
                            [self animateJoinButtonOnTap];
                      }];
+    
+    
     
 }
 
@@ -217,13 +238,7 @@
     
 }
 
-- (Firebase *)firebaseRef {
-    
-    if (!_firebaseRef) {
-        _firebaseRef= [[Firebase alloc] initWithUrl: FIREBASE_URL];
-    }
-    return _firebaseRef;
-}
+
 
 /*
  #pragma mark - Navigation

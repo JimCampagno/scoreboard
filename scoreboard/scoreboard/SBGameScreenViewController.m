@@ -32,18 +32,18 @@
     
     [super viewDidLoad];
     
-    [self setUpContainerOfScorecards];
+    [self setupStartingHealthAndVictoryPoints];
+    
     
     [self.player1 setupScorecardWithMonsterName:@"Jimbo"
                                      playerName:@"BadMan"
-                                   monsterImage:nil];
+                                   monsterImage:[UIImage imageNamed:@"captain_fish_384"]];
     [self.player2 setupScorecardWithMonsterName:@"Frodo"
-                                     playerName:@"Ant"
-                                   monsterImage:nil];
+                                     playerName:@"Brian"
+                                   monsterImage:[UIImage imageNamed:@"drakonis_384"]];
     
     
-//    [self.player1.bottomPicker selectRow:10 inComponent:0 animated:NO];
-
+    
     
     
 
@@ -51,9 +51,22 @@
 
 }
 
-- (void)setUpContainerOfScorecards {
+- (NSArray *)playerScorecards {
     
-    _playerScorecards = @[self.player1, self.player2, self.player3, self.player4, self.player5, self.player6];
+    if (!_playerScorecards) {
+        _playerScorecards = @[self.player1, self.player2, self.player3, self.player4, self.player5, self.player6];
+    }
+    return _playerScorecards;
+}
+
+
+- (void)setupStartingHealthAndVictoryPoints {
+    
+    for (Scorecard *scorecard in self.playerScorecards) {
+        
+        [scorecard.bottomPicker selectRow:10 inComponent:0 animated:YES];
+        [scorecard.topPicker selectRow:0 inComponent:0 animated:YES];
+    }
 }
 
 //-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
