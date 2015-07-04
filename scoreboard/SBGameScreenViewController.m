@@ -90,6 +90,7 @@
 - (void)setupScorecardWithUsersInfo {
     
     
+    
     for (NSInteger i = 0 ; i < [self.testing count] ; i++) {
         
         SBUser *user = self.testing[i];
