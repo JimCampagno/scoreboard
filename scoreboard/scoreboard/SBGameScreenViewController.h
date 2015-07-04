@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Firebase/Firebase.h>
 
 @interface SBGameScreenViewController : UIViewController
 
 
 @property (strong, nonatomic) NSArray *usersInTheRoom;
+@property (strong, nonatomic) Firebase *ref;
+@property (strong, nonatomic) NSString *roomDigits;
+
 
 @end

@@ -9,6 +9,7 @@
 #import "SBGameScreenViewController.h"
 #import "Scorecard.h"
 #import "SBUser.h"
+#import "SBRoom.h"
 
 @interface SBGameScreenViewController ()
 
@@ -24,6 +25,9 @@
 @property (strong, nonatomic) NSArray *playerScorecards;
 @property (strong, nonatomic) NSArray *pickerData;
 
+#warning testing
+@property (strong, nonatomic) NSMutableArray *testing;
+
 @end
 
 @implementation SBGameScreenViewController
@@ -33,11 +37,51 @@
     
     [super viewDidLoad];
     
-    [self setupStartingHealthAndVictoryPoints];
-    
-    [self setupScorecardWithUsersInfo];
+    _testing = [[NSMutableArray alloc] init];
     
     
+    
+    NSLog(@"%@", self.roomDigits);
+    
+    
+    [[self.ref childByAppendingPath:self.roomDigits] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        
+        self.testing = [[SBRoom createRoomWithData:snapshot] mutableCopy];
+        
+        [self setupStartingHealthAndVictoryPoints];
+        
+        [self setupScorecardWithUsersInfo];
+        
+        
+        //code here
+    } withCancelBlock:^(NSError *error) {
+        //error code here
+    }];
+    
+//    [[self.ref childByAppendingPath:self.roomDigits] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+//        
+//        if ([snapshot exists]) {
+//            
+//            self.roomOfPeopleToPassForward  = [SBRoom createRoomWithData:snapshot];
+//            [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
+//            
+//        } else {
+//            //code here for if the room doesn't exist! put up an alert box stating that the room doesn't exist.
+//        }
+//        
+//    } withCancelBlock:^(NSError *error) {
+//        
+//        //Put up alert box stating what the error is or that there was a problem connecting to the Network.
+//        NSLog(@"We have an error in the connect method: %@", error.description);
+//        
+//    }];
+
+    
+    
+//    [self.ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+//        NSLog(@"%@", snapshot.value[@"author"]);
+//        NSLog(@"%@", snapshot.value[@"title"]);
+//    }];
     
     
     
@@ -46,9 +90,9 @@
 - (void)setupScorecardWithUsersInfo {
     
     
-    for (NSInteger i = 0 ; i < [self.usersInTheRoom count] ; i++) {
+    for (NSInteger i = 0 ; i < [self.testing count] ; i++) {
         
-        SBUser *user = self.usersInTheRoom[i];
+        SBUser *user = self.testing[i];
         
         switch (i+1) {
             case 1:
@@ -98,34 +142,34 @@
 
 - (void)hideUnusedScorecards {
     
-    if ([self.usersInTheRoom count] < 6) {
+    if ([self.testing count] < 6) {
         
-        for (NSInteger j = 6 ; j > [self.usersInTheRoom count] ; j--) {
-            
-            switch (j) {
-                case 6:
-                    self.player6.hidden = YES;
-                    break;
-                    
-                case 5:
-                    self.player5.hidden = YES;
-                    break;
-                    
-                case 4:
-                    self.player4.hidden = YES;
-                    break;
-                    
-                case 3:
-                    self.player3.hidden = YES;
-                    break;
-                    
-                case 2:
-                    self.player2.hidden = YES;
-                    break;
-                    
-                default:
-                    break;
-            }
+        for (NSInteger j = 6 ; j > [self.testing count] ; j--) {
+//            
+//            switch (j) {
+//                case 6:
+//                    self.player6.hidden = YES;
+//                    break;
+//                    
+//                case 5:
+//                    self.player5.hidden = YES;
+//                    break;
+//                    
+//                case 4:
+//                    self.player4.hidden = YES;
+//                    break;
+//                    
+//                case 3:
+//                    self.player3.hidden = YES;
+//                    break;
+//                    
+//                case 2:
+//                    self.player2.hidden = YES;
+//                    break;
+//                    
+//                default:
+//                    break;
+//            }
         }
     }
 }

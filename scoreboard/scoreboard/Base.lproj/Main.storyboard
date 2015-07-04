@@ -189,7 +189,7 @@
                         <outletCollection property="joinGameNumbers" destination="KXR-te-UpJ" id="bcb-yt-GBk"/>
                         <outletCollection property="joinGameNumbers" destination="EIn-ao-Inv" id="hZQ-6c-OqV"/>
                         <outletCollection property="joinGameNumbers" destination="IzJ-z0-dB6" id="Xd4-C7-Aar"/>
-                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="GameScreenSegue" modalTransitionStyle="crossDissolve" id="TfR-Cx-Rkb"/>
+                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="GameScreenSegue" id="TfR-Cx-Rkb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

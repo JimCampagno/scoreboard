@@ -265,6 +265,11 @@
         
         SBGameScreenViewController *destVC = segue.destinationViewController;
         destVC.usersInTheRoom = self.roomOfPeopleToPassForward;
+        destVC.ref = self.firebaseRef;
+        destVC.roomDigits = self.invisibleDigits.text;
+        
+        
+        
     } else {
         
         //user created a game, pass forward that info as well? Same VC? does it MATTER??!!
