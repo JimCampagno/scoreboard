@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface SBUser : NSObject
 
@@ -14,6 +15,7 @@
 @property (strong, nonatomic) NSString *monster;
 @property (strong, nonatomic) NSNumber *hp;
 @property (strong, nonatomic) NSNumber *vp;
+@property (strong, nonatomic) UIImage *monsterImage;
 
 - (instancetype)init;
 - (instancetype)initWithName:(NSString *)name

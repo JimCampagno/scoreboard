@@ -12,6 +12,7 @@
 #import "SBConstants.h"
 #import "FirebaseAPIclient.h"
 #import "SBRoom.h"
+#import "SBGameScreenViewController.h"
 
 @interface SBSetupViewController ()
 
@@ -34,8 +35,6 @@
 @end
 
 @implementation SBSetupViewController
-
-
 
 - (void)viewDidLoad {
     
@@ -103,67 +102,25 @@
 - (IBAction)connect:(id)sender {
     
     //699737
-
-    
-    NSLog(@"The connect button was pressed!");
-    
-    
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         
         if ([snapshot exists]) {
             
-            NSLog(@"The room exists");
-            
             self.roomOfPeopleToPassForward  = [SBRoom createRoomWithData:snapshot];
-            
-            for (SBUser *user in self.roomOfPeopleToPassForward) {
-                
-                NSLog(@"The name of the user is %@", user.name);
-                NSLog(@"The name of the monster is %@", user.monster);
-                NSLog(@"The health points is %@", user.hp);
-                NSLog(@"The victory points is %@", user.vp);
-            }
+            [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
             
         } else {
-            
-            NSLog(@"We dead");
+#warning finish this
+            //code here for if the room doesn't exist! put up an alert box stating that the room doesn't exist.
         }
-
+        
     } withCancelBlock:^(NSError *error) {
         
+#warning finish this as well
+        //Put up alert box stating what the error is or that there was a problem connecting to the Network.
         NSLog(@"We have an error in the connect method: %@", error.description);
-
+        
     }];
-    
-//    [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *roomToJoin) {
-//        
-//        if ([roomToJoin exists]) {
-//            
-//            NSLog(@"The room exists");
-//            
-//            self.roomOfPeopleToPassForward  = [SBRoom createRoomWithData:roomToJoin];
-//            
-//            for (SBUser *user in self.roomOfPeopleToPassForward) {
-//                
-//                NSLog(@"The name of the user is %@", user.name);
-//                NSLog(@"The name of the monster is %@", user.monster);
-//                NSLog(@"The health points is %@", user.hp);
-//                NSLog(@"The victory points is %@", user.vp);
-//            }
-//            
-//        } else {
-//            
-//            NSLog(@"We dead");
-//        }
-//        
-//    } withCancelBlock:^(NSError *error) {
-//             NSLog(@"We have an error in the connect method: %@", error.description);
-//         }];
-    
-    
-    
-//        [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
-    
 }
 
 - (IBAction)createGame:(id)sender {
@@ -192,7 +149,7 @@
                      }
                      completion:^ (BOOL finished) {
                          [self animateCreateButtonDown];
-                           [self animateJoinButtonOnTap];
+                         [self animateJoinButtonOnTap];
                      }];
     
     
@@ -260,8 +217,6 @@
                              self.displayJoinGameDigits.alpha = 1;
                              
                          }];
-                         
-                         
                      }];
 }
 
@@ -305,7 +260,14 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"GameScreenSegue"]) {
+        
+        SBGameScreenViewController *destVC = segue.destinationViewController;
+        destVC.usersInTheRoom = self.roomOfPeopleToPassForward;
+    } else {
+        
+        //user created a game, pass forward that info as well? Same VC? does it MATTER??!!
+    }
 }
 @end

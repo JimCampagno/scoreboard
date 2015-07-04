@@ -10,4 +10,7 @@
 
 @interface SBGameScreenViewController : UIViewController
 
+
+@property (strong, nonatomic) NSArray *usersInTheRoom;
+
 @end

@@ -22,11 +22,12 @@
     self = [super init];
     
     if (self) {
-        
         _name = name;
         _monster = monsterName;
         _hp = hp;
         _vp = vp;
+        NSString *nameOfImage = [NSString stringWithFormat:@"%@_128", monsterName];
+        _monsterImage = [UIImage imageNamed:nameOfImage];
     }
     
     return self;

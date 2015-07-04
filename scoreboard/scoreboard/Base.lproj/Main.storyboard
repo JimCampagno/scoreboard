@@ -189,7 +189,7 @@
                         <outletCollection property="joinGameNumbers" destination="KXR-te-UpJ" id="bcb-yt-GBk"/>
                         <outletCollection property="joinGameNumbers" destination="EIn-ao-Inv" id="hZQ-6c-OqV"/>
                         <outletCollection property="joinGameNumbers" destination="IzJ-z0-dB6" id="Xd4-C7-Aar"/>
-                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="GameScreenSegue" modalTransitionStyle="flipHorizontal" id="TfR-Cx-Rkb"/>
+                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="GameScreenSegue" modalTransitionStyle="crossDissolve" id="TfR-Cx-Rkb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -227,7 +227,6 @@
                                         <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="waC-Tn-aRJ" firstAttribute="height" secondItem="cPe-gP-ZxZ" secondAttribute="height" multiplier="0.33" constant="-4" id="3Dj-DP-Hkm" userLabel="player6 - Height"/>
                                     <constraint firstItem="Fhv-nM-dLd" firstAttribute="centerY" secondItem="cPe-gP-ZxZ" secondAttribute="centerY" id="3NO-20-3m1" userLabel="player4 - CenterY"/>
@@ -259,7 +258,6 @@
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="u6j-n3-LDs" firstAttribute="top" secondItem="2e6-Di-eqh" secondAttribute="top" id="1hg-u5-w4o" userLabel="player1 - Top"/>
                                     <constraint firstItem="k6w-oW-eVT" firstAttribute="height" secondItem="2e6-Di-eqh" secondAttribute="height" multiplier="0.33" constant="-4" id="GAX-Ba-Oez" userLabel="player3 - Height"/>

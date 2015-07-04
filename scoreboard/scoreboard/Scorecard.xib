@@ -34,7 +34,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="kuP-EV-GQ6" userLabel="Player Name - Height"/>
                     </constraints>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -110,9 +110,9 @@
                 <constraint firstItem="rfw-sK-C8Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QQq-NE-I3b" userLabel="Player Name - Leading"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UQq-Hb-hSd" userLabel="Monster Image - Leading"/>
                 <constraint firstItem="rfw-sK-C8Z" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="VSC-vz-fDr" userLabel="Player Name - Bottom"/>
-                <constraint firstItem="rfw-sK-C8Z" firstAttribute="width" secondItem="9eV-Dq-2HO" secondAttribute="width" id="mvj-t4-Pgs" userLabel="Player Name - Width"/>
+                <constraint firstItem="rfw-sK-C8Z" firstAttribute="width" relation="greaterThanOrEqual" secondItem="9eV-Dq-2HO" secondAttribute="width" id="mvj-t4-Pgs" userLabel="Player Name - Width"/>
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ozw-gs-JoA" userLabel="Monster Name - Leading"/>
-                <constraint firstItem="SkQ-Nh-BIf" firstAttribute="width" secondItem="9eV-Dq-2HO" secondAttribute="width" id="p8L-f9-hCl" userLabel="Monster Name - Width"/>
+                <constraint firstItem="SkQ-Nh-BIf" firstAttribute="width" relation="greaterThanOrEqual" secondItem="9eV-Dq-2HO" secondAttribute="width" id="p8L-f9-hCl" userLabel="Monster Name - Width"/>
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="leading" secondItem="9eV-Dq-2HO" secondAttribute="trailing" id="td4-PL-0Xm" userLabel="Right View - Leading"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" multiplier="0.6" id="wTY-d7-h3X" userLabel="Monster Image - Trailing"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="bottom" secondItem="rfw-sK-C8Z" secondAttribute="top" constant="-8" id="ygI-eR-Ywh" userLabel="Monster Image - Bottom"/>
