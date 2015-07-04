@@ -83,6 +83,17 @@
 //        NSLog(@"%@", snapshot.value[@"title"]);
 //    }];
     
+    [self testData];
+    
+    
+}
+
+- (void)testData {
+    
+    
+    self.player1.monsterImage.image = [UIImage imageNamed:@"KONG_128"];
+    
+    
     
     
 }
