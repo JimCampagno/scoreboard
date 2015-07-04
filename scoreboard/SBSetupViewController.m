@@ -125,18 +125,24 @@
 
 - (IBAction)createGame:(id)sender {
     
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         [self dismissKeyboard];
-                     }
-                     completion:^ (BOOL finished) {
-                         [self animateCreateButtonDown];
-                         [self animateJoinButtonDown];
-                     }];
+//    [UIView animateWithDuration:0.3
+//                     animations:^{
+//                         [self dismissKeyboard];
+//                     }
+//                     completion:^ (BOOL finished) {
+//                         [self animateCreateButtonDown];
+//                         [self animateJoinButtonDown];
+//                     }];
     
     SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
     SBRoom *newRoom = [[SBRoom alloc] initWithUser:currentUser];
     [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef andRoom:newRoom];
+    
+    
+    
+    
+    
+    
 }
 
 - (IBAction)joinGame:(id)sender {
