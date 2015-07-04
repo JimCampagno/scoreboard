@@ -125,8 +125,6 @@
 
 - (IBAction)createGame:(id)sender {
     
-    NSLog(@"The createGame button was pressed.");
-    
     [UIView animateWithDuration:0.3
                      animations:^{
                          [self dismissKeyboard];
@@ -136,7 +134,7 @@
                          [self animateJoinButtonDown];
                      }];
     
-    SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:@"" hp:@10 vp:@0];
+    SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
     SBRoom *newRoom = [[SBRoom alloc] initWithUser:currentUser];
     [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef andRoom:newRoom];
 }

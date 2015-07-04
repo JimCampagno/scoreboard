@@ -15,7 +15,7 @@
     
     [ref runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
         
-        NSArray *newRoom = [SBRoom createRoomWithData:room];
+        NSArray *newRoom = [SBRoom createRoomWithRoom:room];
         [[currentData childDataByAppendingPath:[SBConstants randomRoomNumber]] setValue:newRoom];
         return [FTransactionResult successWithValue:currentData];
     }];

@@ -41,6 +41,22 @@
     }
 }
 
++ (NSArray *)createRoomWithRoom:(SBRoom *)room {
+    
+    NSArray *result = [[NSArray alloc] init];
+    
+    SBUser *currentUser = [[SBUser alloc] init];
+    currentUser = room.users[0];
+    
+    result = @[ @{ @"name": currentUser.name,
+                   @"monster": currentUser.monster,
+                   @"hp": currentUser.hp,
+                   @"vp": currentUser.vp } ];
+    
+    return result;
+    
+}
+
 + (NSArray *)createRoomWithData:(FDataSnapshot *)data {
     
     NSMutableArray *result = [[NSMutableArray alloc] init];

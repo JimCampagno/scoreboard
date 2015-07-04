@@ -19,5 +19,7 @@
 - (void)addUser:(SBUser *)user;
 - (void)addArrayOfUsers:(NSArray *)users;
 + (NSArray *)createRoomWithData:(FDataSnapshot *)data;
++ (NSArray *)createRoomWithRoom:(SBRoom *)room;
+
 
 @end
