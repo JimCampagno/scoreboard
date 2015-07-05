@@ -229,10 +229,10 @@
                                         <rect key="frame" x="229" y="0.0" width="153" height="200.5"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfP-Pv-ioc" userLabel="topPV">
-                                                <rect key="frame" x="55" y="15" width="98" height="70.5"/>
+                                                <rect key="frame" x="84" y="15" width="69" height="70.5"/>
                                                 <subviews>
                                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RS-NM-LSX" userLabel="victorypoints">
-                                                        <rect key="frame" x="-111" y="-46" width="320" height="162"/>
+                                                        <rect key="frame" x="-125" y="-46" width="320" height="162"/>
                                                     </pickerView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -242,10 +242,10 @@
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBi-rJ-xPL" userLabel="botPV">
-                                                <rect key="frame" x="50" y="85" width="103" height="115"/>
+                                                <rect key="frame" x="84" y="115" width="69" height="70"/>
                                                 <subviews>
                                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="duY-S7-QdS" userLabel="healthpoints">
-                                                        <rect key="frame" x="-109" y="-23.5" width="320" height="162"/>
+                                                        <rect key="frame" x="-126" y="-46" width="320" height="162"/>
                                                     </pickerView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -254,44 +254,43 @@
                                                     <constraint firstItem="duY-S7-QdS" firstAttribute="centerY" secondItem="SBi-rJ-xPL" secondAttribute="centerY" id="nqb-n2-c0K" userLabel="HP Picker - center y"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="VP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zr7-Il-QI0">
-                                                <rect key="frame" x="-245" y="-20" width="14.5" height="13.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kqy-3l-ZjL">
-                                                <rect key="frame" x="-245" y="-20" width="16" height="13.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hy-I0-ssc">
-                                                <rect key="frame" x="-245" y="-20" width="30" height="34"/>
-                                                <state key="normal" title="⚠️">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                            </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="Hv6-2E-7Pp">
-                                                <rect key="frame" x="25" y="35" width="30" height="30"/>
+                                                <rect key="frame" x="46" y="35" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="kkt-Jx-BXc"/>
                                                     <constraint firstAttribute="width" constant="30" id="mt7-0e-O9r"/>
                                                 </constraints>
                                             </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="AVd-TT-9eJ">
+                                                <rect key="frame" x="46" y="135" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="aEe-kK-rxQ"/>
+                                                    <constraint firstAttribute="width" constant="30" id="cDL-0A-Jbl"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sXm-II-RHr">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="🔘">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="0.5" id="0dK-VB-PS1" userLabel="Top - Center Y"/>
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="trailing" secondItem="ofZ-sV-TDV" secondAttribute="trailing" id="4d2-x3-KB1" userLabel="Bot - Trailing"/>
+                                            <constraint firstItem="AVd-TT-9eJ" firstAttribute="centerX" secondItem="ofZ-sV-TDV" secondAttribute="centerX" multiplier="0.8" id="AQK-jJ-zgg" userLabel="Heart - Center X"/>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="height" secondItem="ofZ-sV-TDV" secondAttribute="height" multiplier="0.35" id="Cuw-8i-g1R" userLabel="Top - Height"/>
-                                            <constraint firstItem="SBi-rJ-xPL" firstAttribute="top" secondItem="tfP-Pv-ioc" secondAttribute="bottom" id="RlX-TT-86R" userLabel="Bottom - Top"/>
-                                            <constraint firstItem="tfP-Pv-ioc" firstAttribute="leading" secondItem="Hv6-2E-7Pp" secondAttribute="trailing" id="VRY-ip-BBb" userLabel="Top - Leading"/>
-                                            <constraint firstItem="SBi-rJ-xPL" firstAttribute="bottom" secondItem="ofZ-sV-TDV" secondAttribute="bottom" id="dDd-cJ-J6K" userLabel="Bottom - Bottom"/>
-                                            <constraint firstItem="Hv6-2E-7Pp" firstAttribute="leading" secondItem="ofZ-sV-TDV" secondAttribute="leading" constant="25" id="edm-ke-gnv" userLabel="Star - Leading"/>
+                                            <constraint firstItem="Hv6-2E-7Pp" firstAttribute="centerX" secondItem="ofZ-sV-TDV" secondAttribute="centerX" multiplier="0.8" id="RXd-EH-MEz" userLabel="Star - Center X"/>
+                                            <constraint firstItem="sXm-II-RHr" firstAttribute="top" secondItem="ofZ-sV-TDV" secondAttribute="top" id="TP6-hm-aOT"/>
+                                            <constraint firstItem="tfP-Pv-ioc" firstAttribute="leading" secondItem="Hv6-2E-7Pp" secondAttribute="trailing" constant="8" id="VRY-ip-BBb" userLabel="Top - Leading"/>
+                                            <constraint firstItem="SBi-rJ-xPL" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="1.5" id="Zse-wH-NqO" userLabel="Bot - Center Y"/>
+                                            <constraint firstItem="AVd-TT-9eJ" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="1.5" id="hjZ-IE-Q92" userLabel="Heart - Center Y"/>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="trailing" secondItem="ofZ-sV-TDV" secondAttribute="trailing" id="iKf-Vb-kRG" userLabel="Top - Trailing"/>
+                                            <constraint firstItem="SBi-rJ-xPL" firstAttribute="height" secondItem="ofZ-sV-TDV" secondAttribute="height" multiplier="0.35" id="pSz-OP-fGh" userLabel="Bot - Height"/>
+                                            <constraint firstItem="sXm-II-RHr" firstAttribute="leading" secondItem="ofZ-sV-TDV" secondAttribute="leading" id="qcm-i9-eqT"/>
                                             <constraint firstItem="Hv6-2E-7Pp" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="0.5" id="qx6-X3-b3U" userLabel="Star - Center Y"/>
-                                            <constraint firstItem="SBi-rJ-xPL" firstAttribute="leading" secondItem="ofZ-sV-TDV" secondAttribute="leading" constant="50" id="ugF-Sl-gCH" userLabel="Bottom - Leading"/>
+                                            <constraint firstItem="SBi-rJ-xPL" firstAttribute="leading" secondItem="AVd-TT-9eJ" secondAttribute="trailing" constant="8" id="tVz-bt-kLt" userLabel="Bot - Leading"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DRAKONIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="Brd-gu-tTd">
@@ -415,6 +414,7 @@
     </scenes>
     <resources>
         <image name="DRAKONIS_384" width="384" height="384"/>
+        <image name="heart" width="256" height="256"/>
         <image name="star" width="256" height="256"/>
     </resources>
 </document>
