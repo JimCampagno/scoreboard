@@ -12,14 +12,11 @@
 
 @interface SBRoom : NSObject
 
-@property (strong, nonatomic) NSMutableArray *users;
+@property (strong, nonatomic) NSMutableArray *users; //of SBUsers
 
-- (instancetype)init;
 - (instancetype)initWithUser:(SBUser *)user;
-- (void)addUser:(SBUser *)user;
-- (void)addArrayOfUsers:(NSArray *)users;
-+ (NSArray *)createRoomWithData:(FDataSnapshot *)data;
-+ (NSArray *)createRoomWithRoom:(SBRoom *)room;
++ (SBRoom *)createRoomWithData:(FDataSnapshot *)data;
+- (void)updateChangesMadeToPlayers;
 
 
 @end

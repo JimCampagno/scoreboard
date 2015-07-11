@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tIU-nx-yfq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -190,7 +190,7 @@
                         <outletCollection property="joinGameNumbers" destination="KXR-te-UpJ" id="bcb-yt-GBk"/>
                         <outletCollection property="joinGameNumbers" destination="EIn-ao-Inv" id="hZQ-6c-OqV"/>
                         <outletCollection property="joinGameNumbers" destination="IzJ-z0-dB6" id="Xd4-C7-Aar"/>
-                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="GameScreenSegue" id="TfR-Cx-Rkb"/>
+                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="GameScreenSegue" modalTransitionStyle="flipHorizontal" id="TfR-Cx-Rkb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -235,7 +235,7 @@
                                                         <rect key="frame" x="-125" y="-46" width="320" height="162"/>
                                                     </pickerView>
                                                 </subviews>
-                                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                                                 <constraints>
                                                     <constraint firstItem="4RS-NM-LSX" firstAttribute="centerY" secondItem="tfP-Pv-ioc" secondAttribute="centerY" id="PEL-X3-eR2" userLabel="VP Picker - center y"/>
                                                     <constraint firstItem="4RS-NM-LSX" firstAttribute="centerX" secondItem="tfP-Pv-ioc" secondAttribute="centerX" id="tDt-iW-jG9" userLabel="VP Picker - center x"/>
@@ -248,7 +248,7 @@
                                                         <rect key="frame" x="-126" y="-46" width="320" height="162"/>
                                                     </pickerView>
                                                 </subviews>
-                                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                                                 <constraints>
                                                     <constraint firstItem="duY-S7-QdS" firstAttribute="centerX" secondItem="SBi-rJ-xPL" secondAttribute="centerX" id="XXe-sQ-VeK" userLabel="HP Picker - center x"/>
                                                     <constraint firstItem="duY-S7-QdS" firstAttribute="centerY" secondItem="SBi-rJ-xPL" secondAttribute="centerY" id="nqb-n2-c0K" userLabel="HP Picker - center y"/>
@@ -273,22 +273,25 @@
                                                 <state key="normal" title="🔘">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="smallButton:" destination="tIU-nx-yfq" eventType="touchUpInside" id="CRp-5u-owj"/>
+                                                </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                                         <constraints>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="0.5" id="0dK-VB-PS1" userLabel="Top - Center Y"/>
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="trailing" secondItem="ofZ-sV-TDV" secondAttribute="trailing" id="4d2-x3-KB1" userLabel="Bot - Trailing"/>
                                             <constraint firstItem="AVd-TT-9eJ" firstAttribute="centerX" secondItem="ofZ-sV-TDV" secondAttribute="centerX" multiplier="0.8" id="AQK-jJ-zgg" userLabel="Heart - Center X"/>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="height" secondItem="ofZ-sV-TDV" secondAttribute="height" multiplier="0.35" id="Cuw-8i-g1R" userLabel="Top - Height"/>
                                             <constraint firstItem="Hv6-2E-7Pp" firstAttribute="centerX" secondItem="ofZ-sV-TDV" secondAttribute="centerX" multiplier="0.8" id="RXd-EH-MEz" userLabel="Star - Center X"/>
-                                            <constraint firstItem="sXm-II-RHr" firstAttribute="top" secondItem="ofZ-sV-TDV" secondAttribute="top" id="TP6-hm-aOT"/>
+                                            <constraint firstItem="sXm-II-RHr" firstAttribute="top" secondItem="ofZ-sV-TDV" secondAttribute="top" id="TP6-hm-aOT" userLabel="Button - Top"/>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="leading" secondItem="Hv6-2E-7Pp" secondAttribute="trailing" constant="8" id="VRY-ip-BBb" userLabel="Top - Leading"/>
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="1.5" id="Zse-wH-NqO" userLabel="Bot - Center Y"/>
                                             <constraint firstItem="AVd-TT-9eJ" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="1.5" id="hjZ-IE-Q92" userLabel="Heart - Center Y"/>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="trailing" secondItem="ofZ-sV-TDV" secondAttribute="trailing" id="iKf-Vb-kRG" userLabel="Top - Trailing"/>
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="height" secondItem="ofZ-sV-TDV" secondAttribute="height" multiplier="0.35" id="pSz-OP-fGh" userLabel="Bot - Height"/>
-                                            <constraint firstItem="sXm-II-RHr" firstAttribute="leading" secondItem="ofZ-sV-TDV" secondAttribute="leading" id="qcm-i9-eqT"/>
+                                            <constraint firstItem="sXm-II-RHr" firstAttribute="leading" secondItem="ofZ-sV-TDV" secondAttribute="leading" id="qcm-i9-eqT" userLabel="Button - Leading"/>
                                             <constraint firstItem="Hv6-2E-7Pp" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="0.5" id="qx6-X3-b3U" userLabel="Star - Center Y"/>
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="leading" secondItem="AVd-TT-9eJ" secondAttribute="trailing" constant="8" id="tVz-bt-kLt" userLabel="Bot - Leading"/>
                                         </constraints>
@@ -297,7 +300,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="229" height="183"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstItem="tVL-fj-6uz" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Brd-gu-tTd" secondAttribute="width" id="4eo-kZ-7Pc" userLabel="Monster Name - Width"/>
                                     <constraint firstItem="Brd-gu-tTd" firstAttribute="trailing" secondItem="eJz-5s-qDy" secondAttribute="trailing" multiplier="0.6" id="NmQ-jW-Anz" userLabel="Monster Image - Trailing"/>

@@ -30,7 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *createGameProp;
 - (IBAction)cancel:(id)sender;
 
-@property (strong, nonatomic) NSArray *roomOfPeopleToPassForward;
+@property (strong, nonatomic) SBRoom *roomOfPeopleToPassForward;
 
 @end
 
@@ -101,22 +101,23 @@
 
 - (IBAction)connect:(id)sender {
     
-    //699737
+    //699737 <-- been using this as test data in comunicating with firebase
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         
         if ([snapshot exists]) {
+            
+            
+            
             
             self.roomOfPeopleToPassForward  = [SBRoom createRoomWithData:snapshot];
             [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
             
         } else {
-#warning finish this
-            //code here for if the room doesn't exist! put up an alert box stating that the room doesn't exist.
+            //snapshot doesn't exist, meaninig there is no such room on firebase.
         }
         
     } withCancelBlock:^(NSError *error) {
-        
-#warning finish this as well
+        //this doesn't appear to work when I'm in the subway with no internet connection.
         //Put up alert box stating what the error is or that there was a problem connecting to the Network.
         NSLog(@"We have an error in the connect method: %@", error.description);
         
@@ -135,14 +136,8 @@
 //                     }];
     
     SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
-    SBRoom *newRoom = [[SBRoom alloc] initWithUser:currentUser];
-    [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef andRoom:newRoom];
     
-    
-    
-    
-    
-    
+    [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef andUser:currentUser];
 }
 
 - (IBAction)joinGame:(id)sender {
@@ -271,8 +266,6 @@
         destVC.usersInTheRoom = self.roomOfPeopleToPassForward;
         destVC.ref = self.firebaseRef;
         destVC.roomDigits = self.invisibleDigits.text;
-        
-        
         
     } else {
         

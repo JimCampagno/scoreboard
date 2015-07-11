@@ -11,10 +11,6 @@
 
 @implementation SBRoom
 
-- (instancetype)init {
-    
-    return [self initWithUser:nil];
-}
 
 - (instancetype)initWithUser:(SBUser *)user {
     
@@ -28,54 +24,32 @@
     return self;
 }
 
-- (void)addUser:(SBUser *)user {
++ (SBRoom *)createRoomWithData:(FDataSnapshot *)data {
     
-    [self.users addObject:user];
-}
+    SBRoom *newRoom = [[SBRoom alloc] init];
+    
+    for (FDataSnapshot* child in data.children) {
+                
+        NSDictionary *person = child.value;
 
-- (void)addArrayOfUsers:(NSArray *)stagingUsers {
-    
-    for (SBUser *user in stagingUsers) {
-        
-        [self.users addObject:user];
-    }
-}
-
-+ (NSArray *)createRoomWithRoom:(SBRoom *)room {
-    
-    NSArray *result = [[NSArray alloc] init];
-    
-    SBUser *currentUser = [[SBUser alloc] init];
-    currentUser = room.users[0];
-    
-    result = @[ @{ @"name": currentUser.name,
-                   @"monster": currentUser.monster,
-                   @"hp": currentUser.hp,
-                   @"vp": currentUser.vp } ];
-    
-    return result;
-    
-}
-
-+ (NSArray *)createRoomWithData:(FDataSnapshot *)data {
-    
-    NSMutableArray *result = [[NSMutableArray alloc] init];
-    
-    for (NSDictionary *person in data.value) {
-        
         SBUser *currentPerson = [[SBUser alloc] initWithName:person[@"name"]
                                                  monsterName:person[@"monster"]
                                                           hp:person[@"hp"]
                                                           vp:person[@"vp"]];
         
-        [result addObject:currentPerson];
+        [newRoom.users addObject:currentPerson];
     }
     
-    NSArray *completeRoom = [result copy];
+    return newRoom;
+}
+
+- (void)updateChangesMadeToPlayers {
     
-    return completeRoom;
+    
+    
     
 }
+
 
 - (NSMutableArray *)users {
     
@@ -84,6 +58,5 @@
     }
     return _users;
 }
-
 
 @end

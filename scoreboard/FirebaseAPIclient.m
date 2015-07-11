@@ -11,49 +11,19 @@
 
 @implementation FirebaseAPIclient
 
-+ (void)createGameOnFirebaseWithRef:(Firebase *)ref andRoom:(SBRoom *)room {
++ (void)createGameOnFirebaseWithRef:(Firebase *)ref andUser:(SBUser *)user {
     
     [ref runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+    
+        NSArray *newRoom = @[ @{ @"name": user.name,
+                                 @"monster": user.monster,
+                                 @"hp": user.hp,
+                                 @"vp": user.vp } ];
         
-        NSArray *newRoom = [SBRoom createRoomWithRoom:room];
         [[currentData childDataByAppendingPath:[SBConstants randomRoomNumber]] setValue:newRoom];
+        
         return [FTransactionResult successWithValue:currentData];
     }];
-    
-    
-    
-    //]
-    //    [[ref childByAppendingPath:FIREBASE_CHILD]
-    //     runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-    //
-    //         NSDictionary *newRoom = [SBRoom createRoomWithData:room];
-    //         Firebase *newRef = [ref childByAppendingPath: room.roomNumber];
-    //         [newRef setValue: newRoom];
-    //
-    //
-    //
-    ////         [currentData setValue:newRoom];
-    //         return [FTransactionResult successWithValue:currentData];
-    
-    //         NSString *roomNumber = [@([SBConstants randomRoomNumber]) stringValue];
-    //         SBRoom *newRoom = [[SBRoom alloc] init];
-    //
-    //
-    //         NSDictionary *establishRoom = @{ @"test": newRoom };
-    //         [currentData setValue:establishRoom];
-    
-    
-    //         NSDictionary *storingCurrentData = currentData.value;
-    //         NSLog(@"Is this working %@", storingCurrentData);
-    //
-    //         NSDictionary *jimbo = @{
-    //                                 @"name" : @"CUTE BOY",
-    //                                 @"coolness" : @"1000"
-    //                                 };
-    //
-    //         //         NSDictionary *listOfMorons = @{ @"232323" : jimbo };
-    //         //         [currentData setValue:listOfMorons];
-    //     }];
 }
 
 

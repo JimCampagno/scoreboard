@@ -23,4 +23,6 @@
                           hp:(NSNumber *)hp
                           vp:(NSNumber *)vp;
 
+- (BOOL)didAttributesChangeWithUser:(SBUser *)user;
+
 @end

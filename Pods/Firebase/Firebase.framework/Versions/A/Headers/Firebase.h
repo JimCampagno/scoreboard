@@ -321,7 +321,9 @@ that will automatically be populated by the Firebase Server.
  * @param block The block that should be called.  It is passed the data as an FDataSnapshot.
  * @param cancelBlock The block that will be called if you don't have permission to access this data
  */
-- (void) observeSingleEventOfType:(FEventType)eventType withBlock:(void (^)(FDataSnapshot* snapshot))block withCancelBlock:(void (^)(NSError* error))cancelBlock;
+- (void) observeSingleEventOfType:(FEventType)eventType
+                        withBlock:(void (^)(FDataSnapshot* snapshot))block
+                  withCancelBlock:(void (^)(NSError* error))cancelBlock;
 
 
 /**
