@@ -16,7 +16,7 @@
 
 - (instancetype)initWithUser:(SBUser *)user;
 + (SBRoom *)createRoomWithData:(FDataSnapshot *)data;
-- (void)updateChangesMadeToPlayers;
+- (void)updateChangesMadeToPlayersWithRoom:(SBRoom *)room;
 
 
 @end

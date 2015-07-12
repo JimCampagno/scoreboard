@@ -33,22 +33,26 @@
     return self;
 }
 
-- (BOOL)didAttributesChangeWithUser:(SBUser *)user {
-    
+- (BOOL)didAttributesChangeWithUserOnServer:(SBUser *)user {
+
     BOOL nameIsEqual = [self.name isEqualToString:user.name];
     BOOL monsterNameIsEqual = [self.monster isEqualToString:user.monster];
     BOOL hpIsEqual = [self.hp integerValue] == [user.hp integerValue];
     BOOL vpIsEqual = [self.vp integerValue] == [user.vp integerValue];
-    BOOL nothingChanged = (nameIsEqual == YES && monsterNameIsEqual == YES && hpIsEqual == YES && vpIsEqual == YES) ? YES : NO;
     
-    if (nothingChanged) {
-        
-        return NO;
-        
-    } else {
-        
-        return YES;
-    }
+    return !(nameIsEqual && monsterNameIsEqual && hpIsEqual && vpIsEqual);
 }
+
+- (void)updateAttributesToMatchUser:(SBUser *)user {
+    
+    self.name = user.name;
+    self.monster = user.monster;
+    self.hp = user.hp;
+    self.vp = user.vp;
+    
+    NSString *nameOfImage = [NSString stringWithFormat:@"%@_128", self.monster];
+    self.monsterImage = [UIImage imageNamed:nameOfImage];
+}
+
 
 @end

@@ -39,13 +39,15 @@
     
     _room = [[SBRoom alloc] init];
     
-    self.player1.monsterName.text = @"Godzilla";
-    self.player1.playerName.text = @"JIM";
-    self.player1.monsterImage.image = [UIImage imageNamed:@"MANTIS_384"];
+    [self testData];
     
-    [self.player1.topPicker selectRow:5 inComponent:0 animated:YES];
-    [self.player1.bottomPicker selectRow:5 inComponent:0 animated:YES];
+    [self setupListenerToFirebase];
     
+    
+    
+}
+
+- (void)setupListenerToFirebase {
     
     [[self.ref childByAppendingPath:self.roomDigits]
      observeEventType:FEventTypeValue
@@ -61,26 +63,43 @@
          } else {
              
              SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
-             
-             
-             
-             [self.room updateChangesMadeToPlayers];
-             
-             //create a method to see who and what changed, then update those people.
-             
+             [self updateScoresWithRoom:changedRoom];
          }
          
      } withCancelBlock:^(NSError *error) {
          
-         
+         //Still should do something here.
+         NSLog(@"ERROR: %@", error.description);
      }];
+
+}
+
+
+- (void)updateScoresWithRoom:(SBRoom *)room {
     
+    for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
+        
+        SBUser *currentUser = self.room.users[i];
+        SBUser *userOnServer = room.users[i];
+        
+        if ([currentUser didAttributesChangeWithUserOnServer:userOnServer]) {
+            
+            [currentUser updateAttributesToMatchUser:userOnServer];
+            
+            [self.playerScorecards[i] updateScorecardWithInfoFromUser:self.room.users[i]];
+        }
+    }
 }
 
 - (void)testData {
     
     
-    self.player1.monsterImage.image = [UIImage imageNamed:@"KONG_128"];
+    self.player1.monsterName.text = @"Godzilla";
+    self.player1.playerName.text = @"JIM";
+    self.player1.monsterImage.image = [UIImage imageNamed:@"MANTIS_384"];
+    
+    [self.player1.topPicker selectRow:5 inComponent:0 animated:YES];
+    [self.player1.bottomPicker selectRow:5 inComponent:0 animated:YES];
 }
 
 - (void)setupScorecardWithUsersInfo {
@@ -88,17 +107,8 @@
     for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
         
         SBUser *user = self.room.users[i];
-        
         Scorecard *currentScorecard = self.playerScorecards[i];
-        
-        [currentScorecard setupScorecardWithMonsterName:user.monster
-                                             playerName:user.name
-                                           monsterImage:user.monsterImage];
-        
-        [currentScorecard.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
-        [currentScorecard.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
-        
-        currentScorecard.hidden = NO;
+        [currentScorecard updateScorecardWithInfoFromUser:user];
     }
     
     if ([self.room.users count] < 6) {
@@ -122,11 +132,6 @@
         _playerScorecards = @[self.player1, self.player2, self.player3, self.player4, self.player5, self.player6];
     }
     return _playerScorecards;
-}
-
-- (void)didReceiveMemoryWarning {
-    
-    [super didReceiveMemoryWarning];
 }
 
 - (SBRoom *)usersInTheRoom {

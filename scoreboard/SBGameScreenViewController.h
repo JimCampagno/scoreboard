@@ -17,5 +17,4 @@
 @property (strong, nonatomic) NSString *roomDigits;
 @property (strong, nonatomic) SBUser *currentPlayer;
 
-
 @end

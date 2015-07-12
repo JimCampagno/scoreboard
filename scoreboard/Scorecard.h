@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SBUser.h"
 
 @protocol ScorecardProtocol <NSObject>
 
@@ -38,9 +39,8 @@
 @property (strong, nonatomic) NSMutableArray *customSBConstraints;
 
 
-- (void)setupScorecardWithMonsterName:(NSString *)monsterName
-                           playerName:(NSString *)playerName
-                         monsterImage:(UIImage *)image;
+- (void)updateScorecardWithInfoFromUser:(SBUser *)user;
+
 
 
 @end

@@ -23,6 +23,7 @@
                           hp:(NSNumber *)hp
                           vp:(NSNumber *)vp;
 
-- (BOOL)didAttributesChangeWithUser:(SBUser *)user;
+- (BOOL)didAttributesChangeWithUserOnServer:(SBUser *)user;
+- (void)updateAttributesToMatchUser:(SBUser *)user;
 
 @end

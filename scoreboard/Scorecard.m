@@ -30,13 +30,13 @@
         [self commonInit];
         [self setupPickerViewsDelegateAndDataSource];
         
-
+        
     }
     return self;
 }
 
 - (void)commonInit {
-        
+    
     _customSBConstraints = [[NSMutableArray alloc] init];
     
     [self setupHealthAndVictoryPoints];
@@ -44,24 +44,24 @@
     [[NSBundle mainBundle] loadNibNamed:@"Scorecard"
                                   owner:self
                                 options:nil];
-
+    
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.view];
     [self setNeedsUpdateConstraints];
     
-
+    
     
 }
 
 - (void)updateConstraints {
     
-        UIView *view = self.view;
-        NSDictionary *views = NSDictionaryOfVariableBindings(view);
-        
-        [self.customSBConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat: @"H:|[view]|" options:0 metrics:nil views:views]];
-        [self.customSBConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|[view]|" options:0 metrics:nil views:views]];
-        
-        [self addConstraints:self.customSBConstraints];
+    UIView *view = self.view;
+    NSDictionary *views = NSDictionaryOfVariableBindings(view);
+    
+    [self.customSBConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat: @"H:|[view]|" options:0 metrics:nil views:views]];
+    [self.customSBConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat: @"V:|[view]|" options:0 metrics:nil views:views]];
+    
+    [self addConstraints:self.customSBConstraints];
     
     [super updateConstraints];
 }
@@ -92,16 +92,7 @@
     self.bottomPicker.dataSource = self;
 }
 
-#pragma mark - Setting up the object with names and image
 
-- (void)setupScorecardWithMonsterName:(NSString *)monsterName
-                           playerName:(NSString *)playerName
-                         monsterImage:(UIImage *)image {
-    
-    _monsterName.text = monsterName;
-    _playerName.text = playerName;
-    _monsterImage.image = image;
-}
 
 #pragma mark - UIPickerview Delegate/Datasource methods
 
@@ -133,14 +124,29 @@
     } else {
         
         return [NSString stringWithFormat:@"%@", [self.health[row] stringValue]];
-
+        
     }
 }
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-
+    
     return 40;
 }
+
+- (void)updateScorecardWithInfoFromUser:(SBUser *)user {
+    
+    if (self.hidden == YES) {
+        
+        self.hidden = NO;
+    }
+    self.monsterImage.image = user.monsterImage;
+    self.playerName.text = user.name;
+    self.monsterName.text = user.monster;
+    
+    [self.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
+    [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
+}
+
 
 
 
