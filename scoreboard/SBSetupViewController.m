@@ -110,10 +110,33 @@
             
         } else {
             
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game doesn't exist"
+                                                                           message:@"Please confirm that you're entering in the correct number."
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction *action) {
+                                                                      
+                                                                      self.connectProp.enabled = NO;
+                                                                      
+                                                                      for (UILabel *label in self.joinGameNumbers) {
+                                                                          label.text = @"-";
+                                                                      }
+                                                                      
+                                                                      [self.holdingTheDigits removeAllObjects];
+                                                                  }];
             
-
-        
-        
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:^{
+                //do anything on completion? clear out what was originally entered?
+            }];
+            
+            
+            
+            
+            
+            
+            
         }
         
     } withCancelBlock:^(NSError *error) {
