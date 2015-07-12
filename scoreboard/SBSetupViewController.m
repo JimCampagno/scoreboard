@@ -28,9 +28,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *connectProp;
 @property (weak, nonatomic) IBOutlet UIButton *joinGameProp;
 @property (weak, nonatomic) IBOutlet UIButton *createGameProp;
+
+@property (strong, nonatomic) NSString *digitsToPassForward;
+
+
+
+
+
 - (IBAction)cancel:(id)sender;
 
-@property (strong, nonatomic) SBRoom *roomOfPeopleToPassForward;
 
 @end
 
@@ -95,16 +101,19 @@
 
 - (IBAction)connect:(id)sender {
     
-    //699737 <-- been using this as test data in comunicating with firebase
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         
         if ([snapshot exists]) {
             
-            [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
-            
+            self.digitsToPassForward = self.invisibleDigits.text;
+            [self performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
             
         } else {
-            //snapshot doesn't exist, meaninig there is no such room on firebase.
+            
+            
+
+        
+        
         }
         
     } withCancelBlock:^(NSError *error) {
@@ -117,18 +126,31 @@
 
 - (IBAction)createGame:(id)sender {
     
-//    [UIView animateWithDuration:0.3
-//                     animations:^{
-//                         [self dismissKeyboard];
-//                     }
-//                     completion:^ (BOOL finished) {
-//                         [self animateCreateButtonDown];
-//                         [self animateJoinButtonDown];
-//                     }];
+    //    [UIView animateWithDuration:0.3
+    //                     animations:^{
+    //                         [self dismissKeyboard];
+    //                     }
+    //                     completion:^ (BOOL finished) {
+    //                         [self animateCreateButtonDown];
+    //                         [self animateJoinButtonDown];
+    //                     }];
     
     SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
     
-    [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef andUser:currentUser];
+    [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef
+                                              user:currentUser
+                               withCompletionBlock:^(BOOL success, NSString *digits) {
+                                   
+                                   if (success) {
+                                       
+                                       self.digitsToPassForward = digits;
+                                       [self performSegueWithIdentifier:@"CreateGameSegue" sender:sender];
+                                   }
+                                   
+                               } withFailureBlock:^(NSError *error) {
+                                   
+                                   NSLog(@"Error: %@", error.localizedDescription);
+                               }];
 }
 
 - (IBAction)joinGame:(id)sender {
@@ -248,18 +270,10 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"GameScreenSegue"]) {
-        
-        SBGameScreenViewController *destVC = segue.destinationViewController;
-        destVC.ref = self.firebaseRef;
-        destVC.roomDigits = self.invisibleDigits.text;
-        
-    } else {
-        
-        //user created a game, pass forward that info as well? Same VC? does it MATTER??!!
-    }
+    SBGameScreenViewController *destVC = segue.destinationViewController;
+    destVC.ref = self.firebaseRef;
+    destVC.roomDigits = self.digitsToPassForward;
 }
 @end

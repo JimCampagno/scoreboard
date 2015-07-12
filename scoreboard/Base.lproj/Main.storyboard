@@ -191,6 +191,7 @@
                         <outletCollection property="joinGameNumbers" destination="EIn-ao-Inv" id="hZQ-6c-OqV"/>
                         <outletCollection property="joinGameNumbers" destination="IzJ-z0-dB6" id="Xd4-C7-Aar"/>
                         <segue destination="tIU-nx-yfq" kind="presentation" identifier="GameScreenSegue" modalTransitionStyle="flipHorizontal" id="TfR-Cx-Rkb"/>
+                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="CreateGameSegue" modalTransitionStyle="flipHorizontal" id="dmd-Sd-Ep2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -420,4 +421,7 @@
         <image name="heart" width="256" height="256"/>
         <image name="star" width="256" height="256"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="dmd-Sd-Ep2"/>
+    </inferredMetricsTieBreakers>
 </document>

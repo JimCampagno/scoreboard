@@ -14,7 +14,9 @@
 @interface FirebaseAPIclient : NSObject
 
 + (void)createGameOnFirebaseWithRef:(Firebase *)ref
-                            andUser:(SBUser *)user
-                 andCompletionBlock:(void (^)(BOOL))block;
+                               user:(SBUser *)user
+                withCompletionBlock:(void (^)(BOOL success, NSString *digits))block
+                   withFailureBlock:(void (^)(NSError *error))failureBlock;
+
 
 @end

@@ -12,33 +12,56 @@
 @implementation FirebaseAPIclient
 
 + (void)createGameOnFirebaseWithRef:(Firebase *)ref
-                            andUser:(SBUser *)user
-                 andCompletionBlock:(void (^)(BOOL))block {
+                               user:(SBUser *)user
+                withCompletionBlock:(void (^)(BOOL success, NSString *digits))block
+                   withFailureBlock:(void (^)(NSError *error))failureBlock {
+    
+    NSString *randomNumber = [SBConstants randomRoomNumber];
+    
     
     [ref runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-    
+        
         NSArray *newRoom = @[ @{ @"name": user.name,
                                  @"monster": user.monster,
                                  @"hp": user.hp,
                                  @"vp": user.vp } ];
         
-        [[currentData childDataByAppendingPath:[SBConstants randomRoomNumber]] setValue:newRoom];
+        [[currentData childDataByAppendingPath:randomNumber] setValue:newRoom];
         
         return [FTransactionResult successWithValue:currentData];
+        
+    } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
+        
+        
+        if (committed) {
+            
+            block(YES, randomNumber);
+            
+        } else {
+            
+            failureBlock(error);
+        }
     }];
     
     
     
-    [FirebaseAPIclient createGameOnFirebaseWithRef:nil
-                                           andUser:nil
-                                andCompletionBlock:^(BOOL success) {
-                                    
-                                    
-                                    if (success)
-                                
-                                    //code here
-                                }];
+    
+    //    [ref runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+    //
+    //        NSArray *newRoom = @[ @{ @"name": user.name,
+    //                                 @"monster": user.monster,
+    //                                 @"hp": user.hp,
+    //                                 @"vp": user.vp } ];
+    //
+    //        [[currentData childDataByAppendingPath:[SBConstants randomRoomNumber]] setValue:newRoom];
+    //
+    //        return [FTransactionResult successWithValue:currentData];
+    //
+    //    }];
 }
 
+
+
+//- (void) runTransactionBlock:(FTransactionResult* (^) (FMutableData* currentData))block andCompletionBlock:(void (^) (NSError* error, BOOL committed, FDataSnapshot* snapshot))completionBlock;
 
 @end
