@@ -102,11 +102,45 @@
 - (IBAction)connect:(id)sender {
     
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        
+                
         if ([snapshot exists]) {
             
-            self.digitsToPassForward = self.invisibleDigits.text;
-            [self performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
+            [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+            
+                if ([currentData hasChildren]) {
+                    
+                    if ([currentData.value isKindOfClass:[NSArray class]]) {
+                        
+                        NSArray *data = currentData.value;
+                        
+                        NSString *IDOfNewUser = [NSString stringWithFormat:@"%ld", [data count]];
+                        
+                        NSDictionary *newUser = @{ @"name": self.enterName.text,
+                                                   @"monster": [SBConstants randomMonsterName],
+                                                   @"hp": @10,
+                                                   @"vp": @0 };
+                        
+                        [[currentData childDataByAppendingPath:IDOfNewUser] setValue:newUser];
+                    }
+                }
+        
+                return [FTransactionResult successWithValue:currentData];
+                
+            } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
+                
+                if (committed) {
+                    
+                    NSLog(@"Success!!");
+                    
+                    self.digitsToPassForward = self.invisibleDigits.text;
+                    [self performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
+                    
+                    
+                    
+                }
+                
+            }];
+        
             
         } else {
             
@@ -118,6 +152,7 @@
                                                                   handler:^(UIAlertAction *action) {
                                                                       
                                                                       self.connectProp.enabled = NO;
+                                                                      self.invisibleDigits.text = @"";
                                                                       
                                                                       for (UILabel *label in self.joinGameNumbers) {
                                                                           label.text = @"-";

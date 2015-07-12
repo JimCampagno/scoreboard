@@ -12,8 +12,15 @@
 
 @interface SBGameScreenViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *mainMonsterView;
+//Main Player Card
+@property (weak, nonatomic) IBOutlet UIView *mainMonsterView; // <-- being used?
+@property (weak, nonatomic) IBOutlet UILabel *monsterName;
+@property (weak, nonatomic) IBOutlet UILabel *playerName;
+@property (weak, nonatomic) IBOutlet UIImageView *monsterImage;
+@property (weak, nonatomic) IBOutlet UIPickerView *victoryPoints;
+@property (weak, nonatomic) IBOutlet UIPickerView *healthPoints;
 
+//All other player cards (including main)
 @property (weak, nonatomic) IBOutlet Scorecard *player1;
 @property (weak, nonatomic) IBOutlet Scorecard *player2;
 @property (weak, nonatomic) IBOutlet Scorecard *player3;
@@ -23,7 +30,6 @@
 
 @property (strong, nonatomic) NSArray *playerScorecards;
 @property (strong, nonatomic) NSArray *pickerData;
-
 @property (strong, nonatomic) SBRoom *room;
 
 - (IBAction)smallButton:(id)sender;
@@ -39,12 +45,8 @@
     
     _room = [[SBRoom alloc] init];
     
-    [self testData];
     
     [self setupListenerToFirebase];
-    
-    
-    
 }
 
 - (void)setupListenerToFirebase {
@@ -91,16 +93,6 @@
     }
 }
 
-- (void)testData {
-    
-    
-    self.player1.monsterName.text = @"Godzilla";
-    self.player1.playerName.text = @"JIM";
-    self.player1.monsterImage.image = [UIImage imageNamed:@"MANTIS_384"];
-    
-    [self.player1.topPicker selectRow:5 inComponent:0 animated:YES];
-    [self.player1.bottomPicker selectRow:5 inComponent:0 animated:YES];
-}
 
 - (void)setupScorecardWithUsersInfo {
     

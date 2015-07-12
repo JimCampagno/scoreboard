@@ -42,26 +42,6 @@
             failureBlock(error);
         }
     }];
-    
-    
-    
-    
-    //    [ref runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-    //
-    //        NSArray *newRoom = @[ @{ @"name": user.name,
-    //                                 @"monster": user.monster,
-    //                                 @"hp": user.hp,
-    //                                 @"vp": user.vp } ];
-    //
-    //        [[currentData childDataByAppendingPath:[SBConstants randomRoomNumber]] setValue:newRoom];
-    //
-    //        return [FTransactionResult successWithValue:currentData];
-    //
-    //    }];
 }
-
-
-
-//- (void) runTransactionBlock:(FTransactionResult* (^) (FMutableData* currentData))block andCompletionBlock:(void (^) (NSError* error, BOOL committed, FDataSnapshot* snapshot))completionBlock;
 
 @end
