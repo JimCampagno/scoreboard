@@ -66,13 +66,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (NSArray *)roomOfPeopleToPassForward {
-    
-    if (!_roomOfPeopleToPassForward) {
-        _roomOfPeopleToPassForward = [[NSArray alloc] init];
-    }
-    return _roomOfPeopleToPassForward;
-}
+
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -109,7 +103,6 @@
             
             
             
-            self.roomOfPeopleToPassForward  = [SBRoom createRoomWithData:snapshot];
             [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
             
         } else {
@@ -263,7 +256,6 @@
     if ([segue.identifier isEqualToString:@"GameScreenSegue"]) {
         
         SBGameScreenViewController *destVC = segue.destinationViewController;
-        destVC.usersInTheRoom = self.roomOfPeopleToPassForward;
         destVC.ref = self.firebaseRef;
         destVC.roomDigits = self.invisibleDigits.text;
         
