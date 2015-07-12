@@ -13,6 +13,8 @@
 
 @interface FirebaseAPIclient : NSObject
 
-+ (void)createGameOnFirebaseWithRef:(Firebase *)ref andUser:(SBUser *)user;
++ (void)createGameOnFirebaseWithRef:(Firebase *)ref
+                            andUser:(SBUser *)user
+                 andCompletionBlock:(void (^)(BOOL))block;
 
 @end

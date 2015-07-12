@@ -43,32 +43,6 @@
     return newRoom;
 }
 
-- (void)updateChangesMadeToPlayersWithRoom:(SBRoom *)room {
-    
-    for (NSInteger i = 0 ; i < [self.users count] ; i++) {
-        
-        SBUser *currentUser = self.users[i];
-        SBUser *userOnServer = room.users[i];
-        
-        if ([currentUser didAttributesChangeWithUserOnServer:userOnServer]) {
-            
-            currentUser.name = userOnServer.name;
-            currentUser.monster = userOnServer.monster;
-            
-            NSString *nameOfImage = [NSString stringWithFormat:@"%@_128", currentUser.monster];
-            currentUser.monsterImage = [UIImage imageNamed:nameOfImage];
-            
-            currentUser.hp = userOnServer.hp;
-            currentUser.vp = userOnServer.vp;
-
-        } else {
-            
-            //do nothing
-        }
-    }
-}
-
-
 - (NSMutableArray *)users {
     
     if (!_users) {

@@ -12,7 +12,6 @@
 
 @interface SBGameScreenViewController : UIViewController
 
-@property (strong, nonatomic) SBRoom *usersInTheRoom;
 @property (strong, nonatomic) Firebase *ref;
 @property (strong, nonatomic) NSString *roomDigits;
 @property (strong, nonatomic) SBUser *currentPlayer;

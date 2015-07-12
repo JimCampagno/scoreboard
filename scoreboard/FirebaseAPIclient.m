@@ -11,7 +11,9 @@
 
 @implementation FirebaseAPIclient
 
-+ (void)createGameOnFirebaseWithRef:(Firebase *)ref andUser:(SBUser *)user {
++ (void)createGameOnFirebaseWithRef:(Firebase *)ref
+                            andUser:(SBUser *)user
+                 andCompletionBlock:(void (^)(BOOL))block {
     
     [ref runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
     
@@ -24,9 +26,19 @@
         
         return [FTransactionResult successWithValue:currentData];
     }];
+    
+    
+    
+    [FirebaseAPIclient createGameOnFirebaseWithRef:nil
+                                           andUser:nil
+                                andCompletionBlock:^(BOOL success) {
+                                    
+                                    
+                                    if (success)
+                                
+                                    //code here
+                                }];
 }
-
-
 
 
 @end

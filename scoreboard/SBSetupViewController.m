@@ -100,10 +100,8 @@
         
         if ([snapshot exists]) {
             
-            
-            
-            
             [self performSegueWithIdentifier:@"GameScreenSegue" sender:self];
+            
             
         } else {
             //snapshot doesn't exist, meaninig there is no such room on firebase.

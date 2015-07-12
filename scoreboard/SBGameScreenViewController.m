@@ -134,15 +134,6 @@
     return _playerScorecards;
 }
 
-- (SBRoom *)usersInTheRoom {
-    
-    if (!_usersInTheRoom) {
-        
-        _usersInTheRoom = [[SBRoom alloc] init];
-    }
-    return _usersInTheRoom;
-}
-
 - (IBAction)smallButton:(id)sender {
     
     //settings?
