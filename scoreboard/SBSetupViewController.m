@@ -116,7 +116,7 @@
                                                                         style:UIAlertActionStyleDefault
                                                                       handler:^(UIAlertAction *action) {
                                                                           
-
+                                                                          
                                                                       }];
                 
                 [alert addAction:defaultAction];
@@ -126,28 +126,37 @@
                 
                 
             } else {
-        
-                NSLog(@"What is snapshot: %@", snapshot);
+                
                 NSLog(@"Count of snapshot?? :%ld", snapshot.childrenCount);
                 
                 [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
                     
+                    NSLog(@"What is going on here: %@", currentData);
+                    
                     if ([currentData hasChildren]) {
                         
-                        if ([currentData.value isKindOfClass:[NSArray class]]) {
-                            
-                            NSArray *data = currentData.value;
-                            
-                            NSString *IDOfNewUser = [NSString stringWithFormat:@"%ld", [data count]];
-                            
-                            NSDictionary *newUser = @{ @"name": self.enterName.text,
-                                                       @"monster": [SBConstants randomMonsterName],
-                                                       @"hp": @10,
-                                                       @"vp": @0 };
-                            
-                            [[currentData childDataByAppendingPath:IDOfNewUser] setValue:newUser];
-                        }
+                        NSLog(@"It has children!!!!!");
+                        
+                        //                        if ([currentData.value isKindOfClass:[NSArray class]]) {
+                        
+                        NSLog(@"We are in this block of code noW!!!!");
+                        
+                        NSArray *data = currentData.value;
+                        
+                        NSString *IDOfNewUser = [NSString stringWithFormat:@"%ld", [data count]];
+                        
+                        NSLog(@"What is data count: %ld", data.count);
+                        
+                        NSDictionary *newUser = @{ @"name": self.enterName.text,
+                                                   @"monster": [SBConstants randomMonsterName],
+                                                   @"hp": @10,
+                                                   @"vp": @0 };
+                        
+                        [[currentData childDataByAppendingPath:IDOfNewUser] setValue:newUser];
+                        //                        }
                     }
+                    
+                    NSLog(@"When is it doing this?");
                     
                     return [FTransactionResult successWithValue:currentData];
                     
@@ -196,7 +205,7 @@
             
             
             
-        
+            
             
         }
         
