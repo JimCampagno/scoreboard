@@ -102,45 +102,72 @@
 - (IBAction)connect:(id)sender {
     
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-                
+        
         if ([snapshot exists]) {
             
-            [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-            
-                if ([currentData hasChildren]) {
+            if (snapshot.childrenCount == 6) {
+                
+                NSString *errorMSG = [NSString stringWithFormat:@"The game # %@ is full, it contains six players.", self.invisibleDigits.text];
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game is full"
+                                                                               message:errorMSG
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                        style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction *action) {
+                                                                          
+
+                                                                      }];
+                
+                [alert addAction:defaultAction];
+                [self presentViewController:alert animated:YES completion:^{
+                    //do anything on completion? clear out what was originally entered?
+                }];
+                
+                
+            } else {
+        
+                NSLog(@"What is snapshot: %@", snapshot);
+                NSLog(@"Count of snapshot?? :%ld", snapshot.childrenCount);
+                
+                [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
                     
-                    if ([currentData.value isKindOfClass:[NSArray class]]) {
+                    if ([currentData hasChildren]) {
                         
-                        NSArray *data = currentData.value;
-                        
-                        NSString *IDOfNewUser = [NSString stringWithFormat:@"%ld", [data count]];
-                        
-                        NSDictionary *newUser = @{ @"name": self.enterName.text,
-                                                   @"monster": [SBConstants randomMonsterName],
-                                                   @"hp": @10,
-                                                   @"vp": @0 };
-                        
-                        [[currentData childDataByAppendingPath:IDOfNewUser] setValue:newUser];
+                        if ([currentData.value isKindOfClass:[NSArray class]]) {
+                            
+                            NSArray *data = currentData.value;
+                            
+                            NSString *IDOfNewUser = [NSString stringWithFormat:@"%ld", [data count]];
+                            
+                            NSDictionary *newUser = @{ @"name": self.enterName.text,
+                                                       @"monster": [SBConstants randomMonsterName],
+                                                       @"hp": @10,
+                                                       @"vp": @0 };
+                            
+                            [[currentData childDataByAppendingPath:IDOfNewUser] setValue:newUser];
+                        }
                     }
-                }
-        
-                return [FTransactionResult successWithValue:currentData];
+                    
+                    return [FTransactionResult successWithValue:currentData];
+                    
+                } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
+                    
+                    if (committed) {
+                        
+                        NSLog(@"Success!!");
+                        
+                        self.digitsToPassForward = self.invisibleDigits.text;
+                        [self performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
+                        
+                        
+                        
+                    }
+                    
+                }];
                 
-            } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
-                
-                if (committed) {
-                    
-                    NSLog(@"Success!!");
-                    
-                    self.digitsToPassForward = self.invisibleDigits.text;
-                    [self performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
-                    
-                    
-                    
-                }
-                
-            }];
-        
+            }
+            
             
         } else {
             
@@ -169,8 +196,7 @@
             
             
             
-            
-            
+        
             
         }
         
@@ -180,6 +206,8 @@
         NSLog(@"We have an error in the connect method: %@", error.description);
         
     }];
+    
+    
 }
 
 - (IBAction)createGame:(id)sender {

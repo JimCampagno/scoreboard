@@ -10,7 +10,7 @@
 #import <Firebase/Firebase.h>
 #import "SBRoom.h"
 
-@interface SBGameScreenViewController : UIViewController
+@interface SBGameScreenViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) Firebase *ref;
 @property (strong, nonatomic) NSString *roomDigits;

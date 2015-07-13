@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *monsterImage;
 @property (weak, nonatomic) IBOutlet UIPickerView *victoryPoints;
 @property (weak, nonatomic) IBOutlet UIPickerView *healthPoints;
+@property (strong, nonatomic) NSMutableArray *vpPointsOnPicker;
+@property (strong, nonatomic) NSMutableArray *hpPointsOnPicker;
 
 //All other player cards (including main)
 @property (weak, nonatomic) IBOutlet Scorecard *player1;
@@ -45,7 +47,8 @@
     
     _room = [[SBRoom alloc] init];
     
-    
+    [self setupPickerViewsDelegateAndDataSource];
+
     [self setupListenerToFirebase];
 }
 
@@ -130,5 +133,69 @@
     
     //settings?
 }
+
+#pragma mark - Main Scorecard Methods
+
+- (void)setupPickerViewsDelegateAndDataSource {
+    
+    self.victoryPoints.delegate = self;
+    self.healthPoints.delegate = self;
+    self.victoryPoints.dataSource = self;
+    self.healthPoints.dataSource = self;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    
+    NSMutableArray *hp = [[NSMutableArray alloc] init];
+    NSMutableArray *vp = [[NSMutableArray alloc] init];
+    
+    for (NSInteger i = 0 ; i < 21 ; i++) {
+        if (i > 12) {
+            [vp addObject:@(i)];
+        } else {
+            [vp addObject:@(i)];
+            [hp addObject:@(i)];
+        }
+    }
+    
+    _vpPointsOnPicker = [[NSMutableArray alloc] initWithArray:[vp copy]];
+    _hpPointsOnPicker = [[NSMutableArray alloc] initWithArray:[hp copy]];
+
+    
+    if ([pickerView isEqual:_victoryPoints]) {
+        
+        return [vp count];
+        
+    } else {
+        
+        return [hp count];
+    }
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component {
+    
+    if ([pickerView isEqual:_victoryPoints]) {
+        
+        return [NSString stringWithFormat:@"%@", [self.vpPointsOnPicker[row] stringValue]];
+        
+    } else {
+        
+        return [NSString stringWithFormat:@"%@", [self.hpPointsOnPicker[row] stringValue]];
+        
+    }
+}
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    
+    return 45;
+}
+
 
 @end
