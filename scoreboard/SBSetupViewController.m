@@ -105,47 +105,34 @@
         
         if ([snapshot exists]) {
             
+            //Max number of players in a game is 6
             if (snapshot.childrenCount == 6) {
                 
-                NSString *errorMSG = [NSString stringWithFormat:@"The game # %@ is full, it contains six players.", self.invisibleDigits.text];
-                
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game is full"
-                                                                               message:errorMSG
-                                                                        preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
-                                                                        style:UIAlertActionStyleDefault
-                                                                      handler:^(UIAlertAction *action) {
-                                                                          
-                                                                          
-                                                                      }];
-                
-                [alert addAction:defaultAction];
-                [self presentViewController:alert animated:YES completion:^{
-                    //do anything on completion? clear out what was originally entered?
-                }];
-                
+                [self displayGameIsFullAlert];
                 
             } else {
                 
-                NSLog(@"Count of snapshot?? :%ld", snapshot.childrenCount);
-                
                 [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-                    
-                    NSLog(@"What is going on here: %@", currentData);
                     
                     if ([currentData hasChildren]) {
                         
-                        NSLog(@"It has children!!!!!");
                         
-                        //                        if ([currentData.value isKindOfClass:[NSArray class]]) {
+
                         
-                        NSLog(@"We are in this block of code noW!!!!");
+                        NSDictionary *testingThisThing = currentData.value;
+                        NSArray *testingAgain = currentData.value;
                         
-                        NSArray *data = currentData.value;
+                        NSLog(@"HERE WE GOO!!! : %@", testingThisThing);
                         
-                        NSString *IDOfNewUser = [NSString stringWithFormat:@"%ld", [data count]];
                         
-                        NSLog(@"What is data count: %ld", data.count);
+                        NSLog(@"Here we AGOOO AGAINN ===== ARRAY TIMEEEE : %@", testingAgain);
+                        
+                        
+                       
+            
+                        NSInteger IDOfCurrentUser = [self createIDOfCurrentUserWithData:currentData];
+                    
+                        NSString *IDOfNewUser = [NSString stringWithFormat:@"%ld", IDOfCurrentUser];
                         
                         NSDictionary *newUser = @{ @"name": self.enterName.text,
                                                    @"monster": [SBConstants randomMonsterName],
@@ -153,10 +140,7 @@
                                                    @"vp": @0 };
                         
                         [[currentData childDataByAppendingPath:IDOfNewUser] setValue:newUser];
-                        //                        }
                     }
-                    
-                    NSLog(@"When is it doing this?");
                     
                     return [FTransactionResult successWithValue:currentData];
                     
@@ -164,59 +148,20 @@
                     
                     if (committed) {
                         
-                        NSLog(@"Success!!");
-                        
                         self.digitsToPassForward = self.invisibleDigits.text;
                         [self performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
-                        
-                        
-                        
                     }
-                    
                 }];
-                
             }
-            
-            
         } else {
             
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game doesn't exist"
-                                                                           message:@"Please confirm that you're entering in the correct number."
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
-                                                                    style:UIAlertActionStyleDefault
-                                                                  handler:^(UIAlertAction *action) {
-                                                                      
-                                                                      self.connectProp.enabled = NO;
-                                                                      self.invisibleDigits.text = @"";
-                                                                      
-                                                                      for (UILabel *label in self.joinGameNumbers) {
-                                                                          label.text = @"-";
-                                                                      }
-                                                                      
-                                                                      [self.holdingTheDigits removeAllObjects];
-                                                                  }];
-            
-            [alert addAction:defaultAction];
-            [self presentViewController:alert animated:YES completion:^{
-                //do anything on completion? clear out what was originally entered?
-            }];
-            
-            
-            
-            
-            
-            
+            [self displayGameDoesntExistAlert];
         }
-        
     } withCancelBlock:^(NSError *error) {
         //this doesn't appear to work when I'm in the subway with no internet connection.
         //Put up alert box stating what the error is or that there was a problem connecting to the Network.
         NSLog(@"We have an error in the connect method: %@", error.description);
-        
     }];
-    
-    
 }
 
 - (IBAction)createGame:(id)sender {
@@ -269,6 +214,38 @@
         _holdingTheDigits = [[NSMutableArray alloc] init];
     }
     return _holdingTheDigits;
+}
+
+
+
+- (NSInteger)createIDOfCurrentUserWithData:(FMutableData *)currentData {
+    
+
+    if ([currentData.value isKindOfClass:[NSArray class]]) {
+        
+        NSLog(@"Are we an array???");
+    }
+    
+    
+    
+    
+    
+    NSDictionary *data = currentData.value;
+    NSArray *allKeysOfData = [data allKeys];
+    NSString *firstItemInData = allKeysOfData[0];
+    NSInteger largestID = [firstItemInData integerValue];
+    
+    for (NSString *userID in allKeysOfData) {
+        
+        NSInteger numberToCompare = [userID integerValue];
+        
+        if (numberToCompare > largestID) {
+            
+            largestID = [userID integerValue];
+        }
+    }
+    
+    return largestID + 1;
 }
 
 
@@ -363,11 +340,70 @@
 }
 
 
+
+
+- (void)displayGameDoesntExistAlert {
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game doesn't exist"
+                                                                   message:@"Please confirm that you're entering in the correct number."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+                                                              
+                                                              self.connectProp.enabled = NO;
+                                                              self.invisibleDigits.text = @"";
+                                                              
+                                                              for (UILabel *label in self.joinGameNumbers) {
+                                                                  label.text = @"-";
+                                                              }
+                                                              
+                                                              [self.holdingTheDigits removeAllObjects];
+                                                          }];
+    
+    [alert addAction:defaultAction];
+    
+    
+    [self presentViewController:alert
+                       animated:YES
+                     completion:^{
+                         
+
+                         NSLog(@"In completion block when game doesn't exist!");
+                     
+                     }];
+    
+}
+
+- (void)displayGameIsFullAlert {
+    
+    NSString *errorMSG = [NSString stringWithFormat:@"The game # %@ is full, it contains six players.", self.invisibleDigits.text];
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game is full"
+                                                                   message:errorMSG
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+                                                              
+                                                              
+                                                          }];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:^{
+        //do anything on completion? clear out what was originally entered?
+    }];
+    
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    SBGameScreenViewController *destVC = segue.destinationViewController;
+    SBGameScreenViewController *destVC = (SBGameScreenViewController *)segue.destinationViewController;
     destVC.ref = self.firebaseRef;
     destVC.roomDigits = self.digitsToPassForward;
 }

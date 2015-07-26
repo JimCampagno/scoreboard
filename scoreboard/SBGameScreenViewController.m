@@ -48,7 +48,7 @@
     _room = [[SBRoom alloc] init];
     
     [self setupPickerViewsDelegateAndDataSource];
-
+    
     [self setupListenerToFirebase];
 }
 
@@ -76,7 +76,7 @@
          //Still should do something here.
          NSLog(@"ERROR: %@", error.description);
      }];
-
+    
 }
 
 
@@ -149,7 +149,8 @@
     return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+- (NSInteger)pickerView:(UIPickerView *)pickerView
+numberOfRowsInComponent:(NSInteger)component {
     
     NSMutableArray *hp = [[NSMutableArray alloc] init];
     NSMutableArray *vp = [[NSMutableArray alloc] init];
@@ -165,7 +166,7 @@
     
     _vpPointsOnPicker = [[NSMutableArray alloc] initWithArray:[vp copy]];
     _hpPointsOnPicker = [[NSMutableArray alloc] initWithArray:[hp copy]];
-
+    
     
     if ([pickerView isEqual:_victoryPoints]) {
         
@@ -195,6 +196,23 @@
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
     
     return 45;
+}
+
+
+- (void)pickerView:(UIPickerView *)pickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component {
+    
+    
+    if ([pickerView isEqual:_victoryPoints]) {
+        
+        
+        NSLog(@"The VP number stopped on was : %ld", row);
+        
+    } else {
+        
+        NSLog(@"The HP number stopped on was : %ld", row);
+    }
 }
 
 

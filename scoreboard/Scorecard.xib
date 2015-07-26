@@ -47,7 +47,7 @@
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
                             <rect key="frame" x="20" y="16" width="154" height="130"/>
                             <subviews>
-                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-aE-agV" userLabel="Top Picker View">
+                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-aE-agV" userLabel="Top Picker View">
                                     <rect key="frame" x="-83" y="-16" width="320" height="162"/>
                                 </pickerView>
                             </subviews>
@@ -73,7 +73,7 @@
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
                             <rect key="frame" x="20" y="178" width="154" height="130"/>
                             <subviews>
-                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
+                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
                                     <rect key="frame" x="-83" y="-16" width="320" height="162"/>
                                 </pickerView>
                             </subviews>
