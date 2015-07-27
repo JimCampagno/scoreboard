@@ -62,6 +62,7 @@
     
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
     
+    
     self.ref = nil;
 }
 
@@ -219,13 +220,35 @@ numberOfRowsInComponent:(NSInteger)component {
     if ([pickerView isEqual:_victoryPoints]) {
         
         NSDictionary *victoryPointChange = @{ @"vp": [@(row) stringValue]};
-        [self.currentPlayerRef updateChildValues: victoryPointChange];
         
+        [self.currentPlayerRef updateChildValues:victoryPointChange
+                             withCompletionBlock:^(NSError *error, Firebase *ref) {
+                                 
+                                 if (error) {
+                                     
+                                     NSLog(@"Bad news bears");
+                                     
+                                 } else {
+                                     
+                                     NSLog(@"Hurray! we did it!");
+                                 }
+                             }];
+    
     } else {
         
         NSDictionary *healthPointChange = @{ @"hp": [@(row) stringValue]};
-        [self.currentPlayerRef updateChildValues: healthPointChange];
         
+        [self.currentPlayerRef updateChildValues:healthPointChange
+                             withCompletionBlock:^(NSError *error, Firebase *ref) {
+                                 
+                                 if (error) {
+                                     
+                                     NSLog(@"Bad news bears");
+                                 } else {
+                                     
+                                     NSLog(@"Hurray! we did it!");
+                                 }
+                             }];
         
     }
 }
