@@ -207,6 +207,15 @@ numberOfRowsInComponent:(NSInteger)component {
     if ([pickerView isEqual:_victoryPoints]) {
         
         
+//        Firebase *hopperRef = [self.ref childByAppendingPath: self.roomDigits];
+//        
+//        NSDictionary *nickname = @{
+//                                   @"nickname": @"Amazing Grace",
+//                                   };
+//        
+//        [hopperRef updateChildValues: nickname];
+        
+        
         NSLog(@"The VP number stopped on was : %ld", row);
         
     } else {

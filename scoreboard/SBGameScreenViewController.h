@@ -15,5 +15,6 @@
 @property (strong, nonatomic) Firebase *ref;
 @property (strong, nonatomic) NSString *roomDigits;
 @property (strong, nonatomic) SBUser *currentPlayer;
+@property (strong, nonatomic) NSString *IDOfCurrentPlayer;
 
 @end

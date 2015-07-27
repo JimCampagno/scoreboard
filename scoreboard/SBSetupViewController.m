@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *createGameProp;
 
 @property (strong, nonatomic) NSString *digitsToPassForward;
+@property (strong, nonatomic) NSString *IDOfCurrentUser;
 
 
 
@@ -113,26 +114,11 @@
             } else {
                 
                 [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-                    
+                
                     if ([currentData hasChildren]) {
-                        
-                        
-
-                        
-                        NSDictionary *testingThisThing = currentData.value;
-                        NSArray *testingAgain = currentData.value;
-                        
-                        NSLog(@"HERE WE GOO!!! : %@", testingThisThing);
-                        
-                        
-                        NSLog(@"Here we AGOOO AGAINN ===== ARRAY TIMEEEE : %@", testingAgain);
-                        
-                        
-                       
             
-                        NSInteger IDOfCurrentUser = [self createIDOfCurrentUserWithData:currentData];
-                    
-                        NSString *IDOfNewUser = [NSString stringWithFormat:@"%ld", IDOfCurrentUser];
+                        NSString *IDOfNewUser = [self createIDOfCurrentUserWithCurrentData:currentData];
+                        self.IDOfCurrentUser = IDOfNewUser;
                         
                         NSDictionary *newUser = @{ @"name": self.enterName.text,
                                                    @"monster": [SBConstants randomMonsterName],
@@ -218,34 +204,35 @@
 
 
 
-- (NSInteger)createIDOfCurrentUserWithData:(FMutableData *)currentData {
-    
-
-    if ([currentData.value isKindOfClass:[NSArray class]]) {
-        
-        NSLog(@"Are we an array???");
-    }
-    
-    
-    
-    
+- (NSString *)createIDOfCurrentUserWithCurrentData:(FMutableData *)currentData {
     
     NSDictionary *data = currentData.value;
-    NSArray *allKeysOfData = [data allKeys];
-    NSString *firstItemInData = allKeysOfData[0];
-    NSInteger largestID = [firstItemInData integerValue];
-    
-    for (NSString *userID in allKeysOfData) {
+    NSInteger largestID;
+
+    if ([data respondsToSelector:@selector(allKeys)]) {
         
-        NSInteger numberToCompare = [userID integerValue];
+        NSArray *allKeysOfData = [data allKeys];
+        NSString *firstItemInData = allKeysOfData[0];
+        largestID = [firstItemInData integerValue];
         
-        if (numberToCompare > largestID) {
+        for (NSString *userID in allKeysOfData) {
             
-            largestID = [userID integerValue];
+            NSInteger numberToCompare = [userID integerValue];
+            
+            if (numberToCompare > largestID) {
+                
+                largestID = [userID integerValue];
+            }
         }
-    }
+        return [@(largestID + 1) stringValue];
+
+    } else {
     
-    return largestID + 1;
+        NSArray *dataToUse = currentData.value;
+    
+            largestID = [dataToUse count];
+            return [@(largestID) stringValue];
+    }
 }
 
 
@@ -406,5 +393,6 @@
     SBGameScreenViewController *destVC = (SBGameScreenViewController *)segue.destinationViewController;
     destVC.ref = self.firebaseRef;
     destVC.roomDigits = self.digitsToPassForward;
+    destVC.IDOfCurrentPlayer = self.IDOfCurrentUser;
 }
 @end
