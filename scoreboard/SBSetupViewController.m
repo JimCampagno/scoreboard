@@ -31,6 +31,7 @@
 
 @property (strong, nonatomic) NSString *digitsToPassForward;
 @property (strong, nonatomic) NSString *IDOfCurrentUser;
+@property (strong, nonatomic) NSString *randomMonsterName;
 
 
 
@@ -117,15 +118,16 @@
                 
                     if ([currentData hasChildren]) {
             
-                        NSString *IDOfNewUser = [self createIDOfCurrentUserWithCurrentData:currentData];
-                        self.IDOfCurrentUser = IDOfNewUser;
+                        self.IDOfCurrentUser = [self createIDOfCurrentUserWithCurrentData:currentData];
+                        self.randomMonsterName = [SBConstants randomMonsterName];
+                        
                         
                         NSDictionary *newUser = @{ @"name": self.enterName.text,
-                                                   @"monster": [SBConstants randomMonsterName],
+                                                   @"monster": self.randomMonsterName,
                                                    @"hp": @10,
                                                    @"vp": @0 };
                         
-                        [[currentData childDataByAppendingPath:IDOfNewUser] setValue:newUser];
+                        [[currentData childDataByAppendingPath:self.IDOfCurrentUser] setValue:newUser];
                     }
                     
                     return [FTransactionResult successWithValue:currentData];
@@ -394,5 +396,6 @@
     destVC.ref = self.firebaseRef;
     destVC.roomDigits = self.digitsToPassForward;
     destVC.IDOfCurrentPlayer = self.IDOfCurrentUser;
+    destVC.randomMonsterName = self.randomMonsterName;
 }
 @end

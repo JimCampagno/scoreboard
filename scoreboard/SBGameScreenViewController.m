@@ -34,6 +34,8 @@
 @property (strong, nonatomic) NSArray *pickerData;
 @property (strong, nonatomic) SBRoom *room;
 
+@property (strong, nonatomic) Firebase *currentPlayerRef;
+
 - (IBAction)smallButton:(id)sender;
 
 @end
@@ -49,10 +51,21 @@
     
     [self setupPickerViewsDelegateAndDataSource];
     
-    [self setupListenerToFirebase];
+    [self setupListenerToEntireRoomOnFirebase];
+    
+    [self setupCurrentPlayerReferenceToFirebase];
+    
+    
 }
 
-- (void)setupListenerToFirebase {
+- (void)setupCurrentPlayerReferenceToFirebase {
+    
+    self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
+    
+    self.ref = nil;
+}
+
+- (void)setupListenerToEntireRoomOnFirebase {
     
     [[self.ref childByAppendingPath:self.roomDigits]
      observeEventType:FEventTypeValue
@@ -203,26 +216,18 @@ numberOfRowsInComponent:(NSInteger)component {
       didSelectRow:(NSInteger)row
        inComponent:(NSInteger)component {
     
-    
     if ([pickerView isEqual:_victoryPoints]) {
         
-        
-//        Firebase *hopperRef = [self.ref childByAppendingPath: self.roomDigits];
-//        
-//        NSDictionary *nickname = @{
-//                                   @"nickname": @"Amazing Grace",
-//                                   };
-//        
-//        [hopperRef updateChildValues: nickname];
-        
-        
-        NSLog(@"The VP number stopped on was : %ld", row);
+        NSDictionary *victoryPointChange = @{ @"vp": [@(row) stringValue]};
+        [self.currentPlayerRef updateChildValues: victoryPointChange];
         
     } else {
         
-        NSLog(@"The HP number stopped on was : %ld", row);
+        NSDictionary *healthPointChange = @{ @"hp": [@(row) stringValue]};
+        [self.currentPlayerRef updateChildValues: healthPointChange];
+        
+        
     }
 }
-
 
 @end

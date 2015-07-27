@@ -16,5 +16,6 @@
 @property (strong, nonatomic) NSString *roomDigits;
 @property (strong, nonatomic) SBUser *currentPlayer;
 @property (strong, nonatomic) NSString *IDOfCurrentPlayer;
+@property (strong, nonatomic) NSString *randomMonsterName;
 
 @end
