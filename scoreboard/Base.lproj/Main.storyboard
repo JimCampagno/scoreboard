@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tIU-nx-yfq">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -219,7 +219,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvg-FW-8en">
-                                        <rect key="frame" x="0.0" y="183" width="229" height="17"/>
+                                        <rect key="frame" x="0.0" y="183.5" width="229" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="zao-Ek-3X7" userLabel="Player Name - Height"/>
                                         </constraints>
@@ -297,8 +297,8 @@
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="leading" secondItem="AVd-TT-9eJ" secondAttribute="trailing" constant="8" id="tVz-bt-kLt" userLabel="Bot - Leading"/>
                                         </constraints>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Brd-gu-tTd">
-                                        <rect key="frame" x="0.0" y="0.0" width="229" height="183"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Brd-gu-tTd">
+                                        <rect key="frame" x="0.0" y="19.5" width="229" height="164"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
@@ -307,6 +307,7 @@
                                     <constraint firstItem="Brd-gu-tTd" firstAttribute="trailing" secondItem="eJz-5s-qDy" secondAttribute="trailing" multiplier="0.6" id="NmQ-jW-Anz" userLabel="Monster Image - Trailing"/>
                                     <constraint firstItem="Brd-gu-tTd" firstAttribute="leading" secondItem="eJz-5s-qDy" secondAttribute="leading" id="Vfa-BP-lUf" userLabel="Monster Image - Leading"/>
                                     <constraint firstItem="Brd-gu-tTd" firstAttribute="bottom" secondItem="Dvg-FW-8en" secondAttribute="top" id="WNq-Dw-Nd5" userLabel="Monster Image - Bottom"/>
+                                    <constraint firstItem="Brd-gu-tTd" firstAttribute="top" secondItem="tVL-fj-6uz" secondAttribute="bottom" id="Ylr-bG-Wkj" userLabel="Monster Image - Top"/>
                                     <constraint firstItem="ofZ-sV-TDV" firstAttribute="trailing" secondItem="eJz-5s-qDy" secondAttribute="trailing" id="b6x-Jm-8jj" userLabel="Right View - Trailing"/>
                                     <constraint firstItem="ofZ-sV-TDV" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="top" id="eh8-VG-Kgn" userLabel="Right View - Top"/>
                                     <constraint firstItem="ofZ-sV-TDV" firstAttribute="bottom" secondItem="eJz-5s-qDy" secondAttribute="bottom" id="f4I-gf-kqD" userLabel="Right View - Bottom"/>
@@ -314,7 +315,6 @@
                                     <constraint firstItem="Dvg-FW-8en" firstAttribute="leading" secondItem="eJz-5s-qDy" secondAttribute="leading" id="kIy-aW-Gun" userLabel="Player Name - Leading"/>
                                     <constraint firstItem="ofZ-sV-TDV" firstAttribute="leading" secondItem="Brd-gu-tTd" secondAttribute="trailing" id="lXu-6Q-R5i" userLabel="Right View - Leading"/>
                                     <constraint firstItem="tVL-fj-6uz" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="top" id="nUU-Ql-Yc5" userLabel="Monster Name - Top"/>
-                                    <constraint firstItem="Brd-gu-tTd" firstAttribute="top" secondItem="tVL-fj-6uz" secondAttribute="top" id="qCs-Fh-zSo" userLabel="Monster Image  Top"/>
                                     <constraint firstItem="tVL-fj-6uz" firstAttribute="leading" secondItem="eJz-5s-qDy" secondAttribute="leading" id="x5i-MP-SHj" userLabel="Monster Name - Leading"/>
                                     <constraint firstItem="Dvg-FW-8en" firstAttribute="bottom" secondItem="eJz-5s-qDy" secondAttribute="bottom" id="ySy-Yv-jbb" userLabel="Player Name - Bottom"/>
                                 </constraints>

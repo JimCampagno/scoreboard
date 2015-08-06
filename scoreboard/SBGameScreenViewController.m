@@ -56,14 +56,35 @@
     [self setupCurrentPlayerReferenceToFirebase];
     
     
+    
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(giveUserOptionToChangeMonster)];
+    
+    [self.view addGestureRecognizer:longPress];
+    
+    
+}
+
+
+- (void)giveUserOptionToChangeMonster {
+    
+    NSLog(@"Was this tapped!!!");
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    self.monsterImage.image = [UIImage imageNamed:@"KONG_384"];
+    
+    
+    
 }
 
 - (void)setupCurrentPlayerReferenceToFirebase {
     
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
     
-    
-    self.ref = nil;
 }
 
 - (void)setupListenerToEntireRoomOnFirebase {
@@ -208,6 +229,7 @@ numberOfRowsInComponent:(NSInteger)component {
 }
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    
     
     return 45;
 }
