@@ -55,21 +55,40 @@
     
     [self setupCurrentPlayerReferenceToFirebase];
     
+    [self setupGesture];
     
     
+
     
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(giveUserOptionToChangeMonster)];
+}
+
+- (void)setupGesture {
     
-    [self.view addGestureRecognizer:longPress];
+    self.monsterImage.userInteractionEnabled = YES;
+    UILongPressGestureRecognizer *lpHandler = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleHoldGesture:)];
+    lpHandler.minimumPressDuration = 1; //seconds
+    lpHandler.delegate = self;
+    [self.monsterImage addGestureRecognizer:lpHandler];
+}
+
+- (void)handleHoldGesture:(UILongPressGestureRecognizer *)gestureRecognizer {
     
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        
+        NSLog(@"Tap Began!");
+    }
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        
+        NSLog(@"We ended, lets do something!");
+    }
+    
+
     
 }
 
 
-- (void)giveUserOptionToChangeMonster {
-    
-    NSLog(@"Was this tapped!!!");
-}
+
 
 - (void)viewDidAppear:(BOOL)animated {
     
