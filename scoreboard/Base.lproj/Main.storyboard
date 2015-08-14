@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -414,11 +414,45 @@
                         <outlet property="player6" destination="waC-Tn-aRJ" id="LFj-rE-G8K"/>
                         <outlet property="playerName" destination="Dvg-FW-8en" id="LCa-qh-AFD"/>
                         <outlet property="victoryPoints" destination="4RS-NM-LSX" id="2R7-Xt-ha2"/>
+                        <segue destination="YtX-cr-uDY" kind="presentation" identifier="changeMonster" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="R7d-wy-fpz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t92-lS-65i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="955" y="322"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Fpx-YZ-LjR">
+            <objects>
+                <viewController id="YtX-cr-uDY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dYr-x1-yp4"/>
+                        <viewControllerLayoutGuide type="bottom" id="4ii-J7-IAo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O7F-Nj-AIe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-oo-G37">
+                                <rect key="frame" x="110" y="162" width="194" height="262"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="262" id="Fm3-7s-wAb"/>
+                                    <constraint firstAttribute="width" constant="194" id="hf1-eo-mek"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.63" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="mKH-oo-G37" secondAttribute="centerX" constant="-7" id="FEc-eg-gZE"/>
+                            <constraint firstAttribute="centerY" secondItem="mKH-oo-G37" secondAttribute="centerY" constant="-36" id="qu5-kN-YA5"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W7C-Hx-Ukc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="955" y="-506"/>
         </scene>
     </scenes>
     <resources>

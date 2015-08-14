@@ -75,12 +75,16 @@
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         
-        NSLog(@"Tap Began!");
+        
+        
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
-        NSLog(@"We ended, lets do something!");
+        
+        [self performSegueWithIdentifier:@"changeMonster" sender:self];
+        
+        
     }
     
 
@@ -267,11 +271,9 @@ numberOfRowsInComponent:(NSInteger)component {
                                  
                                  if (error) {
                                      
-                                     NSLog(@"Bad news bears");
                                      
                                  } else {
                                      
-                                     NSLog(@"Hurray! we did it!");
                                  }
                              }];
     
@@ -284,10 +286,9 @@ numberOfRowsInComponent:(NSInteger)component {
                                  
                                  if (error) {
                                      
-                                     NSLog(@"Bad news bears");
+                                     
                                  } else {
                                      
-                                     NSLog(@"Hurray! we did it!");
                                  }
                              }];
         
