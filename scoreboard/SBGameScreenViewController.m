@@ -57,8 +57,37 @@
     
     [self setupGesture];
     
+    [self generateTestData];
+    
     
 
+    
+}
+
+- (void)generateTestData {
+    
+    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
+    
+    for (NSInteger i = 0 ; i < 6 ; i++) {
+        
+        
+        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
+                                                 monsterName:monsterNames[i]
+                                                          hp:@8
+                                                          vp:@9];
+        
+        [self.room.users addObject:currentPerson];
+        
+    }
+    
+    [self setupScorecardWithUsersInfo];
+    
+    
+    
+    
+    
+    
+    
     
 }
 
@@ -75,14 +104,16 @@
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         
-        
+        self.mainMonsterView.hidden = YES;
+        [self performSegueWithIdentifier:@"changeMonster" sender:self];
+
         
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
         
-        [self performSegueWithIdentifier:@"changeMonster" sender:self];
+
         
         
     }
