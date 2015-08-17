@@ -104,7 +104,7 @@
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         
-        self.mainMonsterView.hidden = YES;
+//        self.mainMonsterView.hidden = YES;
         [self performSegueWithIdentifier:@"changeMonster" sender:self];
 
         
@@ -267,20 +267,29 @@ numberOfRowsInComponent:(NSInteger)component {
     }
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component {
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
+             attributedTitleForRow:(NSInteger)row
+                      forComponent:(NSInteger)component {
+    
+    NSLog(@"Getting called from inside PickerView??!!");
     
     if ([pickerView isEqual:_victoryPoints]) {
         
-        return [NSString stringWithFormat:@"%@", [self.vpPointsOnPicker[row] stringValue]];
+        NSString *vpString = [NSString stringWithFormat:@"%@", [self.vpPointsOnPicker[row] stringValue]];
+        NSAttributedString *attVPString = [[NSAttributedString alloc] initWithString:vpString
+                                                                          attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        return attVPString;
         
     } else {
         
-        return [NSString stringWithFormat:@"%@", [self.hpPointsOnPicker[row] stringValue]];
-        
+        NSString *hpString = [NSString stringWithFormat:@"%@", [self.hpPointsOnPicker[row] stringValue]];
+        NSAttributedString *attHPString = [[NSAttributedString alloc] initWithString:hpString
+                                                                          attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        return attHPString;
     }
 }
+
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
     

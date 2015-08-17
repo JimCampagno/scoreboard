@@ -225,7 +225,7 @@
                                             <constraint firstAttribute="height" constant="17" id="zao-Ek-3X7" userLabel="Player Name - Height"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofZ-sV-TDV" userLabel="RightView">
@@ -271,15 +271,6 @@
                                                     <constraint firstAttribute="width" constant="30" id="cDL-0A-Jbl"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sXm-II-RHr">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="🔘">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="smallButton:" destination="tIU-nx-yfq" eventType="touchUpInside" id="CRp-5u-owj"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -288,13 +279,11 @@
                                             <constraint firstItem="AVd-TT-9eJ" firstAttribute="centerX" secondItem="ofZ-sV-TDV" secondAttribute="centerX" multiplier="0.8" id="AQK-jJ-zgg" userLabel="Heart - Center X"/>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="height" secondItem="ofZ-sV-TDV" secondAttribute="height" multiplier="0.35" id="Cuw-8i-g1R" userLabel="Top - Height"/>
                                             <constraint firstItem="Hv6-2E-7Pp" firstAttribute="centerX" secondItem="ofZ-sV-TDV" secondAttribute="centerX" multiplier="0.8" id="RXd-EH-MEz" userLabel="Star - Center X"/>
-                                            <constraint firstItem="sXm-II-RHr" firstAttribute="top" secondItem="ofZ-sV-TDV" secondAttribute="top" id="TP6-hm-aOT" userLabel="Button - Top"/>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="leading" secondItem="Hv6-2E-7Pp" secondAttribute="trailing" constant="8" id="VRY-ip-BBb" userLabel="Top - Leading"/>
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="1.5" id="Zse-wH-NqO" userLabel="Bot - Center Y"/>
                                             <constraint firstItem="AVd-TT-9eJ" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="1.5" id="hjZ-IE-Q92" userLabel="Heart - Center Y"/>
                                             <constraint firstItem="tfP-Pv-ioc" firstAttribute="trailing" secondItem="ofZ-sV-TDV" secondAttribute="trailing" id="iKf-Vb-kRG" userLabel="Top - Trailing"/>
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="height" secondItem="ofZ-sV-TDV" secondAttribute="height" multiplier="0.35" id="pSz-OP-fGh" userLabel="Bot - Height"/>
-                                            <constraint firstItem="sXm-II-RHr" firstAttribute="leading" secondItem="ofZ-sV-TDV" secondAttribute="leading" id="qcm-i9-eqT" userLabel="Button - Leading"/>
                                             <constraint firstItem="Hv6-2E-7Pp" firstAttribute="centerY" secondItem="ofZ-sV-TDV" secondAttribute="centerY" multiplier="0.5" id="qx6-X3-b3U" userLabel="Star - Center Y"/>
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="leading" secondItem="AVd-TT-9eJ" secondAttribute="trailing" constant="8" id="tVz-bt-kLt" userLabel="Bot - Leading"/>
                                         </constraints>
@@ -384,7 +373,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.81960784313725488" green="0.64313725490196083" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.79497464068360013" green="0.824163090647555" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cPe-gP-ZxZ" firstAttribute="trailing" secondItem="wzg-cH-89h" secondAttribute="trailingMargin" id="08X-pr-X2C" userLabel="Right CV - Trailing"/>
                             <constraint firstItem="2e6-Di-eqh" firstAttribute="leading" secondItem="wzg-cH-89h" secondAttribute="leadingMargin" id="2la-bM-3vh" userLabel="Left CV - Leading"/>
@@ -416,7 +405,7 @@
                         <outlet property="player6" destination="waC-Tn-aRJ" id="LFj-rE-G8K"/>
                         <outlet property="playerName" destination="Dvg-FW-8en" id="LCa-qh-AFD"/>
                         <outlet property="victoryPoints" destination="4RS-NM-LSX" id="2R7-Xt-ha2"/>
-                        <segue destination="YtX-cr-uDY" kind="presentation" identifier="changeMonster" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="R7d-wy-fpz"/>
+                        <segue destination="YtX-cr-uDY" kind="presentation" identifier="changeMonster" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="R7d-wy-fpz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t92-lS-65i" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -114,17 +114,38 @@
     
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component {
+//- (NSString *)pickerView:(UIPickerView *)pickerView
+//             titleForRow:(NSInteger)row
+//            forComponent:(NSInteger)component {
+//    
+//    if ([pickerView isEqual:_topPicker]) {
+//        
+//        return [NSString stringWithFormat:@"%@", [self.victoryPoints[row] stringValue]];
+//    } else {
+//        
+//        return [NSString stringWithFormat:@"%@", [self.health[row] stringValue]];
+//        
+//    }
+//}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
+             attributedTitleForRow:(NSInteger)row
+                      forComponent:(NSInteger)component {
     
     if ([pickerView isEqual:_topPicker]) {
+
         
-        return [NSString stringWithFormat:@"%@", [self.victoryPoints[row] stringValue]];
+        NSString *vpString = [NSString stringWithFormat:@"%@", [self.victoryPoints[row] stringValue]];
+        NSAttributedString *attVPString = [[NSAttributedString alloc] initWithString:vpString
+                                                                          attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        return attVPString;
+        
     } else {
         
-        return [NSString stringWithFormat:@"%@", [self.health[row] stringValue]];
-        
+        NSString *hpString = [NSString stringWithFormat:@"%@", [self.health[row] stringValue]];
+        NSAttributedString *attHPString = [[NSAttributedString alloc] initWithString:hpString
+                                                                          attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        return attHPString;
     }
 }
 
