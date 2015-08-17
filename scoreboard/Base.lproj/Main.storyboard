@@ -216,6 +216,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monster Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVL-fj-6uz">
                                         <rect key="frame" x="0.0" y="0.0" width="229" height="19.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvg-FW-8en">
@@ -224,6 +225,7 @@
                                             <constraint firstAttribute="height" constant="17" id="zao-Ek-3X7" userLabel="Player Name - Height"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofZ-sV-TDV" userLabel="RightView">
@@ -301,7 +303,7 @@
                                         <rect key="frame" x="0.0" y="19.5" width="229" height="164"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.10588235294117647" green="0.84705882352941175" blue="0.98431372549019602" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.10980392156862745" green="0.14509803921568629" blue="0.21568627450980393" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="tVL-fj-6uz" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Brd-gu-tTd" secondAttribute="width" id="4eo-kZ-7Pc" userLabel="Monster Name - Width"/>
                                     <constraint firstItem="Brd-gu-tTd" firstAttribute="trailing" secondItem="eJz-5s-qDy" secondAttribute="trailing" multiplier="0.6" id="NmQ-jW-Anz" userLabel="Monster Image - Trailing"/>
@@ -382,7 +384,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.13333333333333333" green="0.14509803921568629" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.81960784313725488" green="0.64313725490196083" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="cPe-gP-ZxZ" firstAttribute="trailing" secondItem="wzg-cH-89h" secondAttribute="trailingMargin" id="08X-pr-X2C" userLabel="Right CV - Trailing"/>
                             <constraint firstItem="2e6-Di-eqh" firstAttribute="leading" secondItem="wzg-cH-89h" secondAttribute="leadingMargin" id="2la-bM-3vh" userLabel="Left CV - Leading"/>

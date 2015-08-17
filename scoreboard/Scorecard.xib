@@ -99,7 +99,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.10588235294117647" green="0.84705882352941175" blue="0.98431372549019602" alpha="0.44" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.10980392156862745" green="0.14509803921568629" blue="0.21568627450980393" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1qm-Hj-cxm" userLabel="Monster Image - Center Y"/>
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="3HR-cv-7tC" userLabel="Right View - Bottom"/>
