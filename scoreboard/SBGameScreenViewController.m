@@ -55,6 +55,83 @@
     
     [self setupCurrentPlayerReferenceToFirebase];
     
+    [self setupGesture];
+    
+    [self generateTestData];
+    
+    
+
+    
+}
+
+- (void)generateTestData {
+    
+    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
+    
+    for (NSInteger i = 0 ; i < 6 ; i++) {
+        
+        
+        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
+                                                 monsterName:monsterNames[i]
+                                                          hp:@8
+                                                          vp:@9];
+        
+        [self.room.users addObject:currentPerson];
+        
+    }
+    
+    [self setupScorecardWithUsersInfo];
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+- (void)setupGesture {
+    
+    self.monsterImage.userInteractionEnabled = YES;
+    UILongPressGestureRecognizer *lpHandler = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleHoldGesture:)];
+    lpHandler.minimumPressDuration = 1; //seconds
+    lpHandler.delegate = self;
+    [self.monsterImage addGestureRecognizer:lpHandler];
+}
+
+- (void)handleHoldGesture:(UILongPressGestureRecognizer *)gestureRecognizer {
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        
+//        self.mainMonsterView.hidden = YES;
+        [self performSegueWithIdentifier:@"changeMonster" sender:self];
+
+        
+    }
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        
+        
+
+        
+        
+    }
+    
+
+    
+}
+
+
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    self.monsterImage.image = [UIImage imageNamed:@"KONG_384"];
+    
+    
     
 }
 
@@ -62,8 +139,6 @@
     
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
     
-    
-    self.ref = nil;
 }
 
 - (void)setupListenerToEntireRoomOnFirebase {
@@ -192,22 +267,32 @@ numberOfRowsInComponent:(NSInteger)component {
     }
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component {
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView
+             attributedTitleForRow:(NSInteger)row
+                      forComponent:(NSInteger)component {
+    
+    NSLog(@"Getting called from inside PickerView??!!");
     
     if ([pickerView isEqual:_victoryPoints]) {
         
-        return [NSString stringWithFormat:@"%@", [self.vpPointsOnPicker[row] stringValue]];
+        NSString *vpString = [NSString stringWithFormat:@"%@", [self.vpPointsOnPicker[row] stringValue]];
+        NSAttributedString *attVPString = [[NSAttributedString alloc] initWithString:vpString
+                                                                          attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        return attVPString;
         
     } else {
         
-        return [NSString stringWithFormat:@"%@", [self.hpPointsOnPicker[row] stringValue]];
-        
+        NSString *hpString = [NSString stringWithFormat:@"%@", [self.hpPointsOnPicker[row] stringValue]];
+        NSAttributedString *attHPString = [[NSAttributedString alloc] initWithString:hpString
+                                                                          attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        return attHPString;
     }
 }
 
+
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    
     
     return 45;
 }
@@ -226,11 +311,9 @@ numberOfRowsInComponent:(NSInteger)component {
                                  
                                  if (error) {
                                      
-                                     NSLog(@"Bad news bears");
                                      
                                  } else {
                                      
-                                     NSLog(@"Hurray! we did it!");
                                  }
                              }];
     
@@ -243,10 +326,9 @@ numberOfRowsInComponent:(NSInteger)component {
                                  
                                  if (error) {
                                      
-                                     NSLog(@"Bad news bears");
+                                     
                                  } else {
                                      
-                                     NSLog(@"Hurray! we did it!");
                                  }
                              }];
         
