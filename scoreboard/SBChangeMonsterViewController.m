@@ -24,7 +24,8 @@
 - (void)setupBlurredViewToContainMonsters;
 - (void)setupMonsterButtons;
 - (UIButton *)createMonsterButtonWithMonsterName:(NSString *)monsterName;
-- (void)setupConstraintsWithButtons:(NSArray *)array;
+- (void)setupConstraintsForMonsterButtons;
+
 @end
 
 static const CGFloat SBChangeMVCWidthMultiplier = 0.8;
@@ -42,20 +43,16 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 }
 
 #pragma mark - Action methods
+
 - (void)monsterTapped:(id)sender {
-    
     UIButton *button = (UIButton *)sender;
     NSString *title = button.currentTitle;
-    
-    NSLog(@"The name of the button is %@.", title);
-    
-    
-    
-    
-    
+    NSLog(@"%@ was tapped.", title);
 }
 
+
 #pragma mark - Setting up views
+
 - (void)setupBlurredViewToContainMonsters {
     self.changeMonsterView = [[UIView alloc] init];
     self.changeMonsterView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.6f];
@@ -76,12 +73,10 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         
         switch (i) {
             case 0:
-                NSLog(@"Case 0 in monsterButtons");
                 self.monsterOne = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
                 [self.view addSubview:self.monsterOne];
                 break;
             case 1:
-                NSLog(@"Case 1 in monsterButtons");
                 self.monsterTwo = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
                 [self.view addSubview:self.self.monsterTwo];
                 break;
@@ -107,26 +102,9 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         }
     }
     
-    
-
-    
-    
-    
-//    UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);
-    
-//    self.monsterOne = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-//    [self.view addSubview:self.monsterOne];
-//    [self.monsterOne mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-//        
-//        make.top.and.left.equalTo(self.changeMonsterView).with.offset(padding.top);
-//        
-//          }];
-    
-  
-    
+    [self setupConstraintsForMonsterButtons];
 }
+
 
 #pragma mark - Helper Methods
 
@@ -137,8 +115,8 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
                       action:@selector(monsterTapped:)
             forControlEvents:UIControlEventTouchUpInside];
     
-    monsterButton.layer.borderColor = [[UIColor blueColor] colorWithAlphaComponent:0.1f].CGColor;
-    monsterButton.layer.borderWidth = 1.5f;
+//    monsterButton.layer.borderColor = [[UIColor blueColor] colorWithAlphaComponent:0.1f].CGColor;
+//    monsterButton.layer.borderWidth = 1.5f;
     
     [monsterButton setTitle:monsterName
                    forState:UIControlStateNormal];
@@ -153,118 +131,39 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     return monsterButton;
 }
 
-- (void)setupConstraintsWithButtons:(NSArray *)array {
-    UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);
-    
-    
-    
-    NSInteger i = 0;
-    for ( ; i < [array count]; i++) {
-        UIButton *monsterButton = array[i];
-        
-        [self.monsterOne mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-            make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-            
-            make.top.and.left.equalTo(self.changeMonsterView).with.offset(padding.top);
-        }];
-
-        
-        switch (i) {
-            case 0: {
-                NSLog(@"Inside case ONE");
-                
-                [self.monsterOne mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-                    make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-                    
-                    make.top.and.left.equalTo(self.changeMonsterView).with.offset(padding.top);
-                }];
-                break;
-            }
-                
-            case 1: {
-                NSLog(@"Inside case TWO");
-
-                [monsterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-                    make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-                    
-                    make.top.and.right.equalTo(self.changeMonsterView).with.offset(padding.top);
-                    
-                }];
-                break;
-            }
-            case 2: {
-                NSLog(@"Inside case THREE");
-
-                [monsterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-                    make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-                    
-                    make.top.and.right.equalTo(self.changeMonsterView).with.offset(padding.top);
-                    
-                }];
-                break;
-            }
-                
-            case 3: {
-                NSLog(@"Inside case FOUR");
-
-                [monsterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-                    make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-                    
-                    make.top.and.right.equalTo(self.changeMonsterView).with.offset(padding.top);
-                    
-                }];
-                break;
-            }
-                
-            case 4: {
-                NSLog(@"Inside case FIVE");
-
-                [monsterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-                    make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-                    
-                    make.top.and.right.equalTo(self.changeMonsterView).with.offset(padding.top);
-                    
-                }];
-                break;
-            }
-                
-            case 5: {
-                NSLog(@"Inside case SIX");
-
-                [monsterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-                    make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-                    
-                    make.top.and.right.equalTo(self.changeMonsterView).with.offset(padding.top);
-                    
-                }];
-                break;
-            }
-                
-            default: {
-                
-                NSLog(@"Falling into default???");
-                
-                break;
-                
-            }
-        }
-        
-        
-        
-        
-    }
-    
-    
-    
-    
-    
+- (void)setupConstraintsForMonsterButtons {
+    [self.monsterOne mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+        make.top.and.left.equalTo(self.changeMonsterView);
+    }];
+    [self.monsterTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+        make.top.and.right.equalTo(self.changeMonsterView);
+    }];
+    [self.monsterThree mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+        make.top.equalTo(self.monsterOne.mas_bottom);
+        make.left.equalTo(self.changeMonsterView);
+    }];
+    [self.monsterFour mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+        make.top.equalTo(self.monsterTwo.mas_bottom);
+        make.right.equalTo(self.changeMonsterView);
+    }];
+    [self.monsterFive mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+        make.bottom.and.left.equalTo(self.changeMonsterView);
+    }];
+    [self.monsterSix mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+        make.bottom.and.right.equalTo(self.changeMonsterView);
+    }];
 }
 
 #pragma mark - Lazy Insatiation
