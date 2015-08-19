@@ -16,18 +16,14 @@ unsigned int const MIN_VALUE = 100000;
 unsigned int const MAX_VALUE = 999999;
 
 + (NSString *)randomRoomNumber {
-    
     NSString *random = [@(arc4random_uniform((MAX_VALUE - MIN_VALUE)) + MIN_VALUE) stringValue];
     return random;
 }
 
 + (NSString *)randomMonsterName {
-    
     NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
     NSString *monster = monsterNames[arc4random_uniform((uint32_t)[monsterNames count])];
     return monster;
 }
 
-
 @end
-

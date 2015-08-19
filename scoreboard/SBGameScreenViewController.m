@@ -38,6 +38,8 @@
 
 - (IBAction)smallButton:(id)sender;
 
+- (void)setupMainPlayerScorecard;
+
 @end
 
 @implementation SBGameScreenViewController
@@ -51,8 +53,9 @@
     [self setupPickerViewsDelegateAndDataSource];
     [self setupListenerToEntireRoomOnFirebase];
     [self setupCurrentPlayerReferenceToFirebase];
+    [self setupMainPlayerScorecard];
     [self setupGesture];
-    [self generateTestData];
+//    [self generateTestData];
 }
 
 - (void)generateTestData {
@@ -83,6 +86,21 @@
 }
 
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
+    NSDictionary *monsterNameChange = @{@"monster": name};
+    self.monsterImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", name]];
+    
+    self.monsterName.text = name;
+    
+    [self.currentPlayerRef updateChildValues:monsterNameChange
+                         withCompletionBlock:^(NSError *error, Firebase *ref) {
+                             
+                             if (error) {
+                                 
+                                 
+                             } else {
+                                 
+                             }
+                         }];
     
     NSLog(@"WE ARE BACK IN THE OTHER VIEW CONTROLLER, THE NAME IS %@", name);
 }
@@ -125,8 +143,6 @@
     
     [super viewDidAppear:animated];
     
-    self.monsterImage.image = [UIImage imageNamed:@"KONG_384"];
-    
     
     
 }
@@ -137,31 +153,52 @@
     
 }
 
-- (void)setupListenerToEntireRoomOnFirebase {
+- (void)setupMainPlayerScorecard {
     
+    self.monsterImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.randomMonsterName]];
+    
+    self.monsterName.text = self.randomMonsterName;
+    
+    self.playerName.text = self.currentPlayerName;
+    
+    [self.healthPoints selectRow:10 inComponent:0 animated:YES];
+
+
+    
+    
+    
+//    @property (weak, nonatomic) IBOutlet UILabel *monsterName;
+//    @property (weak, nonatomic) IBOutlet UILabel *playerName;
+//    @property (weak, nonatomic) IBOutlet UIImageView *monsterImage;
+    
+//    destVC.ref = self.firebaseRef;
+//    destVC.roomDigits = self.digitsToPassForward;
+//    destVC.IDOfCurrentPlayer = self.IDOfCurrentUser;
+//    destVC.randomMonsterName = self.randomMonsterName;
+    
+    
+    
+}
+
+
+- (void)setupListenerToEntireRoomOnFirebase {
     [[self.ref childByAppendingPath:self.roomDigits]
-     observeEventType:FEventTypeValue
+observeEventType:FEventTypeValue
      withBlock:^(FDataSnapshot *snapshot) {
          
          BOOL numberOfPlayersChanged = [self.room.users count] != snapshot.childrenCount ? YES : NO;
          
          if (numberOfPlayersChanged) {
-             
              self.room = [SBRoom createRoomWithData:snapshot];
              [self setupScorecardWithUsersInfo];
-             
          } else {
-             
              SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
              [self updateScoresWithRoom:changedRoom];
          }
-         
      } withCancelBlock:^(NSError *error) {
-         
          //Still should do something here.
          NSLog(@"ERROR: %@", error.description);
      }];
-    
 }
 
 
@@ -219,10 +256,10 @@
     //settings?
 }
 
+
 #pragma mark - Main Scorecard Methods
 
 - (void)setupPickerViewsDelegateAndDataSource {
-    
     self.victoryPoints.delegate = self;
     self.healthPoints.delegate = self;
     self.victoryPoints.dataSource = self;

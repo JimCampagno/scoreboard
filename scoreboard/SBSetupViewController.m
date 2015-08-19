@@ -32,6 +32,7 @@
 @property (strong, nonatomic) NSString *digitsToPassForward;
 @property (strong, nonatomic) NSString *IDOfCurrentUser;
 @property (strong, nonatomic) NSString *randomMonsterName;
+@property (strong, nonatomic) NSString *currentPlayerName;
 
 
 
@@ -48,7 +49,7 @@
     
     [super viewDidLoad];
     [self setupView];
-    _firebaseRef= [[Firebase alloc] initWithUrl: FIREBASE_URL];
+    _firebaseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
 }
 
 - (void)setupView {
@@ -120,7 +121,7 @@
             
                         self.IDOfCurrentUser = [self createIDOfCurrentUserWithCurrentData:currentData];
                         self.randomMonsterName = [SBConstants randomMonsterName];
-                        
+                        self.currentPlayerName = self.enterName.text;
                         
                         NSDictionary *newUser = @{ @"name": self.enterName.text,
                                                    @"monster": self.randomMonsterName,
@@ -378,7 +379,7 @@
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
                                                               
-                                                              
+                                            
                                                           }];
     
     [alert addAction:defaultAction];
@@ -391,11 +392,11 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     SBGameScreenViewController *destVC = (SBGameScreenViewController *)segue.destinationViewController;
     destVC.ref = self.firebaseRef;
     destVC.roomDigits = self.digitsToPassForward;
     destVC.IDOfCurrentPlayer = self.IDOfCurrentUser;
     destVC.randomMonsterName = self.randomMonsterName;
+    destVC.currentPlayerName = self.currentPlayerName;
 }
 @end

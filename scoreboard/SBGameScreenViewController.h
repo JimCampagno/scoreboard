@@ -24,5 +24,6 @@
 @property (strong, nonatomic) SBUser *currentPlayer;
 @property (strong, nonatomic) NSString *IDOfCurrentPlayer;
 @property (strong, nonatomic) NSString *randomMonsterName;
+@property (strong, nonatomic) NSString *currentPlayerName;
 
 @end
