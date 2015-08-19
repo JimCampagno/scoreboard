@@ -272,7 +272,6 @@ numberOfRowsInComponent:(NSInteger)component {
              attributedTitleForRow:(NSInteger)row
                       forComponent:(NSInteger)component {
     
-    NSLog(@"Getting called from inside PickerView??!!");
     
     if ([pickerView isEqual:_victoryPoints]) {
         
