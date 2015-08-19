@@ -10,7 +10,14 @@
 #import <Firebase/Firebase.h>
 #import "SBRoom.h"
 
-@interface SBGameScreenViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate>
+@protocol MonsterChangeDelegate <NSObject>
+
+- (void)userHasChangedToMonsterWithName:(NSString *)name;
+
+@end
+
+
+@interface SBGameScreenViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate, MonsterChangeDelegate>
 
 @property (strong, nonatomic) Firebase *ref;
 @property (strong, nonatomic) NSString *roomDigits;

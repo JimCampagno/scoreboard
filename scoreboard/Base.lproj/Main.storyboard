@@ -423,7 +423,23 @@
                     <view key="view" contentMode="scaleToFill" id="O7F-Nj-AIe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.082352941176470587" green="0.062745098039215685" blue="0.043137254901960784" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCf-1k-DZN">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aDP-VK-iTO">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lCf-1k-DZN" firstAttribute="trailing" secondItem="O7F-Nj-AIe" secondAttribute="trailing" id="1ZI-ar-353"/>
+                            <constraint firstItem="lCf-1k-DZN" firstAttribute="bottom" secondItem="4ii-J7-IAo" secondAttribute="top" id="PnY-sz-Z9P"/>
+                            <constraint firstItem="lCf-1k-DZN" firstAttribute="top" secondItem="dYr-x1-yp4" secondAttribute="top" id="jBH-SQ-oNc"/>
+                            <constraint firstItem="lCf-1k-DZN" firstAttribute="leading" secondItem="O7F-Nj-AIe" secondAttribute="leading" id="mxH-5C-rpH"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>

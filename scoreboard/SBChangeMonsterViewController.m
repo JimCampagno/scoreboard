@@ -7,12 +7,12 @@
 //
 
 #import "SBChangeMonsterViewController.h"
+#import "SBGameScreenViewController.h"
 #import <Masonry.h>
 
 @interface SBChangeMonsterViewController ()
 @property (strong, nonatomic) UIView *changeMonsterView;
 @property (strong, nonatomic) NSArray *monsterNames;
-@property (strong, nonatomic) NSArray *monsterButtons;
 
 @property (strong, nonatomic) UIButton *monsterOne;
 @property (strong, nonatomic) UIButton *monsterTwo;
@@ -21,10 +21,14 @@
 @property (strong, nonatomic) UIButton *monsterFive;
 @property (strong, nonatomic) UIButton *monsterSix;
 
+@property (weak, nonatomic) id <MonsterChangeDelegate> delegate;
+
 - (void)setupBlurredViewToContainMonsters;
 - (void)setupMonsterButtons;
-- (UIButton *)createMonsterButtonWithMonsterName:(NSString *)monsterName;
 - (void)setupConstraintsForMonsterButtons;
+- (void)setupLabel;
+
+- (UIButton *)createMonsterButtonWithMonsterName:(NSString *)monsterName;
 
 @end
 
@@ -40,6 +44,14 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     
     [self setupBlurredViewToContainMonsters];
     [self setupMonsterButtons];
+    [self setupLabel];
+    [self setupMonsterChangeDelegate];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self setupMonsterChangeDelegate];
 }
 
 #pragma mark - Action methods
@@ -47,7 +59,8 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 - (void)monsterTapped:(id)sender {
     UIButton *button = (UIButton *)sender;
     NSString *title = button.currentTitle;
-    NSLog(@"%@ was tapped.", title);
+    [self.delegate userHasChangedToMonsterWithName:title];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -55,13 +68,13 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 
 - (void)setupBlurredViewToContainMonsters {
     self.changeMonsterView = [[UIView alloc] init];
-    self.changeMonsterView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.6f];
+    self.changeMonsterView.backgroundColor = [UIColor clearColor];
+//    self.changeMonsterView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.6f];
     [self.view addSubview:self.changeMonsterView];
     
     [self.changeMonsterView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.view).multipliedBy(SBChangeMVCWidthMultiplier);
         make.height.equalTo(self.view).multipliedBy(SBChangeMVCHeightMultiplier);
-        
         make.centerX.equalTo(self.view);
         make.centerY.equalTo(self.view).multipliedBy(0.9);
     }];
@@ -101,8 +114,24 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
                 break;
         }
     }
-    
     [self setupConstraintsForMonsterButtons];
+}
+
+- (void)setupLabel {
+    UILabel *monsterLabel = [UILabel new];
+    monsterLabel.textAlignment = NSTextAlignmentCenter;
+    monsterLabel.textColor = [UIColor blackColor];
+    monsterLabel.text = @"CHOOSE YOUR MONSTER";
+    monsterLabel.font=[UIFont fontWithName:@"Thonburi" size:50];
+    monsterLabel.adjustsFontSizeToFitWidth = YES;
+    
+    [self.view addSubview:monsterLabel];
+    
+    [monsterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.changeMonsterView);
+        make.bottom.equalTo(self.changeMonsterView.mas_top);
+        make.centerX.equalTo(self.changeMonsterView);
+    }];
 }
 
 
@@ -114,20 +143,15 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [monsterButton addTarget:self
                       action:@selector(monsterTapped:)
             forControlEvents:UIControlEventTouchUpInside];
-    
-//    monsterButton.layer.borderColor = [[UIColor blueColor] colorWithAlphaComponent:0.1f].CGColor;
-//    monsterButton.layer.borderWidth = 1.5f;
-    
+
     [monsterButton setTitle:monsterName
                    forState:UIControlStateNormal];
     [monsterButton setTitleColor:[UIColor clearColor]
                         forState:UIControlStateNormal];
     
     UIImage *robMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", monsterName]];
-    
     [monsterButton setBackgroundImage:robMonster
                              forState:UIControlStateNormal];
-    
     return monsterButton;
 }
 
@@ -166,6 +190,11 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     }];
 }
 
+- (void)setupMonsterChangeDelegate {
+    SBGameScreenViewController *presentingVC = (SBGameScreenViewController *)self.presentingViewController;
+    self.delegate = presentingVC;
+}
+
 #pragma mark - Lazy Insatiation
 
 - (NSArray *)monsterNames {
@@ -173,13 +202,6 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         _monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
     }
     return _monsterNames;
-}
-
-- (NSArray *)monsterButtons {
-    if (!_monsterButtons) {
-        _monsterButtons = @[self.monsterOne, self.monsterTwo, self.monsterThree, self.monsterFour, self.monsterFive, self.monsterSix];
-    }
-    return _monsterButtons;
 }
 
 @end

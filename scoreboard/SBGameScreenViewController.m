@@ -44,24 +44,15 @@
 
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     
     _room = [[SBRoom alloc] init];
     
     [self setupPickerViewsDelegateAndDataSource];
-    
     [self setupListenerToEntireRoomOnFirebase];
-    
     [self setupCurrentPlayerReferenceToFirebase];
-    
     [self setupGesture];
-    
     [self generateTestData];
-    
-    
-
-    
 }
 
 - (void)generateTestData {
@@ -89,6 +80,11 @@
     
     
     
+}
+
+- (void)userHasChangedToMonsterWithName:(NSString *)name {
+    
+    NSLog(@"WE ARE BACK IN THE OTHER VIEW CONTROLLER, THE NAME IS %@", name);
 }
 
 - (void)setupGesture {
