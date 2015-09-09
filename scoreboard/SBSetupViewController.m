@@ -34,6 +34,10 @@
 @property (strong, nonatomic) NSString *randomMonsterName;
 @property (strong, nonatomic) NSString *currentPlayerName;
 
+@property (nonatomic) BOOL isInJoinScreenMode;
+@property (nonatomic) CGRect frameOfOriginalJoinButton;
+@property (nonatomic) CGRect frameOfOriginalCreateButton;
+
 
 
 
@@ -64,10 +68,17 @@
     self.displayJoinGameDigits.alpha = 0;
     
     [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
+    _isInJoinScreenMode = NO;
 }
 
 -(void)dismissKeyboard {
     [self.enterName resignFirstResponder];
+    [self.invisibleDigits resignFirstResponder];
+    
+    if (self.isInJoinScreenMode) {
+        [self bringButtonsBackAfterCancelTapped];
+        self.isInJoinScreenMode = NO;
+    }
 }
 
 
@@ -102,6 +113,16 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    if (self.holdingTheDigits.count == 6) {
+        return NO;
+    }
+    return YES;
+}
+
+
+
 - (IBAction)connect:(id)sender {
     
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -116,9 +137,9 @@
             } else {
                 
                 [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-                
+                    
                     if ([currentData hasChildren]) {
-            
+                        
                         self.IDOfCurrentUser = [self createIDOfCurrentUserWithCurrentData:currentData];
                         self.randomMonsterName = [SBConstants randomMonsterName];
                         self.currentPlayerName = self.enterName.text;
@@ -184,13 +205,15 @@
 
 - (IBAction)joinGame:(id)sender {
     
+    _isInJoinScreenMode = YES;
+    
     [UIView animateWithDuration:0.3
                      animations:^{
-                         [self dismissKeyboard];
+                         //                         [self dismissKeyboard];
                      }
                      completion:^ (BOOL finished) {
                          [self animateCreateButtonDown];
-                         [self animateJoinButtonOnTap];
+                         [self animateJoinButtonDown];
                      }];
     
     
@@ -208,84 +231,50 @@
 
 
 - (NSString *)createIDOfCurrentUserWithCurrentData:(FMutableData *)currentData {
-    
     NSDictionary *data = currentData.value;
     NSInteger largestID;
-
+    
     if ([data respondsToSelector:@selector(allKeys)]) {
-        
         NSArray *allKeysOfData = [data allKeys];
         NSString *firstItemInData = allKeysOfData[0];
         largestID = [firstItemInData integerValue];
         
         for (NSString *userID in allKeysOfData) {
-            
             NSInteger numberToCompare = [userID integerValue];
             
             if (numberToCompare > largestID) {
-                
                 largestID = [userID integerValue];
             }
         }
         return [@(largestID + 1) stringValue];
-
+        
     } else {
-    
         NSArray *dataToUse = currentData.value;
-    
-            largestID = [dataToUse count];
-            return [@(largestID) stringValue];
+        largestID = [dataToUse count];
+        return [@(largestID) stringValue];
     }
 }
 
 
 - (void)animateCreateButtonDown {
-    
-    [UIView animateWithDuration:0.8
+    [UIView animateWithDuration:0.3
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         
-                         self.createGameProp.frame = CGRectMake(self.createGameProp.frame.origin.x + 0, self.createGameProp.frame.origin.y + 200, self.createGameProp.frame.size.width, self.createGameProp.frame.size.height);
                          self.createGameProp.alpha = 0.0;
-                         
                      }
-                     completion:^ (BOOL finished) {
-                         
-                     }];
+                     completion:nil];
 }
 
 - (void)animateJoinButtonDown {
-    
-    [UIView animateWithDuration:0.8
-                          delay:0.34
+    [UIView animateWithDuration:0.3
+                          delay:0.15
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         
-                         self.joinGameProp.frame = CGRectMake(self.joinGameProp.frame.origin.x + 0, self.joinGameProp.frame.origin.y + 200, self.joinGameProp.frame.size.width, self.joinGameProp.frame.size.height);
                          self.joinGameProp.alpha = 0.0;
-                         
                      }
                      completion:^ (BOOL finished) {
-                         
-                     }];
-}
-
-- (void)animateJoinButtonOnTap {
-    
-    [UIView animateWithDuration:0.8
-                          delay:0.34
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         
-                         self.joinGameProp.frame = CGRectMake(self.joinGameProp.frame.origin.x + 0, self.joinGameProp.frame.origin.y + 200, self.joinGameProp.frame.size.width, self.joinGameProp.frame.size.height);
-                         self.joinGameProp.alpha = 0.0;
-                         
-                     }
-                     completion:^ (BOOL finished) {
-                         
                          [self.invisibleDigits becomeFirstResponder];
-                         NSLog(@"The joinGame button was pressed.");
                          
                          [UIView animateWithDuration:0.2 animations:^{
                              self.displayJoinGameDigits.alpha = 1;
@@ -295,38 +284,32 @@
 }
 
 - (void)bringButtonsBackAfterCancelTapped {
-    
     [self.view endEditing:YES];
     
-    [UIView animateWithDuration:0.8
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
+    [UIView animateWithDuration:0.2
                      animations:^{
-                         
-                         self.createGameProp.alpha = 1;
-                         self.joinGameProp.alpha = 1;
-                         
-                         self.createGameProp.frame = CGRectMake(self.createGameProp.frame.origin.x + 0, self.createGameProp.frame.origin.y - 200, self.createGameProp.frame.size.width, self.createGameProp.frame.size.height);
-                         
-                         self.joinGameProp.frame = CGRectMake(self.joinGameProp.frame.origin.x + 0, self.joinGameProp.frame.origin.y - 200, self.joinGameProp.frame.size.width, self.joinGameProp.frame.size.height);
-                         
                          self.displayJoinGameDigits.alpha = 0;
+                     } completion:^(BOOL finished) {
+                         self.connectProp.enabled = NO;
+                         [self.holdingTheDigits removeAllObjects];
                          
-                     }
-                     completion:^ (BOOL finished) {
+                         for (UILabel *label in self.joinGameNumbers) {
+                             label.text = @"-";
+                         }
+                         
+                         [UIView animateWithDuration:0.5
+                                               delay:0.0
+                                             options:UIViewAnimationOptionCurveLinear
+                                          animations:^{
+                                              self.createGameProp.alpha = 1;
+                                              self.joinGameProp.alpha = 1;
+                                          }
+                                          completion:nil];
                      }];
-    
 }
 
 - (IBAction)cancel:(id)sender {
-    
     [self bringButtonsBackAfterCancelTapped];
-    self.connectProp.enabled = NO;
-    [self.holdingTheDigits removeAllObjects];
-    
-    for (UILabel *label in self.joinGameNumbers) {
-        label.text = @"-";
-    }
 }
 
 
@@ -360,9 +343,9 @@
                        animated:YES
                      completion:^{
                          
-
+                         
                          NSLog(@"In completion block when game doesn't exist!");
-                     
+                         
                      }];
     
 }
@@ -379,7 +362,7 @@
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
                                                               
-                                            
+                                                              
                                                           }];
     
     [alert addAction:defaultAction];
