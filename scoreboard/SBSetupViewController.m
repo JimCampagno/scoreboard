@@ -90,6 +90,11 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    
+    if (textField.text.length == 6) {
+        return NO;
+    }
+    
     if ([string isEqualToString:@""]) {
         
         if ([self.holdingTheDigits count] >= 1) {
@@ -110,12 +115,18 @@
         }
     }
     
+    
+    
+    
+    
     return YES;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    NSLog(@"\n\nLength:%ld", textField.text.length);
     
-    if (self.holdingTheDigits.count == 6) {
+    if (textField.text.length == 6) {
+        NSLog(@"\n\n ABOUT TO RETURN NO!\n\n");
         return NO;
     }
     return YES;
