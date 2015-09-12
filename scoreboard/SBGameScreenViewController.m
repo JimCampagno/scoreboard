@@ -179,18 +179,6 @@
         if ([currentUser didAttributesChangeWithUserOnServer:userOnServer]) {
             [currentUser updateAttributesToMatchUser:userOnServer];
             [self.playerScorecards[i] updateScorecardWithInfoFromUser:self.room.users[i]];
-            
-            Scorecard *currentScorecard = self.playerScorecards[i];
-            currentScorecard.heartParticleView.hidden = NO;
-            SBHeartScene * scene = [SBHeartScene sceneWithSize:currentScorecard.heartParticleView.bounds.size];
-            scene.scaleMode = SKSceneScaleModeAspectFill;
-            [currentScorecard.heartParticleView presentScene:scene];
-            
-            
-            
-
-            
-            NSLog(@"Getting called?");
         }
     }
 }

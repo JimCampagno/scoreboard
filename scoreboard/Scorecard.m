@@ -9,6 +9,12 @@
 #import "Scorecard.h"
 #import "SBHeartScene.h"
 
+@interface Scorecard ()
+
+@property (nonatomic, strong) SBHeartScene *heartScene;
+
+@end
+
 
 @implementation Scorecard
 
@@ -52,11 +58,12 @@
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.view];
     [self setNeedsUpdateConstraints];
-   
     
     self.heartParticleView.allowsTransparency = YES;
     self.heartParticleView.backgroundColor = [UIColor clearColor];
-    self.heartParticleView.hidden = YES;
+    self.heartScene = [SBHeartScene sceneWithSize:self.heartParticleView.bounds.size];
+    self.heartScene.scaleMode = SKSceneScaleModeAspectFill;
+    [self.heartParticleView presentScene:self.heartScene];
 }
 
 - (void)updateConstraints {
@@ -116,21 +123,19 @@
         
         return [self.health count];
     }
-    
-    
 }
 
 //- (NSString *)pickerView:(UIPickerView *)pickerView
 //             titleForRow:(NSInteger)row
 //            forComponent:(NSInteger)component {
-//    
+//
 //    if ([pickerView isEqual:_topPicker]) {
-//        
+//
 //        return [NSString stringWithFormat:@"%@", [self.victoryPoints[row] stringValue]];
 //    } else {
-//        
+//
 //        return [NSString stringWithFormat:@"%@", [self.health[row] stringValue]];
-//        
+//
 //    }
 //}
 
@@ -139,7 +144,7 @@
                       forComponent:(NSInteger)component {
     
     if ([pickerView isEqual:_topPicker]) {
-
+        
         
         NSString *vpString = [NSString stringWithFormat:@"%@", [self.victoryPoints[row] stringValue]];
         NSAttributedString *attVPString = [[NSAttributedString alloc] initWithString:vpString
@@ -164,7 +169,12 @@
     if (self.hidden == YES) {
         self.hidden = NO;
     }
-
+    
+    
+    
+    
+    
+    
     self.monsterImage.image = user.monsterImage;
     self.playerName.text = user.name;
     self.monsterName.text = user.monster;
