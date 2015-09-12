@@ -49,19 +49,16 @@
     [super viewDidLoad];
     
     _room = [[SBRoom alloc] init];
-    
     [self setupPickerViewsDelegateAndDataSource];
     [self setupListenerToEntireRoomOnFirebase];
     [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
     [self setupGesture];
-//    [self generateTestData];
+    [self generateTestData];
 }
 
 - (void)generateTestData {
-    
     NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
-    
     for (NSInteger i = 0 ; i < 6 ; i++) {
         
         
@@ -75,14 +72,6 @@
     }
     
     [self setupScorecardWithUsersInfo];
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
@@ -101,7 +90,6 @@
                                  
                              }
                          }];
-    
     NSLog(@"WE ARE BACK IN THE OTHER VIEW CONTROLLER, THE NAME IS %@", name);
 }
 
@@ -118,21 +106,21 @@
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         
-//        self.mainMonsterView.hidden = YES;
+        //        self.mainMonsterView.hidden = YES;
         [self performSegueWithIdentifier:@"changeMonster" sender:self];
-
+        
         
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
         
-
+        
         
         
     }
     
-
+    
     
 }
 
@@ -154,36 +142,16 @@
 }
 
 - (void)setupMainPlayerScorecard {
-    
     self.monsterImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.randomMonsterName]];
-    
     self.monsterName.text = self.randomMonsterName;
-    
     self.playerName.text = self.currentPlayerName;
-    
     [self.healthPoints selectRow:10 inComponent:0 animated:YES];
-
-
-    
-    
-    
-//    @property (weak, nonatomic) IBOutlet UILabel *monsterName;
-//    @property (weak, nonatomic) IBOutlet UILabel *playerName;
-//    @property (weak, nonatomic) IBOutlet UIImageView *monsterImage;
-    
-//    destVC.ref = self.firebaseRef;
-//    destVC.roomDigits = self.digitsToPassForward;
-//    destVC.IDOfCurrentPlayer = self.IDOfCurrentUser;
-//    destVC.randomMonsterName = self.randomMonsterName;
-    
-    
-    
 }
 
 
 - (void)setupListenerToEntireRoomOnFirebase {
     [[self.ref childByAppendingPath:self.roomDigits]
-observeEventType:FEventTypeValue
+     observeEventType:FEventTypeValue
      withBlock:^(FDataSnapshot *snapshot) {
          
          BOOL numberOfPlayersChanged = [self.room.users count] != snapshot.childrenCount ? YES : NO;
@@ -348,7 +316,7 @@ numberOfRowsInComponent:(NSInteger)component {
                                      
                                  }
                              }];
-    
+        
     } else {
         
         NSDictionary *healthPointChange = @{ @"hp": [@(row) stringValue]};
