@@ -11,6 +11,8 @@
 		5BB2D0C01B83C2C100516593 /* SBChangeMonsterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2D0BF1B83C2C100516593 /* SBChangeMonsterViewController.m */; };
 		5BCAF1121B2A70A60096C88F /* Scorecard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCAF1111B2A70A60096C88F /* Scorecard.xib */; };
 		5BCE28B41BA47AF9001CD3F9 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCE28B31BA47AF9001CD3F9 /* SpriteKit.framework */; };
+		5BCE28BB1BA480E4001CD3F9 /* HeartParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BCE28B91BA480E4001CD3F9 /* HeartParticle.sks */; };
+		5BCE28BC1BA480E4001CD3F9 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCE28BA1BA480E4001CD3F9 /* spark.png */; };
 		6B647E1806F53B817493F3C7 /* libPods-scoreboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222343B35E078E5138A9B551 /* libPods-scoreboard.a */; };
 		7D16630B1B136987002A2BF0 /* SBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D16630A1B136987002A2BF0 /* SBConstants.m */; };
 		7D16630E1B136B01002A2BF0 /* FirebaseAPIclient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D16630D1B136B01002A2BF0 /* FirebaseAPIclient.m */; };
@@ -46,6 +48,8 @@
 		5BCAF1011B237F5D0096C88F /* SBGameScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBGameScreenViewController.h; sourceTree = "<group>"; };
 		5BCAF1111B2A70A60096C88F /* Scorecard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Scorecard.xib; sourceTree = "<group>"; };
 		5BCE28B31BA47AF9001CD3F9 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		5BCE28B91BA480E4001CD3F9 /* HeartParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HeartParticle.sks; sourceTree = "<group>"; };
+		5BCE28BA1BA480E4001CD3F9 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		7D1663091B136987002A2BF0 /* SBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBConstants.h; sourceTree = "<group>"; };
 		7D16630A1B136987002A2BF0 /* SBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBConstants.m; sourceTree = "<group>"; };
 		7D16630C1B136B01002A2BF0 /* FirebaseAPIclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirebaseAPIclient.h; sourceTree = "<group>"; };
@@ -187,6 +191,8 @@
 				7D45F38E1B126AA30053F47F /* Images.xcassets */,
 				7D45F3821B126AA30053F47F /* Info.plist */,
 				7D45F3831B126AA30053F47F /* main.m */,
+				5BCE28B91BA480E4001CD3F9 /* HeartParticle.sks */,
+				5BCE28BA1BA480E4001CD3F9 /* spark.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -321,6 +327,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BCE28BB1BA480E4001CD3F9 /* HeartParticle.sks in Resources */,
+				5BCE28BC1BA480E4001CD3F9 /* spark.png in Resources */,
 				5BCAF1121B2A70A60096C88F /* Scorecard.xib in Resources */,
 				7D45F38D1B126AA30053F47F /* Main.storyboard in Resources */,
 				7D45F3921B126AA30053F47F /* LaunchScreen.xib in Resources */,
