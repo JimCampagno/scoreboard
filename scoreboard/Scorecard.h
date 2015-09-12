@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 #import "SBUser.h"
 
 @protocol ScorecardProtocol <NSObject>
@@ -25,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *monsterName;
 @property (weak, nonatomic) IBOutlet UILabel *playerName;
 @property (weak, nonatomic) IBOutlet UIImageView *monsterImage;
+
+@property (weak, nonatomic) IBOutlet SKView *heartParticleView;
+
 
 //topPicker is Victory Points
 @property (weak, nonatomic) IBOutlet UIPickerView *topPicker;

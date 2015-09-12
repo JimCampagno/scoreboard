@@ -7,6 +7,8 @@
 //
 
 #import "Scorecard.h"
+#import "SBHeartScene.h"
+
 
 @implementation Scorecard
 
@@ -37,6 +39,8 @@
 
 - (void)commonInit {
     
+    
+    
     _customSBConstraints = [[NSMutableArray alloc] init];
     
     [self setupHealthAndVictoryPoints];
@@ -49,7 +53,11 @@
     [self addSubview:self.view];
     [self setNeedsUpdateConstraints];
     
-    
+    SBHeartScene * scene = [SBHeartScene sceneWithSize:self.heartParticleView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    self.heartParticleView.allowsTransparency = YES;
+    self.heartParticleView.backgroundColor = [UIColor clearColor];
+    [self.heartParticleView presentScene:scene];
     
 }
 
