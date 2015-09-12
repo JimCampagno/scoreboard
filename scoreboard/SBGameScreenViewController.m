@@ -9,6 +9,7 @@
 #import "SBGameScreenViewController.h"
 #import "Scorecard.h"
 #import "SBUser.h"
+#import "SBHeartScene.h"
 
 @interface SBGameScreenViewController ()
 
@@ -171,41 +172,44 @@
 
 
 - (void)updateScoresWithRoom:(SBRoom *)room {
-    
     for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
-        
         SBUser *currentUser = self.room.users[i];
         SBUser *userOnServer = room.users[i];
         
         if ([currentUser didAttributesChangeWithUserOnServer:userOnServer]) {
-            
             [currentUser updateAttributesToMatchUser:userOnServer];
-            
             [self.playerScorecards[i] updateScorecardWithInfoFromUser:self.room.users[i]];
+            
+            Scorecard *currentScorecard = self.playerScorecards[i];
+            currentScorecard.heartParticleView.hidden = NO;
+            SBHeartScene * scene = [SBHeartScene sceneWithSize:currentScorecard.heartParticleView.bounds.size];
+            scene.scaleMode = SKSceneScaleModeAspectFill;
+            [currentScorecard.heartParticleView presentScene:scene];
+            
+            
+            
+
+            
+            NSLog(@"Getting called?");
         }
     }
 }
 
 
 - (void)setupScorecardWithUsersInfo {
-    
     for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
-        
         SBUser *user = self.room.users[i];
         Scorecard *currentScorecard = self.playerScorecards[i];
         [currentScorecard updateScorecardWithInfoFromUser:user];
     }
     
     if ([self.room.users count] < 6) {
-        
         [self hideUnusedScorecards];
     }
 }
 
 - (void)hideUnusedScorecards {
-    
     for (NSUInteger i = [self.room.users count] ; i < 6 ; i++) {
-        
         Scorecard *sc = self.playerScorecards[i];
         sc.hidden = YES;
     }

@@ -8,22 +8,36 @@
 
 #import "SBHeartScene.h"
 
+@interface SBHeartScene ()
+@property (nonatomic, strong) SKEmitterNode *heart;
+@end
+
 static NSString* const kHeartParticle = @"HeartParticle";
+
 
 @implementation SBHeartScene
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-       
         self.backgroundColor = [UIColor clearColor];
         NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
-        SKEmitterNode *heart = [NSKeyedUnarchiver unarchiveObjectWithFile:emitterPath];
-        heart.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
-        heart.name = @"particleHeart";
-        heart.targetNode = self.scene;
-        [self addChild:heart];
+        self.heart = [NSKeyedUnarchiver unarchiveObjectWithFile:emitterPath];
+        self.heart.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
+        self.heart.name = @"particleHeart";
+        self.heart.targetNode = self.scene;
+        [self addChild:self.heart];
     }
     return self;
 }
+
+- (void)pauseHearts {
+    NSLog(@"Pause hearts getting called!");
+}
+
+- (void)runHearts {
+    NSLog(@"Run hearts getting called!");
+}
+
+
 
 @end

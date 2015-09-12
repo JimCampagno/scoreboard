@@ -11,5 +11,7 @@
 
 @interface SBHeartScene : SKScene
 
+- (void)pauseHearts;
+- (void)runHearts;
 
 @end
