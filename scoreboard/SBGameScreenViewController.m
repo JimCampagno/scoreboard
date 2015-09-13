@@ -179,6 +179,8 @@
         if ([currentUser didAttributesChangeWithUserOnServer:userOnServer]) {
             [currentUser updateAttributesToMatchUser:userOnServer];
             [self.playerScorecards[i] updateScorecardWithInfoFromUser:self.room.users[i]];
+            
+            
         }
     }
 }

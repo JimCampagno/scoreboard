@@ -44,9 +44,6 @@
 }
 
 - (void)commonInit {
-    
-    
-    
     _customSBConstraints = [[NSMutableArray alloc] init];
     
     [self setupHealthAndVictoryPoints];
@@ -172,7 +169,7 @@
     
     
     
-    
+    [self.heartScene runHearts];
     
     
     self.monsterImage.image = user.monsterImage;

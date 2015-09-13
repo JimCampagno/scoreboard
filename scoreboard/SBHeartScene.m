@@ -31,10 +31,17 @@ static NSString* const kHeartParticle = @"HeartParticle";
 }
 
 - (void)pauseHearts {
+    [self.heart setParticleBirthRate:0.0f];
     NSLog(@"Pause hearts getting called!");
 }
 
 - (void)runHearts {
+    
+    [self removeAllChildren];
+    [self addChild:self.heart];
+    
+    
+//    [self.heart setParticleBirthRate:5.0f];
     NSLog(@"Run hearts getting called!");
 }
 
