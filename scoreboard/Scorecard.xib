@@ -12,6 +12,7 @@
                 <outlet property="monsterImage" destination="9eV-Dq-2HO" id="5nz-1n-2H7"/>
                 <outlet property="monsterName" destination="SkQ-Nh-BIf" id="RMS-Wj-YRZ"/>
                 <outlet property="playerName" destination="rfw-sK-C8Z" id="jId-ng-anv"/>
+                <outlet property="starParticleView" destination="BGY-hD-Sgh" id="2zr-qO-XkY"/>
                 <outlet property="topPicker" destination="Dga-aE-agV" id="LbN-XT-J5m"/>
                 <outlet property="view" destination="iN0-l3-epB" id="EHk-ce-SwH"/>
             </connections>
@@ -107,6 +108,14 @@
                         <constraint firstAttribute="width" constant="60" id="RCz-7x-KXJ"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGY-hD-Sgh" userLabel="starParticle" customClass="SKView">
+                    <rect key="frame" x="240.5" y="51.5" width="60" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="Ffd-l4-Olb"/>
+                        <constraint firstAttribute="height" constant="60" id="ZxL-mS-SbS"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.10980392156862745" green="0.14509803921568629" blue="0.21568627450980393" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
             <constraints>
@@ -114,16 +123,18 @@
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="3HR-cv-7tC" userLabel="Right View - Bottom"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="top" secondItem="SkQ-Nh-BIf" secondAttribute="bottom" constant="8" symbolic="YES" id="5V1-a9-Feu" userLabel="Monster Image - Top"/>
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="6rn-O6-Q3O" userLabel="Right View - Trailing"/>
-                <constraint firstItem="D71-Gh-ZqA" firstAttribute="centerX" secondItem="9mj-Ng-cHE" secondAttribute="centerX" multiplier="0.75" constant="10" id="AZw-zb-Dv7"/>
+                <constraint firstItem="D71-Gh-ZqA" firstAttribute="centerX" secondItem="9mj-Ng-cHE" secondAttribute="centerX" multiplier="0.75" constant="10" id="AZw-zb-Dv7" userLabel="Heart Particle - Center X"/>
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BK2-2m-ymQ" userLabel="Monster Name - Top"/>
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FWW-2O-jvI" userLabel="Right View - Top"/>
+                <constraint firstItem="BGY-hD-Sgh" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" constant="0.5" id="Glg-KR-jnf" userLabel="Star Particle - Center Y"/>
                 <constraint firstItem="rfw-sK-C8Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QQq-NE-I3b" userLabel="Player Name - Leading"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UQq-Hb-hSd" userLabel="Monster Image - Leading"/>
                 <constraint firstItem="rfw-sK-C8Z" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="VSC-vz-fDr" userLabel="Player Name - Bottom"/>
                 <constraint firstItem="rfw-sK-C8Z" firstAttribute="width" relation="greaterThanOrEqual" secondItem="9eV-Dq-2HO" secondAttribute="width" id="mvj-t4-Pgs" userLabel="Player Name - Width"/>
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ozw-gs-JoA" userLabel="Monster Name - Leading"/>
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="width" relation="greaterThanOrEqual" secondItem="9eV-Dq-2HO" secondAttribute="width" id="p8L-f9-hCl" userLabel="Monster Name - Width"/>
-                <constraint firstItem="D71-Gh-ZqA" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="qiZ-C7-pQt"/>
+                <constraint firstItem="D71-Gh-ZqA" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="qiZ-C7-pQt" userLabel="Heart Particle - Center Y"/>
+                <constraint firstItem="BGY-hD-Sgh" firstAttribute="centerX" secondItem="9mj-Ng-cHE" secondAttribute="centerX" multiplier="0.75" constant="10" id="r50-Ax-Tu0" userLabel="Star Particle - Center X"/>
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="leading" secondItem="9eV-Dq-2HO" secondAttribute="trailing" id="td4-PL-0Xm" userLabel="Right View - Leading"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" multiplier="0.6" id="wTY-d7-h3X" userLabel="Monster Image - Trailing"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="bottom" secondItem="rfw-sK-C8Z" secondAttribute="top" constant="-8" id="ygI-eR-Ywh" userLabel="Monster Image - Bottom"/>

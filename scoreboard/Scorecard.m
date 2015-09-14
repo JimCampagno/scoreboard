@@ -8,17 +8,20 @@
 
 #import "Scorecard.h"
 #import "SBHeartScene.h"
+#import "SBStarScene.h"
 
 @interface Scorecard ()
 
 @property (nonatomic, strong) SBHeartScene *heartScene;
-@property (nonatomic, strong) NSTimer *heartTimer;
-@property (nonatomic) BOOL heartPaused;
+@property (nonatomic, strong) SBStarScene *starScene;
 @property (nonatomic) BOOL firstTimeThrough;
 
 @end
 
+
 static NSTimeInterval const kLengthOfHeartScene = 0.7;
+static NSTimeInterval const kLengthOfStarScene = 0.7;
+
 
 
 @implementation Scorecard
@@ -58,6 +61,12 @@ static NSTimeInterval const kLengthOfHeartScene = 0.7;
     self.heartScene = [SBHeartScene sceneWithSize:self.heartParticleView.bounds.size];
     self.heartScene.scaleMode = SKSceneScaleModeAspectFill;
     [self.heartParticleView presentScene:self.heartScene];
+    
+    self.starParticleView.allowsTransparency = YES;
+    self.starParticleView.backgroundColor = [UIColor clearColor];
+    self.starScene = [SBStarScene sceneWithSize:self.starParticleView.bounds.size];
+    self.starScene.scaleMode = SKSceneScaleModeAspectFill;
+    [self.starParticleView presentScene:self.starScene];
 }
 
 - (void)updateConstraints {
@@ -150,18 +159,22 @@ static NSTimeInterval const kLengthOfHeartScene = 0.7;
     }
     
     if ((currentVictoryFromPickerView != [user.vp integerValue]) && !self.firstTimeThrough) {
-        
-        
-        
-        
-        
+        [self.starScene runStars];
+        [NSTimer scheduledTimerWithTimeInterval:kLengthOfStarScene
+                                         target:self
+                                       selector:@selector(pauseStarTimer)
+                                       userInfo:nil
+                                        repeats:NO];
     }
     self.firstTimeThrough = NO;
-
 }
 
 - (void)pauseHeartTimer {
     [self.heartScene pauseHearts];
+}
+
+- (void)pauseStarTimer {
+    [self.starScene pauseStars];
 }
 
 @end

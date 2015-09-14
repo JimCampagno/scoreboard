@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *monsterImage;
 
 @property (weak, nonatomic) IBOutlet SKView *heartParticleView;
+@property (weak, nonatomic) IBOutlet SKView *starParticleView;
 
 
 //topPicker is Victory Points

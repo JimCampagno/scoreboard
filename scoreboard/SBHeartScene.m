@@ -9,11 +9,14 @@
 #import "SBHeartScene.h"
 
 @interface SBHeartScene ()
+
 @property (nonatomic, strong) SKEmitterNode *heart;
+
 @end
 
+
 static NSString* const kHeartParticle = @"HeartParticle";
-static CGFloat const kParticleBirthRate = 15.0;
+static CGFloat const kHeartParticleBirthRate = 15.0;
 
 
 @implementation SBHeartScene
@@ -37,9 +40,7 @@ static CGFloat const kParticleBirthRate = 15.0;
 }
 
 - (void)runHearts {
-    [self.heart setParticleBirthRate:kParticleBirthRate];
+    [self.heart setParticleBirthRate:kHeartParticleBirthRate];
 }
-
-
 
 @end

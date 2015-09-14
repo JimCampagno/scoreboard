@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B4A50521BA65E5A003893D8 /* SBStarScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A50511BA65E5A003893D8 /* SBStarScene.m */; };
+		5B4A50541BA65E9B003893D8 /* StarParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B4A50531BA65E9B003893D8 /* StarParticle.sks */; };
 		5B83D7371B65C56E0003CCAC /* SBGameScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B83D7361B65C56E0003CCAC /* SBGameScreenViewController.m */; };
 		5BB2D0C01B83C2C100516593 /* SBChangeMonsterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2D0BF1B83C2C100516593 /* SBChangeMonsterViewController.m */; };
 		5BCAF1121B2A70A60096C88F /* Scorecard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCAF1111B2A70A60096C88F /* Scorecard.xib */; };
@@ -43,6 +45,9 @@
 /* Begin PBXFileReference section */
 		222343B35E078E5138A9B551 /* libPods-scoreboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-scoreboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A1C5B47474595727EFC8D4B /* Pods-scoreboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scoreboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scoreboard/Pods-scoreboard.debug.xcconfig"; sourceTree = "<group>"; };
+		5B4A50501BA65E5A003893D8 /* SBStarScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBStarScene.h; sourceTree = "<group>"; };
+		5B4A50511BA65E5A003893D8 /* SBStarScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBStarScene.m; sourceTree = "<group>"; };
+		5B4A50531BA65E9B003893D8 /* StarParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarParticle.sks; sourceTree = "<group>"; };
 		5B83D7361B65C56E0003CCAC /* SBGameScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameScreenViewController.m; sourceTree = "<group>"; };
 		5BB2D0BE1B83C2C100516593 /* SBChangeMonsterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBChangeMonsterViewController.h; sourceTree = "<group>"; };
 		5BB2D0BF1B83C2C100516593 /* SBChangeMonsterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBChangeMonsterViewController.m; sourceTree = "<group>"; };
@@ -106,7 +111,10 @@
 			children = (
 				5BCE28BD1BA4B06B001CD3F9 /* SBHeartScene.h */,
 				5BCE28BE1BA4B06B001CD3F9 /* SBHeartScene.m */,
+				5B4A50501BA65E5A003893D8 /* SBStarScene.h */,
+				5B4A50511BA65E5A003893D8 /* SBStarScene.m */,
 				5BCE28B91BA480E4001CD3F9 /* HeartParticle.sks */,
+				5B4A50531BA65E9B003893D8 /* StarParticle.sks */,
 				5BCE28BA1BA480E4001CD3F9 /* spark.png */,
 			);
 			name = Scenes;
@@ -333,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BCE28BB1BA480E4001CD3F9 /* HeartParticle.sks in Resources */,
+				5B4A50541BA65E9B003893D8 /* StarParticle.sks in Resources */,
 				5BCE28BC1BA480E4001CD3F9 /* spark.png in Resources */,
 				5BCAF1121B2A70A60096C88F /* Scorecard.xib in Resources */,
 				7D45F38D1B126AA30053F47F /* Main.storyboard in Resources */,
@@ -389,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BCE28BF1BA4B06B001CD3F9 /* SBHeartScene.m in Sources */,
+				5B4A50521BA65E5A003893D8 /* SBStarScene.m in Sources */,
 				7D1663111B13B13E002A2BF0 /* SBRoom.m in Sources */,
 				7D45F3871B126AA30053F47F /* AppDelegate.m in Sources */,
 				7D45F3AC1B1271120053F47F /* SBSetupViewController.m in Sources */,
