@@ -18,7 +18,7 @@
 
 @end
 
-static NSTimeInterval const kLengthOfHeartScene = 0.5;
+static NSTimeInterval const kLengthOfHeartScene = 0.7;
 
 
 @implementation Scorecard
@@ -133,11 +133,12 @@ static NSTimeInterval const kLengthOfHeartScene = 0.5;
     self.monsterImage.image = user.monsterImage;
     self.playerName.text = user.name;
     self.monsterName.text = user.monster;
-    [self.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
-    [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
 
     NSInteger currentHealthFromPickerView = [self.bottomPicker selectedRowInComponent:0];
     NSInteger currentVictoryFromPickerView = [self.topPicker selectedRowInComponent:0];
+    
+    [self.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
+    [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
     
     if ((currentHealthFromPickerView != [user.hp integerValue]) && !self.firstTimeThrough) {
         [self.heartScene runHearts];

@@ -178,10 +178,7 @@
         
         if ([currentUser didAttributesChangeWithUserOnServer:userOnServer]) {
             [currentUser updateAttributesToMatchUser:userOnServer];
-            NSLog(@"================================================ATTRIBUTES CHANGE===================");
             [self.playerScorecards[i] updateScorecardWithInfoFromUser:self.room.users[i]];
-            
-            
         }
     }
 }
@@ -191,7 +188,6 @@
     for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
         SBUser *user = self.room.users[i];
         Scorecard *currentScorecard = self.playerScorecards[i];
-        NSLog(@"================================================INITIAL SETUP OF SCORECARDD===================");
 
         [currentScorecard updateScorecardWithInfoFromUser:user];
     }
