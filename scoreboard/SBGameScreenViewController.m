@@ -55,25 +55,25 @@
     [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
     [self setupGesture];
-    [self generateTestData];
+//    [self generateTestData];
 }
 
-- (void)generateTestData {
-    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
-    for (NSInteger i = 0 ; i < 6 ; i++) {
-        
-        
-        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
-                                                 monsterName:monsterNames[i]
-                                                          hp:@8
-                                                          vp:@9];
-        
-        [self.room.users addObject:currentPerson];
-        
-    }
-    
-    [self setupScorecardWithUsersInfo];
-}
+//- (void)generateTestData {
+//    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
+//    for (NSInteger i = 0 ; i < 6 ; i++) {
+//        
+//        
+//        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
+//                                                 monsterName:monsterNames[i]
+//                                                          hp:@8
+//                                                          vp:@9];
+//        
+//        [self.room.users addObject:currentPerson];
+//        
+//    }
+//    
+//    [self setupScorecardWithUsersInfo];
+//}
 
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
     NSDictionary *monsterNameChange = @{@"monster": name};
@@ -178,6 +178,7 @@
         
         if ([currentUser didAttributesChangeWithUserOnServer:userOnServer]) {
             [currentUser updateAttributesToMatchUser:userOnServer];
+            NSLog(@"================================================ATTRIBUTES CHANGE===================");
             [self.playerScorecards[i] updateScorecardWithInfoFromUser:self.room.users[i]];
             
             
@@ -190,6 +191,8 @@
     for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
         SBUser *user = self.room.users[i];
         Scorecard *currentScorecard = self.playerScorecards[i];
+        NSLog(@"================================================INITIAL SETUP OF SCORECARDD===================");
+
         [currentScorecard updateScorecardWithInfoFromUser:user];
     }
     

@@ -13,6 +13,7 @@
 @end
 
 static NSString* const kHeartParticle = @"HeartParticle";
+static CGFloat const kParticleBirthRate = 15.0;
 
 
 @implementation SBHeartScene
@@ -25,6 +26,7 @@ static NSString* const kHeartParticle = @"HeartParticle";
         self.heart.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
         self.heart.name = @"particleHeart";
         self.heart.targetNode = self.scene;
+        [self.heart setParticleBirthRate:0.0f];
         [self addChild:self.heart];
     }
     return self;
@@ -32,17 +34,10 @@ static NSString* const kHeartParticle = @"HeartParticle";
 
 - (void)pauseHearts {
     [self.heart setParticleBirthRate:0.0f];
-    NSLog(@"Pause hearts getting called!");
 }
 
 - (void)runHearts {
-    
-    [self removeAllChildren];
-    [self addChild:self.heart];
-    
-    
-//    [self.heart setParticleBirthRate:5.0f];
-    NSLog(@"Run hearts getting called!");
+    [self.heart setParticleBirthRate:kParticleBirthRate];
 }
 
 
