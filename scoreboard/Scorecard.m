@@ -61,12 +61,16 @@ static NSTimeInterval const kLengthOfStarScene = 0.7;
     self.heartScene = [SBHeartScene sceneWithSize:self.heartParticleView.bounds.size];
     self.heartScene.scaleMode = SKSceneScaleModeAspectFill;
     [self.heartParticleView presentScene:self.heartScene];
+    [self.heartScene runHearts];
+    [self.heartScene pauseHearts];
     
     self.starParticleView.allowsTransparency = YES;
     self.starParticleView.backgroundColor = [UIColor clearColor];
     self.starScene = [SBStarScene sceneWithSize:self.starParticleView.bounds.size];
     self.starScene.scaleMode = SKSceneScaleModeAspectFill;
     [self.starParticleView presentScene:self.starScene];
+    [self.starScene runStars];
+    [self.starScene pauseStars];
 }
 
 - (void)updateConstraints {

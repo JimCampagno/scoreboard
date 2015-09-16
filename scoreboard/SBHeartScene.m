@@ -29,7 +29,6 @@ static CGFloat const kHeartParticleBirthRate = 15.0;
         self.heart.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
         self.heart.name = @"particleHeart";
         self.heart.targetNode = self.scene;
-        [self.heart setParticleBirthRate:0.0f];
         [self addChild:self.heart];
     }
     return self;

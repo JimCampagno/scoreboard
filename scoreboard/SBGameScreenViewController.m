@@ -116,9 +116,7 @@
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
         
-        
-        
-        
+
     }
     
     
@@ -182,7 +180,6 @@
         }
     }
 }
-
 
 - (void)setupScorecardWithUsersInfo {
     for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
