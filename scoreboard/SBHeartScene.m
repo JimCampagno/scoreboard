@@ -10,13 +10,12 @@
 
 @interface SBHeartScene ()
 
-@property (nonatomic, strong) SKEmitterNode *heart;
 
 @end
 
 
 static NSString* const kHeartParticle = @"HeartParticle";
-static CGFloat const kHeartParticleBirthRate = 15.0;
+static const CGFloat kHeartParticleBirthRate = 15.0;
 
 
 @implementation SBHeartScene

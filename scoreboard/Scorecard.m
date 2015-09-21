@@ -19,8 +19,8 @@
 @end
 
 
-static NSTimeInterval const kLengthOfHeartScene = 0.7;
-static NSTimeInterval const kLengthOfStarScene = 0.7;
+static const NSTimeInterval kLengthOfHeartScene = 0.7;
+static const NSTimeInterval kLengthOfStarScene = 0.7;
 
 
 

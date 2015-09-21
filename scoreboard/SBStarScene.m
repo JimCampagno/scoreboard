@@ -10,7 +10,6 @@
 
 @interface SBStarScene ()
 
-@property (nonatomic, strong) SKEmitterNode *star;
 
 @end
 

@@ -10,6 +10,7 @@
 #import "Scorecard.h"
 #import "SBUser.h"
 #import "SBHeartScene.h"
+#import "SBStarScene.h"
 
 @interface SBGameScreenViewController ()
 
@@ -22,6 +23,11 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *healthPoints;
 @property (strong, nonatomic) NSMutableArray *vpPointsOnPicker;
 @property (strong, nonatomic) NSMutableArray *hpPointsOnPicker;
+@property (weak, nonatomic) IBOutlet SKView *mainHeartParticleView;
+@property (weak, nonatomic) IBOutlet SKView *mainStarParticleView;
+@property (nonatomic, strong) SBHeartScene *mainHeartScene;
+@property (nonatomic, strong) SBStarScene *mainStarScene;
+
 
 //All other player cards (including main)
 @property (weak, nonatomic) IBOutlet Scorecard *player1;
@@ -43,6 +49,9 @@
 
 @end
 
+static const NSTimeInterval kLengthOfMainHeartScene = 0.7;
+static const NSTimeInterval kLengthOfMainStarScene = 0.7;
+
 @implementation SBGameScreenViewController
 
 
@@ -55,25 +64,26 @@
     [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
     [self setupGesture];
-//    [self generateTestData];
+    [self generateTestData];
 }
 
-//- (void)generateTestData {
-//    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
-//    for (NSInteger i = 0 ; i < 6 ; i++) {
-//        
-//        
-//        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
-//                                                 monsterName:monsterNames[i]
-//                                                          hp:@8
-//                                                          vp:@9];
-//        
-//        [self.room.users addObject:currentPerson];
-//        
-//    }
-//    
-//    [self setupScorecardWithUsersInfo];
-//}
+- (void)generateTestData {
+    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
+    for (NSInteger i = 0 ; i < 6 ; i++) {
+        
+        
+        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
+                                                 monsterName:monsterNames[i]
+                                                          hp:@8
+                                                          vp:@9];
+        
+        [self.room.users addObject:currentPerson];
+        
+    }
+    
+    self.playerName.text = @"JIMBO";
+    [self setupScorecardWithUsersInfo];
+}
 
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
     NSDictionary *monsterNameChange = @{@"monster": name};
@@ -145,6 +155,32 @@
     self.monsterName.text = self.randomMonsterName;
     self.playerName.text = self.currentPlayerName;
     [self.healthPoints selectRow:10 inComponent:0 animated:YES];
+    
+    self.mainHeartParticleView.allowsTransparency = YES;
+    self.mainHeartParticleView.backgroundColor = [UIColor clearColor];
+    self.mainHeartScene = [SBHeartScene sceneWithSize:self.mainHeartParticleView.bounds.size];
+    self.mainHeartScene.scaleMode = SKSceneScaleModeAspectFill;
+    [self.mainHeartParticleView presentScene:self.mainHeartScene];
+    [self.mainHeartScene runHearts];
+    [self.mainHeartScene pauseHearts];
+    [self.mainHeartScene.heart setParticleSize:CGSizeMake(300, 300)];
+    [self.mainHeartScene.heart setParticlePositionRange:CGVectorMake(50, 50)];
+
+//    [self.mainHeartScene.heart setParticleScale:0.09];
+//    [self.mainHeartScene.heart setParticleScaleRange:0.1];
+    
+    self.mainStarParticleView.allowsTransparency = YES;
+    self.mainStarParticleView.backgroundColor = [UIColor clearColor];
+    self.mainStarScene = [SBStarScene sceneWithSize:self.mainStarParticleView.bounds.size];
+    self.mainStarScene.scaleMode = SKSceneScaleModeAspectFill;
+    [self.mainStarParticleView presentScene:self.mainStarScene];
+    [self.mainStarScene runStars];
+    [self.mainStarScene pauseStars];
+    [self.mainStarScene.star setParticleSize:CGSizeMake(300, 300)];
+    [self.mainStarScene.star setParticlePositionRange:CGVectorMake(50, 50)];
+
+//    [self.mainStarScene.star setParticleScale:0.09];
+//    [self.mainStarScene.star setParticleScaleRange:0.1];
 }
 
 
@@ -296,10 +332,21 @@ numberOfRowsInComponent:(NSInteger)component {
         
         NSDictionary *victoryPointChange = @{ @"vp": [@(row) stringValue]};
         
+        [self.mainStarScene runStars];
+        [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainStarScene
+                                         target:self
+                                       selector:@selector(pauseStarTimer)
+                                       userInfo:nil
+                                        repeats:NO];
+
+        
+        
         [self.currentPlayerRef updateChildValues:victoryPointChange
                              withCompletionBlock:^(NSError *error, Firebase *ref) {
                                  
+                                 
                                  if (error) {
+                                     
                                      
                                      
                                  } else {
@@ -311,18 +358,40 @@ numberOfRowsInComponent:(NSInteger)component {
         
         NSDictionary *healthPointChange = @{ @"hp": [@(row) stringValue]};
         
+    
+        [self.mainHeartScene runHearts];
+        [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainHeartScene
+                                         target:self
+                                       selector:@selector(pauseHeartTimer)
+                                       userInfo:nil
+                                        repeats:NO];
+        
         [self.currentPlayerRef updateChildValues:healthPointChange
                              withCompletionBlock:^(NSError *error, Firebase *ref) {
                                  
+                                 
                                  if (error) {
+                                     
+
+                        
                                      
                                      
                                  } else {
+                                     
                                      
                                  }
                              }];
         
     }
 }
+
+- (void)pauseHeartTimer {
+    [self.mainHeartScene pauseHearts];
+}
+
+- (void)pauseStarTimer {
+    [self.mainStarScene pauseStars];
+}
+
 
 @end

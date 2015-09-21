@@ -10,8 +10,9 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface SBHeartScene : SKScene
+@property (nonatomic, strong) SKEmitterNode *heart;
+
 
 - (void)pauseHearts;
 - (void)runHearts;
-
 @end

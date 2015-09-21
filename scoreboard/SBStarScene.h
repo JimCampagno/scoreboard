@@ -10,8 +10,9 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface SBStarScene : SKScene
+@property (nonatomic, strong) SKEmitterNode *star;
+
 
 - (void)pauseStars;
 - (void)runStars;
-
 @end
