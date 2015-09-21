@@ -1,0 +1,2 @@
+PODS_SCOREBOARD_FIREBASE_FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/Firebase"
+PODS_SCOREBOARD_FIREBASE_OTHER_LDFLAGS = -l"c++" -l"icucore" -framework "CFNetwork" -framework "Firebase" -framework "Security" -framework "SystemConfiguration"

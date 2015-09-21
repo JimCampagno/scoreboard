@@ -26,6 +26,7 @@
                                  @"hp": user.hp,
                                  @"vp": user.vp } ];
         
+        
         [[currentData childDataByAppendingPath:randomNumber] setValue:newRoom];
         
         return [FTransactionResult successWithValue:currentData];
