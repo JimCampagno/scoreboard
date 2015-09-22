@@ -12,6 +12,10 @@
 #import "SBHeartScene.h"
 #import "SBStarScene.h"
 
+#import <Masonry.h>
+
+
+
 @interface SBGameScreenViewController ()
 
 //Main Player Card
@@ -64,6 +68,7 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
     [self setupGesture];
+    [self setupSettingsButton];
 //    [self generateTestData];
 }
 
@@ -96,22 +101,10 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
                              
                              if (error) {
                                  
-                                 
                              } else {
                                  
                              }
                          }];
-    NSLog(@"WE ARE BACK IN THE OTHER VIEW CONTROLLER, THE NAME IS %@", name);
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    NSLog(@"\n\n\n** JUST CALLED viewDidDisappear\n\n\n");
-    [super viewDidDisappear:animated];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"\n\n????????? viewWillAppear\n\n???????");
-    [super viewWillAppear:animated];
 }
 
 - (void)setupGesture {
@@ -124,40 +117,18 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 }
 
 - (void)handleHoldGesture:(UILongPressGestureRecognizer *)gestureRecognizer {
-    
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        
-        //        self.mainMonsterView.hidden = YES;
         [self performSegueWithIdentifier:@"changeMonster" sender:self];
-        
-        
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
-        
-
     }
-    
-    
-    
-}
-
-
-
-
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    
-    
-    
 }
 
 - (void)setupCurrentPlayerReferenceToFirebase {
-    
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
-    
+    [self.currentPlayerRef onDisconnectRemoveValue];
 }
 
 - (void)setupMainPlayerScorecard {
@@ -231,7 +202,6 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
         SBUser *user = self.room.users[i];
         Scorecard *currentScorecard = self.playerScorecards[i];
-
         [currentScorecard updateScorecardWithInfoFromUser:user];
     }
     
@@ -248,7 +218,6 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 }
 
 - (NSArray *)playerScorecards {
-    
     if (!_playerScorecards) {
         _playerScorecards = @[self.player1, self.player2, self.player3, self.player4, self.player5, self.player6];
     }
@@ -258,6 +227,26 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 - (IBAction)smallButton:(id)sender {
     
     //settings?
+}
+
+- (void)setupSettingsButton {
+    UIButton *testButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [testButton setImage:[UIImage imageNamed:@"questionBlock"]
+                forState:UIControlStateNormal];
+    [testButton addTarget:self
+                   action:@selector(settingsTapped:)
+         forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.mainMonsterView addSubview:testButton];
+
+    [testButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.equalTo(self.mainMonsterView).with.offset(8);
+        make.height.and.width.equalTo(@18);
+    }];
+}
+
+- (void)settingsTapped:(UIButton *)sender {
+    NSLog(@"Settings have been tapped: %@", sender);
 }
 
 
@@ -271,13 +260,11 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    
     return 1;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component {
-    
     NSMutableArray *hp = [[NSMutableArray alloc] init];
     NSMutableArray *vp = [[NSMutableArray alloc] init];
     
@@ -295,11 +282,8 @@ numberOfRowsInComponent:(NSInteger)component {
     
     
     if ([pickerView isEqual:_victoryPoints]) {
-        
         return [vp count];
-        
     } else {
-        
         return [hp count];
     }
 }
