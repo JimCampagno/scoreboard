@@ -15,8 +15,6 @@
 #import "SBGameScreenViewController.h"
 
 @interface SBSetupViewController ()
-
-
 @property (weak, nonatomic) IBOutlet UIView *displayJoinGameDigits;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *joinGameNumbers;
 @property (weak, nonatomic) IBOutlet UITextField *enterName;
@@ -38,14 +36,11 @@
 @property (nonatomic) CGRect frameOfOriginalJoinButton;
 @property (nonatomic) CGRect frameOfOriginalCreateButton;
 
-
-
-
-
 - (IBAction)cancel:(id)sender;
-
-
 @end
+
+static const NSInteger kMaxNumberOfPlayers = 6;
+
 
 @implementation SBSetupViewController
 
@@ -140,13 +135,10 @@
         
         if ([snapshot exists]) {
             
-            //Max number of players in a game is 6
-            if (snapshot.childrenCount == 6) {
+            if (snapshot.childrenCount == kMaxNumberOfPlayers) {
                 
                 [self displayGameIsFullAlert];
-                
             } else {
-                
                 [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
                     
                     if ([currentData hasChildren]) {
@@ -186,16 +178,6 @@
 }
 
 - (IBAction)createGame:(id)sender {
-    
-    //    [UIView animateWithDuration:0.3
-    //                     animations:^{
-    //                         [self dismissKeyboard];
-    //                     }
-    //                     completion:^ (BOOL finished) {
-    //                         [self animateCreateButtonDown];
-    //                         [self animateJoinButtonDown];
-    //                     }];
-    
     SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
     
     [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef
@@ -203,19 +185,19 @@
                                withCompletionBlock:^(BOOL success, NSString *digits) {
                                    
                                    if (success) {
-                                       
                                        self.digitsToPassForward = digits;
+                                       self.IDOfCurrentUser = @"0";
+                                       self.randomMonsterName = currentUser.monster;
+                                       self.currentPlayerName = self.enterName.text;
                                        [self performSegueWithIdentifier:@"CreateGameSegue" sender:sender];
                                    }
                                    
                                } withFailureBlock:^(NSError *error) {
-                                   
                                    NSLog(@"Error: %@", error.localizedDescription);
                                }];
 }
 
 - (IBAction)joinGame:(id)sender {
-    
     _isInJoinScreenMode = YES;
     
     [UIView animateWithDuration:0.3
@@ -226,20 +208,14 @@
                          [self animateCreateButtonDown];
                          [self animateJoinButtonDown];
                      }];
-    
-    
-    
 }
 
 - (NSMutableArray *)holdingTheDigits {
-    
     if (!_holdingTheDigits) {
         _holdingTheDigits = [[NSMutableArray alloc] init];
     }
     return _holdingTheDigits;
 }
-
-
 
 - (NSString *)createIDOfCurrentUserWithCurrentData:(FMutableData *)currentData {
     NSDictionary *data = currentData.value;
@@ -265,7 +241,6 @@
         return [@(largestID) stringValue];
     }
 }
-
 
 - (void)animateCreateButtonDown {
     [UIView animateWithDuration:0.3
@@ -323,12 +298,7 @@
     [self bringButtonsBackAfterCancelTapped];
 }
 
-
-
-
 - (void)displayGameDoesntExistAlert {
-    
-    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game doesn't exist"
                                                                    message:@"Please confirm that you're entering in the correct number."
                                                             preferredStyle:UIAlertControllerStyleAlert];

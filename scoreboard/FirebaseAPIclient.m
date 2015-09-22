@@ -16,6 +16,8 @@
                 withCompletionBlock:(void (^)(BOOL success, NSString *digits))block
                    withFailureBlock:(void (^)(NSError *error))failureBlock {
     
+    
+    
     NSString *randomNumber = [SBConstants randomRoomNumber];
     
     
@@ -36,9 +38,13 @@
         
         if (committed) {
             
+            NSLog(@"We've been commited.\n");
+            
             block(YES, randomNumber);
             
         } else {
+            
+            NSLog(@"We're a FAILURE!\n");
             
             failureBlock(error);
         }

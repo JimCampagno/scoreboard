@@ -104,6 +104,16 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     NSLog(@"WE ARE BACK IN THE OTHER VIEW CONTROLLER, THE NAME IS %@", name);
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    NSLog(@"\n\n\n** JUST CALLED viewDidDisappear\n\n\n");
+    [super viewDidDisappear:animated];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"\n\n????????? viewWillAppear\n\n???????");
+    [super viewWillAppear:animated];
+}
+
 - (void)setupGesture {
     
     self.monsterImage.userInteractionEnabled = YES;
