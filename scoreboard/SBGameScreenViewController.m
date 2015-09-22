@@ -47,10 +47,8 @@
 
 @property (strong, nonatomic) Firebase *currentPlayerRef;
 
-- (IBAction)smallButton:(id)sender;
 
 - (void)setupMainPlayerScorecard;
-
 @end
 
 static const NSTimeInterval kLengthOfMainHeartScene = 0.7;
@@ -224,29 +222,44 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     return _playerScorecards;
 }
 
-- (IBAction)smallButton:(id)sender {
-    
-    //settings?
-}
+
 
 - (void)setupSettingsButton {
-    UIButton *testButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [testButton setImage:[UIImage imageNamed:@"questionBlock"]
-                forState:UIControlStateNormal];
-    [testButton addTarget:self
-                   action:@selector(settingsTapped:)
-         forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.mainMonsterView addSubview:testButton];
+    UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings"]
+                              forState:UIControlStateNormal];
 
-    [testButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [settingsButton addTarget:self
+                       action:@selector(settingsTapped:)
+             forControlEvents:UIControlEventTouchUpInside];
+
+    [self.mainMonsterView addSubview:settingsButton];
+
+    [settingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.equalTo(self.mainMonsterView).with.offset(8);
         make.height.and.width.equalTo(@18);
     }];
 }
 
 - (void)settingsTapped:(UIButton *)sender {
-    NSLog(@"Settings have been tapped: %@", sender);
+    
+    
+    
+    
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 
