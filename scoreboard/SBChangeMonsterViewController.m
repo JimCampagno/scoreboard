@@ -67,16 +67,16 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 #pragma mark - Setting up views
 
 - (void)setupBlurredViewToContainMonsters {
+    self.view.backgroundColor = [UIColor colorWithRed:0.26 green:0.43 blue:0.56 alpha:0.75];
     self.changeMonsterView = [[UIView alloc] init];
-    self.changeMonsterView.backgroundColor = [UIColor clearColor];
-//    self.changeMonsterView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.6f];
+    self.changeMonsterView.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     [self.view addSubview:self.changeMonsterView];
     
     [self.changeMonsterView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.view).multipliedBy(SBChangeMVCWidthMultiplier);
         make.height.equalTo(self.view).multipliedBy(SBChangeMVCHeightMultiplier);
         make.centerX.equalTo(self.view);
-        make.centerY.equalTo(self.view).multipliedBy(0.9);
+        make.centerY.equalTo(self.view);
     }];
 }
 
@@ -120,18 +120,56 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 - (void)setupLabel {
     UILabel *monsterLabel = [UILabel new];
     monsterLabel.textAlignment = NSTextAlignmentCenter;
-    monsterLabel.textColor = [UIColor blackColor];
     monsterLabel.text = @"CHOOSE YOUR MONSTER";
-    monsterLabel.font=[UIFont fontWithName:@"Thonburi" size:50];
+    [monsterLabel setFont:[UIFont systemFontOfSize:36]];
+    monsterLabel.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+
     monsterLabel.adjustsFontSizeToFitWidth = YES;
+    
     
     [self.view addSubview:monsterLabel];
     
     [monsterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.changeMonsterView);
-        make.bottom.equalTo(self.changeMonsterView.mas_top);
+        make.bottom.equalTo(self.changeMonsterView.mas_top).with.offset(-2);
         make.centerX.equalTo(self.changeMonsterView);
     }];
+    
+    UIView *bottomContainerView = [UIView new];
+    bottomContainerView.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    [self.view addSubview:bottomContainerView];
+    
+    [bottomContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.changeMonsterView.mas_bottom).with.offset(2);
+        make.width.equalTo(self.changeMonsterView);
+        make.centerX.equalTo(self.changeMonsterView);
+        make.height.equalTo(@40);
+    }];
+    
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    
+    [cancelButton addTarget:self
+                      action:@selector(cancelTapped:)
+            forControlEvents:UIControlEventTouchUpInside];
+    
+    cancelButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
+    [cancelButton setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
+    
+    
+    
+    [cancelButton setTitle:@"LEAVE GAME"
+                   forState:UIControlStateNormal];
+    
+    [self.view addSubview:cancelButton];
+    
+    [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(bottomContainerView);
+        make.centerX.equalTo(self.changeMonsterView).multipliedBy(.75);
+    }];
+    
+    
+    
+    
 }
 
 
@@ -202,6 +240,14 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         _monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
     }
     return _monsterNames;
+}
+
+#pragma mark - Action Methods
+
+- (void)cancelTapped:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
 }
 
 @end

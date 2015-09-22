@@ -67,26 +67,26 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self setupMainPlayerScorecard];
     [self setupGesture];
     [self setupSettingsButton];
-    //    [self generateTestData];
+    [self generateTestData];
 }
 
-//- (void)generateTestData {
-//    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
-//    for (NSInteger i = 0 ; i < 6 ; i++) {
-//
-//
-//        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
-//                                                 monsterName:monsterNames[i]
-//                                                          hp:@8
-//                                                          vp:@9];
-//
-//        [self.room.users addObject:currentPerson];
-//
-//    }
-//
-//    self.playerName.text = @"JIMBO";
-//    [self setupScorecardWithUsersInfo];
-//}
+- (void)generateTestData {
+    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
+    for (NSInteger i = 0 ; i < 6 ; i++) {
+        
+        
+        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
+                                                 monsterName:monsterNames[i]
+                                                          hp:@8
+                                                          vp:@9];
+        
+        [self.room.users addObject:currentPerson];
+        
+    }
+    
+    self.playerName.text = @"JIMBO";
+    [self setupScorecardWithUsersInfo];
+}
 
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
     NSDictionary *monsterNameChange = @{@"monster": name};
@@ -244,10 +244,7 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 }
 
 - (void)settingsTapped:(UIButton *)sender {
-    
-    
-    
-    
+    [self performSegueWithIdentifier:@"changeMonster" sender:self];
 }
 
 #pragma mark - Main Scorecard Methods
@@ -312,7 +309,7 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row
        inComponent:(NSInteger)component {
-
+    
     if ([pickerView isEqual:_victoryPoints]) {
         if ([self.currentPlayer.vp integerValue] != row) {
             [self runTheStarParticles];
