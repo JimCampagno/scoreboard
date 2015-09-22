@@ -25,11 +25,9 @@
 }
 
 + (SBRoom *)createRoomWithData:(FDataSnapshot *)data {
-    
     SBRoom *newRoom = [[SBRoom alloc] init];
     
     for (FDataSnapshot* child in data.children) {
-                
         NSDictionary *person = child.value;
 
         SBUser *currentPerson = [[SBUser alloc] initWithName:person[@"name"]
@@ -39,7 +37,7 @@
         
         [newRoom.users addObject:currentPerson];
     }
-    
+
     return newRoom;
 }
 

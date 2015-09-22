@@ -31,6 +31,7 @@
 @property (strong, nonatomic) NSString *IDOfCurrentUser;
 @property (strong, nonatomic) NSString *randomMonsterName;
 @property (strong, nonatomic) NSString *currentPlayerName;
+@property (strong, nonatomic) SBUser *currentUser;
 
 @property (nonatomic) BOOL isInJoinScreenMode;
 @property (nonatomic) CGRect frameOfOriginalJoinButton;
@@ -142,13 +143,15 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                 [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
                     
                     if ([currentData hasChildren]) {
-                        
+                        self.currentUser = [[SBUser alloc] initWithName:self.enterName.text
+                                                            monsterName:[SBConstants randomMonsterName]
+                                                                     hp:@10
+                                                                     vp:@0];
+                    
                         self.IDOfCurrentUser = [self createIDOfCurrentUserWithCurrentData:currentData];
-                        self.randomMonsterName = [SBConstants randomMonsterName];
-                        self.currentPlayerName = self.enterName.text;
                         
-                        NSDictionary *newUser = @{ @"name": self.enterName.text,
-                                                   @"monster": self.randomMonsterName,
+                        NSDictionary *newUser = @{ @"name": self.currentUser.name,
+                                                   @"monster": self.currentUser.monster,
                                                    @"hp": @10,
                                                    @"vp": @0 };
                         
@@ -358,9 +361,10 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     SBGameScreenViewController *destVC = (SBGameScreenViewController *)segue.destinationViewController;
     destVC.ref = self.firebaseRef;
+    destVC.currentPlayer = self.currentUser;
     destVC.roomDigits = self.digitsToPassForward;
     destVC.IDOfCurrentPlayer = self.IDOfCurrentUser;
-    destVC.randomMonsterName = self.randomMonsterName;
-    destVC.currentPlayerName = self.currentPlayerName;
+    destVC.randomMonsterName = self.currentUser.monster;
+    destVC.currentPlayerName = self.currentUser.name;
 }
 @end

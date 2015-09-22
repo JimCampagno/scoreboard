@@ -67,23 +67,23 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self setupMainPlayerScorecard];
     [self setupGesture];
     [self setupSettingsButton];
-//    [self generateTestData];
+    //    [self generateTestData];
 }
 
 //- (void)generateTestData {
 //    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
 //    for (NSInteger i = 0 ; i < 6 ; i++) {
-//        
-//        
+//
+//
 //        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
 //                                                 monsterName:monsterNames[i]
 //                                                          hp:@8
 //                                                          vp:@9];
-//        
+//
 //        [self.room.users addObject:currentPerson];
-//        
+//
 //    }
-//    
+//
 //    self.playerName.text = @"JIMBO";
 //    [self setupScorecardWithUsersInfo];
 //}
@@ -130,11 +130,17 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 }
 
 - (void)setupMainPlayerScorecard {
-    self.monsterImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.randomMonsterName]];
-    self.monsterName.text = self.randomMonsterName;
-    self.playerName.text = self.currentPlayerName;
-    [self.healthPoints selectRow:10 inComponent:0 animated:YES];
+    self.monsterImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.currentPlayer.monster]];
+    self.monsterName.text = self.currentPlayer.monster;
+    self.playerName.text = self.currentPlayer.name;
+    [self.healthPoints selectRow:[self.currentPlayer.hp integerValue] inComponent:0 animated:YES];
+    [self.victoryPoints selectRow:[self.currentPlayer.vp integerValue] inComponent:0 animated:YES];
     
+    [self setupMainHeartParticleView];
+    [self setupMainStarParticleView];
+}
+
+- (void)setupMainHeartParticleView {
     self.mainHeartParticleView.allowsTransparency = YES;
     self.mainHeartParticleView.backgroundColor = [UIColor clearColor];
     self.mainHeartScene = [SBHeartScene sceneWithSize:self.mainHeartParticleView.bounds.size];
@@ -144,10 +150,9 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self.mainHeartScene pauseHearts];
     [self.mainHeartScene.heart setParticleSize:CGSizeMake(300, 300)];
     [self.mainHeartScene.heart setParticlePositionRange:CGVectorMake(50, 50)];
+}
 
-//    [self.mainHeartScene.heart setParticleScale:0.09];
-//    [self.mainHeartScene.heart setParticleScaleRange:0.1];
-    
+- (void)setupMainStarParticleView {
     self.mainStarParticleView.allowsTransparency = YES;
     self.mainStarParticleView.backgroundColor = [UIColor clearColor];
     self.mainStarScene = [SBStarScene sceneWithSize:self.mainStarParticleView.bounds.size];
@@ -157,9 +162,6 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self.mainStarScene pauseStars];
     [self.mainStarScene.star setParticleSize:CGSizeMake(300, 300)];
     [self.mainStarScene.star setParticlePositionRange:CGVectorMake(50, 50)];
-
-//    [self.mainStarScene.star setParticleScale:0.09];
-//    [self.mainStarScene.star setParticleScaleRange:0.1];
 }
 
 
@@ -228,13 +230,13 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings"]
                               forState:UIControlStateNormal];
-
+    
     [settingsButton addTarget:self
                        action:@selector(settingsTapped:)
              forControlEvents:UIControlEventTouchUpInside];
-
+    
     [self.mainMonsterView addSubview:settingsButton];
-
+    
     [settingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.equalTo(self.mainMonsterView).with.offset(8);
         make.height.and.width.equalTo(@18);
@@ -261,8 +263,7 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component {
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     NSMutableArray *hp = [[NSMutableArray alloc] init];
     NSMutableArray *vp = [[NSMutableArray alloc] init];
     
@@ -275,9 +276,8 @@ numberOfRowsInComponent:(NSInteger)component {
         }
     }
     
-    _vpPointsOnPicker = [[NSMutableArray alloc] initWithArray:[vp copy]];
-    _hpPointsOnPicker = [[NSMutableArray alloc] initWithArray:[hp copy]];
-    
+    _vpPointsOnPicker = [vp mutableCopy];
+    _hpPointsOnPicker = [hp mutableCopy];
     
     if ([pickerView isEqual:_victoryPoints]) {
         return [vp count];
@@ -286,21 +286,17 @@ numberOfRowsInComponent:(NSInteger)component {
     }
 }
 
-
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView
              attributedTitleForRow:(NSInteger)row
                       forComponent:(NSInteger)component {
     
-    
     if ([pickerView isEqual:_victoryPoints]) {
-        
         NSString *vpString = [NSString stringWithFormat:@"%@", [self.vpPointsOnPicker[row] stringValue]];
         NSAttributedString *attVPString = [[NSAttributedString alloc] initWithString:vpString
                                                                           attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
         return attVPString;
         
     } else {
-        
         NSString *hpString = [NSString stringWithFormat:@"%@", [self.hpPointsOnPicker[row] stringValue]];
         NSAttributedString *attHPString = [[NSAttributedString alloc] initWithString:hpString
                                                                           attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -308,10 +304,7 @@ numberOfRowsInComponent:(NSInteger)component {
     }
 }
 
-
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    
-    
     return 45;
 }
 
@@ -319,62 +312,62 @@ numberOfRowsInComponent:(NSInteger)component {
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row
        inComponent:(NSInteger)component {
-    
+
     if ([pickerView isEqual:_victoryPoints]) {
-        
-        NSDictionary *victoryPointChange = @{ @"vp": [@(row) stringValue]};
-        
-        [self.mainStarScene runStars];
-        [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainStarScene
-                                         target:self
-                                       selector:@selector(pauseStarTimer)
-                                       userInfo:nil
-                                        repeats:NO];
-
-        
-        
-        [self.currentPlayerRef updateChildValues:victoryPointChange
-                             withCompletionBlock:^(NSError *error, Firebase *ref) {
-                                 
-                                 
-                                 if (error) {
-                                     
-                                     
-                                     
-                                 } else {
-                                     
-                                 }
-                             }];
-        
+        if ([self.currentPlayer.vp integerValue] != row) {
+            [self runTheStarParticles];
+            [self updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:row];
+            self.currentPlayer.vp = @(row);
+        }
     } else {
-        
-        NSDictionary *healthPointChange = @{ @"hp": [@(row) stringValue]};
-        
-    
-        [self.mainHeartScene runHearts];
-        [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainHeartScene
-                                         target:self
-                                       selector:@selector(pauseHeartTimer)
-                                       userInfo:nil
-                                        repeats:NO];
-        
-        [self.currentPlayerRef updateChildValues:healthPointChange
-                             withCompletionBlock:^(NSError *error, Firebase *ref) {
-                                 
-                                 
-                                 if (error) {
-                                     
-
-                        
-                                     
-                                     
-                                 } else {
-                                     
-                                     
-                                 }
-                             }];
-        
+        if ([self.currentPlayer.hp integerValue] != row) {
+            [self runTheHeartParticles];
+            [self updateTheHPOfTheCurrentUserOnFirebaseWithSelectedRow:row];
+            self.currentPlayer.hp = @(row);
+        }
     }
+}
+
+- (void)updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:(NSInteger)row {
+    NSDictionary *victoryPointChange = @{ @"vp": [@(row) stringValue]};
+    
+    [self.currentPlayerRef updateChildValues:victoryPointChange
+                         withCompletionBlock:^(NSError *error, Firebase *ref) {
+                             if (error) {
+                                 
+                             }
+                         }];
+}
+
+- (void)updateTheHPOfTheCurrentUserOnFirebaseWithSelectedRow:(NSInteger)row {
+    NSDictionary *healthPointChange = @{ @"hp": [@(row) stringValue]};
+    
+    [self.currentPlayerRef updateChildValues:healthPointChange
+                         withCompletionBlock:^(NSError *error, Firebase *ref) {
+                             if (error) {
+                                 
+                             }
+                         }];
+}
+
+- (void)runTheStarParticles {
+    [self.mainStarScene runStars];
+    
+    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainStarScene
+                                     target:self
+                                   selector:@selector(pauseStarTimer)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
+- (void)runTheHeartParticles {
+    [self.mainHeartScene runHearts];
+    
+    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainHeartScene
+                                     target:self
+                                   selector:@selector(pauseHeartTimer)
+                                   userInfo:nil
+                                    repeats:NO];
 }
 
 - (void)pauseHeartTimer {
