@@ -65,7 +65,6 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self setupListenerToEntireRoomOnFirebase];
     [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
-    [self setupGesture];
     [self setupSettingsButton];
     [self generateTestData];
 }
@@ -105,24 +104,9 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
                          }];
 }
 
-- (void)setupGesture {
-    
-    self.monsterImage.userInteractionEnabled = YES;
-    UILongPressGestureRecognizer *lpHandler = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleHoldGesture:)];
-    lpHandler.minimumPressDuration = 1; //seconds
-    lpHandler.delegate = self;
-    [self.monsterImage addGestureRecognizer:lpHandler];
-}
 
-- (void)handleHoldGesture:(UILongPressGestureRecognizer *)gestureRecognizer {
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        [self performSegueWithIdentifier:@"changeMonster" sender:self];
-    }
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        
-    }
-}
+
+
 
 - (void)setupCurrentPlayerReferenceToFirebase {
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
