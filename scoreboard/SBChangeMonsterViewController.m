@@ -67,10 +67,15 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 #pragma mark - Setting up views
 
 - (void)setupBlurredViewToContainMonsters {
-    self.view.backgroundColor = [UIColor colorWithRed:0.26 green:0.43 blue:0.56 alpha:0.75];
+    self.view.backgroundColor = [UIColor colorWithRed:0.26 green:0.43 blue:0.56 alpha:0.9];
     self.changeMonsterView = [[UIView alloc] init];
     self.changeMonsterView.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     [self.view addSubview:self.changeMonsterView];
+    
+    self.changeMonsterView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.changeMonsterView.layer.borderWidth = 0.2f;
+    self.changeMonsterView.layer.cornerRadius = 10.0f;
+    self.changeMonsterView.clipsToBounds = YES;
     
     [self.changeMonsterView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.view).multipliedBy(SBChangeMVCWidthMultiplier);
@@ -121,11 +126,19 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     UILabel *monsterLabel = [UILabel new];
     monsterLabel.textAlignment = NSTextAlignmentCenter;
     monsterLabel.text = @"CHOOSE YOUR MONSTER";
-    [monsterLabel setFont:[UIFont systemFontOfSize:36]];
+    [monsterLabel setFont:[UIFont systemFontOfSize:24]];
     monsterLabel.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
-
-    monsterLabel.adjustsFontSizeToFitWidth = YES;
     
+    monsterLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    monsterLabel.layer.borderWidth = 0.2f;
+    monsterLabel.layer.cornerRadius = 10.0f;
+    monsterLabel.clipsToBounds = YES;
+    monsterLabel.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1];
+    
+    monsterLabel.numberOfLines = 1;
+    monsterLabel.adjustsFontSizeToFitWidth = YES;
+    monsterLabel.lineBreakMode = NSLineBreakByClipping;
+    monsterLabel.adjustsFontSizeToFitWidth = YES;
     
     [self.view addSubview:monsterLabel];
     
@@ -133,18 +146,9 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         make.width.equalTo(self.changeMonsterView);
         make.bottom.equalTo(self.changeMonsterView.mas_top).with.offset(-2);
         make.centerX.equalTo(self.changeMonsterView);
+        make.height.equalTo(@35);
     }];
     
-    UIView *bottomContainerView = [UIView new];
-    bottomContainerView.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
-    [self.view addSubview:bottomContainerView];
-    
-    [bottomContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.changeMonsterView.mas_bottom).with.offset(2);
-        make.width.equalTo(self.changeMonsterView);
-        make.centerX.equalTo(self.changeMonsterView);
-        make.height.equalTo(@40);
-    }];
     
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
@@ -152,24 +156,57 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
                       action:@selector(cancelTapped:)
             forControlEvents:UIControlEventTouchUpInside];
     
-    cancelButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
+    cancelButton.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    cancelButton.layer.borderColor = [UIColor blackColor].CGColor;
+    cancelButton.layer.borderWidth = 0.2f;
+    cancelButton.layer.cornerRadius = 10.0f;
+    
+    cancelButton.titleLabel.font = [UIFont systemFontOfSize:18.0];
     [cancelButton setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
-    
-    
     
     [cancelButton setTitle:@"LEAVE GAME"
                    forState:UIControlStateNormal];
     
+    cancelButton.titleLabel.numberOfLines = 1;
+    cancelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    cancelButton.titleLabel.lineBreakMode = NSLineBreakByClipping;
+    
     [self.view addSubview:cancelButton];
     
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(bottomContainerView);
-        make.centerX.equalTo(self.changeMonsterView).multipliedBy(.75);
+        make.top.equalTo(self.changeMonsterView.mas_bottom).with.offset(2);
+        make.left.equalTo(self.changeMonsterView).with.offset(20);
+        make.width.equalTo(self.changeMonsterView).multipliedBy(0.4);
     }];
     
+    UIButton *goBackButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
+    [goBackButton addTarget:self
+                     action:@selector(goBackTapped:)
+           forControlEvents:UIControlEventTouchUpInside];
     
+    goBackButton.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    goBackButton.layer.borderColor = [UIColor blackColor].CGColor;
+    goBackButton.layer.borderWidth = 0.2f;
+    goBackButton.layer.cornerRadius = 10.0f;
     
+    goBackButton.titleLabel.font = [UIFont systemFontOfSize:18.0];
+    [goBackButton setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
+    
+    [goBackButton setTitle:@"GO BACK"
+                  forState:UIControlStateNormal];
+    
+    goBackButton.titleLabel.numberOfLines = 1;
+    goBackButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    goBackButton.titleLabel.lineBreakMode = NSLineBreakByClipping;
+    
+    [self.view addSubview:goBackButton];
+    
+    [goBackButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.changeMonsterView.mas_bottom).with.offset(2);
+        make.right.equalTo(self.changeMonsterView).with.offset(-20);
+        make.width.equalTo(self.changeMonsterView).multipliedBy(0.4);
+    }];
 }
 
 
@@ -248,6 +285,10 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [self dismissViewControllerAnimated:YES completion:nil];
     
     
+}
+
+- (void)goBackTapped:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
