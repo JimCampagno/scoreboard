@@ -82,7 +82,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         make.width.equalTo(self.view).multipliedBy(SBChangeMVCWidthMultiplier);
         make.height.equalTo(self.view).multipliedBy(SBChangeMVCHeightMultiplier);
         make.centerX.equalTo(self.view);
-        make.centerY.equalTo(self.view);
+        make.centerY.equalTo(self.view).multipliedBy(1.05);
     }];
 }
 
@@ -127,7 +127,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     UILabel *monsterLabel = [UILabel new];
     monsterLabel.textAlignment = NSTextAlignmentCenter;
     monsterLabel.text = @"CHOOSE YOUR MONSTER";
-    [monsterLabel setFont:[UIFont systemFontOfSize:24]];
+    [monsterLabel setFont:[UIFont systemFontOfSize:20]];
     monsterLabel.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     
     monsterLabel.layer.borderColor = [UIColor blackColor].CGColor;
@@ -150,11 +150,9 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         make.height.equalTo(@35);
     }];
     
-    
-    
     UILabel *roomNumber = [UILabel new];
     roomNumber.textAlignment = NSTextAlignmentCenter;
-    roomNumber.text = @"Room# 699737";
+    roomNumber.text = @"ROOM# 699737";
     [roomNumber setFont:[UIFont systemFontOfSize:24]];
     roomNumber.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     
@@ -162,7 +160,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     roomNumber.layer.borderWidth = 0.2f;
     roomNumber.layer.cornerRadius = 10.0f;
     roomNumber.clipsToBounds = YES;
-    roomNumber.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1];
+    roomNumber.textColor = [UIColor whiteColor];
     
     roomNumber.numberOfLines = 1;
     roomNumber.adjustsFontSizeToFitWidth = YES;
@@ -172,9 +170,9 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [self.view addSubview:roomNumber];
     
     [roomNumber mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.changeMonsterView).multipliedBy(0.5);
-        make.bottom.equalTo(self.changeMonsterView.mas_top).with.offset(-2);
-        make.centerX.equalTo(self.changeMonsterView);
+        make.width.equalTo(self.changeMonsterView).multipliedBy(0.75);
+        make.bottom.equalTo(monsterLabel.mas_top).with.offset(-2);
+        make.left.equalTo(self.changeMonsterView);
         make.height.equalTo(@35);
     }];
     
