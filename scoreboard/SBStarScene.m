@@ -25,8 +25,6 @@ static CGFloat const kStarParticleBirthRate = 15.0;
         self.backgroundColor = [UIColor clearColor];
         NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kStarParticle ofType:@"sks"];
         
-        [self.star setZPosition:0];
-
         self.star = [NSKeyedUnarchiver unarchiveObjectWithFile:emitterPath];
         self.star.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
         self.star.name = @"particleHeart";

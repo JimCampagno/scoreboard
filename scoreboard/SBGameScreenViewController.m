@@ -131,8 +131,6 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     self.mainHeartScene = [SBHeartScene sceneWithSize:self.mainHeartParticleView.bounds.size];
     self.mainHeartScene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [self.mainHeartScene.heart setZPosition:0];
-
     [self.mainHeartParticleView presentScene:self.mainHeartScene];
     [self.mainHeartScene runHearts];
     [self.mainHeartScene pauseHearts];
@@ -146,8 +144,6 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     self.mainStarScene = [SBStarScene sceneWithSize:self.mainStarParticleView.bounds.size];
     self.mainStarScene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [self.mainStarScene.star setZPosition:0];
-
     [self.mainStarParticleView presentScene:self.mainStarScene];
     [self.mainStarScene runStars];
     [self.mainStarScene pauseStars];
