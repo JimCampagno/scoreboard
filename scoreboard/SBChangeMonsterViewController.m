@@ -46,6 +46,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [self setupMonsterButtons];
     [self setupLabel];
     [self setupMonsterChangeDelegate];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -144,6 +145,34 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     
     [monsterLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.changeMonsterView);
+        make.bottom.equalTo(self.changeMonsterView.mas_top).with.offset(-2);
+        make.centerX.equalTo(self.changeMonsterView);
+        make.height.equalTo(@35);
+    }];
+    
+    
+    
+    UILabel *roomNumber = [UILabel new];
+    roomNumber.textAlignment = NSTextAlignmentCenter;
+    roomNumber.text = @"Room# 699737";
+    [roomNumber setFont:[UIFont systemFontOfSize:24]];
+    roomNumber.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    
+    roomNumber.layer.borderColor = [UIColor blackColor].CGColor;
+    roomNumber.layer.borderWidth = 0.2f;
+    roomNumber.layer.cornerRadius = 10.0f;
+    roomNumber.clipsToBounds = YES;
+    roomNumber.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1];
+    
+    roomNumber.numberOfLines = 1;
+    roomNumber.adjustsFontSizeToFitWidth = YES;
+    roomNumber.lineBreakMode = NSLineBreakByClipping;
+    roomNumber.adjustsFontSizeToFitWidth = YES;
+    
+    [self.view addSubview:roomNumber];
+    
+    [roomNumber mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.changeMonsterView).multipliedBy(0.5);
         make.bottom.equalTo(self.changeMonsterView.mas_top).with.offset(-2);
         make.centerX.equalTo(self.changeMonsterView);
         make.height.equalTo(@35);
