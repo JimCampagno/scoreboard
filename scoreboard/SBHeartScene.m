@@ -24,6 +24,9 @@ static const CGFloat kHeartParticleBirthRate = 15.0;
     if (self = [super initWithSize:size]) {
         self.backgroundColor = [UIColor clearColor];
         NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
+        
+        [self.heart setZPosition:0];
+
         self.heart = [NSKeyedUnarchiver unarchiveObjectWithFile:emitterPath];
         self.heart.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
         self.heart.name = @"particleHeart";
