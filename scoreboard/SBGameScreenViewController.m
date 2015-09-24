@@ -66,24 +66,24 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
     [self setupSettingsButton];
-//    [self generateTestData];
-
+    //    [self generateTestData];
+    
 }
 
 //- (void)generateTestData {
 //    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
 //    for (NSInteger i = 0 ; i < 6 ; i++) {
-//        
-//        
+//
+//
 //        SBUser *currentPerson = [[SBUser alloc] initWithName:@"CoolGuy"
 //                                                 monsterName:monsterNames[i]
 //                                                          hp:@8
 //                                                          vp:@9];
-//        
+//
 //        [self.room.users addObject:currentPerson];
-//        
+//
 //    }
-//    
+//
 //    self.playerName.text = @"JIMBO";
 //    [self setupScorecardWithUsersInfo];
 //}
@@ -354,6 +354,7 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
                                     repeats:NO];
 }
 
+
 - (void)pauseHeartTimer {
     [self.mainHeartScene pauseHearts];
 }
@@ -362,5 +363,11 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self.mainStarScene pauseStars];
 }
 
+
+
+
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
+    return NO;
+}
 
 @end

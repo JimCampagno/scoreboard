@@ -451,8 +451,12 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <segue destination="3Ul-RZ-oKT" kind="unwind" identifier="reset" unwindAction="reset:" id="L6i-rw-YGS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W7C-Hx-Ukc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="3Ul-RZ-oKT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="932" y="-516"/>
         </scene>

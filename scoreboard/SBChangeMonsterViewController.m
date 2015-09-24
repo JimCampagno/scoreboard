@@ -8,6 +8,7 @@
 
 #import "SBChangeMonsterViewController.h"
 #import "SBGameScreenViewController.h"
+#import "AppDelegate.h"
 #import <Masonry.h>
 
 @interface SBChangeMonsterViewController ()
@@ -309,10 +310,14 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 #pragma mark - Action Methods
 
 - (void)cancelTapped:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    
+    [self performSegueWithIdentifier:@"reset" sender:self];
 }
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
+    return NO;
+}
+
+
+
 
 - (void)goBackTapped:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

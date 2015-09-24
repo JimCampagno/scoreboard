@@ -87,9 +87,9 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
-    if (textField.text.length == 6) {
-        return NO;
-    }
+//    if (textField.text.length == 6) {
+//        return NO;
+//    }
     
     if ([string isEqualToString:@""]) {
         
@@ -121,10 +121,10 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     NSLog(@"\n\nLength:%ld", textField.text.length);
     
-    if (textField.text.length == 6) {
-        NSLog(@"\n\n ABOUT TO RETURN NO!\n\n");
-        return NO;
-    }
+//    if (textField.text.length == 6) {
+//        NSLog(@"\n\n ABOUT TO RETURN NO!\n\n");
+//        return NO;
+//    }
     return YES;
 }
 
@@ -356,6 +356,11 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
 }
 
+-(IBAction)reset:(UIStoryboardSegue *)segue {
+    NSLog(@"\n\n\n RESET WAS CALLED!!! \n\n\n");
+    //do stuff
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -367,4 +372,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     destVC.randomMonsterName = self.currentUser.monster;
     destVC.currentPlayerName = self.currentUser.name;
 }
+
+
 @end

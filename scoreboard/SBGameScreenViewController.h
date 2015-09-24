@@ -10,10 +10,9 @@
 #import <Firebase/Firebase.h>
 #import "SBRoom.h"
 
+
 @protocol MonsterChangeDelegate <NSObject>
-
 - (void)userHasChangedToMonsterWithName:(NSString *)name;
-
 @end
 
 
@@ -26,4 +25,5 @@
 @property (strong, nonatomic) NSString *randomMonsterName;
 @property (strong, nonatomic) NSString *currentPlayerName;
 
+- (void)resetGame;
 @end
