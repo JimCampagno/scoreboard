@@ -64,9 +64,9 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     UIButton *transparencyButton = [[UIButton alloc] initWithFrame:self.view.bounds];
     
     transparencyButton.backgroundColor = [UIColor clearColor];
-    
+        
     [self.view insertSubview:transparencyButton
-                belowSubview:self.enterName];
+                belowSubview:self.displayJoinGameDigits];
     
     [transparencyButton addTarget:self
                            action:@selector(dismissKeyboard:)
