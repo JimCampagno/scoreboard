@@ -37,7 +37,6 @@
 @property (nonatomic) CGRect frameOfOriginalJoinButton;
 @property (nonatomic) CGRect frameOfOriginalCreateButton;
 
-@property (strong, nonatomic) SBGameScreenViewController *currentRoom;
 
 - (IBAction)cancel:(id)sender;
 @end
@@ -133,31 +132,31 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 
 - (IBAction)connect:(id)sender {
-    
+    __weak typeof(self) tmpself = self;
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         
         if ([snapshot exists]) {
             
             if (snapshot.childrenCount == kMaxNumberOfPlayers) {
                 
-                [self displayGameIsFullAlert];
+                [tmpself displayGameIsFullAlert];
             } else {
-                [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+                [[tmpself.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
                     
                     if ([currentData hasChildren]) {
-                        self.currentUser = [[SBUser alloc] initWithName:self.enterName.text
+                        tmpself.currentUser = [[SBUser alloc] initWithName:tmpself.enterName.text
                                                             monsterName:[SBConstants randomMonsterName]
                                                                      hp:@10
                                                                      vp:@0];
                     
-                        self.IDOfCurrentUser = [self createIDOfCurrentUserWithCurrentData:currentData];
+                        tmpself.IDOfCurrentUser = [tmpself createIDOfCurrentUserWithCurrentData:currentData];
                         
-                        NSDictionary *newUser = @{ @"name": self.currentUser.name,
-                                                   @"monster": self.currentUser.monster,
+                        NSDictionary *newUser = @{ @"name": tmpself.currentUser.name,
+                                                   @"monster": tmpself.currentUser.monster,
                                                    @"hp": @10,
                                                    @"vp": @0 };
                         
-                        [[currentData childDataByAppendingPath:self.IDOfCurrentUser] setValue:newUser];
+                        [[currentData childDataByAppendingPath:tmpself.IDOfCurrentUser] setValue:newUser];
                     }
                     
                     return [FTransactionResult successWithValue:currentData];
@@ -166,15 +165,15 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                     
                     if (committed) {
                         
-                        self.digitsToPassForward = self.invisibleDigits.text;
+                        tmpself.digitsToPassForward = tmpself.invisibleDigits.text;
                         
-                        [self performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
+                        [tmpself performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
                     }
                 }];
             }
         } else {
             
-            [self displayGameDoesntExistAlert];
+            [tmpself displayGameDoesntExistAlert];
         }
     } withCancelBlock:^(NSError *error) {
         //this doesn't appear to work when I'm in the subway with no internet connection.
@@ -373,12 +372,14 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     SBGameScreenViewController *destVC = (SBGameScreenViewController *)segue.destinationViewController;
     destVC.ref = self.firebaseRef;
     destVC.currentPlayer = self.currentUser;
-    destVC.roomDigits = self.digitsToPassForward;
-    destVC.IDOfCurrentPlayer = self.IDOfCurrentUser;
-    destVC.randomMonsterName = self.currentUser.monster;
-    destVC.currentPlayerName = self.currentUser.name;
-    
-    self.currentRoom = destVC;
+    destVC.roomDigits = [self.digitsToPassForward copy];
+    destVC.IDOfCurrentPlayer = [self.IDOfCurrentUser copy];
+    destVC.randomMonsterName = [self.currentUser.monster copy];
+    destVC.currentPlayerName = [self.currentUser.name copy];
+}
+
+- (void)turnFireBaseOnline {
+    [Firebase goOnline];
 }
 
 @end

@@ -14,24 +14,21 @@
 @interface SBChangeMonsterViewController ()
 @property (strong, nonatomic) UIView *changeMonsterView;
 @property (strong, nonatomic) NSArray *monsterNames;
-
 @property (strong, nonatomic) UIButton *monsterOne;
 @property (strong, nonatomic) UIButton *monsterTwo;
 @property (strong, nonatomic) UIButton *monsterThree;
 @property (strong, nonatomic) UIButton *monsterFour;
 @property (strong, nonatomic) UIButton *monsterFive;
 @property (strong, nonatomic) UIButton *monsterSix;
-
 @property (weak, nonatomic) id <MonsterChangeDelegate> delegate;
 
 - (void)setupBlurredViewToContainMonsters;
 - (void)setupMonsterButtons;
 - (void)setupConstraintsForMonsterButtons;
 - (void)setupLabel;
-
 - (UIButton *)createMonsterButtonWithMonsterName:(NSString *)monsterName;
-
 @end
+
 
 static const CGFloat SBChangeMVCWidthMultiplier = 0.8;
 static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
@@ -42,17 +39,14 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setupBlurredViewToContainMonsters];
     [self setupMonsterButtons];
     [self setupLabel];
     [self setupMonsterChangeDelegate];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     [self setupMonsterChangeDelegate];
 }
 
@@ -298,6 +292,23 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     self.delegate = presentingVC;
 }
 
+
+#pragma mark - Action Methods
+
+- (void)cancelTapped:(UIButton *)sender {
+    __block SBGameScreenViewController *presentingVC = (SBGameScreenViewController *)self.presentingViewController;
+    
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 [presentingVC resetMethodHasBeenCalled];
+                             }];
+}
+
+- (void)goBackTapped:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 #pragma mark - Lazy Insatiation
 
 - (NSArray *)monsterNames {
@@ -306,40 +317,5 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     }
     return _monsterNames;
 }
-
-#pragma mark - Action Methods
-
-
-- (void)cancelTapped:(UIButton *)sender {
-    __block SBGameScreenViewController *presentingVC = (SBGameScreenViewController *)self.presentingViewController;
-    
-    
-    [self dismissViewControllerAnimated:YES
-                             completion:^{
-                                 
-                                 [presentingVC resetMethodHasBeenCalled];
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 NSLog(@"In completion of initial dismissal");
-                                 
-                             }];
-    
-//     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    [appDelegate resetWindowToInitialView];
-}
-
-- (void)goBackTapped:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-#pragma mark - Commented Out Methods
-//- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
-//    return NO;
-//}
 
 @end

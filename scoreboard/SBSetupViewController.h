@@ -13,4 +13,6 @@
 
 @property (strong, nonatomic) Firebase *firebaseRef;
 
+- (void)turnFireBaseOnline;
+
 @end

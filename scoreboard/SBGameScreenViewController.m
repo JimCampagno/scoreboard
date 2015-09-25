@@ -11,6 +11,7 @@
 #import "SBUser.h"
 #import "SBHeartScene.h"
 #import "SBStarScene.h"
+#import "SBSetupViewController.h"
 
 #import <Masonry.h>
 
@@ -149,18 +150,20 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 
 
 - (void)setupListenerToEntireRoomOnFirebase {
+    __weak typeof(self) tmpself = self;
     [[self.ref childByAppendingPath:self.roomDigits]
+
      observeEventType:FEventTypeValue
      withBlock:^(FDataSnapshot *snapshot) {
-         
-         BOOL numberOfPlayersChanged = [self.room.users count] != snapshot.childrenCount ? YES : NO;
+
+         BOOL numberOfPlayersChanged = [tmpself.room.users count] != snapshot.childrenCount ? YES : NO;
          
          if (numberOfPlayersChanged) {
-             self.room = [SBRoom createRoomWithData:snapshot];
-             [self setupScorecardWithUsersInfo];
+             tmpself.room = [SBRoom createRoomWithData:snapshot];
+             [tmpself setupScorecardWithUsersInfo];
          } else {
              SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
-             [self updateScoresWithRoom:changedRoom];
+             [tmpself updateScoresWithRoom:changedRoom];
          }
      } withCancelBlock:^(NSError *error) {
          //Still should do something here.
@@ -359,21 +362,29 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 }
 
 - (void)resetMethodHasBeenCalled {
+    SBSetupViewController *presentingVC = (SBSetupViewController *)self.presentingViewController;
+    
+//    @property (strong, nonatomic) Firebase *ref;
+//    @property (strong, nonatomic) NSString *roomDigits;
+//    @property (strong, nonatomic) SBUser *currentPlayer;
+//    @property (strong, nonatomic) NSString *IDOfCurrentPlayer;
+//    @property (strong, nonatomic) NSString *randomMonsterName;
+//    @property (strong, nonatomic) NSString *currentPlayerName;
+    
+    
+    
+    
     NSLog(@"Reset Method has been called has been called!!");
-    
-    [Firebase goOffline];
-    
     [self.currentPlayerRef removeValue];
-    
+    [Firebase goOffline];
     [self dismissViewControllerAnimated:YES
                              completion:^{
-                                 
-                                 
-                                 
-                                 
+                                 [presentingVC turnFireBaseOnline];
                                  NSLog(@"In completion block of the last completion of view dismissing itself!");
                              }];
 }
+
+
 
 
 #pragma mark - Commented Out Methods
