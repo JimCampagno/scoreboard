@@ -47,30 +47,39 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 @implementation SBSetupViewController
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     [self setupView];
-    _firebaseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
+    self.firebaseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
 }
 
 - (void)setupView {
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    
-    [self.view addGestureRecognizer:tap];
-    
     self.invisibleDigits.delegate = self;
     self.displayJoinGameDigits.alpha = 0;
     
     [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
-    _isInJoinScreenMode = NO;
+    self.isInJoinScreenMode = NO;
 }
 
--(void)dismissKeyboard {
-    [self.enterName resignFirstResponder];
-    [self.invisibleDigits resignFirstResponder];
+- (void)setupClearButtonForTapToDismiss {
+    UIButton *transparencyButton = [[UIButton alloc] initWithFrame:self.view.bounds];
+    
+    transparencyButton.backgroundColor = [UIColor clearColor];
+    
+    [self.view insertSubview:transparencyButton
+                belowSubview:self.enterName];
+    
+    [transparencyButton addTarget:self
+                           action:@selector(dismissKeyboard:)
+                 forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)dismissKeyboard:(UIButton *)sender {
+    NSLog(@"DismissKeyBoard: is being called.");
+    if ([self.enterName isFirstResponder]) {
+        [self.enterName resignFirstResponder];
+    } else {
+        [self.invisibleDigits resignFirstResponder];
+    }
     
     if (self.isInJoinScreenMode) {
         [self bringButtonsBackAfterCancelTapped];
@@ -78,34 +87,31 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     }
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-
-
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+    NSDictionary *beforeAll = @{@"textfield text": textField.text,
+                                @"range": [NSString stringWithFormat:@"location: %ld / Length: %ld", range.location, range.length],
+                                @"string": string };
     
-//    if (textField.text.length == 6) {
-//        return NO;
-//    }
+    NSLog(@"%@", beforeAll);
+    
+    NSLog(@"Holding The DIgits ==BEFORE==: %@", self.holdingTheDigits);
+    
+    
+    
     
     if ([string isEqualToString:@""]) {
-        
         if ([self.holdingTheDigits count] >= 1) {
-            UILabel *label = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
-            label.text = @"-";
+            UILabel *currentLabel = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
+            currentLabel.text = @"-";
             [self.holdingTheDigits removeLastObject];
             self.connectProp.enabled = NO;
         }
         
-    } else if ([self.holdingTheDigits count] < 6){
-        
+    } else if ([self.holdingTheDigits count] < 6) {
         [self.holdingTheDigits addObject:string];
-        UILabel *label = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
-        label.text = string;
+        UILabel *currentLabel = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
+        currentLabel.text = string;
         
         if ([self.holdingTheDigits count] == 6) {
             self.connectProp.enabled = YES;
@@ -113,26 +119,30 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     }
     
     
+    NSLog(@"Holding The DIgits ==AFTER==: %@", self.holdingTheDigits);
+
+
+    BOOL isAllGood = (textField.text.length >= 6 && range.length == 0) ? NO : YES;
     
-    
-    
-    return YES;
+    NSLog(@"RETURN IS %@\n\n\n\n\n", @(isAllGood));
+    return isAllGood;
+
+
+
 }
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    NSLog(@"\n\nLength:%ld", textField.text.length);
-    
-//    if (textField.text.length == 6) {
-//        NSLog(@"\n\n ABOUT TO RETURN NO!\n\n");
-//        return NO;
-//    }
-    return YES;
-}
-
-
 
 - (IBAction)connect:(id)sender {
     __weak typeof(self) tmpself = self;
+    
+    NSDictionary *holdingDataHereToTest = @{ @"InvisibleDigits": [NSString stringWithFormat:@"%@", self.invisibleDigits.text] };
+    
+    NSLog(@"%@", holdingDataHereToTest);
+    
+    NSDictionary *anotherTest = @{ @"InvisibleDigits": [NSString stringWithFormat:@"%@", self.invisibleDigits.text] };
+    
+    NSLog(@"%@", anotherTest);
+    
+
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         
         if ([snapshot exists]) {
@@ -145,10 +155,10 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                     
                     if ([currentData hasChildren]) {
                         tmpself.currentUser = [[SBUser alloc] initWithName:tmpself.enterName.text
-                                                            monsterName:[SBConstants randomMonsterName]
-                                                                     hp:@10
-                                                                     vp:@0];
-                    
+                                                               monsterName:[SBConstants randomMonsterName]
+                                                                        hp:@10
+                                                                        vp:@0];
+                        
                         tmpself.IDOfCurrentUser = [tmpself createIDOfCurrentUserWithCurrentData:currentData];
                         
                         NSDictionary *newUser = @{ @"name": tmpself.currentUser.name,
@@ -166,6 +176,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                     if (committed) {
                         
                         tmpself.digitsToPassForward = tmpself.invisibleDigits.text;
+                        [self bringButtonsBackAfterCancelTapped];
                         
                         [tmpself performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
                     }
@@ -183,18 +194,20 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 }
 
 - (IBAction)createGame:(id)sender {
+    __weak typeof(self) tmpself = self;
+    
     SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
     
-    [FirebaseAPIclient createGameOnFirebaseWithRef:self.firebaseRef
+    [FirebaseAPIclient createGameOnFirebaseWithRef:tmpself.firebaseRef
                                               user:currentUser
                                withCompletionBlock:^(BOOL success, NSString *digits) {
                                    
                                    if (success) {
-                                       self.digitsToPassForward = digits;
-                                       self.IDOfCurrentUser = @"0";
-                                       self.randomMonsterName = currentUser.monster;
-                                       self.currentPlayerName = self.enterName.text;
-                                       [self performSegueWithIdentifier:@"CreateGameSegue" sender:sender];
+                                       tmpself.digitsToPassForward = digits;
+                                       tmpself.IDOfCurrentUser = @"0";
+                                       tmpself.randomMonsterName = currentUser.monster;
+                                       tmpself.currentPlayerName = self.enterName.text;
+                                       [tmpself performSegueWithIdentifier:@"CreateGameSegue" sender:sender];
                                    }
                                    
                                } withFailureBlock:^(NSError *error) {
@@ -203,7 +216,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 }
 
 - (IBAction)joinGame:(id)sender {
-    _isInJoinScreenMode = YES;
+    self.isInJoinScreenMode = YES;
     
     [UIView animateWithDuration:0.3
                      animations:^{
@@ -248,43 +261,50 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 }
 
 - (void)animateCreateButtonDown {
+    __weak typeof(self) tmpself = self;
     [UIView animateWithDuration:0.3
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.createGameProp.alpha = 0.0;
+                         tmpself.createGameProp.alpha = 0.0;
                      }
                      completion:nil];
 }
 
 - (void)animateJoinButtonDown {
+    __weak typeof(self) tmpself = self;
+    
     [UIView animateWithDuration:0.3
                           delay:0.15
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.joinGameProp.alpha = 0.0;
+                         tmpself.joinGameProp.alpha = 0.0;
                      }
                      completion:^ (BOOL finished) {
-                         [self.invisibleDigits becomeFirstResponder];
+                         [tmpself.invisibleDigits becomeFirstResponder];
                          
                          [UIView animateWithDuration:0.2 animations:^{
-                             self.displayJoinGameDigits.alpha = 1;
+                             tmpself.displayJoinGameDigits.alpha = 1;
                              
                          }];
                      }];
 }
 
 - (void)bringButtonsBackAfterCancelTapped {
+    __weak typeof(self) tmpself = self;
+    
+    
     [self.view endEditing:YES];
     
     [UIView animateWithDuration:0.2
                      animations:^{
-                         self.displayJoinGameDigits.alpha = 0;
+                         tmpself.displayJoinGameDigits.alpha = 0;
                      } completion:^(BOOL finished) {
-                         self.connectProp.enabled = NO;
-                         [self.holdingTheDigits removeAllObjects];
+                         tmpself.connectProp.enabled = NO;
+                         [tmpself.holdingTheDigits removeAllObjects];
+                         tmpself.invisibleDigits.text = @"";
                          
-                         for (UILabel *label in self.joinGameNumbers) {
+                         for (UILabel *label in tmpself.joinGameNumbers) {
                              label.text = @"-";
                          }
                          
@@ -292,8 +312,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                                                delay:0.0
                                              options:UIViewAnimationOptionCurveLinear
                                           animations:^{
-                                              self.createGameProp.alpha = 1;
-                                              self.joinGameProp.alpha = 1;
+                                              tmpself.createGameProp.alpha = 1;
+                                              tmpself.joinGameProp.alpha = 1;
                                           }
                                           completion:nil];
                      }];
@@ -304,6 +324,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 }
 
 - (void)displayGameDoesntExistAlert {
+    __weak typeof(self) tmpself = self;
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game doesn't exist"
                                                                    message:@"Please confirm that you're entering in the correct number."
                                                             preferredStyle:UIAlertControllerStyleAlert];
@@ -311,65 +333,53 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
+                                                              tmpself.connectProp.enabled = NO;
+                                                              tmpself.invisibleDigits.text = @"";
+                                                              [tmpself.holdingTheDigits removeAllObjects];
+                                                              [tmpself.invisibleDigits becomeFirstResponder];
                                                               
-                                                              self.connectProp.enabled = NO;
-                                                              self.invisibleDigits.text = @"";
-                                                              
-                                                              for (UILabel *label in self.joinGameNumbers) {
+                                                              for (UILabel *label in tmpself.joinGameNumbers) {
                                                                   label.text = @"-";
                                                               }
-                                                              
-                                                              [self.holdingTheDigits removeAllObjects];
                                                           }];
     
     [alert addAction:defaultAction];
-    
-    
+
     [self presentViewController:alert
                        animated:YES
                      completion:^{
-                         
-                         
-                         NSLog(@"In completion block when game doesn't exist!");
-                         
+                         //ToDo: Doing nothing here right now, do we need this completion block to do anything?
                      }];
-    
 }
 
 - (void)displayGameIsFullAlert {
-    
-    NSString *errorMSG = [NSString stringWithFormat:@"The game # %@ is full, it contains six players.", self.invisibleDigits.text];
-    
+    __weak typeof(self) tmpself = self;
+
+    NSString *errorMSG = [NSString stringWithFormat:@"The game # %@ is full, it contains six players.", tmpself.invisibleDigits.text];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game is full"
                                                                    message:errorMSG
                                                             preferredStyle:UIAlertControllerStyleAlert];
+    
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
                                                               
-                                                              
+                                                        
                                                           }];
-    
     [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:^{
-        //do anything on completion? clear out what was originally entered?
-    }];
     
+    [self presentViewController:alert
+                       animated:YES
+                     completion:^{
+                         //ToDo: Doing nothing here right now, do we need this completion block to do anything?
+                     }];
 }
-
--(IBAction)reset:(UIStoryboardSegue *)segue {
-    NSLog(@"\n\n\n RESET WAS CALLED!!! \n\n\n");
-    // delegate call to destroy game
-    
-    
-    
-}
-
-#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     SBGameScreenViewController *destVC = (SBGameScreenViewController *)segue.destinationViewController;
+    
+    //ToDo: Is referencing self.firebaseRef & self.currentUser here a retain cycle?
     destVC.ref = self.firebaseRef;
     destVC.currentPlayer = self.currentUser;
     destVC.roomDigits = [self.digitsToPassForward copy];

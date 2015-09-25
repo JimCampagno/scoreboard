@@ -16,7 +16,6 @@
 #import <Masonry.h>
 
 
-
 @interface SBGameScreenViewController ()
 
 //Main Player Card
