@@ -57,7 +57,12 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.enterName.delegate = self;
     self.displayJoinGameDigits.alpha = 0;
     
-    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)]];
+    UIView *viewToHandleDismissalOfKeyboardOnTap = [[UIView alloc] initWithFrame:self.view.frame];
+    viewToHandleDismissalOfKeyboardOnTap.backgroundColor = [UIColor redColor];
+    [self.view insertSubview:viewToHandleDismissalOfKeyboardOnTap
+                belowSubview:self.displayJoinGameDigits];
+
+    [viewToHandleDismissalOfKeyboardOnTap addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)]];
     
     [self.enterName setAutocapitalizationType:UITextAutocapitalizationTypeAllCharacters];
     
