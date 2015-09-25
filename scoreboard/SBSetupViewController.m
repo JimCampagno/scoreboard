@@ -37,6 +37,8 @@
 @property (nonatomic) CGRect frameOfOriginalJoinButton;
 @property (nonatomic) CGRect frameOfOriginalCreateButton;
 
+@property (strong, nonatomic) SBGameScreenViewController *currentRoom;
+
 - (IBAction)cancel:(id)sender;
 @end
 
@@ -165,6 +167,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                     if (committed) {
                         
                         self.digitsToPassForward = self.invisibleDigits.text;
+                        
                         [self performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
                     }
                 }];
@@ -358,7 +361,10 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 -(IBAction)reset:(UIStoryboardSegue *)segue {
     NSLog(@"\n\n\n RESET WAS CALLED!!! \n\n\n");
-    //do stuff
+    // delegate call to destroy game
+    
+    
+    
 }
 
 #pragma mark - Navigation
@@ -371,7 +377,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     destVC.IDOfCurrentPlayer = self.IDOfCurrentUser;
     destVC.randomMonsterName = self.currentUser.monster;
     destVC.currentPlayerName = self.currentUser.name;
+    
+    self.currentRoom = destVC;
 }
-
 
 @end

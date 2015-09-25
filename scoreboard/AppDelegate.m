@@ -17,6 +17,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    _initalStoryboard = self.window.rootViewController.storyboard;
+    
+    self.initalStoryboard = sb;
     
     // Override point for customization after application launch.
     return YES;
@@ -44,31 +48,47 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)resetApp {
-    NSLog(@"resetApp has been called!");
+- (void)resetWindowToInitialView {
     
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SBSetupViewController *vc = [sb instantiateInitialViewController];
-    
-//    UIWindow *window = (UIWindow *)[[UIApplication sharedApplication].windows firstObject];
-//    [UIView transitionFromView:window.rootViewController.view
-//                        toView:vc.view
-//                      duration:0.65f
-//                       options:UIViewAnimationOptionTransitionCrossDissolve // transition animation
-//                    completion:^(BOOL finished){
-//                        window.rootViewController = vc;
-//                    }];
-    
-    
-    
-    for (id view in self.window.subviews) {
-        if ([view respondsToSelector:@selector(removeFromSuperview)]) {
-            [view removeFromSuperview];
-        }
+    NSLog(@"%ld", self.window.subviews.count);
+    NSLog(@"\n\n\n RESET HAPPENED!!!");
+    for (UIView* view in self.window.subviews)
+    {
+        [view removeFromSuperview];
     }
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = vc;
-    [self.window makeKeyAndVisible];
+    
+    NSLog(@"%ld", self.window.subviews.count);
+
+    
+    SBSetupViewController* initialScene = [self.initalStoryboard instantiateInitialViewController];
+    self.window.rootViewController = initialScene;
 }
+
+//- (void)resetApp {
+//    NSLog(@"resetApp has been called!");
+//    
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    SBSetupViewController *vc = [sb instantiateInitialViewController];
+//    
+////    UIWindow *window = (UIWindow *)[[UIApplication sharedApplication].windows firstObject];
+////    [UIView transitionFromView:window.rootViewController.view
+////                        toView:vc.view
+////                      duration:0.65f
+////                       options:UIViewAnimationOptionTransitionCrossDissolve // transition animation
+////                    completion:^(BOOL finished){
+////                        window.rootViewController = vc;
+////                    }];
+//    
+//    
+//    
+//    for (id view in self.window.subviews) {
+//        if ([view respondsToSelector:@selector(removeFromSuperview)]) {
+//            [view removeFromSuperview];
+//        }
+//    }
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window.rootViewController = vc;
+//    [self.window makeKeyAndVisible];
+//}
 
 @end

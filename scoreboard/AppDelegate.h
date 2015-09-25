@@ -10,7 +10,9 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIStoryboard *initalStoryboard;
 
 - (void)resetApp;
+- (void)resetWindowToInitialView;
 @end
 

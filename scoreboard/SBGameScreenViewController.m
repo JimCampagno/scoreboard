@@ -60,7 +60,7 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _room = [[SBRoom alloc] init];
+    self.room = [[SBRoom alloc] init];
     [self setupPickerViewsDelegateAndDataSource];
     [self setupListenerToEntireRoomOnFirebase];
     [self setupCurrentPlayerReferenceToFirebase];
@@ -98,16 +98,12 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
                          withCompletionBlock:^(NSError *error, Firebase *ref) {
                              
                              if (error) {
-                                 
+                        
                              } else {
                                  
                              }
                          }];
 }
-
-
-
-
 
 - (void)setupCurrentPlayerReferenceToFirebase {
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
@@ -354,7 +350,6 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
                                     repeats:NO];
 }
 
-
 - (void)pauseHeartTimer {
     [self.mainHeartScene pauseHearts];
 }
@@ -363,11 +358,28 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self.mainStarScene pauseStars];
 }
 
-
-
-
-- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
-    return NO;
+- (void)resetMethodHasBeenCalled {
+    NSLog(@"Reset Method has been called has been called!!");
+    
+    [Firebase goOffline];
+    
+    [self.currentPlayerRef removeValue];
+    
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 
+                                 
+                                 
+                                 
+                                 NSLog(@"In completion block of the last completion of view dismissing itself!");
+                             }];
 }
+
+
+#pragma mark - Commented Out Methods
+//- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
+//    return NO;
+//}
+
 
 @end

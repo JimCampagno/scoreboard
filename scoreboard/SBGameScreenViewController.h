@@ -26,4 +26,5 @@
 @property (strong, nonatomic) NSString *currentPlayerName;
 
 - (void)resetGame;
+- (void)resetMethodHasBeenCalled;
 @end

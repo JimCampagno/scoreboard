@@ -309,18 +309,37 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 
 #pragma mark - Action Methods
 
+
 - (void)cancelTapped:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"reset" sender:self];
+    __block SBGameScreenViewController *presentingVC = (SBGameScreenViewController *)self.presentingViewController;
+    
+    
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 
+                                 [presentingVC resetMethodHasBeenCalled];
+                                 
+                                 
+                                 
+                                 
+                                 
+                                 
+                                 NSLog(@"In completion of initial dismissal");
+                                 
+                             }];
+    
+//     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    [appDelegate resetWindowToInitialView];
 }
-- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
-    return NO;
-}
-
-
-
 
 - (void)goBackTapped:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+#pragma mark - Commented Out Methods
+//- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
+//    return NO;
+//}
 
 @end
