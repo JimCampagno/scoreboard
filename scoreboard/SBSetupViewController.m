@@ -132,18 +132,19 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
 }
 
+#pragma mark - Action Methods
+
 - (IBAction)connect:(id)sender {
     __weak typeof(self) tmpself = self;
     
     self.connectProp.enabled = NO;
     
-    NSDictionary *holdingDataHereToTest = @{ @"InvisibleDigits": [NSString stringWithFormat:@"%@", self.invisibleDigits.text] };
-    
-    NSLog(@"%@", holdingDataHereToTest);
-    
-    NSDictionary *anotherTest = @{ @"InvisibleDigits": [NSString stringWithFormat:@"%@", self.invisibleDigits.text] };
-    
-    NSLog(@"%@", anotherTest);
+    //    NSString *currentEnteredName = self.enterName.text;
+    //    if (currentEnteredName.length < 1) {
+    //        NSLog(@"There is no name entered inside of the textfield");
+    //    } else {
+    //        NSLog(@"All is good, entername Textfield meets our requirements.");
+    //    }
     
     
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -219,16 +220,45 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 }
 
 - (IBAction)joinGame:(id)sender {
-    self.isInJoinScreenMode = YES;
+    NSString *currentEnteredName = self.enterName.text;
+    if (currentEnteredName.length < 1) {
+        [self.enterName resignFirstResponder];
+        [self.invisibleDigits resignFirstResponder];
+        
+        [self displayAlertForNameNotEntered];
+    } else {
+        self.isInJoinScreenMode = YES;
+        
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                         }
+                         completion:^ (BOOL finished) {
+                             [self animateCreateButtonDown];
+                             [self animateJoinButtonDown];
+                         }];
+    }
     
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         //                         [self dismissKeyboard];
-                     }
-                     completion:^ (BOOL finished) {
-                         [self animateCreateButtonDown];
-                         [self animateJoinButtonDown];
-                     }];
+}
+
+- (void)displayAlertForNameNotEntered {
+    NSString *errorTitle = @"Name has not been entered.";
+    NSString *errorMessage = @"Please enter your name.";
+    
+    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:errorTitle
+                                                                        message:errorMessage
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *errorAlertAction = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction *action) {
+                                                                 
+                                                             }];
+    
+    [errorAlert addAction:errorAlertAction];
+    
+    [self presentViewController:errorAlert
+                       animated:YES
+                     completion:nil];
 }
 
 - (NSMutableArray *)holdingTheDigits {
