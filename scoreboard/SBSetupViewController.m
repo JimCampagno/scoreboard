@@ -205,17 +205,15 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 - (IBAction)createGame:(id)sender {
     __weak typeof(self) tmpself = self;
     
-    SBUser *currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
+    self.currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
     
     [FirebaseAPIclient createGameOnFirebaseWithRef:tmpself.firebaseRef
-                                              user:currentUser
+                                              user:self.currentUser
                                withCompletionBlock:^(BOOL success, NSString *digits) {
                                    
                                    if (success) {
                                        tmpself.digitsToPassForward = digits;
                                        tmpself.IDOfCurrentUser = @"0";
-                                       tmpself.randomMonsterName = currentUser.monster;
-                                       tmpself.currentPlayerName = self.enterName.text;
                                        [tmpself performSegueWithIdentifier:@"CreateGameSegue" sender:sender];
                                    }
                                    
