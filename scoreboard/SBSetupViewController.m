@@ -58,7 +58,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.displayJoinGameDigits.alpha = 0;
     
     UIView *viewToHandleDismissalOfKeyboardOnTap = [[UIView alloc] initWithFrame:self.view.frame];
-    viewToHandleDismissalOfKeyboardOnTap.backgroundColor = [UIColor redColor];
+    viewToHandleDismissalOfKeyboardOnTap.backgroundColor = [UIColor clearColor];
     [self.view insertSubview:viewToHandleDismissalOfKeyboardOnTap
                 belowSubview:self.displayJoinGameDigits];
 
@@ -87,7 +87,9 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     NSLog(@"DismissKeyBoard: is being called.");
     if ([self.enterName isFirstResponder]) {
         [self.enterName resignFirstResponder];
-    } else {
+    }
+    
+    if ([self.invisibleDigits isFirstResponder]) {
         [self.invisibleDigits resignFirstResponder];
     }
     
@@ -232,6 +234,10 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     } else {
         self.isInJoinScreenMode = YES;
         
+        if ([self.enterName isFirstResponder]) {
+            [self.enterName resignFirstResponder];
+        }
+        
         [UIView animateWithDuration:0.3
                          animations:^{
                          }
@@ -364,7 +370,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     __weak typeof(self) tmpself = self;
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game doesn't exist"
-                                                                   message:@"Please confirm that you're entering in the correct number."
+                                                                   message:@"Please confirm that you're entering in the correct numbers."
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
