@@ -59,6 +59,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)]];
     
+    [self.enterName setAutocapitalizationType:UITextAutocapitalizationTypeAllCharacters];
+    
     [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
     self.isInJoinScreenMode = NO;
 }
@@ -108,6 +110,13 @@ static const NSInteger kMaxNumberOfPlayers = 6;
             NSLog(@"Only numbers can be entered.");
             return NO;
         }
+    }
+    
+    NSRange lowercaseCharRange = [string rangeOfCharacterFromSet:[NSCharacterSet lowercaseLetterCharacterSet]];
+    if (lowercaseCharRange.location != NSNotFound) {
+        textField.text = [textField.text stringByReplacingCharactersInRange:range
+                                                                 withString:[string uppercaseString]];
+        return NO;
     }
     
     if ([textField isEqual:self.invisibleDigits]) {
