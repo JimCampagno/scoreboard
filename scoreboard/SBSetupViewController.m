@@ -54,26 +54,29 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)setupView {
     self.invisibleDigits.delegate = self;
+    self.enterName.delegate = self;
     self.displayJoinGameDigits.alpha = 0;
+    
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)]];
     
     [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
     self.isInJoinScreenMode = NO;
 }
 
-- (void)setupClearButtonForTapToDismiss {
-    UIButton *transparencyButton = [[UIButton alloc] initWithFrame:self.view.bounds];
-    
-    transparencyButton.backgroundColor = [UIColor clearColor];
-        
-    [self.view insertSubview:transparencyButton
-                belowSubview:self.displayJoinGameDigits];
-    
-    [transparencyButton addTarget:self
-                           action:@selector(dismissKeyboard:)
-                 forControlEvents:UIControlEventTouchUpInside];
-}
-
--(void)dismissKeyboard:(UIButton *)sender {
+//- (void)setupClearButtonForTapToDismiss {
+//    UIButton *transparencyButton = [[UIButton alloc] initWithFrame:self.view.bounds];
+//
+//    transparencyButton.backgroundColor = [UIColor clearColor];
+//
+//    [self.view insertSubview:transparencyButton
+//                belowSubview:self.displayJoinGameDigits];
+//
+//    [transparencyButton addTarget:self
+//                           action:@selector(dismissKeyboard:)
+//                 forControlEvents:UIControlEventTouchUpInside];
+//}
+//
+-(void)dismissKeyboard:(id)sender {
     NSLog(@"DismissKeyBoard: is being called.");
     if ([self.enterName isFirstResponder]) {
         [self.enterName resignFirstResponder];
@@ -87,48 +90,54 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     }
 }
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([textField isEqual:self.enterName]) {
+        if (self.isInJoinScreenMode) {
+            self.isInJoinScreenMode = NO;
+            [self bringButtonsBackAfterCancelTapped];
+            [self.enterName becomeFirstResponder];
+        }
+    }
+}
 
-    NSDictionary *beforeAll = @{@"textfield text": textField.text,
-                                @"range": [NSString stringWithFormat:@"location: %ld / Length: %ld", range.location, range.length],
-                                @"string": string };
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    NSLog(@"%@", beforeAll);
-    
-    NSLog(@"Holding The DIgits ==BEFORE==: %@", self.holdingTheDigits);
-    
-    
-    
-    
-    if ([string isEqualToString:@""]) {
-        if ([self.holdingTheDigits count] >= 1) {
+    if ([textField isEqual:self.invisibleDigits]) {
+        
+        if ([string isEqualToString:@""]) {
+            if ([self.holdingTheDigits count] >= 1) {
+                UILabel *currentLabel = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
+                currentLabel.text = @"-";
+                [self.holdingTheDigits removeLastObject];
+                self.connectProp.enabled = NO;
+            }
+            
+        } else if ([self.holdingTheDigits count] < 6) {
+            [self.holdingTheDigits addObject:string];
             UILabel *currentLabel = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
-            currentLabel.text = @"-";
-            [self.holdingTheDigits removeLastObject];
-            self.connectProp.enabled = NO;
+            currentLabel.text = string;
+            
+            if ([self.holdingTheDigits count] == 6) {
+                self.connectProp.enabled = YES;
+            }
         }
         
-    } else if ([self.holdingTheDigits count] < 6) {
-        [self.holdingTheDigits addObject:string];
-        UILabel *currentLabel = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
-        currentLabel.text = string;
         
-        if ([self.holdingTheDigits count] == 6) {
-            self.connectProp.enabled = YES;
-        }
+        NSLog(@"Holding The DIgits ==AFTER==: %@", self.holdingTheDigits);
+        
+        
+        BOOL isAllGood = (textField.text.length >= 6 && range.length == 0) ? NO : YES;
+        
+        NSLog(@"RETURN IS %@\n\n\n\n\n", @(isAllGood));
+        return isAllGood;
+    } else {
+        
+        return YES;
     }
     
     
-    NSLog(@"Holding The DIgits ==AFTER==: %@", self.holdingTheDigits);
-
-
-    BOOL isAllGood = (textField.text.length >= 6 && range.length == 0) ? NO : YES;
     
-    NSLog(@"RETURN IS %@\n\n\n\n\n", @(isAllGood));
-    return isAllGood;
-
-
-
 }
 
 - (IBAction)connect:(id)sender {
@@ -142,7 +151,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
     NSLog(@"%@", anotherTest);
     
-
+    
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         
         if ([snapshot exists]) {
@@ -320,6 +329,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 }
 
 - (IBAction)cancel:(id)sender {
+    NSLog(@"Cancel has been tapped.");
     [self bringButtonsBackAfterCancelTapped];
 }
 
@@ -344,7 +354,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                                                           }];
     
     [alert addAction:defaultAction];
-
+    
     [self presentViewController:alert
                        animated:YES
                      completion:^{
@@ -354,7 +364,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)displayGameIsFullAlert {
     __weak typeof(self) tmpself = self;
-
+    
     NSString *errorMSG = [NSString stringWithFormat:@"The game # %@ is full, it contains six players.", tmpself.invisibleDigits.text];
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game is full"
@@ -365,7 +375,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
                                                               
-                                                        
+                                                              
                                                           }];
     [alert addAction:defaultAction];
     
