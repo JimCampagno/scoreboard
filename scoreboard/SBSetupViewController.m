@@ -104,7 +104,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     if ([textField isEqual:self.invisibleDigits]) {
-        
         if ([string isEqualToString:@""]) {
             if ([self.holdingTheDigits count] >= 1) {
                 UILabel *currentLabel = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
@@ -123,14 +122,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
             }
         }
         
-        
-        NSLog(@"Holding The DIgits ==AFTER==: %@", self.holdingTheDigits);
-        
-        
-        BOOL isAllGood = (textField.text.length >= 6 && range.length == 0) ? NO : YES;
-        
-        NSLog(@"RETURN IS %@\n\n\n\n\n", @(isAllGood));
-        return isAllGood;
+        return (textField.text.length >= 6 && range.length == 0) ? NO : YES;
     } else {
         
         return YES;
@@ -142,6 +134,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (IBAction)connect:(id)sender {
     __weak typeof(self) tmpself = self;
+    
+    self.connectProp.enabled = NO;
     
     NSDictionary *holdingDataHereToTest = @{ @"InvisibleDigits": [NSString stringWithFormat:@"%@", self.invisibleDigits.text] };
     
