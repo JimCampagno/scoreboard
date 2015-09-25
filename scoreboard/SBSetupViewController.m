@@ -103,6 +103,13 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
+    if (textField.keyboardType == UIKeyboardTypeNumberPad) {
+        if ([string rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound) {
+            NSLog(@"Only numbers can be entered.");
+            return NO;
+        }
+    }
+    
     if ([textField isEqual:self.invisibleDigits]) {
         if ([string isEqualToString:@""]) {
             if ([self.holdingTheDigits count] >= 1) {
@@ -123,40 +130,30 @@ static const NSInteger kMaxNumberOfPlayers = 6;
         }
         
         return (textField.text.length >= 6 && range.length == 0) ? NO : YES;
+        
     } else {
+        NSString *updatedText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        if (updatedText.length > 10) {
+            return NO;
+        }
         
         return YES;
     }
-    
-    
-    
 }
 
 #pragma mark - Action Methods
 
 - (IBAction)connect:(id)sender {
     __weak typeof(self) tmpself = self;
-    
     self.connectProp.enabled = NO;
     
-    //    NSString *currentEnteredName = self.enterName.text;
-    //    if (currentEnteredName.length < 1) {
-    //        NSLog(@"There is no name entered inside of the textfield");
-    //    } else {
-    //        NSLog(@"All is good, entername Textfield meets our requirements.");
-    //    }
-    
-    
     [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        
         if ([snapshot exists]) {
-            
             if (snapshot.childrenCount == kMaxNumberOfPlayers) {
-                
                 [tmpself displayGameIsFullAlert];
             } else {
+                
                 [[tmpself.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-                    
                     if ([currentData hasChildren]) {
                         tmpself.currentUser = [[SBUser alloc] initWithName:tmpself.enterName.text
                                                                monsterName:[SBConstants randomMonsterName]
@@ -172,27 +169,19 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                         
                         [[currentData childDataByAppendingPath:tmpself.IDOfCurrentUser] setValue:newUser];
                     }
-                    
                     return [FTransactionResult successWithValue:currentData];
-                    
                 } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
-                    
                     if (committed) {
-                        
                         tmpself.digitsToPassForward = tmpself.invisibleDigits.text;
-                        [self bringButtonsBackAfterCancelTapped];
-                        
+                        [tmpself bringButtonsBackAfterCancelTapped];
                         [tmpself performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
                     }
                 }];
             }
         } else {
-            
             [tmpself displayGameDoesntExistAlert];
         }
     } withCancelBlock:^(NSError *error) {
-        //this doesn't appear to work when I'm in the subway with no internet connection.
-        //Put up alert box stating what the error is or that there was a problem connecting to the Network.
         NSLog(@"We have an error in the connect method: %@", error.description);
     }];
 }
