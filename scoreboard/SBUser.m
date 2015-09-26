@@ -11,7 +11,6 @@
 @implementation SBUser
 
 - (instancetype)init {
-    
     return [self initWithName:@"" monsterName:@"" hp:@0 vp:@0];
 }
 
@@ -34,7 +33,6 @@
 }
 
 - (BOOL)didAttributesChangeWithUserOnServer:(SBUser *)user {
-
     BOOL nameIsEqual = [self.name isEqualToString:user.name];
     BOOL monsterNameIsEqual = [self.monster isEqualToString:user.monster];
     BOOL hpIsEqual = [self.hp integerValue] == [user.hp integerValue];
@@ -44,7 +42,6 @@
 }
 
 - (void)updateAttributesToMatchUser:(SBUser *)user {
-    
     self.name = user.name;
     self.monster = user.monster;
     self.hp = user.hp;

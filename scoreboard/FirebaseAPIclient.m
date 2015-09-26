@@ -16,36 +16,21 @@
                 withCompletionBlock:(void (^)(BOOL success, NSString *digits))block
                    withFailureBlock:(void (^)(NSError *error))failureBlock {
     
-    
-    
     NSString *randomNumber = [SBConstants randomRoomNumber];
     
-    
     [ref runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-        
         NSArray *newRoom = @[ @{ @"name": user.name,
                                  @"monster": user.monster,
                                  @"hp": user.hp,
                                  @"vp": user.vp } ];
         
-        
         [[currentData childDataByAppendingPath:randomNumber] setValue:newRoom];
         
         return [FTransactionResult successWithValue:currentData];
-        
     } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
-        
-        
         if (committed) {
-            
-            NSLog(@"We've been commited.\n");
-            
             block(YES, randomNumber);
-            
         } else {
-            
-            NSLog(@"We're a FAILURE!\n");
-            
             failureBlock(error);
         }
     }];

@@ -13,11 +13,8 @@
 
 
 - (instancetype)initWithUser:(SBUser *)user {
-    
     self = [super init];
-    
     if (self) {
-        
         [self.users addObject:user];
     }
     
