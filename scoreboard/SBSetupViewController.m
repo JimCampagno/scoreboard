@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *connectProp;
 @property (weak, nonatomic) IBOutlet UIButton *joinGameProp;
 @property (weak, nonatomic) IBOutlet UIButton *createGameProp;
+@property (weak, nonatomic) IBOutlet UIButton *cancelProp;
 
 @property (strong, nonatomic) NSString *digitsToPassForward;
 @property (strong, nonatomic) NSString *IDOfCurrentUser;
@@ -51,23 +52,14 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     [self setupTheLabelDisplayingTheEnteredDigits];
     [self setupJoinGameButton];
     [self setupCreateGameButton];
+    [self setupEnterNameLabel];
+    [self setupTheDisplayJoinGameDigits];
     
     self.firebaseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
     self.invisibleDigits.delegate = self;
-    self.enterName.delegate = self;
-    self.displayJoinGameDigits.alpha = 0;
     self.isInJoinScreenMode = NO;
 //    self.view.backgroundColor = [UIColor colorWithRed:0.26 green:0.43 blue:0.56 alpha:1.0];
     self.view.backgroundColor = [UIColor colorWithRed:0.8 green:0.82 blue:0.91 alpha:1];
-    
-    
-    if ([self.enterName respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [UIColor colorWithRed:0.44 green:0.46 blue:0.49 alpha:1];
-        self.enterName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Enter name here"
-                                                                               attributes:@{NSForegroundColorAttributeName: color}];
-    }
-    
-    [self.enterName setAutocapitalizationType:UITextAutocapitalizationTypeAllCharacters];
 }
 
 //- (void)setupClearButtonForTapToDismiss {
@@ -114,6 +106,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)setupTheLabelDisplayingTheEnteredDigits {
     for (UILabel *label in self.joinGameNumbers) {
+        label.textColor = [UIColor whiteColor];
         label.text = @"-";
     }
 }
@@ -125,6 +118,26 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                 belowSubview:self.displayJoinGameDigits];
     
     [viewToHandleDismissalOfKeyboardOnTap addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)]];
+}
+
+- (void)setupEnterNameLabel {
+    self.enterName.delegate = self;
+    
+    if ([self.enterName respondsToSelector:@selector(setAttributedPlaceholder:)]) {
+        UIColor *color = [UIColor colorWithRed:0.35 green:0.38 blue:0.46 alpha:1];
+        self.enterName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Enter name here"
+                                                                               attributes:@{NSForegroundColorAttributeName: color}];
+    }
+    
+    [self.enterName setAutocapitalizationType:UITextAutocapitalizationTypeAllCharacters];
+}
+
+- (void)setupTheDisplayJoinGameDigits {
+    self.displayJoinGameDigits.alpha = 0;
+    self.displayJoinGameDigits.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    self.displayJoinGameDigits.layer.borderColor = [UIColor blackColor].CGColor;
+    self.displayJoinGameDigits.layer.borderWidth = 0.2f;
+    self.displayJoinGameDigits.layer.cornerRadius = 10.0f;
 }
 
 -(void)dismissKeyboard:(id)sender {

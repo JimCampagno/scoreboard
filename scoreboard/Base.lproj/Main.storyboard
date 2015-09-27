@@ -178,6 +178,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="cancelProp" destination="8ob-hI-Zt8" id="rFl-0W-aTz"/>
                         <outlet property="connectProp" destination="pUx-NI-haz" id="2Re-QT-dxR"/>
                         <outlet property="createGameProp" destination="ueS-eC-LeI" id="CBn-aT-EVb"/>
                         <outlet property="displayJoinGameDigits" destination="5VM-md-5Mi" id="cgO-MF-SxX"/>
