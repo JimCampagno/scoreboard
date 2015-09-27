@@ -147,7 +147,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     
     UILabel *roomNumber = [UILabel new];
     roomNumber.textAlignment = NSTextAlignmentCenter;
-    roomNumber.text = @"ROOM# 699737";
+    roomNumber.text = [NSString stringWithFormat:@"ROOM# %@", self.roomID];
     [roomNumber setFont:[UIFont systemFontOfSize:24]];
     roomNumber.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     

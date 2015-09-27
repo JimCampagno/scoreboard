@@ -12,6 +12,7 @@
 #import "SBHeartScene.h"
 #import "SBStarScene.h"
 #import "SBSetupViewController.h"
+#import "SBChangeMonsterViewController.h"
 
 #import <Masonry.h>
 
@@ -381,6 +382,13 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
                                  [presentingVC turnFireBaseOnline];
                                  NSLog(@"In completion block of the last completion of view dismissing itself!");
                              }];
+}
+
+#pragma mark - Prepare For Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    SBChangeMonsterViewController *destVC = segue.destinationViewController;
+    destVC.roomID = [self.roomDigits copy];
 }
 
 

@@ -29,7 +29,6 @@
 		7D45F3921B126AA30053F47F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F3901B126AA30053F47F /* LaunchScreen.xib */; };
 		7D45F39E1B126AA30053F47F /* scoreboardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F39D1B126AA30053F47F /* scoreboardTests.m */; };
 		7D45F3AC1B1271120053F47F /* SBSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3AB1B1271120053F47F /* SBSetupViewController.m */; };
-		7D45F3AF1B1286120053F47F /* SBUILabelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3AE1B1286120053F47F /* SBUILabelHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,8 +80,6 @@
 		7D45F39D1B126AA30053F47F /* scoreboardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = scoreboardTests.m; sourceTree = "<group>"; };
 		7D45F3AA1B1271120053F47F /* SBSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSetupViewController.h; sourceTree = "<group>"; };
 		7D45F3AB1B1271120053F47F /* SBSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSetupViewController.m; sourceTree = "<group>"; };
-		7D45F3AD1B1286120053F47F /* SBUILabelHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUILabelHelper.h; sourceTree = "<group>"; };
-		7D45F3AE1B1286120053F47F /* SBUILabelHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUILabelHelper.m; sourceTree = "<group>"; };
 		8AC5529345ED1248A6EDE297 /* Pods-scoreboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scoreboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-scoreboard/Pods-scoreboard.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,8 +131,6 @@
 		7D1663131B13B188002A2BF0 /* API Client/Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7D45F3AD1B1286120053F47F /* SBUILabelHelper.h */,
-				7D45F3AE1B1286120053F47F /* SBUILabelHelper.m */,
 				7D16630C1B136B01002A2BF0 /* FirebaseAPIclient.h */,
 				7D16630D1B136B01002A2BF0 /* FirebaseAPIclient.m */,
 			);
@@ -409,7 +404,6 @@
 				5B83D7371B65C56E0003CCAC /* SBGameScreenViewController.m in Sources */,
 				5BB2D0C01B83C2C100516593 /* SBChangeMonsterViewController.m in Sources */,
 				7D16630E1B136B01002A2BF0 /* FirebaseAPIclient.m in Sources */,
-				7D45F3AF1B1286120053F47F /* SBUILabelHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

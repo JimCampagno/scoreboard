@@ -7,7 +7,6 @@
 //
 
 #import "SBSetupViewController.h"
-#import "SBUILabelHelper.h"
 #import <Firebase/Firebase.h>
 #import "SBConstants.h"
 #import "FirebaseAPIclient.h"
@@ -48,26 +47,18 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupView];
+    [self setupTheViewToHandleTheDismissingOfTheKeyboardOnTap];
+    [self setupTheLabelDisplayingTheEnteredDigits];
+    [self setupJoinGameButton];
+    [self setupCreateGameButton];
+    
     self.firebaseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
-}
-
-- (void)setupView {
     self.invisibleDigits.delegate = self;
     self.enterName.delegate = self;
     self.displayJoinGameDigits.alpha = 0;
-    
-    UIView *viewToHandleDismissalOfKeyboardOnTap = [[UIView alloc] initWithFrame:self.view.frame];
-    viewToHandleDismissalOfKeyboardOnTap.backgroundColor = [UIColor clearColor];
-    [self.view insertSubview:viewToHandleDismissalOfKeyboardOnTap
-                belowSubview:self.displayJoinGameDigits];
-
-    [viewToHandleDismissalOfKeyboardOnTap addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)]];
+    self.isInJoinScreenMode = NO;
     
     [self.enterName setAutocapitalizationType:UITextAutocapitalizationTypeAllCharacters];
-    
-    [SBUILabelHelper setupBorderOfLabelsWithArrayOfLabels:self.joinGameNumbers];
-    self.isInJoinScreenMode = NO;
 }
 
 //- (void)setupClearButtonForTapToDismiss {
@@ -83,6 +74,50 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 //                 forControlEvents:UIControlEventTouchUpInside];
 //}
 //
+
+- (void)setupJoinGameButton {
+    self.joinGameProp.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    self.joinGameProp.layer.borderColor = [UIColor blackColor].CGColor;
+    self.joinGameProp.layer.borderWidth = 0.2f;
+    self.joinGameProp.layer.cornerRadius = 10.0f;
+    
+    self.joinGameProp.titleLabel.font = [UIFont systemFontOfSize:18.0];
+    [self.joinGameProp setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
+    
+    self.joinGameProp.titleLabel.numberOfLines = 1;
+    self.joinGameProp.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.joinGameProp.titleLabel.lineBreakMode = NSLineBreakByClipping;
+}
+
+- (void)setupCreateGameButton {
+    self.createGameProp.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    self.createGameProp.layer.borderColor = [UIColor blackColor].CGColor;
+    self.createGameProp.layer.borderWidth = 0.2f;
+    self.createGameProp.layer.cornerRadius = 10.0f;
+    
+    self.createGameProp.titleLabel.font = [UIFont systemFontOfSize:18.0];
+    [self.createGameProp setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
+    
+    self.createGameProp.titleLabel.numberOfLines = 1;
+    self.createGameProp.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.createGameProp.titleLabel.lineBreakMode = NSLineBreakByClipping;
+}
+
+- (void)setupTheLabelDisplayingTheEnteredDigits {
+    for (UILabel *label in self.joinGameNumbers) {
+        label.text = @"-";
+    }
+}
+
+- (void)setupTheViewToHandleTheDismissingOfTheKeyboardOnTap {
+    UIView *viewToHandleDismissalOfKeyboardOnTap = [[UIView alloc] initWithFrame:self.view.frame];
+    viewToHandleDismissalOfKeyboardOnTap.backgroundColor = [UIColor clearColor];
+    [self.view insertSubview:viewToHandleDismissalOfKeyboardOnTap
+                belowSubview:self.displayJoinGameDigits];
+    
+    [viewToHandleDismissalOfKeyboardOnTap addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)]];
+}
+
 -(void)dismissKeyboard:(id)sender {
     NSLog(@"DismissKeyBoard: is being called.");
     if ([self.enterName isFirstResponder]) {

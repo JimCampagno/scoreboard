@@ -10,4 +10,6 @@
 
 @interface SBChangeMonsterViewController : UIViewController
 
+@property (nonatomic, strong) NSString *roomID;
+
 @end
