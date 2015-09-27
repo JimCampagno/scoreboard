@@ -57,6 +57,15 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.enterName.delegate = self;
     self.displayJoinGameDigits.alpha = 0;
     self.isInJoinScreenMode = NO;
+//    self.view.backgroundColor = [UIColor colorWithRed:0.26 green:0.43 blue:0.56 alpha:1.0];
+    self.view.backgroundColor = [UIColor colorWithRed:0.8 green:0.82 blue:0.91 alpha:1];
+    
+    
+    if ([self.enterName respondsToSelector:@selector(setAttributedPlaceholder:)]) {
+        UIColor *color = [UIColor colorWithRed:0.44 green:0.46 blue:0.49 alpha:1];
+        self.enterName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Enter name here"
+                                                                               attributes:@{NSForegroundColorAttributeName: color}];
+    }
     
     [self.enterName setAutocapitalizationType:UITextAutocapitalizationTypeAllCharacters];
 }
@@ -146,19 +155,11 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
     if (textField.keyboardType == UIKeyboardTypeNumberPad) {
         if ([string rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound) {
-            NSLog(@"Only numbers can be entered.");
+            
             return NO;
         }
-    }
-    
-    NSRange lowercaseCharRange = [string rangeOfCharacterFromSet:[NSCharacterSet lowercaseLetterCharacterSet]];
-    if (lowercaseCharRange.location != NSNotFound) {
-        textField.text = [textField.text stringByReplacingCharactersInRange:range
-                                                                 withString:[string uppercaseString]];
-        return NO;
     }
     
     if ([textField isEqual:self.invisibleDigits]) {
@@ -179,12 +180,20 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                 self.connectProp.enabled = YES;
             }
         }
-        
         return (textField.text.length >= 6 && range.length == 0) ? NO : YES;
         
     } else {
+        
         NSString *updatedText = [textField.text stringByReplacingCharactersInRange:range withString:string];
         if (updatedText.length > 10) {
+            
+            return NO;
+        }
+        
+        NSRange lowercaseCharRange = [string rangeOfCharacterFromSet:[NSCharacterSet lowercaseLetterCharacterSet]];
+        if (lowercaseCharRange.location != NSNotFound) {
+            textField.text = [textField.text stringByReplacingCharactersInRange:range
+                                                                     withString:[string uppercaseString]];
             return NO;
         }
         
@@ -377,7 +386,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)bringButtonsBackAfterCancelTapped {
     __weak typeof(self) tmpself = self;
-    
     
     [self.view endEditing:YES];
     
