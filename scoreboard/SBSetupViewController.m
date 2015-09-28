@@ -62,20 +62,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.view.backgroundColor = [UIColor colorWithRed:0.8 green:0.82 blue:0.91 alpha:1];
 }
 
-//- (void)setupClearButtonForTapToDismiss {
-//    UIButton *transparencyButton = [[UIButton alloc] initWithFrame:self.view.bounds];
-//
-//    transparencyButton.backgroundColor = [UIColor clearColor];
-//
-//    [self.view insertSubview:transparencyButton
-//                belowSubview:self.displayJoinGameDigits];
-//
-//    [transparencyButton addTarget:self
-//                           action:@selector(dismissKeyboard:)
-//                 forControlEvents:UIControlEventTouchUpInside];
-//}
-//
-
 - (void)setupJoinGameButton {
     self.joinGameProp.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     self.joinGameProp.layer.borderColor = [UIColor blackColor].CGColor;
