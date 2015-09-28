@@ -54,23 +54,12 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     [self setupCreateGameButton];
     [self setupEnterNameLabel];
     [self setupTheDisplayJoinGameDigits];
+    [self setupTheConnectAndCancelButtons];
     
     self.firebaseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
     self.invisibleDigits.delegate = self;
     self.isInJoinScreenMode = NO;
-    //    self.view.backgroundColor = [UIColor colorWithRed:0.26 green:0.43 blue:0.56 alpha:1.0];
     self.view.backgroundColor = [UIColor colorWithRed:0.8 green:0.82 blue:0.91 alpha:1];
-    
-    CGFloat normalStateAlphaFloatValue = 1;
-    CGFloat disabledStateAlphaFloatValue = 0.2;
-    
-    UIColor *normalStateColor = [UIColor colorWithRed:0.95 green:0.53 blue:0.19 alpha:normalStateAlphaFloatValue];
-    UIColor *disabledStateColor = [UIColor colorWithRed:0.95 green:0.53 blue:0.19 alpha:disabledStateAlphaFloatValue];
-    
-    [self.connectProp setTitleColor:normalStateColor forState:UIControlStateNormal];
-    [self.connectProp setTitleColor:disabledStateColor forState:UIControlStateDisabled];
-    
-    [self.cancelProp setTitleColor:normalStateColor forState:UIControlStateNormal];
 }
 
 //- (void)setupClearButtonForTapToDismiss {
@@ -117,7 +106,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)setupTheLabelDisplayingTheEnteredDigits {
     for (UILabel *label in self.joinGameNumbers) {
-        label.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1];
+        label.textColor = [UIColor colorWithRed:1 green:0.8 blue:0 alpha:1];
         label.text = @"-";
     }
 }
@@ -149,6 +138,21 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.displayJoinGameDigits.layer.borderColor = [UIColor blackColor].CGColor;
     self.displayJoinGameDigits.layer.borderWidth = 0.2f;
     self.displayJoinGameDigits.layer.cornerRadius = 10.0f;
+}
+
+- (void)setupTheConnectAndCancelButtons {
+    UIColor *colorToUseHere = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
+    UIColor *backgroundColorsForBothButtons = [UIColor clearColor];
+    
+    UIColor *normalStateColor = [colorToUseHere copy];
+    UIColor *disabledStateColor= [[colorToUseHere copy] colorWithAlphaComponent:0.4];
+    
+    [self.connectProp setTitleColor:normalStateColor forState:UIControlStateNormal];
+    [self.connectProp setTitleColor:disabledStateColor forState:UIControlStateDisabled];
+    self.connectProp.backgroundColor = backgroundColorsForBothButtons;
+    
+    [self.cancelProp setTitleColor:normalStateColor forState:UIControlStateNormal];
+    self.cancelProp.backgroundColor = backgroundColorsForBothButtons;
 }
 
 -(void)dismissKeyboard:(id)sender {
