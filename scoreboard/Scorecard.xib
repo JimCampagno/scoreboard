@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -24,6 +24,7 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monster Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkQ-Nh-BIf">
                     <rect key="frame" x="0.0" y="0.0" width="260" height="20"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="OZt-5U-LkM" userLabel="Monster Name - Height"/>
                     </constraints>
@@ -33,6 +34,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfw-sK-C8Z">
                     <rect key="frame" x="0.0" y="303" width="260" height="20"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="kuP-EV-GQ6" userLabel="Player Name - Height"/>
                     </constraints>
@@ -42,6 +44,7 @@
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Dq-2HO" userLabel="Monster Image">
                     <rect key="frame" x="0.0" y="28" width="260" height="267"/>
+                    <animations/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE" userLabel="MAIN - holding top/bottom PV">
                     <rect key="frame" x="260" y="0.0" width="174" height="323"/>
@@ -49,10 +52,12 @@
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
                             <rect key="frame" x="20" y="16" width="154" height="130"/>
                             <subviews>
-                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-aE-agV" userLabel="Top Picker View">
+                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-aE-agV" userLabel="Top Picker View">
                                     <rect key="frame" x="-83" y="-16" width="320" height="162"/>
+                                    <animations/>
                                 </pickerView>
                             </subviews>
+                            <animations/>
                             <constraints>
                                 <constraint firstItem="Dga-aE-agV" firstAttribute="centerX" secondItem="MhE-Mp-bZm" secondAttribute="centerX" id="QsS-D3-EqX" userLabel="Top Picker View - Center X"/>
                                 <constraint firstItem="Dga-aE-agV" firstAttribute="centerY" secondItem="MhE-Mp-bZm" secondAttribute="centerY" id="l5l-nh-HLg" userLabel="Top Picker View - Center Y"/>
@@ -60,6 +65,7 @@
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="Ueg-FQ-rtm">
                             <rect key="frame" x="0.0" y="233" width="20" height="20"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="OYU-bb-JcA"/>
                                 <constraint firstAttribute="width" constant="20" id="Ool-f1-M7O"/>
@@ -67,6 +73,7 @@
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="YZu-pP-hk8">
                             <rect key="frame" x="0.0" y="71" width="20" height="20"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="9iY-fR-b2C"/>
                                 <constraint firstAttribute="width" constant="20" id="ydp-F0-bwZ"/>
@@ -75,16 +82,19 @@
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
                             <rect key="frame" x="20" y="178" width="154" height="130"/>
                             <subviews>
-                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
+                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
                                     <rect key="frame" x="-83" y="-16" width="320" height="162"/>
+                                    <animations/>
                                 </pickerView>
                             </subviews>
+                            <animations/>
                             <constraints>
                                 <constraint firstItem="Xe3-3W-iEg" firstAttribute="centerX" secondItem="sCA-Ec-FRv" secondAttribute="centerX" id="CMN-rx-naz" userLabel="Bottom Picker View - Center X"/>
                                 <constraint firstItem="Xe3-3W-iEg" firstAttribute="centerY" secondItem="sCA-Ec-FRv" secondAttribute="centerY" id="oUS-wY-xHR" userLabel="Bottom Picker View - Center Y"/>
                             </constraints>
                         </view>
                     </subviews>
+                    <animations/>
                     <constraints>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="leading" secondItem="Ueg-FQ-rtm" secondAttribute="trailing" id="6h7-XM-a53" userLabel="Bottom PV View - Leading"/>
                         <constraint firstItem="Ueg-FQ-rtm" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="DhR-ZJ-BaT" userLabel="Heart - Center Y"/>
@@ -102,6 +112,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D71-Gh-ZqA" userLabel="heartParticle" customClass="SKView">
                     <rect key="frame" x="240.5" y="212" width="60" height="60"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="KHJ-Nz-43Q"/>
@@ -110,6 +121,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGY-hD-Sgh" userLabel="starParticle" customClass="SKView">
                     <rect key="frame" x="240.5" y="51.5" width="60" height="60"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="Ffd-l4-Olb"/>
@@ -117,6 +129,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" red="0.10980392156862745" green="0.14509803921568629" blue="0.21568627450980393" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1qm-Hj-cxm" userLabel="Monster Image - Center Y"/>

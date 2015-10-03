@@ -12,8 +12,8 @@
 
 @interface Scorecard ()
 
-@property (nonatomic, strong) SBHeartScene *heartScene;
-@property (nonatomic, strong) SBStarScene *starScene;
+//@property (nonatomic, strong) SBHeartScene *heartScene;
+//@property (nonatomic, strong) SBStarScene *starScene;
 @property (nonatomic) BOOL firstTimeThrough;
 
 @end
@@ -56,21 +56,21 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     [self addSubview:self.view];
     [self setNeedsUpdateConstraints];
     
-    self.heartParticleView.allowsTransparency = YES;
-    self.heartParticleView.backgroundColor = [UIColor clearColor];
-    self.heartScene = [SBHeartScene sceneWithSize:self.heartParticleView.bounds.size];
-    self.heartScene.scaleMode = SKSceneScaleModeAspectFill;
-    [self.heartParticleView presentScene:self.heartScene];
-    [self.heartScene runHearts];
-    [self.heartScene pauseHearts];
-    
-    self.starParticleView.allowsTransparency = YES;
-    self.starParticleView.backgroundColor = [UIColor clearColor];
-    self.starScene = [SBStarScene sceneWithSize:self.starParticleView.bounds.size];
-    self.starScene.scaleMode = SKSceneScaleModeAspectFill;
-    [self.starParticleView presentScene:self.starScene];
-    [self.starScene runStars];
-    [self.starScene pauseStars];
+//    self.heartParticleView.allowsTransparency = YES;
+//    self.heartParticleView.backgroundColor = [UIColor clearColor];
+//    self.heartScene = [SBHeartScene sceneWithSize:self.heartParticleView.bounds.size];
+//    self.heartScene.scaleMode = SKSceneScaleModeAspectFill;
+//    [self.heartParticleView presentScene:self.heartScene];
+//    [self.heartScene runHearts];
+//    [self.heartScene pauseHearts];
+//    
+//    self.starParticleView.allowsTransparency = YES;
+//    self.starParticleView.backgroundColor = [UIColor clearColor];
+//    self.starScene = [SBStarScene sceneWithSize:self.starParticleView.bounds.size];
+//    self.starScene.scaleMode = SKSceneScaleModeAspectFill;
+//    [self.starParticleView presentScene:self.starScene];
+//    [self.starScene runStars];
+//    [self.starScene pauseStars];
 }
 
 - (void)updateConstraints {
@@ -154,7 +154,7 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
     
     if ((currentHealthFromPickerView != [user.hp integerValue]) && !self.firstTimeThrough) {
-        [self.heartScene runHearts];
+//        [self.heartScene runHearts];
         [NSTimer scheduledTimerWithTimeInterval:kLengthOfHeartScene
                                          target:self
                                        selector:@selector(pauseHeartTimer)
@@ -163,7 +163,7 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     }
     
     if ((currentVictoryFromPickerView != [user.vp integerValue]) && !self.firstTimeThrough) {
-        [self.starScene runStars];
+//        [self.starScene runStars];
         [NSTimer scheduledTimerWithTimeInterval:kLengthOfStarScene
                                          target:self
                                        selector:@selector(pauseStarTimer)
@@ -174,11 +174,11 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
 }
 
 - (void)pauseHeartTimer {
-    [self.heartScene pauseHearts];
+//    [self.heartScene pauseHearts];
 }
 
 - (void)pauseStarTimer {
-    [self.starScene pauseStars];
+//    [self.starScene pauseStars];
 }
 
 @end

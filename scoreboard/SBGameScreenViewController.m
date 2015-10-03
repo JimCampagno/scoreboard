@@ -30,8 +30,8 @@
 @property (strong, nonatomic) NSMutableArray *hpPointsOnPicker;
 @property (weak, nonatomic) IBOutlet SKView *mainHeartParticleView;
 @property (weak, nonatomic) IBOutlet SKView *mainStarParticleView;
-@property (nonatomic, strong) SBHeartScene *mainHeartScene;
-@property (nonatomic, strong) SBStarScene *mainStarScene;
+//@property (nonatomic, strong) SBHeartScene *mainHeartScene;
+//@property (nonatomic, strong) SBStarScene *mainStarScene;
 
 
 //All other player cards (including main)
@@ -118,35 +118,35 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     [self.healthPoints selectRow:[self.currentPlayer.hp integerValue] inComponent:0 animated:YES];
     [self.victoryPoints selectRow:[self.currentPlayer.vp integerValue] inComponent:0 animated:YES];
     
-    [self setupMainHeartParticleView];
-    [self setupMainStarParticleView];
+//    [self setupMainHeartParticleView];
+//    [self setupMainStarParticleView];
 }
 
-- (void)setupMainHeartParticleView {
-    self.mainHeartParticleView.allowsTransparency = YES;
-    self.mainHeartParticleView.backgroundColor = [UIColor clearColor];
-    self.mainHeartScene = [SBHeartScene sceneWithSize:self.mainHeartParticleView.bounds.size];
-    self.mainHeartScene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    [self.mainHeartParticleView presentScene:self.mainHeartScene];
-    [self.mainHeartScene runHearts];
-    [self.mainHeartScene pauseHearts];
-    [self.mainHeartScene.heart setParticleSize:CGSizeMake(300, 300)];
-    [self.mainHeartScene.heart setParticlePositionRange:CGVectorMake(50, 50)];
-}
-
-- (void)setupMainStarParticleView {
-    self.mainStarParticleView.allowsTransparency = YES;
-    self.mainStarParticleView.backgroundColor = [UIColor clearColor];
-    self.mainStarScene = [SBStarScene sceneWithSize:self.mainStarParticleView.bounds.size];
-    self.mainStarScene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    [self.mainStarParticleView presentScene:self.mainStarScene];
-    [self.mainStarScene runStars];
-    [self.mainStarScene pauseStars];
-    [self.mainStarScene.star setParticleSize:CGSizeMake(300, 300)];
-    [self.mainStarScene.star setParticlePositionRange:CGVectorMake(50, 50)];
-}
+//- (void)setupMainHeartParticleView {
+//    self.mainHeartParticleView.allowsTransparency = YES;
+//    self.mainHeartParticleView.backgroundColor = [UIColor clearColor];
+//    self.mainHeartScene = [SBHeartScene sceneWithSize:self.mainHeartParticleView.bounds.size];
+//    self.mainHeartScene.scaleMode = SKSceneScaleModeAspectFill;
+//    
+//    [self.mainHeartParticleView presentScene:self.mainHeartScene];
+//    [self.mainHeartScene runHearts];
+//    [self.mainHeartScene pauseHearts];
+//    [self.mainHeartScene.heart setParticleSize:CGSizeMake(300, 300)];
+//    [self.mainHeartScene.heart setParticlePositionRange:CGVectorMake(50, 50)];
+//}
+//
+//- (void)setupMainStarParticleView {
+//    self.mainStarParticleView.allowsTransparency = YES;
+//    self.mainStarParticleView.backgroundColor = [UIColor clearColor];
+//    self.mainStarScene = [SBStarScene sceneWithSize:self.mainStarParticleView.bounds.size];
+//    self.mainStarScene.scaleMode = SKSceneScaleModeAspectFill;
+//    
+//    [self.mainStarParticleView presentScene:self.mainStarScene];
+//    [self.mainStarScene runStars];
+//    [self.mainStarScene pauseStars];
+//    [self.mainStarScene.star setParticleSize:CGSizeMake(300, 300)];
+//    [self.mainStarScene.star setParticlePositionRange:CGVectorMake(50, 50)];
+//}
 
 
 - (void)setupListenerToEntireRoomOnFirebase {
@@ -298,13 +298,13 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
     
     if ([pickerView isEqual:_victoryPoints]) {
         if ([self.currentPlayer.vp integerValue] != row) {
-            [self runTheStarParticles];
+//            [self runTheStarParticles];
             [self updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:row];
             self.currentPlayer.vp = @(row);
         }
     } else {
         if ([self.currentPlayer.hp integerValue] != row) {
-            [self runTheHeartParticles];
+//            [self runTheHeartParticles];
             [self updateTheHPOfTheCurrentUserOnFirebaseWithSelectedRow:row];
             self.currentPlayer.hp = @(row);
         }
@@ -333,33 +333,33 @@ static const NSTimeInterval kLengthOfMainStarScene = 0.7;
                          }];
 }
 
-- (void)runTheStarParticles {
-    [self.mainStarScene runStars];
-    
-    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainStarScene
-                                     target:self
-                                   selector:@selector(pauseStarTimer)
-                                   userInfo:nil
-                                    repeats:NO];
-}
-
-- (void)runTheHeartParticles {
-    [self.mainHeartScene runHearts];
-    
-    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainHeartScene
-                                     target:self
-                                   selector:@selector(pauseHeartTimer)
-                                   userInfo:nil
-                                    repeats:NO];
-}
-
-- (void)pauseHeartTimer {
-    [self.mainHeartScene pauseHearts];
-}
-
-- (void)pauseStarTimer {
-    [self.mainStarScene pauseStars];
-}
+//- (void)runTheStarParticles {
+//    [self.mainStarScene runStars];
+//    
+//    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainStarScene
+//                                     target:self
+//                                   selector:@selector(pauseStarTimer)
+//                                   userInfo:nil
+//                                    repeats:NO];
+//}
+//
+//- (void)runTheHeartParticles {
+//    [self.mainHeartScene runHearts];
+//    
+//    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainHeartScene
+//                                     target:self
+//                                   selector:@selector(pauseHeartTimer)
+//                                   userInfo:nil
+//                                    repeats:NO];
+//}
+//
+//- (void)pauseHeartTimer {
+//    [self.mainHeartScene pauseHearts];
+//}
+//
+//- (void)pauseStarTimer {
+//    [self.mainStarScene pauseStars];
+//}
 
 - (void)resetMethodHasBeenCalled {
     SBSetupViewController *presentingVC = (SBSetupViewController *)self.presentingViewController;
