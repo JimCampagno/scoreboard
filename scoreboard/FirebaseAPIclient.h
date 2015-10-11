@@ -10,6 +10,8 @@
 #import <Firebase/Firebase.h>
 #import "SBConstants.h"
 #import "SBRoom.h"
+#import <SystemConfiguration/SCNetworkReachability.h>
+
 
 @interface FirebaseAPIclient : NSObject
 
@@ -18,5 +20,6 @@
                 withCompletionBlock:(void (^)(BOOL success, NSString *digits))block
                    withFailureBlock:(void (^)(NSError *error))failureBlock;
 
++ (BOOL)isNetworkAvailable;
 
 @end

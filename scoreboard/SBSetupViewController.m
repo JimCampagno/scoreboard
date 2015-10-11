@@ -12,17 +12,16 @@
 #import "FirebaseAPIclient.h"
 #import "SBRoom.h"
 #import "SBGameScreenViewController.h"
+#import <Masonry.h>
 
 @interface SBSetupViewController ()
 @property (weak, nonatomic) IBOutlet UIView *displayJoinGameDigits;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *joinGameNumbers;
 @property (weak, nonatomic) IBOutlet UITextField *enterName;
-- (IBAction)connect:(id)sender;
 - (IBAction)createGame:(id)sender;
 - (IBAction)joinGame:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *invisibleDigits;
 @property (strong, nonatomic) NSMutableArray *holdingTheDigits;
-@property (weak, nonatomic) IBOutlet UIButton *connectProp;
 @property (weak, nonatomic) IBOutlet UIButton *joinGameProp;
 @property (weak, nonatomic) IBOutlet UIButton *createGameProp;
 @property (weak, nonatomic) IBOutlet UIButton *cancelProp;
@@ -36,6 +35,8 @@
 @property (nonatomic) BOOL isInJoinScreenMode;
 @property (nonatomic) CGRect frameOfOriginalJoinButton;
 @property (nonatomic) CGRect frameOfOriginalCreateButton;
+
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 
 - (IBAction)cancel:(id)sender;
@@ -60,6 +61,21 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.invisibleDigits.delegate = self;
     self.isInJoinScreenMode = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.8 green:0.82 blue:0.91 alpha:1];
+    
+    
+    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    [self.view addSubview:self.activityView];
+    
+    [self.activityView mas_makeConstraints:^(MASConstraintMaker *make) {
+        UILabel *labelToConstrainTo = self.joinGameNumbers[0];
+        make.top.equalTo(labelToConstrainTo.mas_bottom).with.offset(10);
+        make.centerX.equalTo(self.displayJoinGameDigits);
+        
+    }];
+    
+    
+    
 }
 
 - (void)setupJoinGameButton {
@@ -124,23 +140,55 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.displayJoinGameDigits.layer.borderColor = [UIColor blackColor].CGColor;
     self.displayJoinGameDigits.layer.borderWidth = 0.2f;
     self.displayJoinGameDigits.layer.cornerRadius = 10.0f;
+    
+    
+
+    
+    
+//    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"Enter Room Digits"];
+//    [attributeString addAttribute:NSUnderlineStyleAttributeName
+//                            value:[NSNumber numberWithInt:1]
+//                            range:(NSRange){0,[attributeString length]}];
+    
+//    [attributeString addAttribute:NSUnderlineColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, attributeString.length)];//TextColor
+
+    
+    UILabel *enterRoomDigitsLabel = [UILabel new];
+    enterRoomDigitsLabel.text = @"Enter Room Digits";
+    enterRoomDigitsLabel.font = [UIFont systemFontOfSize:20];
+    enterRoomDigitsLabel.adjustsFontSizeToFitWidth = YES;
+    enterRoomDigitsLabel.textColor = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
+    
+//    enterRoomDigitsLabel.attributedText = attributeString;
+    
+    [self.displayJoinGameDigits addSubview:enterRoomDigitsLabel];
+    
+    [enterRoomDigitsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.displayJoinGameDigits).with.offset(8);
+        make.top.equalTo(self.displayJoinGameDigits).with.offset(8);
+    }];
 }
 
 - (void)setupTheConnectAndCancelButtons {
     UIColor *colorToUseHere = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
+//    UIColor *colorToUseHere = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     UIColor *backgroundColorsForBothButtons = [UIColor clearColor];
     
     UIColor *normalStateColor = [colorToUseHere copy];
-    UIColor *disabledStateColor= [[colorToUseHere copy] colorWithAlphaComponent:0.4];
+    //    UIColor *disabledStateColor= [[colorToUseHere copy] colorWithAlphaComponent:0.4];
     
-    [self.connectProp setTitleColor:normalStateColor forState:UIControlStateNormal];
-    [self.connectProp setTitleColor:disabledStateColor forState:UIControlStateDisabled];
-    self.connectProp.backgroundColor = backgroundColorsForBothButtons;
     
     [self.cancelProp setTitleColor:normalStateColor forState:UIControlStateNormal];
-    self.cancelProp.titleLabel.font = [UIFont systemFontOfSize:24];
+    [self.cancelProp.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    self.cancelProp.titleLabel.font = [UIFont systemFontOfSize:20];
+//    self.cancelProp.layer.borderWidth = 0.3;
+//    self.cancelProp.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.cancelProp.layer.cornerRadius = 12.5;
+//    self.cancelProp.clipsToBounds = YES;
     [self.cancelProp setTitle:@"X" forState:UIControlStateNormal];
     self.cancelProp.backgroundColor = backgroundColorsForBothButtons;
+    
+    
 }
 
 -(void)dismissKeyboard:(id)sender {
@@ -184,7 +232,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                 UILabel *currentLabel = self.joinGameNumbers[[self.holdingTheDigits count] - 1];
                 currentLabel.text = @"-";
                 [self.holdingTheDigits removeLastObject];
-                self.connectProp.enabled = NO;
             }
             
         } else if ([self.holdingTheDigits count] < 6) {
@@ -193,9 +240,14 @@ static const NSInteger kMaxNumberOfPlayers = 6;
             currentLabel.text = string;
             
             if ([self.holdingTheDigits count] == 6) {
-                self.connectProp.enabled = YES;
+                [self.activityView startAnimating];
+                [self performSelector:@selector(connectToGameRoom)withObject:nil afterDelay:0.6];
+                
+                
+                
             }
         }
+        NSLog(@"About to return YES!!!!!!!!!!!!");
         return (textField.text.length >= 6 && range.length == 0) ? NO : YES;
         
     } else {
@@ -219,48 +271,66 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 #pragma mark - Action Methods
 
-- (IBAction)connect:(id)sender {
-    __weak typeof(self) tmpself = self;
-    self.connectProp.enabled = NO;
-    
-    [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        if ([snapshot exists]) {
-            if (snapshot.childrenCount == kMaxNumberOfPlayers) {
-                [tmpself displayGameIsFullAlert];
+- (void)connectToGameRoom {
+    if (![FirebaseAPIclient isNetworkAvailable]) {
+        [self.activityView stopAnimating];
+        [self displayNoNetworkAlert];
+        
+    } else {
+        NSLog(@"CONNECT ROOM IS HAPPENING!!!");
+        __weak typeof(self) tmpself = self;
+        
+        [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            NSLog(@"ARE WE COOL?????????");
+            if ([snapshot exists]) {
+                if (snapshot.childrenCount == kMaxNumberOfPlayers) {
+                    [tmpself.activityView stopAnimating];
+                    [tmpself displayGameIsFullAlert];
+                } else {
+                    
+                    [[tmpself.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+                        if ([currentData hasChildren]) {
+                            tmpself.currentUser = [[SBUser alloc] initWithName:tmpself.enterName.text
+                                                                   monsterName:[SBConstants randomMonsterName]
+                                                                            hp:@10
+                                                                            vp:@0];
+                            
+                            tmpself.IDOfCurrentUser = [tmpself createIDOfCurrentUserWithCurrentData:currentData];
+                            
+                            NSDictionary *newUser = @{ @"name": tmpself.currentUser.name,
+                                                       @"monster": tmpself.currentUser.monster,
+                                                       @"hp": @10,
+                                                       @"vp": @0 };
+                            
+                            [[currentData childDataByAppendingPath:tmpself.IDOfCurrentUser] setValue:newUser];
+                        }
+                        return [FTransactionResult successWithValue:currentData];
+                    } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
+                        NSLog(@"DOOOOOO WE ENTER THIS COMPLETION BLOCK!!!!");
+                        if (committed) {
+                            tmpself.digitsToPassForward = tmpself.invisibleDigits.text;
+                            [tmpself bringButtonsBackAfterCancelTapped];
+                            [tmpself.activityView stopAnimating];
+                            [tmpself performSegueWithIdentifier:@"GameScreenSegue" sender:nil];
+                        } else {
+                            NSLog(@"\n\n\n SHIT OUT OF LUCK!!!!!!!!!!!!!!!\n\n");
+                        }
+                    }];
+                }
             } else {
-                
-                [[tmpself.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
-                    if ([currentData hasChildren]) {
-                        tmpself.currentUser = [[SBUser alloc] initWithName:tmpself.enterName.text
-                                                               monsterName:[SBConstants randomMonsterName]
-                                                                        hp:@10
-                                                                        vp:@0];
-                        
-                        tmpself.IDOfCurrentUser = [tmpself createIDOfCurrentUserWithCurrentData:currentData];
-                        
-                        NSDictionary *newUser = @{ @"name": tmpself.currentUser.name,
-                                                   @"monster": tmpself.currentUser.monster,
-                                                   @"hp": @10,
-                                                   @"vp": @0 };
-                        
-                        [[currentData childDataByAppendingPath:tmpself.IDOfCurrentUser] setValue:newUser];
-                    }
-                    return [FTransactionResult successWithValue:currentData];
-                } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
-                    if (committed) {
-                        tmpself.digitsToPassForward = tmpself.invisibleDigits.text;
-                        [tmpself bringButtonsBackAfterCancelTapped];
-                        [tmpself performSegueWithIdentifier:@"GameScreenSegue" sender:sender];
-                    }
-                }];
+                [tmpself.activityView stopAnimating];
+                [tmpself displayGameDoesntExistAlert];
             }
-        } else {
-            [tmpself displayGameDoesntExistAlert];
-        }
-    } withCancelBlock:^(NSError *error) {
-        NSLog(@"We have an error in the connect method: %@", error.description);
-    }];
+        } withCancelBlock:^(NSError *error) {
+            NSLog(@"We have an error in the connect method: %@", error.description);
+        }];
+        
+    }
+    
+    
 }
+
+
 
 - (IBAction)createGame:(id)sender {
     __weak typeof(self) tmpself = self;
@@ -409,7 +479,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                      animations:^{
                          tmpself.displayJoinGameDigits.alpha = 0;
                      } completion:^(BOOL finished) {
-                         tmpself.connectProp.enabled = NO;
                          [tmpself.holdingTheDigits removeAllObjects];
                          tmpself.invisibleDigits.text = @"";
                          
@@ -436,14 +505,13 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 - (void)displayGameDoesntExistAlert {
     __weak typeof(self) tmpself = self;
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game doesn't exist"
-                                                                   message:@"Please confirm that you're entering in the correct numbers."
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Game not found"
+                                                                   message:@"Entered game # doesn't exist"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
-                                                              tmpself.connectProp.enabled = NO;
                                                               tmpself.invisibleDigits.text = @"";
                                                               [tmpself.holdingTheDigits removeAllObjects];
                                                               [tmpself.invisibleDigits becomeFirstResponder];
@@ -474,6 +542,14 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
+                                                              tmpself.invisibleDigits.text = @"";
+                                                              [tmpself.holdingTheDigits removeAllObjects];
+                                                              [tmpself.invisibleDigits becomeFirstResponder];
+                                                              
+                                                              for (UILabel *label in tmpself.joinGameNumbers) {
+                                                                  label.text = @"-";
+                                                              }
+
                                                               
                                                               
                                                           }];
@@ -484,6 +560,40 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                      completion:^{
                          //ToDo: Doing nothing here right now, do we need this completion block to do anything?
                      }];
+}
+
+- (void)displayNoNetworkAlert {
+    __weak typeof(self) tmpself = self;
+
+    NSString *errorMSG = @"Please check your internet connection or try again later.";
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Internet Connection"
+                                                                   message:errorMSG
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+                                                              tmpself.invisibleDigits.text = @"";
+                                                              [tmpself.holdingTheDigits removeAllObjects];
+                                                              [tmpself.invisibleDigits becomeFirstResponder];
+                                                              
+                                                              for (UILabel *label in tmpself.joinGameNumbers) {
+                                                                  label.text = @"-";
+                                                              }
+
+                                                              
+                                                              
+                                                          }];
+    [alert addAction:defaultAction];
+    
+    [self presentViewController:alert
+                       animated:YES
+                     completion:^{
+                         //ToDo: Doing nothing here right now, do we need this completion block to do anything?
+                     }];
+    
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -83,24 +83,13 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUx-NI-haz">
-                                        <rect key="frame" x="137" y="109" width="101" height="38"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ob-hI-Zt8">
+                                        <rect key="frame" x="341" y="8" width="25" height="25"/>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="38" id="Ouk-LL-ncZ"/>
-                                            <constraint firstAttribute="width" constant="101" id="mVg-qH-akv"/>
+                                            <constraint firstAttribute="height" constant="25" id="2wV-3e-16F"/>
+                                            <constraint firstAttribute="width" constant="25" id="KLt-Ys-Tfp"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <state key="normal" title="CONNECT">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="connect:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ryd-pO-ae4"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ob-hI-Zt8">
-                                        <rect key="frame" x="307" y="0.0" width="59" height="30"/>
-                                        <animations/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -113,19 +102,17 @@
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="KXR-te-UpJ" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="1.11111" id="1Tz-qQ-guO"/>
-                                    <constraint firstItem="8ob-hI-Zt8" firstAttribute="top" secondItem="5VM-md-5Mi" secondAttribute="top" id="1sp-Eg-FDu"/>
-                                    <constraint firstAttribute="trailing" secondItem="8ob-hI-Zt8" secondAttribute="trailing" constant="8" id="4mC-jf-Whr"/>
+                                    <constraint firstItem="8ob-hI-Zt8" firstAttribute="top" secondItem="5VM-md-5Mi" secondAttribute="top" constant="8" id="1sp-Eg-FDu"/>
+                                    <constraint firstItem="8ob-hI-Zt8" firstAttribute="trailing" secondItem="5VM-md-5Mi" secondAttribute="trailing" constant="-8" id="4mC-jf-Whr"/>
                                     <constraint firstItem="Gf7-l4-4ts" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="5PM-PV-6zn"/>
                                     <constraint firstItem="EIn-ao-Inv" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="6tR-85-tos"/>
                                     <constraint firstItem="IzJ-z0-dB6" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="9bY-uT-Z7J"/>
                                     <constraint firstItem="ETJ-mx-yPA" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" id="ELj-1b-FAi"/>
-                                    <constraint firstItem="pUx-NI-haz" firstAttribute="bottom" secondItem="5VM-md-5Mi" secondAttribute="bottom" constant="-8" id="KT6-W4-fHt"/>
                                     <constraint firstItem="IzJ-z0-dB6" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="1.66667" id="KYa-UA-DZx"/>
                                     <constraint firstItem="EFY-KD-9In" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="0.555555" id="Tca-GO-MoW"/>
                                     <constraint firstItem="KXR-te-UpJ" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="VXc-6c-IZJ"/>
                                     <constraint firstItem="EFY-KD-9In" firstAttribute="centerY" secondItem="5VM-md-5Mi" secondAttribute="centerY" constant="0.5" id="a5A-IW-9F9"/>
                                     <constraint firstAttribute="height" constant="155" id="hkH-vm-eGA"/>
-                                    <constraint firstItem="pUx-NI-haz" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" constant="0.5" id="jgT-CT-Oak"/>
                                     <constraint firstItem="EIn-ao-Inv" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="1.38889" id="kC8-57-TWb"/>
                                     <constraint firstItem="Gf7-l4-4ts" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="0.833333" id="keJ-0h-yuI"/>
                                     <constraint firstItem="ETJ-mx-yPA" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="0.277778" id="uCb-h7-rss"/>
@@ -194,7 +181,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="cancelProp" destination="8ob-hI-Zt8" id="rFl-0W-aTz"/>
-                        <outlet property="connectProp" destination="pUx-NI-haz" id="2Re-QT-dxR"/>
                         <outlet property="createGameProp" destination="ueS-eC-LeI" id="CBn-aT-EVb"/>
                         <outlet property="displayJoinGameDigits" destination="5VM-md-5Mi" id="cgO-MF-SxX"/>
                         <outlet property="enterName" destination="u2f-Ay-Hv6" id="tZ0-qJ-elz"/>

@@ -22,6 +22,7 @@
 		7D1663111B13B13E002A2BF0 /* SBRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1663101B13B13E002A2BF0 /* SBRoom.m */; };
 		7D1663191B13B26B002A2BF0 /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1663181B13B26B002A2BF0 /* SBUser.m */; };
 		7D2968A41B2E2FA7000E1C7C /* Scorecard.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2968A31B2E2FA7000E1C7C /* Scorecard.m */; };
+		7D4295791BCA1C38007B100F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4295781BCA1C38007B100F /* SystemConfiguration.framework */; };
 		7D45F3841B126AA30053F47F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3831B126AA30053F47F /* main.m */; };
 		7D45F3871B126AA30053F47F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3861B126AA30053F47F /* AppDelegate.m */; };
 		7D45F38D1B126AA30053F47F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F38B1B126AA30053F47F /* Main.storyboard */; };
@@ -67,6 +68,7 @@
 		7D1663181B13B26B002A2BF0 /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
 		7D2968A21B2E2FA7000E1C7C /* Scorecard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scorecard.h; sourceTree = "<group>"; };
 		7D2968A31B2E2FA7000E1C7C /* Scorecard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scorecard.m; sourceTree = "<group>"; };
+		7D4295781BCA1C38007B100F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7D45F37E1B126AA30053F47F /* scoreboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scoreboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D45F3821B126AA30053F47F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D45F3831B126AA30053F47F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D4295791BCA1C38007B100F /* SystemConfiguration.framework in Frameworks */,
 				5BCE28B41BA47AF9001CD3F9 /* SpriteKit.framework in Frameworks */,
 				6B647E1806F53B817493F3C7 /* libPods-scoreboard.a in Frameworks */,
 			);
@@ -237,6 +240,7 @@
 		9A6AE255DB7D31A7C5828CBF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D4295781BCA1C38007B100F /* SystemConfiguration.framework */,
 				5BCE28B31BA47AF9001CD3F9 /* SpriteKit.framework */,
 				222343B35E078E5138A9B551 /* libPods-scoreboard.a */,
 			);
