@@ -37,6 +37,7 @@
 @property (nonatomic) CGRect frameOfOriginalCreateButton;
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UIView *viewToHandleDismissalOfKeyboardOnTap;
 
 
 - (IBAction)cancel:(id)sender;
@@ -62,9 +63,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.isInJoinScreenMode = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.8 green:0.82 blue:0.91 alpha:1];
     
-    
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
     [self.view addSubview:self.activityView];
     
     [self.activityView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,9 +72,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
         make.centerX.equalTo(self.displayJoinGameDigits);
         
     }];
-    
-    
-    
 }
 
 - (void)setupJoinGameButton {
@@ -114,12 +110,12 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 }
 
 - (void)setupTheViewToHandleTheDismissingOfTheKeyboardOnTap {
-    UIView *viewToHandleDismissalOfKeyboardOnTap = [[UIView alloc] initWithFrame:self.view.frame];
-    viewToHandleDismissalOfKeyboardOnTap.backgroundColor = [UIColor clearColor];
-    [self.view insertSubview:viewToHandleDismissalOfKeyboardOnTap
+    self.viewToHandleDismissalOfKeyboardOnTap = [[UIView alloc] initWithFrame:self.view.frame];
+    self.viewToHandleDismissalOfKeyboardOnTap.backgroundColor = [UIColor clearColor];
+    [self.view insertSubview:self.viewToHandleDismissalOfKeyboardOnTap
                 belowSubview:self.displayJoinGameDigits];
     
-    [viewToHandleDismissalOfKeyboardOnTap addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)]];
+    [self.viewToHandleDismissalOfKeyboardOnTap addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)]];
 }
 
 - (void)setupEnterNameLabel {
@@ -241,20 +237,19 @@ static const NSInteger kMaxNumberOfPlayers = 6;
             
             if ([self.holdingTheDigits count] == 6) {
                 [self.activityView startAnimating];
+                self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = NO;
+                self.cancelProp.userInteractionEnabled = NO;
+                self.enterName.userInteractionEnabled = NO;
                 [self performSelector:@selector(connectToGameRoom)withObject:nil afterDelay:0.6];
-                
-                
-                
             }
         }
-        NSLog(@"About to return YES!!!!!!!!!!!!");
+        
         return (textField.text.length >= 6 && range.length == 0) ? NO : YES;
         
     } else {
-        
         NSString *updatedText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
         if (updatedText.length > 10) {
-            
             return NO;
         }
         
@@ -273,19 +268,23 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)connectToGameRoom {
     if (![FirebaseAPIclient isNetworkAvailable]) {
+        self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+        self.cancelProp.userInteractionEnabled = YES;
+        self.enterName.userInteractionEnabled = YES;
         [self.activityView stopAnimating];
         [self displayNoNetworkAlert];
         
     } else {
-        NSLog(@"CONNECT ROOM IS HAPPENING!!!");
         __weak typeof(self) tmpself = self;
         
         [[self.firebaseRef childByAppendingPath:self.invisibleDigits.text] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            NSLog(@"ARE WE COOL?????????");
             if ([snapshot exists]) {
                 if (snapshot.childrenCount == kMaxNumberOfPlayers) {
                     [tmpself.activityView stopAnimating];
                     [tmpself displayGameIsFullAlert];
+                    tmpself.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+                    tmpself.cancelProp.userInteractionEnabled = YES;
+                    tmpself.enterName.userInteractionEnabled = YES;
                 } else {
                     
                     [[tmpself.firebaseRef childByAppendingPath:self.invisibleDigits.text] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
@@ -306,18 +305,23 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                         }
                         return [FTransactionResult successWithValue:currentData];
                     } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
-                        NSLog(@"DOOOOOO WE ENTER THIS COMPLETION BLOCK!!!!");
                         if (committed) {
                             tmpself.digitsToPassForward = tmpself.invisibleDigits.text;
                             [tmpself bringButtonsBackAfterCancelTapped];
                             [tmpself.activityView stopAnimating];
+                            tmpself.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+                            tmpself.cancelProp.userInteractionEnabled = YES;
+                            tmpself.enterName.userInteractionEnabled = YES;
                             [tmpself performSegueWithIdentifier:@"GameScreenSegue" sender:nil];
                         } else {
-                            NSLog(@"\n\n\n SHIT OUT OF LUCK!!!!!!!!!!!!!!!\n\n");
                         }
                     }];
                 }
             } else {
+                tmpself.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+                tmpself.cancelProp.userInteractionEnabled = YES;
+                tmpself.enterName.userInteractionEnabled = YES;
+
                 [tmpself.activityView stopAnimating];
                 [tmpself displayGameDoesntExistAlert];
             }
