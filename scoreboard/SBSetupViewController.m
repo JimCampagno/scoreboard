@@ -138,16 +138,16 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.displayJoinGameDigits.layer.cornerRadius = 10.0f;
     
     
-
     
     
-//    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"Enter Room Digits"];
-//    [attributeString addAttribute:NSUnderlineStyleAttributeName
-//                            value:[NSNumber numberWithInt:1]
-//                            range:(NSRange){0,[attributeString length]}];
     
-//    [attributeString addAttribute:NSUnderlineColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, attributeString.length)];//TextColor
-
+    //    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"Enter Room Digits"];
+    //    [attributeString addAttribute:NSUnderlineStyleAttributeName
+    //                            value:[NSNumber numberWithInt:1]
+    //                            range:(NSRange){0,[attributeString length]}];
+    
+    //    [attributeString addAttribute:NSUnderlineColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, attributeString.length)];//TextColor
+    
     
     UILabel *enterRoomDigitsLabel = [UILabel new];
     enterRoomDigitsLabel.text = @"Enter Room Digits";
@@ -155,7 +155,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     enterRoomDigitsLabel.adjustsFontSizeToFitWidth = YES;
     enterRoomDigitsLabel.textColor = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
     
-//    enterRoomDigitsLabel.attributedText = attributeString;
+    //    enterRoomDigitsLabel.attributedText = attributeString;
     
     [self.displayJoinGameDigits addSubview:enterRoomDigitsLabel];
     
@@ -167,7 +167,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)setupTheConnectAndCancelButtons {
     UIColor *colorToUseHere = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
-//    UIColor *colorToUseHere = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    //    UIColor *colorToUseHere = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     UIColor *backgroundColorsForBothButtons = [UIColor clearColor];
     
     UIColor *normalStateColor = [colorToUseHere copy];
@@ -177,10 +177,10 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     [self.cancelProp setTitleColor:normalStateColor forState:UIControlStateNormal];
     [self.cancelProp.titleLabel setTextAlignment:NSTextAlignmentCenter];
     self.cancelProp.titleLabel.font = [UIFont systemFontOfSize:20];
-//    self.cancelProp.layer.borderWidth = 0.3;
-//    self.cancelProp.layer.borderColor = [UIColor blackColor].CGColor;
-//    self.cancelProp.layer.cornerRadius = 12.5;
-//    self.cancelProp.clipsToBounds = YES;
+    //    self.cancelProp.layer.borderWidth = 0.3;
+    //    self.cancelProp.layer.borderColor = [UIColor blackColor].CGColor;
+    //    self.cancelProp.layer.cornerRadius = 12.5;
+    //    self.cancelProp.clipsToBounds = YES;
     [self.cancelProp setTitle:@"X" forState:UIControlStateNormal];
     self.cancelProp.backgroundColor = backgroundColorsForBothButtons;
     
@@ -321,7 +321,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                 tmpself.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
                 tmpself.cancelProp.userInteractionEnabled = YES;
                 tmpself.enterName.userInteractionEnabled = YES;
-
+                
                 [tmpself.activityView stopAnimating];
                 [tmpself displayGameDoesntExistAlert];
             }
@@ -366,12 +366,21 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     }
 }
 
+- (void)turnVariousViewsInteractionsOn {
+    self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+    self.enterName.userInteractionEnabled = YES;
+}
+
 - (IBAction)joinGame:(id)sender {
+    self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = NO;
+    self.enterName.userInteractionEnabled = NO;
+    
     NSString *currentEnteredName = self.enterName.text;
     if (currentEnteredName.length < 1) {
         [self.enterName resignFirstResponder];
         [self.invisibleDigits resignFirstResponder];
-        
+        self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+        self.enterName.userInteractionEnabled = YES;
         [self displayAlertForNameNotEntered];
     } else {
         self.isInJoinScreenMode = YES;
@@ -380,13 +389,9 @@ static const NSInteger kMaxNumberOfPlayers = 6;
             [self.enterName resignFirstResponder];
         }
         
-        [UIView animateWithDuration:0.3
-                         animations:^{
-                         }
-                         completion:^ (BOOL finished) {
-                             [self animateCreateButtonDown];
-                             [self animateJoinButtonDown];
-                         }];
+        [self animateCreateButtonDown];
+        [self animateJoinButtonDown];
+        [self performSelector:@selector(turnVariousViewsInteractionsOn)withObject:nil afterDelay:1.0];
     }
     
 }
@@ -465,12 +470,17 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                          tmpself.joinGameProp.alpha = 0.0;
                      }
                      completion:^ (BOOL finished) {
+                         
                          [tmpself.invisibleDigits becomeFirstResponder];
                          
-                         [UIView animateWithDuration:0.2 animations:^{
-                             tmpself.displayJoinGameDigits.alpha = 1;
-                             
-                         }];
+                         
+                         [UIView animateWithDuration:0.2
+                                          animations:^{
+                                              tmpself.displayJoinGameDigits.alpha = 1;
+                                              
+                                          } completion:^(BOOL finished) {
+                                              
+                                          }];
                      }];
 }
 
@@ -553,7 +563,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                                                               for (UILabel *label in tmpself.joinGameNumbers) {
                                                                   label.text = @"-";
                                                               }
-
+                                                              
                                                               
                                                               
                                                           }];
@@ -568,7 +578,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)displayNoNetworkAlert {
     __weak typeof(self) tmpself = self;
-
+    
     NSString *errorMSG = @"Please check your internet connection or try again later.";
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Internet Connection"
@@ -585,7 +595,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                                                               for (UILabel *label in tmpself.joinGameNumbers) {
                                                                   label.text = @"-";
                                                               }
-
+                                                              
                                                               
                                                               
                                                           }];
