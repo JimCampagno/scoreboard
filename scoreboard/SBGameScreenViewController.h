@@ -25,6 +25,5 @@
 @property (strong, nonatomic) NSString *randomMonsterName;
 @property (strong, nonatomic) NSString *currentPlayerName;
 
-- (void)resetGame;
 - (void)resetMethodHasBeenCalled;
 @end

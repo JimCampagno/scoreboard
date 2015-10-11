@@ -52,8 +52,8 @@
 - (void)setupMainPlayerScorecard;
 @end
 
-static const NSTimeInterval kLengthOfMainHeartScene = 0.7;
-static const NSTimeInterval kLengthOfMainStarScene = 0.7;
+//static const NSTimeInterval kLengthOfMainHeartScene = 0.7;
+//static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 
 @implementation SBGameScreenViewController
 
