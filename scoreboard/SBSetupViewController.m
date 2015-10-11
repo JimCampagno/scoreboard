@@ -352,6 +352,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
         
         [self.createGameActivityView startAnimating];
         self.joinGameProp.userInteractionEnabled = NO;
+        self.createGameProp.userInteractionEnabled = NO;
         self.enterName.userInteractionEnabled = NO;
         self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = NO;
         
@@ -359,6 +360,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
         if (currentEnteredName.length < 1) {
             self.joinGameProp.userInteractionEnabled = YES;
             self.enterName.userInteractionEnabled = YES;
+            self.createGameProp.userInteractionEnabled = YES;
             self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
             [self.enterName resignFirstResponder];
             [self.invisibleDigits resignFirstResponder];
@@ -379,9 +381,15 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                                               user:self.currentUser
                                withCompletionBlock:^(BOOL success, NSString *digits) {
                                    [tmpself.createGameActivityView stopAnimating];
+                                   
+                                   
                                    tmpself.joinGameProp.userInteractionEnabled = YES;
                                    tmpself.enterName.userInteractionEnabled = YES;
                                    tmpself.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+                                   tmpself.createGameProp.userInteractionEnabled = YES;
+                                   
+                                   [self animateJoinAndCreateGameButtonsOnCreateGameTap];
+                                   
                                    
                                    if (success) {
                                        tmpself.digitsToPassForward = digits;
@@ -394,12 +402,34 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                                }];
 }
 
+- (void)animateJoinAndCreateGameButtonsOnCreateGameTap {
+    __weak typeof(self) tmpself = self;
+    
+    [UIView animateWithDuration:0.6
+                     animations:^{
+                         tmpself.createGameProp.alpha = 0.0;
+                         tmpself.joinGameProp.alpha = 0.0;
+                     } completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.1
+                                               delay:1.0
+                                             options:UIViewAnimationOptionCurveEaseIn
+                                          animations:^{
+                                              tmpself.createGameProp.alpha = 1.0;
+                                              tmpself.joinGameProp.alpha = 1.0;
+                                          } completion:nil];
+                     }];
+}
+
 - (void)turnVariousViewsInteractionsOn {
     self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
     self.enterName.userInteractionEnabled = YES;
 }
 
 - (IBAction)joinGame:(id)sender {
+    if ([self.enterName isFirstResponder]) {
+        [self.enterName resignFirstResponder];
+    }
+    
     self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = NO;
     self.enterName.userInteractionEnabled = NO;
     
@@ -412,11 +442,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
         [self displayAlertForNameNotEntered];
     } else {
         self.isInJoinScreenMode = YES;
-        
-        if ([self.enterName isFirstResponder]) {
-            [self.enterName resignFirstResponder];
-        }
-        
         [self animateCreateButtonDown];
         [self animateJoinButtonDown];
         [self performSelector:@selector(turnVariousViewsInteractionsOn)withObject:nil afterDelay:1.0];
