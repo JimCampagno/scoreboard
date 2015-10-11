@@ -37,6 +37,8 @@
 @property (nonatomic) CGRect frameOfOriginalCreateButton;
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UIActivityIndicatorView *createGameActivityView;
+
 @property (nonatomic, strong) UIView *viewToHandleDismissalOfKeyboardOnTap;
 
 
@@ -57,12 +59,15 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     [self setupEnterNameLabel];
     [self setupTheDisplayJoinGameDigits];
     [self setupTheConnectAndCancelButtons];
+    [self setUpActivityViews];
     
     self.firebaseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
     self.invisibleDigits.delegate = self;
     self.isInJoinScreenMode = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.8 green:0.82 blue:0.91 alpha:1];
-    
+}
+
+- (void)setUpActivityViews {
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.view addSubview:self.activityView];
     
@@ -70,7 +75,15 @@ static const NSInteger kMaxNumberOfPlayers = 6;
         UILabel *labelToConstrainTo = self.joinGameNumbers[0];
         make.top.equalTo(labelToConstrainTo.mas_bottom).with.offset(10);
         make.centerX.equalTo(self.displayJoinGameDigits);
-        
+    }];
+    
+    
+    self.createGameActivityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:self.createGameActivityView];
+    
+    [self.createGameActivityView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.createGameProp.mas_top).with.offset(-16);
+        make.centerX.equalTo(self.view);
     }];
 }
 
@@ -136,10 +149,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.displayJoinGameDigits.layer.borderColor = [UIColor blackColor].CGColor;
     self.displayJoinGameDigits.layer.borderWidth = 0.2f;
     self.displayJoinGameDigits.layer.cornerRadius = 10.0f;
-    
-    
-    
-    
     
     //    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"Enter Room Digits"];
     //    [attributeString addAttribute:NSUnderlineStyleAttributeName
@@ -340,11 +349,11 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     if (![FirebaseAPIclient isNetworkAvailable]) {
         [self displayNoNetworkAlert];
     } else {
+        
+        [self.createGameActivityView startAnimating];
         self.joinGameProp.userInteractionEnabled = NO;
         self.enterName.userInteractionEnabled = NO;
         self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = NO;
-        
-        __weak typeof(self) tmpself = self;
         
         NSString *currentEnteredName = self.enterName.text;
         if (currentEnteredName.length < 1) {
@@ -356,26 +365,33 @@ static const NSInteger kMaxNumberOfPlayers = 6;
             [self displayAlertForNameNotEntered];
         } else {
             
-            self.currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
-            
-            [FirebaseAPIclient createGameOnFirebaseWithRef:tmpself.firebaseRef
-                                                      user:self.currentUser
-                                       withCompletionBlock:^(BOOL success, NSString *digits) {
-                                           tmpself.joinGameProp.userInteractionEnabled = YES;
-                                           tmpself.enterName.userInteractionEnabled = YES;
-                                           tmpself.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
-                                           
-                                           if (success) {
-                                               tmpself.digitsToPassForward = digits;
-                                               tmpself.IDOfCurrentUser = @"0";
-                                               [tmpself performSegueWithIdentifier:@"CreateGameSegue" sender:sender];
-                                           }
-                                           
-                                       } withFailureBlock:^(NSError *error) {
-                                           NSLog(@"Error: %@", error.localizedDescription);
-                                       }];
+            [self performSelector:@selector(createGameOnFirebase)withObject:nil afterDelay:0.6];
         }
     }
+}
+
+- (void)createGameOnFirebase {
+    self.currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
+    
+    __weak typeof(self) tmpself = self;
+    
+    [FirebaseAPIclient createGameOnFirebaseWithRef:tmpself.firebaseRef
+                                              user:self.currentUser
+                               withCompletionBlock:^(BOOL success, NSString *digits) {
+                                   [tmpself.createGameActivityView stopAnimating];
+                                   tmpself.joinGameProp.userInteractionEnabled = YES;
+                                   tmpself.enterName.userInteractionEnabled = YES;
+                                   tmpself.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+                                   
+                                   if (success) {
+                                       tmpself.digitsToPassForward = digits;
+                                       tmpself.IDOfCurrentUser = @"0";
+                                       [tmpself performSegueWithIdentifier:@"CreateGameSegue" sender:nil];
+                                   }
+                                   
+                               } withFailureBlock:^(NSError *error) {
+                                   NSLog(@"Error: %@", error.localizedDescription);
+                               }];
 }
 
 - (void)turnVariousViewsInteractionsOn {
