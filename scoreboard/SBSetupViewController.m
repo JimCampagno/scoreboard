@@ -138,6 +138,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.connectProp.backgroundColor = backgroundColorsForBothButtons;
     
     [self.cancelProp setTitleColor:normalStateColor forState:UIControlStateNormal];
+    self.cancelProp.titleLabel.font = [UIFont systemFontOfSize:24];
+    [self.cancelProp setTitle:@"X" forState:UIControlStateNormal];
     self.cancelProp.backgroundColor = backgroundColorsForBothButtons;
 }
 

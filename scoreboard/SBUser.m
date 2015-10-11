@@ -25,7 +25,7 @@
         _monster = monsterName;
         _hp = hp;
         _vp = vp;
-        NSString *nameOfImage = [NSString stringWithFormat:@"%@_128", monsterName];
+        NSString *nameOfImage = [NSString stringWithFormat:@"%@_384", monsterName];
         _monsterImage = [UIImage imageNamed:nameOfImage];
     }
     
