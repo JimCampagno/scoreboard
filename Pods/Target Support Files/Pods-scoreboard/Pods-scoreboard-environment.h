@@ -10,7 +10,7 @@
 #define COCOAPODS_POD_AVAILABLE_Firebase
 #define COCOAPODS_VERSION_MAJOR_Firebase 2
 #define COCOAPODS_VERSION_MINOR_Firebase 4
-#define COCOAPODS_VERSION_PATCH_Firebase 0
+#define COCOAPODS_VERSION_PATCH_Firebase 2
 
 // Masonry
 #define COCOAPODS_POD_AVAILABLE_Masonry
