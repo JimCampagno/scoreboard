@@ -47,7 +47,7 @@
     self.hp = user.hp;
     self.vp = user.vp;
     
-    NSString *nameOfImage = [NSString stringWithFormat:@"%@_128", self.monster];
+    NSString *nameOfImage = [NSString stringWithFormat:@"%@_384", self.monster];
     self.monsterImage = [UIImage imageNamed:nameOfImage];
 }
 
