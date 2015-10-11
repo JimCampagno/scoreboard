@@ -340,20 +340,20 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-gP-ZxZ" userLabel="Right Container View">
-                                <rect key="frame" x="211" y="228" width="183" height="499.5"/>
+                                <rect key="frame" x="207.5" y="228" width="186.5" height="499.5"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fhv-nM-dLd" userLabel="player4" customClass="Scorecard">
-                                        <rect key="frame" x="0.0" y="169" width="183" height="161.5"/>
+                                        <rect key="frame" x="0.0" y="169" width="186.5" height="161.5"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="waC-Tn-aRJ" userLabel="player6" customClass="Scorecard">
-                                        <rect key="frame" x="0.0" y="338" width="183" height="161"/>
+                                        <rect key="frame" x="0.0" y="338" width="186.5" height="161"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iyJ-by-eGr" userLabel="player2" customClass="Scorecard">
-                                        <rect key="frame" x="0.0" y="0.0" width="183" height="161"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="186.5" height="161"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -375,20 +375,20 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2e6-Di-eqh" userLabel="Left Container View">
-                                <rect key="frame" x="20" y="228" width="183" height="499.5"/>
+                                <rect key="frame" x="20" y="228" width="186.5" height="499.5"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6j-n3-LDs" userLabel="player1" customClass="Scorecard">
-                                        <rect key="frame" x="0.0" y="0.0" width="183" height="161"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="186.5" height="161"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-oW-eVT" userLabel="player3" customClass="Scorecard">
-                                        <rect key="frame" x="0.0" y="169" width="183" height="161.5"/>
+                                        <rect key="frame" x="0.0" y="169" width="186.5" height="161.5"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVm-fg-JMZ" userLabel="player5" customClass="Scorecard">
-                                        <rect key="frame" x="0.0" y="338" width="183" height="161"/>
+                                        <rect key="frame" x="0.0" y="338" width="186.5" height="161"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -417,8 +417,8 @@
                             <constraint firstItem="2e6-Di-eqh" firstAttribute="leading" secondItem="wzg-cH-89h" secondAttribute="leadingMargin" id="2la-bM-3vh" userLabel="Left CV - Leading"/>
                             <constraint firstItem="2e6-Di-eqh" firstAttribute="bottom" secondItem="ejB-Ho-y4o" secondAttribute="top" constant="-8" id="8rn-EQ-kJ9" userLabel="Left CV - VerticalB"/>
                             <constraint firstItem="cPe-gP-ZxZ" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="bottom" constant="8" id="RRn-eO-C3d" userLabel="Right CV - Vertical"/>
-                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.5" constant="-24" id="bWC-Wd-B89" userLabel="Right CV - Width"/>
-                            <constraint firstItem="2e6-Di-eqh" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.5" constant="-24" id="duL-VJ-gXV" userLabel="Left CV - Width"/>
+                            <constraint firstItem="cPe-gP-ZxZ" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.45" id="bWC-Wd-B89" userLabel="Right CV - Width"/>
+                            <constraint firstItem="2e6-Di-eqh" firstAttribute="width" secondItem="wzg-cH-89h" secondAttribute="width" multiplier="0.45" id="duL-VJ-gXV" userLabel="Left CV - Width"/>
                             <constraint firstItem="2e6-Di-eqh" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="bottom" constant="8" id="dww-5h-TnM" userLabel="Left CV - VerticalB"/>
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="trailing" secondItem="wzg-cH-89h" secondAttribute="trailingMargin" id="eJT-aY-WVz" userLabel="MainSC Trailing"/>
                             <constraint firstItem="eJz-5s-qDy" firstAttribute="top" secondItem="09X-X6-S6t" secondAttribute="bottom" id="g4N-Bu-YIj" userLabel="MainSC Top"/>
