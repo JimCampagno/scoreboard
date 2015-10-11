@@ -337,32 +337,44 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 
 - (IBAction)createGame:(id)sender {
-    __weak typeof(self) tmpself = self;
-    
-    NSString *currentEnteredName = self.enterName.text;
-    if (currentEnteredName.length < 1) {
-        [self.enterName resignFirstResponder];
-        [self.invisibleDigits resignFirstResponder];
-        
-        [self displayAlertForNameNotEntered];
-        
+    if (![FirebaseAPIclient isNetworkAvailable]) {
+        [self displayNoNetworkAlert];
     } else {
+        self.joinGameProp.userInteractionEnabled = NO;
+        self.enterName.userInteractionEnabled = NO;
+        self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = NO;
         
-        self.currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
+        __weak typeof(self) tmpself = self;
         
-        [FirebaseAPIclient createGameOnFirebaseWithRef:tmpself.firebaseRef
-                                                  user:self.currentUser
-                                   withCompletionBlock:^(BOOL success, NSString *digits) {
-                                       
-                                       if (success) {
-                                           tmpself.digitsToPassForward = digits;
-                                           tmpself.IDOfCurrentUser = @"0";
-                                           [tmpself performSegueWithIdentifier:@"CreateGameSegue" sender:sender];
-                                       }
-                                       
-                                   } withFailureBlock:^(NSError *error) {
-                                       NSLog(@"Error: %@", error.localizedDescription);
-                                   }];
+        NSString *currentEnteredName = self.enterName.text;
+        if (currentEnteredName.length < 1) {
+            self.joinGameProp.userInteractionEnabled = YES;
+            self.enterName.userInteractionEnabled = YES;
+            self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+            [self.enterName resignFirstResponder];
+            [self.invisibleDigits resignFirstResponder];
+            [self displayAlertForNameNotEntered];
+        } else {
+            
+            self.currentUser = [[SBUser alloc] initWithName:self.enterName.text monsterName:[SBConstants randomMonsterName] hp:@10 vp:@0];
+            
+            [FirebaseAPIclient createGameOnFirebaseWithRef:tmpself.firebaseRef
+                                                      user:self.currentUser
+                                       withCompletionBlock:^(BOOL success, NSString *digits) {
+                                           tmpself.joinGameProp.userInteractionEnabled = YES;
+                                           tmpself.enterName.userInteractionEnabled = YES;
+                                           tmpself.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = YES;
+                                           
+                                           if (success) {
+                                               tmpself.digitsToPassForward = digits;
+                                               tmpself.IDOfCurrentUser = @"0";
+                                               [tmpself performSegueWithIdentifier:@"CreateGameSegue" sender:sender];
+                                           }
+                                           
+                                       } withFailureBlock:^(NSError *error) {
+                                           NSLog(@"Error: %@", error.localizedDescription);
+                                       }];
+        }
     }
 }
 
@@ -590,7 +602,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                                                           handler:^(UIAlertAction *action) {
                                                               tmpself.invisibleDigits.text = @"";
                                                               [tmpself.holdingTheDigits removeAllObjects];
-                                                              [tmpself.invisibleDigits becomeFirstResponder];
                                                               
                                                               for (UILabel *label in tmpself.joinGameNumbers) {
                                                                   label.text = @"-";
