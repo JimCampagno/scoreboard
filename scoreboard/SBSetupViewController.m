@@ -358,6 +358,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
         
         NSString *currentEnteredName = self.enterName.text;
         if (currentEnteredName.length < 1) {
+            [self.createGameActivityView stopAnimating];
             self.joinGameProp.userInteractionEnabled = YES;
             self.enterName.userInteractionEnabled = YES;
             self.createGameProp.userInteractionEnabled = YES;
