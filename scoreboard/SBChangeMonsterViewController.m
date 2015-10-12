@@ -298,13 +298,17 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 
 #pragma mark - Action Methods
 
-- (void)cancelTapped:(UIButton *)sender {
+- (void)leaveGame {
     __block SBGameScreenViewController *presentingVC = (SBGameScreenViewController *)self.presentingViewController;
     
     [self dismissViewControllerAnimated:YES
                              completion:^{
                                  [presentingVC resetMethodHasBeenCalled];
                              }];
+}
+
+- (void)cancelTapped:(UIButton *)sender {
+    [self presentActionSheetForLeaveGame];
 }
 
 - (void)goBackTapped:(UIButton *)sender {
@@ -319,6 +323,25 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         _monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
     }
     return _monsterNames;
+}
+
+- (void)presentActionSheetForLeaveGame {
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Are you sure you want to leave this game?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self leaveGame];
+    }];
+    
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [actionSheet dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    
+//    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [actionSheet addAction: yesAction];
+    [actionSheet addAction: noAction];
+
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 @end

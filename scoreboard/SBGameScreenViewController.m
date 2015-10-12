@@ -331,23 +331,11 @@
 - (void)resetMethodHasBeenCalled {
     SBSetupViewController *presentingVC = (SBSetupViewController *)self.presentingViewController;
     
-    //    @property (strong, nonatomic) Firebase *ref;
-    //    @property (strong, nonatomic) NSString *roomDigits;
-    //    @property (strong, nonatomic) SBUser *currentPlayer;
-    //    @property (strong, nonatomic) NSString *IDOfCurrentPlayer;
-    //    @property (strong, nonatomic) NSString *randomMonsterName;
-    //    @property (strong, nonatomic) NSString *currentPlayerName;
-    
-    
-    
-    
-    NSLog(@"Reset Method has been called has been called!!");
     [self.currentPlayerRef removeValue];
     [Firebase goOffline];
     [self dismissViewControllerAnimated:YES
                              completion:^{
                                  [presentingVC turnFireBaseOnline];
-                                 NSLog(@"In completion block of the last completion of view dismissing itself!");
                              }];
 }
 
