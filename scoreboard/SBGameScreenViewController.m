@@ -23,13 +23,14 @@
 @property (weak, nonatomic) IBOutlet UIView *mainMonsterView; // <-- being used?
 @property (weak, nonatomic) IBOutlet UILabel *monsterName;
 @property (weak, nonatomic) IBOutlet UILabel *playerName;
-@property (weak, nonatomic) IBOutlet UIImageView *monsterImage;
+@property (weak, nonatomic) IBOutlet UIButton *monsterImage;
 @property (weak, nonatomic) IBOutlet UIPickerView *victoryPoints;
 @property (weak, nonatomic) IBOutlet UIPickerView *healthPoints;
 @property (strong, nonatomic) NSMutableArray *vpPointsOnPicker;
 @property (strong, nonatomic) NSMutableArray *hpPointsOnPicker;
-@property (weak, nonatomic) IBOutlet SKView *mainHeartParticleView;
-@property (weak, nonatomic) IBOutlet SKView *mainStarParticleView;
+
+//@property (weak, nonatomic) IBOutlet SKView *mainHeartParticleView;
+//@property (weak, nonatomic) IBOutlet SKView *mainStarParticleView;
 //@property (nonatomic, strong) SBHeartScene *mainHeartScene;
 //@property (nonatomic, strong) SBStarScene *mainStarScene;
 
@@ -48,6 +49,7 @@
 
 @property (strong, nonatomic) Firebase *currentPlayerRef;
 
+- (IBAction)monsterImageTapped:(id)sender;
 
 - (void)setupMainPlayerScorecard;
 @end
@@ -69,7 +71,8 @@
 
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
     NSDictionary *monsterNameChange = @{@"monster": name};
-    self.monsterImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", name]];
+    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", name]];
+    [self.monsterImage setBackgroundImage:imageOfMonster forState:UIControlStateNormal];
     
     self.monsterName.text = name;
     
@@ -89,13 +92,13 @@
     [self.currentPlayerRef onDisconnectRemoveValue];
 }
 
+- (IBAction)monsterImageTapped:(id)sender {
+    [self performSegueWithIdentifier:@"changeMonster" sender:nil];
+}
+
 - (void)setupMainPlayerScorecard {
-    self.monsterImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.currentPlayer.monster]];
-    self.monsterImage.userInteractionEnabled = YES;
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                action:@selector(mainMonsterTapped:)];
-    singleTap.numberOfTapsRequired = 1;
-    [self.monsterImage addGestureRecognizer:singleTap];
+    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.currentPlayer.monster]];
+    [self.monsterImage setBackgroundImage:imageOfMonster forState:UIControlStateNormal];
     
     self.monsterName.text = self.currentPlayer.monster;
     self.playerName.text = self.currentPlayer.name;
@@ -106,9 +109,7 @@
     //    [self setupMainStarParticleView];
 }
 
-- (void)mainMonsterTapped:(id)sender {
-    [self performSegueWithIdentifier:@"changeMonster" sender:nil];
-}
+
 
 //- (void)setupMainHeartParticleView {
 //    self.mainHeartParticleView.allowsTransparency = YES;
