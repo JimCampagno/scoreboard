@@ -72,7 +72,7 @@
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
     NSDictionary *monsterNameChange = @{@"monster": name};
     UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", name]];
-    [self.monsterImage setBackgroundImage:imageOfMonster forState:UIControlStateNormal];
+    [self.monsterImage setImage:imageOfMonster forState:UIControlStateNormal];
     
     self.monsterName.text = name;
     
@@ -98,7 +98,8 @@
 
 - (void)setupMainPlayerScorecard {
     UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.currentPlayer.monster]];
-    [self.monsterImage setBackgroundImage:imageOfMonster forState:UIControlStateNormal];
+    [self.monsterImage setImage:imageOfMonster forState:UIControlStateNormal];
+    [self.monsterImage.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     self.monsterName.text = self.currentPlayer.monster;
     self.playerName.text = self.currentPlayer.name;
