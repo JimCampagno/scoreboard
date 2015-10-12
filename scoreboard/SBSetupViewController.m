@@ -565,7 +565,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 }
 
 - (IBAction)cancel:(id)sender {
-    NSLog(@"Cancel has been tapped.");
     [self bringButtonsBackAfterCancelTapped];
 }
 
