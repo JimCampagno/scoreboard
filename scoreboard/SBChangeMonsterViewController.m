@@ -336,8 +336,6 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         [actionSheet dismissViewControllerAnimated:YES completion:nil];
     }];
     
-    
-//    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     [actionSheet addAction: yesAction];
     [actionSheet addAction: noAction];
 
