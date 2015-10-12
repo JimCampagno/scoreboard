@@ -66,7 +66,6 @@
     [self setupListenerToEntireRoomOnFirebase];
     [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
-    [self setupSettingsButton];
     //    [self generateTestData];
     
 }
@@ -99,7 +98,7 @@
                          withCompletionBlock:^(NSError *error, Firebase *ref) {
                              
                              if (error) {
-                        
+                                 
                              } else {
                                  
                              }
@@ -113,13 +112,37 @@
 
 - (void)setupMainPlayerScorecard {
     self.monsterImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.currentPlayer.monster]];
+    self.monsterImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                action:@selector(mainMonsterTapped:)];
+    singleTap.numberOfTapsRequired = 1;
+    
+    [self.monsterImage addGestureRecognizer:singleTap];
     self.monsterName.text = self.currentPlayer.monster;
     self.playerName.text = self.currentPlayer.name;
     [self.healthPoints selectRow:[self.currentPlayer.hp integerValue] inComponent:0 animated:YES];
     [self.victoryPoints selectRow:[self.currentPlayer.vp integerValue] inComponent:0 animated:YES];
     
-//    [self setupMainHeartParticleView];
-//    [self setupMainStarParticleView];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //    [self setupMainHeartParticleView];
+    //    [self setupMainStarParticleView];
+}
+
+- (void)mainMonsterTapped:(id)sender {
+    [self performSegueWithIdentifier:@"changeMonster" sender:nil];
 }
 
 //- (void)setupMainHeartParticleView {
@@ -127,7 +150,7 @@
 //    self.mainHeartParticleView.backgroundColor = [UIColor clearColor];
 //    self.mainHeartScene = [SBHeartScene sceneWithSize:self.mainHeartParticleView.bounds.size];
 //    self.mainHeartScene.scaleMode = SKSceneScaleModeAspectFill;
-//    
+//
 //    [self.mainHeartParticleView presentScene:self.mainHeartScene];
 //    [self.mainHeartScene runHearts];
 //    [self.mainHeartScene pauseHearts];
@@ -140,7 +163,7 @@
 //    self.mainStarParticleView.backgroundColor = [UIColor clearColor];
 //    self.mainStarScene = [SBStarScene sceneWithSize:self.mainStarParticleView.bounds.size];
 //    self.mainStarScene.scaleMode = SKSceneScaleModeAspectFill;
-//    
+//
 //    [self.mainStarParticleView presentScene:self.mainStarScene];
 //    [self.mainStarScene runStars];
 //    [self.mainStarScene pauseStars];
@@ -152,10 +175,10 @@
 - (void)setupListenerToEntireRoomOnFirebase {
     __weak typeof(self) tmpself = self;
     [[self.ref childByAppendingPath:self.roomDigits]
-
+     
      observeEventType:FEventTypeValue
      withBlock:^(FDataSnapshot *snapshot) {
-
+         
          BOOL numberOfPlayersChanged = [tmpself.room.users count] != snapshot.childrenCount ? YES : NO;
          
          if (numberOfPlayersChanged) {
@@ -208,29 +231,6 @@
         _playerScorecards = @[self.player1, self.player2, self.player3, self.player4, self.player5, self.player6];
     }
     return _playerScorecards;
-}
-
-
-
-- (void)setupSettingsButton {
-    UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings"]
-                              forState:UIControlStateNormal];
-    
-    [settingsButton addTarget:self
-                       action:@selector(settingsTapped:)
-             forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.mainMonsterView addSubview:settingsButton];
-    
-    [settingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.and.left.equalTo(self.mainMonsterView).with.offset(8);
-        make.height.and.width.equalTo(@18);
-    }];
-}
-
-- (void)settingsTapped:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"changeMonster" sender:self];
 }
 
 #pragma mark - Main Scorecard Methods
@@ -298,13 +298,13 @@
     
     if ([pickerView isEqual:_victoryPoints]) {
         if ([self.currentPlayer.vp integerValue] != row) {
-//            [self runTheStarParticles];
+            //            [self runTheStarParticles];
             [self updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:row];
             self.currentPlayer.vp = @(row);
         }
     } else {
         if ([self.currentPlayer.hp integerValue] != row) {
-//            [self runTheHeartParticles];
+            //            [self runTheHeartParticles];
             [self updateTheHPOfTheCurrentUserOnFirebaseWithSelectedRow:row];
             self.currentPlayer.hp = @(row);
         }
@@ -335,7 +335,7 @@
 
 //- (void)runTheStarParticles {
 //    [self.mainStarScene runStars];
-//    
+//
 //    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainStarScene
 //                                     target:self
 //                                   selector:@selector(pauseStarTimer)
@@ -345,7 +345,7 @@
 //
 //- (void)runTheHeartParticles {
 //    [self.mainHeartScene runHearts];
-//    
+//
 //    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainHeartScene
 //                                     target:self
 //                                   selector:@selector(pauseHeartTimer)
@@ -364,12 +364,12 @@
 - (void)resetMethodHasBeenCalled {
     SBSetupViewController *presentingVC = (SBSetupViewController *)self.presentingViewController;
     
-//    @property (strong, nonatomic) Firebase *ref;
-//    @property (strong, nonatomic) NSString *roomDigits;
-//    @property (strong, nonatomic) SBUser *currentPlayer;
-//    @property (strong, nonatomic) NSString *IDOfCurrentPlayer;
-//    @property (strong, nonatomic) NSString *randomMonsterName;
-//    @property (strong, nonatomic) NSString *currentPlayerName;
+    //    @property (strong, nonatomic) Firebase *ref;
+    //    @property (strong, nonatomic) NSString *roomDigits;
+    //    @property (strong, nonatomic) SBUser *currentPlayer;
+    //    @property (strong, nonatomic) NSString *IDOfCurrentPlayer;
+    //    @property (strong, nonatomic) NSString *randomMonsterName;
+    //    @property (strong, nonatomic) NSString *currentPlayerName;
     
     
     
