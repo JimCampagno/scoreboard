@@ -64,7 +64,7 @@
     [self setupPickerViewsDelegateAndDataSource];
     [self setupListenerToEntireRoomOnFirebase];
     [self setupCurrentPlayerReferenceToFirebase];
-    [self setupMainPlayerScorecard];    
+    [self setupMainPlayerScorecard];
 }
 
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
@@ -95,26 +95,12 @@
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                 action:@selector(mainMonsterTapped:)];
     singleTap.numberOfTapsRequired = 1;
-    
     [self.monsterImage addGestureRecognizer:singleTap];
+    
     self.monsterName.text = self.currentPlayer.monster;
     self.playerName.text = self.currentPlayer.name;
     [self.healthPoints selectRow:[self.currentPlayer.hp integerValue] inComponent:0 animated:YES];
     [self.victoryPoints selectRow:[self.currentPlayer.vp integerValue] inComponent:0 animated:YES];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     //    [self setupMainHeartParticleView];
     //    [self setupMainStarParticleView];

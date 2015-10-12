@@ -216,7 +216,7 @@
                                 <rect key="frame" x="20" y="20" width="374" height="200.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monster Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVL-fj-6uz">
-                                        <rect key="frame" x="0.0" y="0.0" width="224" height="19.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="224.5" height="19.5"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19.5" id="AUl-gL-fnH"/>
@@ -226,7 +226,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvg-FW-8en">
-                                        <rect key="frame" x="0.0" y="180" width="224" height="20"/>
+                                        <rect key="frame" x="0.0" y="180" width="224.5" height="20"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="zao-Ek-3X7" userLabel="Player Name - Height"/>
@@ -235,14 +235,14 @@
                                         <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofZ-sV-TDV" userLabel="RightView">
-                                        <rect key="frame" x="224" y="0.0" width="150" height="200.5"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ofZ-sV-TDV" userLabel="RightView">
+                                        <rect key="frame" x="335.5" y="0.0" width="38.5" height="200.5"/>
                                         <subviews>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfP-Pv-ioc" userLabel="topPV">
-                                                <rect key="frame" x="83" y="15" width="67" height="70.5"/>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tfP-Pv-ioc" userLabel="topPV">
+                                                <rect key="frame" x="38.5" y="15" width="0.0" height="70.5"/>
                                                 <subviews>
-                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RS-NM-LSX" userLabel="victorypoints">
-                                                        <rect key="frame" x="-126" y="-73" width="320" height="216"/>
+                                                    <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4RS-NM-LSX" userLabel="victorypoints">
+                                                        <rect key="frame" x="-159.5" y="-73" width="320" height="216"/>
                                                         <animations/>
                                                     </pickerView>
                                                 </subviews>
@@ -253,11 +253,11 @@
                                                     <constraint firstItem="4RS-NM-LSX" firstAttribute="centerX" secondItem="tfP-Pv-ioc" secondAttribute="centerX" id="tDt-iW-jG9" userLabel="VP Picker - center x"/>
                                                 </constraints>
                                             </view>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBi-rJ-xPL" userLabel="botPV">
-                                                <rect key="frame" x="83" y="115" width="67" height="70"/>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SBi-rJ-xPL" userLabel="botPV">
+                                                <rect key="frame" x="38.5" y="115" width="0.0" height="70"/>
                                                 <subviews>
-                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="duY-S7-QdS" userLabel="healthpoints">
-                                                        <rect key="frame" x="-127" y="-73" width="320" height="216"/>
+                                                    <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="duY-S7-QdS" userLabel="healthpoints">
+                                                        <rect key="frame" x="-160.5" y="-73" width="320" height="216"/>
                                                         <animations/>
                                                     </pickerView>
                                                 </subviews>
@@ -268,16 +268,16 @@
                                                     <constraint firstItem="duY-S7-QdS" firstAttribute="centerY" secondItem="SBi-rJ-xPL" secondAttribute="centerY" id="nqb-n2-c0K" userLabel="HP Picker - center y"/>
                                                 </constraints>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="Hv6-2E-7Pp">
-                                                <rect key="frame" x="45" y="35" width="30" height="30"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="Hv6-2E-7Pp">
+                                                <rect key="frame" x="0.5" y="35" width="30" height="30"/>
                                                 <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="kkt-Jx-BXc"/>
                                                     <constraint firstAttribute="width" constant="30" id="mt7-0e-O9r"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="AVd-TT-9eJ">
-                                                <rect key="frame" x="45" y="135" width="30" height="30"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="AVd-TT-9eJ">
+                                                <rect key="frame" x="0.5" y="135" width="30" height="30"/>
                                                 <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="aEe-kK-rxQ"/>
@@ -302,28 +302,28 @@
                                             <constraint firstItem="SBi-rJ-xPL" firstAttribute="leading" secondItem="AVd-TT-9eJ" secondAttribute="trailing" constant="8" id="tVz-bt-kLt" userLabel="Bot - Leading"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Brd-gu-tTd">
-                                        <rect key="frame" x="0.0" y="19" width="224" height="161"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cp3-Ya-5xK" userLabel="Monster Image">
+                                        <rect key="frame" x="0.0" y="19.5" width="224.5" height="160.5"/>
                                         <animations/>
-                                    </imageView>
+                                        <state key="normal" title="Button"/>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.10980392156862745" green="0.14509803921568629" blue="0.21568627450980393" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="tVL-fj-6uz" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Brd-gu-tTd" secondAttribute="width" id="4eo-kZ-7Pc" userLabel="Monster Name - Width"/>
-                                    <constraint firstItem="Brd-gu-tTd" firstAttribute="trailing" secondItem="eJz-5s-qDy" secondAttribute="trailing" multiplier="0.6" id="NmQ-jW-Anz" userLabel="Monster Image - Trailing"/>
-                                    <constraint firstItem="Brd-gu-tTd" firstAttribute="leading" secondItem="eJz-5s-qDy" secondAttribute="leading" id="Vfa-BP-lUf" userLabel="Monster Image - Leading"/>
-                                    <constraint firstItem="Brd-gu-tTd" firstAttribute="bottom" secondItem="Dvg-FW-8en" secondAttribute="top" id="WNq-Dw-Nd5" userLabel="Monster Image - Bottom"/>
-                                    <constraint firstItem="Brd-gu-tTd" firstAttribute="top" secondItem="tVL-fj-6uz" secondAttribute="bottom" id="Ylr-bG-Wkj" userLabel="Monster Image - Top"/>
+                                    <constraint firstItem="cp3-Ya-5xK" firstAttribute="top" secondItem="tVL-fj-6uz" secondAttribute="bottom" id="0Gw-77-TfX"/>
+                                    <constraint firstItem="tVL-fj-6uz" firstAttribute="width" secondItem="cp3-Ya-5xK" secondAttribute="width" id="2MU-al-5Mz"/>
                                     <constraint firstItem="ofZ-sV-TDV" firstAttribute="trailing" secondItem="eJz-5s-qDy" secondAttribute="trailing" id="b6x-Jm-8jj" userLabel="Right View - Trailing"/>
                                     <constraint firstItem="ofZ-sV-TDV" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="top" id="eh8-VG-Kgn" userLabel="Right View - Top"/>
                                     <constraint firstItem="ofZ-sV-TDV" firstAttribute="bottom" secondItem="eJz-5s-qDy" secondAttribute="bottom" id="f4I-gf-kqD" userLabel="Right View - Bottom"/>
-                                    <constraint firstItem="Dvg-FW-8en" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Brd-gu-tTd" secondAttribute="width" id="hA2-mG-aYf" userLabel="Player Name - Width"/>
                                     <constraint firstItem="Dvg-FW-8en" firstAttribute="leading" secondItem="eJz-5s-qDy" secondAttribute="leading" id="kIy-aW-Gun" userLabel="Player Name - Leading"/>
-                                    <constraint firstItem="ofZ-sV-TDV" firstAttribute="leading" secondItem="Brd-gu-tTd" secondAttribute="trailing" id="lXu-6Q-R5i" userLabel="Right View - Leading"/>
+                                    <constraint firstItem="cp3-Ya-5xK" firstAttribute="bottom" secondItem="Dvg-FW-8en" secondAttribute="top" id="mfh-c3-s8h"/>
                                     <constraint firstItem="tVL-fj-6uz" firstAttribute="top" secondItem="eJz-5s-qDy" secondAttribute="top" id="nUU-Ql-Yc5" userLabel="Monster Name - Top"/>
+                                    <constraint firstItem="Dvg-FW-8en" firstAttribute="width" secondItem="cp3-Ya-5xK" secondAttribute="width" id="sE0-kh-kjA"/>
+                                    <constraint firstItem="cp3-Ya-5xK" firstAttribute="leading" secondItem="eJz-5s-qDy" secondAttribute="leading" id="vo4-q2-uze"/>
                                     <constraint firstItem="tVL-fj-6uz" firstAttribute="leading" secondItem="eJz-5s-qDy" secondAttribute="leading" id="x5i-MP-SHj" userLabel="Monster Name - Leading"/>
                                     <constraint firstItem="Dvg-FW-8en" firstAttribute="bottom" secondItem="eJz-5s-qDy" secondAttribute="bottom" id="ySy-Yv-jbb" userLabel="Player Name - Bottom"/>
+                                    <constraint firstItem="cp3-Ya-5xK" firstAttribute="trailing" secondItem="eJz-5s-qDy" secondAttribute="trailing" multiplier="0.6" id="yzF-i2-iS1"/>
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-gP-ZxZ" userLabel="Right Container View">
@@ -420,7 +420,6 @@
                     <connections>
                         <outlet property="healthPoints" destination="duY-S7-QdS" id="NMv-xT-R8f"/>
                         <outlet property="mainMonsterView" destination="eJz-5s-qDy" id="6dk-5x-IZn"/>
-                        <outlet property="monsterImage" destination="Brd-gu-tTd" id="Cih-YD-H8o"/>
                         <outlet property="monsterName" destination="tVL-fj-6uz" id="57j-XW-0z2"/>
                         <outlet property="player1" destination="u6j-n3-LDs" id="QFJ-CE-ujv"/>
                         <outlet property="player2" destination="iyJ-by-eGr" id="Mxh-0m-9dx"/>
