@@ -31,7 +31,6 @@
                                                  monsterName:person[@"monster"]
                                                           hp:person[@"hp"]
                                                           vp:person[@"vp"]];
-        
         [newRoom.users addObject:currentPerson];
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bfr-lM-Fap">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -178,6 +178,7 @@
                             <constraint firstItem="u2f-Ay-Hv6" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="0.25" id="txQ-BY-fEj"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="u0i-Hp-akY"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="cancelProp" destination="8ob-hI-Zt8" id="rFl-0W-aTz"/>
@@ -192,13 +193,13 @@
                         <outletCollection property="joinGameNumbers" destination="KXR-te-UpJ" id="bcb-yt-GBk"/>
                         <outletCollection property="joinGameNumbers" destination="EIn-ao-Inv" id="hZQ-6c-OqV"/>
                         <outletCollection property="joinGameNumbers" destination="IzJ-z0-dB6" id="Xd4-C7-Aar"/>
-                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="GameScreenSegue" id="TfR-Cx-Rkb"/>
-                        <segue destination="tIU-nx-yfq" kind="presentation" identifier="CreateGameSegue" id="dmd-Sd-Ep2"/>
+                        <segue destination="tIU-nx-yfq" kind="show" identifier="GameScreenSegue" id="TfR-Cx-Rkb"/>
+                        <segue destination="tIU-nx-yfq" kind="show" identifier="CreateGameSegue" id="dmd-Sd-Ep2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="348" y="322"/>
+            <point key="canvasLocation" x="1160" y="322"/>
         </scene>
         <!--Game Screen View Controller-->
         <scene sceneID="ANY-VD-GXY">
@@ -438,7 +439,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t92-lS-65i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="955" y="322"/>
+            <point key="canvasLocation" x="1767" y="322"/>
         </scene>
         <!--Change Monster View Controller-->
         <scene sceneID="Fpx-YZ-LjR">
@@ -459,6 +460,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W7C-Hx-Ukc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="932" y="-516"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sxQ-ma-ero">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bfr-lM-Fap" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tlo-M0-m1Z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="mFN-et-M8o"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gJo-Tc-0ni" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="348" y="322"/>
         </scene>
     </scenes>
     <resources>
