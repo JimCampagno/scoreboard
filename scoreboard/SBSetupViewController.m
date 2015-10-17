@@ -61,11 +61,35 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     [self setupTheConnectAndCancelButtons];
     [self setUpActivityViews];
     
+    
+    self.navigationController.navigationBar.hidden = YES;
+//    self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:0.52 green:0.48 blue:0.67 alpha:1];
+    
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.35 green:0.38 blue:0.46 alpha:1];
+
+    
+    
+    
+
     self.firebaseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
     self.invisibleDigits.delegate = self;
     self.isInJoinScreenMode = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.8 green:0.82 blue:0.91 alpha:1];
 }
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.hidden = YES;
+    [Firebase goOnline];
+    
+    
+}
+
+
 
 - (void)setUpActivityViews {
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -674,8 +698,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     destVC.currentPlayerName = [self.currentUser.name copy];
 }
 
-- (void)turnFireBaseOnline {
-    [Firebase goOnline];
-}
+
 
 @end

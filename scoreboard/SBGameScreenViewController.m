@@ -67,6 +67,30 @@
     [self setupListenerToEntireRoomOnFirebase];
     [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
+    
+    self.navigationController.navigationBar.hidden = NO;
+    
+    UIBarButtonItem *leaveGameBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<"
+                                                                               style:UIBarButtonItemStylePlain
+                                                                              target:self
+                                                                              action:@selector(handleBack:)];
+    
+    self.navigationItem.leftBarButtonItem = leaveGameBarButtonItem;
+    
+    NSUInteger size = 26;
+    UIFont *font = [UIFont systemFontOfSize:size];
+    NSDictionary *attributes = @{ NSFontAttributeName: font };
+    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    
+    self.navigationItem.title = [NSString stringWithFormat:@"#%@", _roomDigits];
+    NSDictionary *attributesForTitleText = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
+    self.navigationController.navigationBar.titleTextAttributes = attributesForTitleText;
+}
+
+
+
+- (void)handleBack:(id)sender {
+    [self presentActionSheetForLeaveGame];
 }
 
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
@@ -329,14 +353,22 @@
 //}
 
 - (void)resetMethodHasBeenCalled {
-    SBSetupViewController *presentingVC = (SBSetupViewController *)self.presentingViewController;
+//    SBSetupViewController *presentingVC = (SBSetupViewController *)self.presentingViewController;
     
     [self.currentPlayerRef removeValue];
     [Firebase goOffline];
-    [self dismissViewControllerAnimated:YES
-                             completion:^{
-                                 [presentingVC turnFireBaseOnline];
-                             }];
+    
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+//    [self.navigationController dismissViewControllerAnimated:YES
+//                                                  completion:^{
+//                                                      
+//                                                      [presentingVC turnFireBaseOnline];
+//                                                  }];
+    
+    
+
 }
 
 #pragma mark - Prepare For Segue
@@ -346,13 +378,34 @@
     destVC.roomID = [self.roomDigits copy];
 }
 
+- (void)presentActionSheetForLeaveGame {
+    
+    __weak typeof(self) tmpself = self;
+
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Are you sure you want to leave this game?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [tmpself resetMethodHasBeenCalled];
+    }];
+    
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [actionSheet dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [actionSheet addAction: yesAction];
+    [actionSheet addAction: noAction];
+    
+    [tmpself presentViewController:actionSheet animated:YES completion:nil];
+}
 
 
 
-#pragma mark - Commented Out Methods
-//- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender {
-//    return NO;
-//}
+
+
+
+
+
+
 
 
 @end

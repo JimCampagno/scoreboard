@@ -178,7 +178,9 @@
                             <constraint firstItem="u2f-Ay-Hv6" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="0.25" id="txQ-BY-fEj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="u0i-Hp-akY"/>
+                    <navigationItem key="navigationItem" id="u0i-Hp-akY">
+                        <barButtonItem key="backBarButtonItem" title="Leave Game" id="m6w-fc-0Qw"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="cancelProp" destination="8ob-hI-Zt8" id="rFl-0W-aTz"/>
