@@ -279,7 +279,7 @@
 }
 
 - (void)updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:(NSInteger)row {
-    NSDictionary *victoryPointChange = @{ @"vp": [@(row) stringValue]};
+    NSDictionary *victoryPointChange = @{ @"vp": @(row)};
     
     [self.currentPlayerRef updateChildValues:victoryPointChange
                          withCompletionBlock:^(NSError *error, Firebase *ref) {
@@ -290,7 +290,7 @@
 }
 
 - (void)updateTheHPOfTheCurrentUserOnFirebaseWithSelectedRow:(NSInteger)row {
-    NSDictionary *healthPointChange = @{ @"hp": [@(row) stringValue]};
+    NSDictionary *healthPointChange = @{ @"hp": @(row)};
     
     [self.currentPlayerRef updateChildValues:healthPointChange
                          withCompletionBlock:^(NSError *error, Firebase *ref) {
