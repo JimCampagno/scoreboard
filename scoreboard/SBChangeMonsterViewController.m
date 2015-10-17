@@ -7,7 +7,6 @@
 //
 
 #import "SBChangeMonsterViewController.h"
-#import "SBGameScreenViewController.h"
 #import "AppDelegate.h"
 #import <Masonry.h>
 
@@ -20,7 +19,6 @@
 @property (strong, nonatomic) UIButton *monsterFour;
 @property (strong, nonatomic) UIButton *monsterFive;
 @property (strong, nonatomic) UIButton *monsterSix;
-@property (weak, nonatomic) id <MonsterChangeDelegate> delegate;
 
 - (void)setupBlurredViewToContainMonsters;
 - (void)setupMonsterButtons;
@@ -42,13 +40,9 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [self setupBlurredViewToContainMonsters];
     [self setupMonsterButtons];
     [self setupLabel];
-    [self setupMonsterChangeDelegate];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self setupMonsterChangeDelegate];
-}
+
 
 #pragma mark - Action methods
 
@@ -290,10 +284,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     }];
 }
 
-- (void)setupMonsterChangeDelegate {
-    SBGameScreenViewController *presentingVC = (SBGameScreenViewController *)self.presentingViewController;
-    self.delegate = presentingVC;
-}
+
 
 
 #pragma mark - Action Methods

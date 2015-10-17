@@ -432,7 +432,7 @@
                         <outlet property="player6" destination="waC-Tn-aRJ" id="LFj-rE-G8K"/>
                         <outlet property="playerName" destination="Dvg-FW-8en" id="LCa-qh-AFD"/>
                         <outlet property="victoryPoints" destination="4RS-NM-LSX" id="2R7-Xt-ha2"/>
-                        <segue destination="YtX-cr-uDY" kind="presentation" identifier="changeMonster" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="R7d-wy-fpz"/>
+                        <segue destination="YtX-cr-uDY" kind="presentation" identifier="changeMonster" modalPresentationStyle="overFullScreen" id="R7d-wy-fpz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t92-lS-65i" userLabel="First Responder" sceneMemberID="firstResponder"/>

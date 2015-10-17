@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SBGameScreenViewController.h"
 
 @interface SBChangeMonsterViewController : UIViewController
 
 @property (nonatomic, strong) NSString *roomID;
+@property (weak, nonatomic) id <MonsterChangeDelegate> delegate;
 
 @end

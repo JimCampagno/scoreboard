@@ -117,6 +117,7 @@
 }
 
 - (IBAction)monsterImageTapped:(id)sender {
+    
     [self performSegueWithIdentifier:@"changeMonster" sender:nil];
 }
 
@@ -375,6 +376,8 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     SBChangeMonsterViewController *destVC = segue.destinationViewController;
+    
+    destVC.delegate = self;
     destVC.roomID = [self.roomDigits copy];
 }
 
