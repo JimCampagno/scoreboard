@@ -32,6 +32,14 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     if (self = [super initWithCoder:aDecoder]) {
         [self commonInit];
         [self setupPickerViewsDelegateAndDataSource];
+        
+        self.monsterName.numberOfLines = 1;
+        self.monsterName.adjustsFontSizeToFitWidth = YES;
+        self.monsterName.lineBreakMode = NSLineBreakByClipping;
+        
+        self.playerName.numberOfLines = 1;
+        self.playerName.adjustsFontSizeToFitWidth = YES;
+        self.playerName.lineBreakMode = NSLineBreakByClipping;
     }
     return self;
 }
@@ -40,6 +48,14 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     if (self = [super initWithFrame:frame]) {
         [self commonInit];
         [self setupPickerViewsDelegateAndDataSource];
+        
+        self.monsterName.numberOfLines = 1;
+        self.monsterName.adjustsFontSizeToFitWidth = YES;
+        self.monsterName.lineBreakMode = NSLineBreakByClipping;
+        
+        self.playerName.numberOfLines = 1;
+        self.playerName.adjustsFontSizeToFitWidth = YES;
+        self.playerName.lineBreakMode = NSLineBreakByClipping;
     }
     return self;
 }

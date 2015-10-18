@@ -193,7 +193,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.changeMonsterView.mas_bottom).with.offset(2);
         make.left.equalTo(self.changeMonsterView);
-        make.right.equalTo(self.changeMonsterView.mas_centerX).with.offset(-1);
+        make.right.equalTo(self.changeMonsterView);
         make.height.equalTo(@35);
     }];
     
@@ -223,7 +223,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [goBackButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.changeMonsterView.mas_bottom).with.offset(2);
         make.right.equalTo(self.changeMonsterView);
-        make.left.equalTo(self.changeMonsterView.mas_centerX).with.offset(1);
+        make.left.equalTo(self.changeMonsterView).with.offset(1);
         make.height.equalTo(@35);
     }];
 }
@@ -299,7 +299,6 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 }
 
 - (void)cancelTapped:(UIButton *)sender {
-    [self presentActionSheetForLeaveGame];
 }
 
 - (void)goBackTapped:(UIButton *)sender {
@@ -316,21 +315,6 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     return _monsterNames;
 }
 
-- (void)presentActionSheetForLeaveGame {
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Are you sure you want to leave this game?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self leaveGame];
-    }];
-    
-    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [actionSheet dismissViewControllerAnimated:YES completion:nil];
-    }];
-    
-    [actionSheet addAction: yesAction];
-    [actionSheet addAction: noAction];
 
-    [self presentViewController:actionSheet animated:YES completion:nil];
-}
 
 @end

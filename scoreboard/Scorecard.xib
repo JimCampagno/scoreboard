@@ -20,38 +20,38 @@
             <rect key="frame" x="0.0" y="0.0" width="434" height="323"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monster Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkQ-Nh-BIf">
-                    <rect key="frame" x="0.0" y="0.0" width="260" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monster Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="SkQ-Nh-BIf">
+                    <rect key="frame" x="0.0" y="0.0" width="217" height="20"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="OZt-5U-LkM" userLabel="Monster Name - Height"/>
                     </constraints>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfw-sK-C8Z">
-                    <rect key="frame" x="0.0" y="303" width="260" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="rfw-sK-C8Z">
+                    <rect key="frame" x="0.0" y="303" width="217" height="20"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="kuP-EV-GQ6" userLabel="Player Name - Height"/>
                     </constraints>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Dq-2HO" userLabel="Monster Image">
-                    <rect key="frame" x="0.0" y="28" width="260" height="267"/>
+                    <rect key="frame" x="0.0" y="50" width="217" height="223"/>
                     <animations/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE" userLabel="MAIN - holding top/bottom PV">
-                    <rect key="frame" x="260" y="0.0" width="174" height="323"/>
+                    <rect key="frame" x="217" y="0.0" width="217" height="323"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
-                            <rect key="frame" x="20" y="16" width="154" height="130"/>
+                            <rect key="frame" x="86" y="16" width="125" height="130"/>
                             <subviews>
-                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-aE-agV" userLabel="Top Picker View">
-                                    <rect key="frame" x="-83" y="-16" width="320" height="162"/>
+                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-aE-agV" userLabel="Top Picker View">
+                                    <rect key="frame" x="-97" y="-43" width="320" height="216"/>
                                     <animations/>
                                 </pickerView>
                             </subviews>
@@ -62,7 +62,7 @@
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="Ueg-FQ-rtm">
-                            <rect key="frame" x="0.0" y="233" width="20" height="20"/>
+                            <rect key="frame" x="66" y="233" width="20" height="20"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="OYU-bb-JcA"/>
@@ -70,7 +70,7 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="YZu-pP-hk8">
-                            <rect key="frame" x="0.0" y="71" width="20" height="20"/>
+                            <rect key="frame" x="66" y="71" width="20" height="20"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="9iY-fR-b2C"/>
@@ -78,10 +78,10 @@
                             </constraints>
                         </imageView>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
-                            <rect key="frame" x="20" y="178" width="154" height="130"/>
+                            <rect key="frame" x="86" y="178" width="125" height="130"/>
                             <subviews>
-                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
-                                    <rect key="frame" x="-83" y="-16" width="320" height="162"/>
+                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
+                                    <rect key="frame" x="-97.5" y="-43" width="320" height="216"/>
                                     <animations/>
                                 </pickerView>
                             </subviews>
@@ -95,14 +95,14 @@
                     <animations/>
                     <constraints>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="leading" secondItem="Ueg-FQ-rtm" secondAttribute="trailing" id="6h7-XM-a53" userLabel="Bottom PV View - Leading"/>
+                        <constraint firstItem="Ueg-FQ-rtm" firstAttribute="centerX" secondItem="9mj-Ng-cHE" secondAttribute="centerX" multiplier="0.7" id="DT5-j5-o5e"/>
                         <constraint firstItem="Ueg-FQ-rtm" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="DhR-ZJ-BaT" userLabel="Heart - Center Y"/>
-                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" id="HHO-Wf-iae" userLabel="Top PV View - Trailing"/>
-                        <constraint firstItem="sCA-Ec-FRv" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" id="Uny-k1-UH6" userLabel="Bottom PV View - Trailing"/>
-                        <constraint firstItem="Ueg-FQ-rtm" firstAttribute="leading" secondItem="9mj-Ng-cHE" secondAttribute="leading" id="W2X-9E-QAJ" userLabel="Heart - Leading"/>
+                        <constraint firstItem="MhE-Mp-bZm" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" constant="-6" id="HHO-Wf-iae" userLabel="Top PV View - Trailing"/>
+                        <constraint firstItem="sCA-Ec-FRv" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" constant="-6" id="Uny-k1-UH6" userLabel="Bottom PV View - Trailing"/>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="cfg-Z4-Kgz" userLabel="Bottom PV View - Center Y"/>
                         <constraint firstItem="YZu-pP-hk8" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" id="csi-AX-qzi" userLabel="Star - Center Y"/>
                         <constraint firstItem="MhE-Mp-bZm" firstAttribute="height" secondItem="9mj-Ng-cHE" secondAttribute="height" multiplier="0.4" id="jJc-Bp-R2l" userLabel="Top PV View - Height"/>
-                        <constraint firstItem="YZu-pP-hk8" firstAttribute="leading" secondItem="9mj-Ng-cHE" secondAttribute="leading" id="okO-KD-aZe" userLabel="Star - Leading"/>
+                        <constraint firstItem="YZu-pP-hk8" firstAttribute="centerX" secondItem="9mj-Ng-cHE" secondAttribute="centerX" multiplier="0.7" id="jfm-Fu-6G7"/>
                         <constraint firstItem="MhE-Mp-bZm" firstAttribute="leading" secondItem="YZu-pP-hk8" secondAttribute="trailing" id="uVG-9W-dQB" userLabel="Top PV View - Leading"/>
                         <constraint firstItem="MhE-Mp-bZm" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" id="wFc-XX-RW9" userLabel="Top PV View - Center Y"/>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="height" secondItem="9mj-Ng-cHE" secondAttribute="height" multiplier="0.4" id="z2Q-lw-Z7E" userLabel="Bottom PV View - Height"/>
@@ -114,7 +114,7 @@
             <constraints>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1qm-Hj-cxm" userLabel="Monster Image - Center Y"/>
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="3HR-cv-7tC" userLabel="Right View - Bottom"/>
-                <constraint firstItem="9eV-Dq-2HO" firstAttribute="top" secondItem="SkQ-Nh-BIf" secondAttribute="bottom" constant="8" symbolic="YES" id="5V1-a9-Feu" userLabel="Monster Image - Top"/>
+                <constraint firstItem="9eV-Dq-2HO" firstAttribute="top" secondItem="SkQ-Nh-BIf" secondAttribute="bottom" constant="30" id="5V1-a9-Feu" userLabel="Monster Image - Top"/>
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="6rn-O6-Q3O" userLabel="Right View - Trailing"/>
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BK2-2m-ymQ" userLabel="Monster Name - Top"/>
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FWW-2O-jvI" userLabel="Right View - Top"/>
@@ -125,8 +125,8 @@
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ozw-gs-JoA" userLabel="Monster Name - Leading"/>
                 <constraint firstItem="SkQ-Nh-BIf" firstAttribute="width" relation="greaterThanOrEqual" secondItem="9eV-Dq-2HO" secondAttribute="width" id="p8L-f9-hCl" userLabel="Monster Name - Width"/>
                 <constraint firstItem="9mj-Ng-cHE" firstAttribute="leading" secondItem="9eV-Dq-2HO" secondAttribute="trailing" id="td4-PL-0Xm" userLabel="Right View - Leading"/>
-                <constraint firstItem="9eV-Dq-2HO" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" multiplier="0.6" id="wTY-d7-h3X" userLabel="Monster Image - Trailing"/>
-                <constraint firstItem="9eV-Dq-2HO" firstAttribute="bottom" secondItem="rfw-sK-C8Z" secondAttribute="top" constant="-8" id="ygI-eR-Ywh" userLabel="Monster Image - Bottom"/>
+                <constraint firstItem="9eV-Dq-2HO" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" multiplier="0.5" id="wTY-d7-h3X" userLabel="Monster Image - Trailing"/>
+                <constraint firstItem="9eV-Dq-2HO" firstAttribute="bottom" secondItem="rfw-sK-C8Z" secondAttribute="top" constant="-30" id="ygI-eR-Ywh" userLabel="Monster Image - Bottom"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
