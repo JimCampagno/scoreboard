@@ -280,7 +280,7 @@
 }
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    return 40;
+    return 49;
 }
 
 
@@ -301,6 +301,7 @@
             self.currentPlayer.hp = @(row);
         }
     }
+    
 }
 
 - (void)updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:(NSInteger)row {
