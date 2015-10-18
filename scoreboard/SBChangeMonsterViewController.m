@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import <Masonry.h>
 
-@interface SBChangeMonsterViewController ()
+@interface SBChangeMonsterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UIView *changeMonsterView;
 @property (strong, nonatomic) NSArray *monsterNames;
 @property (strong, nonatomic) UIButton *monsterOne;
@@ -19,6 +19,7 @@
 @property (strong, nonatomic) UIButton *monsterFour;
 @property (strong, nonatomic) UIButton *monsterFive;
 @property (strong, nonatomic) UIButton *monsterSix;
+@property (strong, nonatomic) UITableView *tableView;
 
 - (void)setupBlurredViewToContainMonsters;
 - (void)setupMonsterButtons;
@@ -38,7 +39,6 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupBlurredViewToContainMonsters];
-    [self setupMonsterButtons];
     [self setupLabel];
 }
 
@@ -53,6 +53,15 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)setupMonsterChoosingTableView {
+    
+    
+    
+    
+    
+    
+}
+
 
 #pragma mark - Setting up views
 
@@ -64,7 +73,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [self.view addSubview:self.changeMonsterView];
     
     self.changeMonsterView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.changeMonsterView.layer.borderWidth = 0.2f;
+    self.changeMonsterView.layer.borderWidth = 0.6f;
     self.changeMonsterView.layer.cornerRadius = 10.0f;
     self.changeMonsterView.clipsToBounds = YES;
     
@@ -76,42 +85,42 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     }];
 }
 
-- (void)setupMonsterButtons {
-    NSInteger numberOfAvailableMonsters = [self.monsterNames count];
-    for (NSInteger i = 0; i < numberOfAvailableMonsters; ++i) {
-        
-        switch (i) {
-            case 0:
-                self.monsterOne = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-                [self.view addSubview:self.monsterOne];
-                break;
-            case 1:
-                self.monsterTwo = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-                [self.view addSubview:self.self.monsterTwo];
-                break;
-            case 2:
-                self.monsterThree = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-                [self.view addSubview:self.self.monsterThree];
-                break;
-            case 3:
-                self.monsterFour = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-                [self.view addSubview:self.monsterFour];
-                break;
-            case 4:
-                self.monsterFive = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-                [self.view addSubview:self.monsterFive];
-                break;
-            case 5:
-                self.monsterSix = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-                [self.view addSubview:self.monsterSix];
-                break;
-            default:
-                [NSException raise:NSInvalidArgumentException format:@"Array contains more than 6 monsters, this isn't correct.  Make sure the monsterName array contains 6 monsters."];
-                break;
-        }
-    }
-    [self setupConstraintsForMonsterButtons];
-}
+//- (void)setupMonsterButtons {
+//    NSInteger numberOfAvailableMonsters = [self.monsterNames count];
+//    for (NSInteger i = 0; i < numberOfAvailableMonsters; ++i) {
+//        
+//        switch (i) {
+//            case 0:
+//                self.monsterOne = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
+//                [self.view addSubview:self.monsterOne];
+//                break;
+//            case 1:
+//                self.monsterTwo = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
+//                [self.view addSubview:self.self.monsterTwo];
+//                break;
+//            case 2:
+//                self.monsterThree = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
+//                [self.view addSubview:self.self.monsterThree];
+//                break;
+//            case 3:
+//                self.monsterFour = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
+//                [self.view addSubview:self.monsterFour];
+//                break;
+//            case 4:
+//                self.monsterFive = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
+//                [self.view addSubview:self.monsterFive];
+//                break;
+//            case 5:
+//                self.monsterSix = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
+//                [self.view addSubview:self.monsterSix];
+//                break;
+//            default:
+//                [NSException raise:NSInvalidArgumentException format:@"Array contains more than 6 monsters, this isn't correct.  Make sure the monsterName array contains 6 monsters."];
+//                break;
+//        }
+//    }
+//    [self setupConstraintsForMonsterButtons];
+//}
 
 - (void)setupLabel {
     UILabel *monsterLabel = [UILabel new];
@@ -121,10 +130,10 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     monsterLabel.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     
     monsterLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    monsterLabel.layer.borderWidth = 0.2f;
+    monsterLabel.layer.borderWidth = 0.6f;
     monsterLabel.layer.cornerRadius = 10.0f;
     monsterLabel.clipsToBounds = YES;
-    monsterLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+    monsterLabel.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] ;
     
     monsterLabel.numberOfLines = 1;
     monsterLabel.adjustsFontSizeToFitWidth = YES;
@@ -140,63 +149,6 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
         make.height.equalTo(@35);
     }];
     
-    UILabel *roomNumber = [UILabel new];
-    roomNumber.textAlignment = NSTextAlignmentCenter;
-    roomNumber.text = [NSString stringWithFormat:@"ROOM# %@", self.roomID];
-    [roomNumber setFont:[UIFont systemFontOfSize:20]];
-    roomNumber.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
-    
-    roomNumber.layer.borderColor = [UIColor blackColor].CGColor;
-    roomNumber.layer.borderWidth = 0.2f;
-    roomNumber.layer.cornerRadius = 10.0f;
-    roomNumber.clipsToBounds = YES;
-    roomNumber.textColor = [UIColor whiteColor];
-    
-    roomNumber.numberOfLines = 1;
-    roomNumber.adjustsFontSizeToFitWidth = YES;
-    roomNumber.lineBreakMode = NSLineBreakByClipping;
-    roomNumber.adjustsFontSizeToFitWidth = YES;
-    
-    [self.view addSubview:roomNumber];
-    
-    [roomNumber mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.changeMonsterView);
-        make.bottom.equalTo(monsterLabel.mas_top).with.offset(-2);
-        make.left.equalTo(self.changeMonsterView);
-        make.height.equalTo(@35);
-    }];
-    
-    
-    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    [cancelButton addTarget:self
-                      action:@selector(cancelTapped:)
-            forControlEvents:UIControlEventTouchUpInside];
-    
-    cancelButton.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
-    cancelButton.layer.borderColor = [UIColor blackColor].CGColor;
-    cancelButton.layer.borderWidth = 0.2f;
-    cancelButton.layer.cornerRadius = 10.0f;
-    
-    cancelButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
-    [cancelButton setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
-    
-    [cancelButton setTitle:@"LEAVE GAME"
-                   forState:UIControlStateNormal];
-    
-    cancelButton.titleLabel.numberOfLines = 1;
-    cancelButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    cancelButton.titleLabel.lineBreakMode = NSLineBreakByClipping;
-    
-    [self.view addSubview:cancelButton];
-    
-    [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.changeMonsterView.mas_bottom).with.offset(2);
-        make.left.equalTo(self.changeMonsterView);
-        make.right.equalTo(self.changeMonsterView);
-        make.height.equalTo(@35);
-    }];
-    
     UIButton *goBackButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
     [goBackButton addTarget:self
@@ -205,7 +157,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     
     goBackButton.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     goBackButton.layer.borderColor = [UIColor blackColor].CGColor;
-    goBackButton.layer.borderWidth = 0.2f;
+    goBackButton.layer.borderWidth = 0.6f;
     goBackButton.layer.cornerRadius = 10.0f;
     
     goBackButton.titleLabel.font = [UIFont systemFontOfSize:20.0];
@@ -223,7 +175,7 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [goBackButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.changeMonsterView.mas_bottom).with.offset(2);
         make.right.equalTo(self.changeMonsterView);
-        make.left.equalTo(self.changeMonsterView).with.offset(1);
+        make.left.equalTo(self.changeMonsterView);
         make.height.equalTo(@35);
     }];
 }
@@ -231,58 +183,58 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 
 #pragma mark - Helper Methods
 
-- (UIButton *)createMonsterButtonWithMonsterName:(NSString *)monsterName {
-    UIButton *monsterButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    [monsterButton addTarget:self
-                      action:@selector(monsterTapped:)
-            forControlEvents:UIControlEventTouchUpInside];
+//- (UIButton *)createMonsterButtonWithMonsterName:(NSString *)monsterName {
+//    UIButton *monsterButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    
+//    [monsterButton addTarget:self
+//                      action:@selector(monsterTapped:)
+//            forControlEvents:UIControlEventTouchUpInside];
+//
+//    [monsterButton setTitle:monsterName
+//                   forState:UIControlStateNormal];
+//    [monsterButton setTitleColor:[UIColor clearColor]
+//                        forState:UIControlStateNormal];
+//    
+//    UIImage *robMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", monsterName]];
+//    [monsterButton setBackgroundImage:robMonster
+//                             forState:UIControlStateNormal];
+//    return monsterButton;
+//}
 
-    [monsterButton setTitle:monsterName
-                   forState:UIControlStateNormal];
-    [monsterButton setTitleColor:[UIColor clearColor]
-                        forState:UIControlStateNormal];
-    
-    UIImage *robMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", monsterName]];
-    [monsterButton setBackgroundImage:robMonster
-                             forState:UIControlStateNormal];
-    return monsterButton;
-}
-
-- (void)setupConstraintsForMonsterButtons {
-    [self.monsterOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-        make.top.and.left.equalTo(self.changeMonsterView);
-    }];
-    [self.monsterTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-        make.top.and.right.equalTo(self.changeMonsterView);
-    }];
-    [self.monsterThree mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-        make.top.equalTo(self.monsterOne.mas_bottom);
-        make.left.equalTo(self.changeMonsterView);
-    }];
-    [self.monsterFour mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-        make.top.equalTo(self.monsterTwo.mas_bottom);
-        make.right.equalTo(self.changeMonsterView);
-    }];
-    [self.monsterFive mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-        make.bottom.and.left.equalTo(self.changeMonsterView);
-    }];
-    [self.monsterSix mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-        make.bottom.and.right.equalTo(self.changeMonsterView);
-    }];
-}
+//- (void)setupConstraintsForMonsterButtons {
+//    [self.monsterOne mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+//        make.top.and.left.equalTo(self.changeMonsterView);
+//    }];
+//    [self.monsterTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+//        make.top.and.right.equalTo(self.changeMonsterView);
+//    }];
+//    [self.monsterThree mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+//        make.top.equalTo(self.monsterOne.mas_bottom);
+//        make.left.equalTo(self.changeMonsterView);
+//    }];
+//    [self.monsterFour mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+//        make.top.equalTo(self.monsterTwo.mas_bottom);
+//        make.right.equalTo(self.changeMonsterView);
+//    }];
+//    [self.monsterFive mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+//        make.bottom.and.left.equalTo(self.changeMonsterView);
+//    }];
+//    [self.monsterSix mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
+//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
+//        make.bottom.and.right.equalTo(self.changeMonsterView);
+//    }];
+//}
 
 
 

@@ -166,6 +166,7 @@
 
 - (void)setupListenerToEntireRoomOnFirebase {
     __weak typeof(self) tmpself = self;
+    
     [[self.ref childByAppendingPath:self.roomDigits]
      
      observeEventType:FEventTypeValue
