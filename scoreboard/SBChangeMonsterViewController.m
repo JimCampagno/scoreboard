@@ -22,17 +22,15 @@
 @property (strong, nonatomic) UITableView *tableView;
 
 - (void)setupBlurredViewToContainMonsters;
-- (void)setupMonsterButtons;
-- (void)setupConstraintsForMonsterButtons;
 - (void)setupLabel;
-- (UIButton *)createMonsterButtonWithMonsterName:(NSString *)monsterName;
 @end
 
 
+static NSString *const kCellIdentifier = @"MonsterCell";
 static const CGFloat SBChangeMVCWidthMultiplier = 0.8;
 static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
-static const CGFloat HeightOfMonsterButtonDivisor = 3;
-static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
+//static const CGFloat HeightOfMonsterButtonDivisor = 3;
+//static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 
 @implementation SBChangeMonsterViewController
 
@@ -40,6 +38,8 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
     [super viewDidLoad];
     [self setupBlurredViewToContainMonsters];
     [self setupLabel];
+    
+    [self setupMonsterChoosingTableView];
 }
 
 
@@ -54,12 +54,64 @@ static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
 }
 
 - (void)setupMonsterChoosingTableView {
+    CGRect changeMonsterViewFrame = _changeMonsterView.frame;
     
+    self.tableView = [[UITableView alloc] initWithFrame:changeMonsterViewFrame
+                                                  style:UITableViewStylePlain];
     
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+
+    [_tableView registerClass:[UITableViewCell class]
+       forCellReuseIdentifier:kCellIdentifier];
     
+    [_changeMonsterView addSubview:_tableView];
+
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.bottom.left.and.right.equalTo(_changeMonsterView);
+    }];
+}
+
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     
+    if (!cell.detailTextLabel.text) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:kCellIdentifier];
+        cell.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.detailTextLabel.textColor = [UIColor blackColor];
+    }
     
+    cell.textLabel.text = @"Jim Campagno";
+    cell.detailTextLabel.text = @"Flatiron School";
+    cell.imageView.image = [UIImage imageNamed:@"DRAKONIS_384"];
+    
+    return cell;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 4;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    return @"Human";
 }
 
 

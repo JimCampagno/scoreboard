@@ -82,7 +82,7 @@
     NSDictionary *attributes = @{ NSFontAttributeName: font };
     [self.navigationItem.leftBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
     
-    self.navigationItem.title = [NSString stringWithFormat:@"#%@", _roomDigits];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@", _roomDigits];
     NSDictionary *attributesForTitleText = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
     self.navigationController.navigationBar.titleTextAttributes = attributesForTitleText;
 }
