@@ -54,6 +54,7 @@
 //@property (nonatomic, strong) SBStarScene *starScene;
 
 @property (strong, nonatomic) SCNScene *heart;
+@property (strong, nonatomic) SCNParticleSystem *particleSystem;
 
 
 

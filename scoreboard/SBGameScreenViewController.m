@@ -90,6 +90,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"VIEW DID LOAD!!!");
+    
     self.room = [[SBRoom alloc] init];
     [self setupPickerViewsDelegateAndDataSource];
     [self setupListenerToEntireRoomOnFirebase];
@@ -213,47 +216,56 @@
     
     self.scnviews = @[ self.player1SCNView, self.player2SCNView, self.player3SCNView, self.player4SCNView, self.player5SCNView, self.player6SCNView ];
     
+    NSLog(@"WUDDUP!!");
     
-    Scorecard *sc = self.playerScorecards[0];
-    SCNView *view = self.scnviews[0];
-    
-    view.scene = [SCNScene new];
-    view.scene.physicsWorld.contactDelegate = sc;
-    view.backgroundColor = [UIColor clearColor];
-    
-    [sc.heartContainerView addSubview:view];
-    
-    //    heartParticleView.allowsTransparency = YES;
-    //    heartParticleView.ignoresSiblingOrder = NO;
-    //    heartParticleView.backgroundColor = [UIColor clearColor];
-    //    NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"HeartParticle" ofType:@"sks"];
-    
-    
-    
-    
-    NSString *documentdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *tileDirectory = [documentdir stringByAppendingPathComponent:@""];
-    NSLog(@"Tile Directory: %@", tileDirectory);
-    
-    SCNParticleSystem *particleSystem = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
-    
-    
-    
-    SCNNode *systemNode = [SCNNode new];
-    
-    [systemNode addParticleSystem:particleSystem];
-    
-    systemNode.position = SCNVector3Make(0.0, 0.0, 0.0);
-    
-//    systemNode.position = SCNVector3Make(view.frame.origin.x, view.frame.origin.y, 0.0);
-    
-    
-    [view.scene.rootNode addChildNode:systemNode];
-    
-    
-    
+    for (NSInteger i = 0; i < self.scnviews.count; i++) {
+        
+        
+        
+        
+        
+        Scorecard *sc = self.playerScorecards[i];
+        SCNView *view = self.scnviews[i];
+        
+        view.scene = [SCNScene new];
+        view.scene.physicsWorld.contactDelegate = sc;
+        view.backgroundColor = [UIColor clearColor];
+        
+        [sc.heartContainerView addSubview:view];
+        
+        //    heartParticleView.allowsTransparency = YES;
+        //    heartParticleView.ignoresSiblingOrder = NO;
+        //    heartParticleView.backgroundColor = [UIColor clearColor];
+        //    NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
+        
+        
+        
+//        sc.particleSystem = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
+//        
+//        [view.scene.rootNode addParticleSystem:sc.particleSystem];
+        
+        
+//        SCNNode *systemNode = [SCNNode new];
+//        
+//        
+//        [systemNode addParticleSystem:sc.particleSystem];
+//        
+//        systemNode.position = SCNVector3Make(0.0, 0.0, 0.0);
+//        
+//        //    systemNode.position = SCNVector3Make(view.frame.origin.x, view.frame.origin.y, 0.0);
+//        
+//        
+//        [view.scene.rootNode addChildNode:systemNode];
+        
+        
+        
+        
+        //    particleSystem.birthRate = 0.0;
+        
+        
+        
+        
+    }
     
     
     
@@ -495,6 +507,16 @@
 }
 
 - (void)updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:(NSInteger)row {
+    
+    Scorecard *sc = self.playerScorecards[0];
+    SCNView *view = self.scnviews[0];
+
+    
+    SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
+    
+    [view.scene.rootNode addParticleSystem:new];
+  
+    
     NSDictionary *victoryPointChange = @{ @"vp": @(row)};
     
     [self.currentPlayerRef updateChildValues:victoryPointChange
