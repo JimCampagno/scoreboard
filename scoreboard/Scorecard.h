@@ -34,6 +34,8 @@
 
 @property (weak, nonatomic) IBOutlet SKView *starParticleView;
 @property (weak, nonatomic) IBOutlet UIView *heartContainerView;
+@property (weak, nonatomic) IBOutlet UIView *starContainerView;
+
 @property (strong, nonatomic) SKView *heartParticleView;
 
 
@@ -55,6 +57,10 @@
 
 @property (strong, nonatomic) SCNScene *heart;
 @property (strong, nonatomic) SCNParticleSystem *particleSystem;
+@property (strong, nonatomic) SCNView *heartView;
+
+@property (strong, nonatomic) SCNView *starView;
+
 
 
 

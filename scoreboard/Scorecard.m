@@ -72,6 +72,28 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.view];
+    
+    self.heartView = [SCNView new];
+    self.heartView.scene = [SCNScene new];
+    self.heartView.scene.physicsWorld.contactDelegate = self;
+    self.heartView.backgroundColor = [UIColor clearColor];
+    [self.heartContainerView addSubview:self.heartView];
+    
+    [self.heartView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.and.right.and.bottom.equalTo(self.heartContainerView);
+    }];
+    
+    
+    self.starView = [SCNView new];
+    self.starView.scene = [SCNScene new];
+    self.starView.scene.physicsWorld.contactDelegate = self;
+    self.starView.backgroundColor = [UIColor clearColor];
+    [self.starContainerView addSubview:self.starView];
+    
+    [self.starView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.and.right.and.bottom.equalTo(self.starContainerView);
+    }];
+    
     [self setNeedsUpdateConstraints];
     
     
@@ -167,15 +189,35 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     
     
     if ((currentHealthFromPickerView != [user.hp integerValue]) && !self.firstTimeThrough) {
+        
+    
+        
+        SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
+        
+        [self.heartView.scene.rootNode addParticleSystem:new];
+        
+        
+        
+        
+        
+        
+        
+        
 //        [self.heartScene runHearts];
-        [NSTimer scheduledTimerWithTimeInterval:kLengthOfHeartScene
-                                         target:self
-                                       selector:@selector(pauseHeartTimer)
-                                       userInfo:nil
-                                        repeats:NO];
+//        [NSTimer scheduledTimerWithTimeInterval:kLengthOfHeartScene
+//                                         target:self
+//                                       selector:@selector(pauseHeartTimer)
+//                                       userInfo:nil
+//                                        repeats:NO];
     }
     
     if ((currentVictoryFromPickerView != [user.vp integerValue]) && !self.firstTimeThrough) {
+        
+        SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Starfetti" inDirectory:nil];
+        
+        [self.starView.scene.rootNode addParticleSystem:new];
+        
+        
 //        [self.starScene runStars];
 //        [NSTimer scheduledTimerWithTimeInterval:kLengthOfStarScene
 //                                         target:self

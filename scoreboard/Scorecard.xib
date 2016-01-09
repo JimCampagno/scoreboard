@@ -13,6 +13,7 @@
                 <outlet property="monsterImage" destination="9eV-Dq-2HO" id="5nz-1n-2H7"/>
                 <outlet property="monsterName" destination="SkQ-Nh-BIf" id="RMS-Wj-YRZ"/>
                 <outlet property="playerName" destination="rfw-sK-C8Z" id="jId-ng-anv"/>
+                <outlet property="starContainerView" destination="Tuo-He-cKv" id="cYl-tQ-emC"/>
                 <outlet property="topPicker" destination="Dga-aE-agV" id="LbN-XT-J5m"/>
                 <outlet property="view" destination="iN0-l3-epB" id="EHk-ce-SwH"/>
             </connections>
@@ -75,8 +76,8 @@
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
                             <rect key="frame" x="86" y="178" width="125" height="130"/>
                             <subviews>
-                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
-                                    <rect key="frame" x="-98" y="-43" width="321" height="216"/>
+                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
+                                    <rect key="frame" x="-97" y="-43" width="320" height="216"/>
                                 </pickerView>
                             </subviews>
                             <constraints>
@@ -92,15 +93,25 @@
                                 <constraint firstAttribute="height" constant="90" id="oac-m7-k4f"/>
                             </constraints>
                         </view>
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tuo-He-cKv" userLabel="starScene">
+                            <rect key="frame" x="31" y="36" width="90" height="90"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="APj-JR-ISy"/>
+                                <constraint firstAttribute="height" constant="90" id="hCN-R1-nTN"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="leading" secondItem="Ueg-FQ-rtm" secondAttribute="trailing" id="6h7-XM-a53" userLabel="Bottom PV View - Leading"/>
+                        <constraint firstItem="Tuo-He-cKv" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" id="AgL-u2-fhN"/>
                         <constraint firstItem="Ueg-FQ-rtm" firstAttribute="centerX" secondItem="9mj-Ng-cHE" secondAttribute="centerX" multiplier="0.7" id="DT5-j5-o5e"/>
                         <constraint firstItem="Ueg-FQ-rtm" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="DhR-ZJ-BaT" userLabel="Heart - Center Y"/>
                         <constraint firstItem="MhE-Mp-bZm" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" constant="-6" id="HHO-Wf-iae" userLabel="Top PV View - Trailing"/>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="trailing" secondItem="9mj-Ng-cHE" secondAttribute="trailing" constant="-6" id="Uny-k1-UH6" userLabel="Bottom PV View - Trailing"/>
                         <constraint firstItem="sCA-Ec-FRv" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="1.5" id="cfg-Z4-Kgz" userLabel="Bottom PV View - Center Y"/>
                         <constraint firstItem="YZu-pP-hk8" firstAttribute="centerY" secondItem="9mj-Ng-cHE" secondAttribute="centerY" multiplier="0.5" id="csi-AX-qzi" userLabel="Star - Center Y"/>
+                        <constraint firstItem="Tuo-He-cKv" firstAttribute="centerX" secondItem="9mj-Ng-cHE" secondAttribute="centerX" multiplier="0.7" id="dUU-Tc-DKk"/>
                         <constraint firstItem="MhE-Mp-bZm" firstAttribute="height" secondItem="9mj-Ng-cHE" secondAttribute="height" multiplier="0.4" id="jJc-Bp-R2l" userLabel="Top PV View - Height"/>
                         <constraint firstItem="YZu-pP-hk8" firstAttribute="centerX" secondItem="9mj-Ng-cHE" secondAttribute="centerX" multiplier="0.7" id="jfm-Fu-6G7"/>
                         <constraint firstItem="MhE-Mp-bZm" firstAttribute="leading" secondItem="YZu-pP-hk8" secondAttribute="trailing" id="uVG-9W-dQB" userLabel="Top PV View - Leading"/>

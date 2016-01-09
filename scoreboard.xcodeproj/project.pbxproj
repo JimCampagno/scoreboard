@@ -34,6 +34,7 @@
 		7D45F3921B126AA30053F47F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D45F3901B126AA30053F47F /* LaunchScreen.xib */; };
 		7D45F39E1B126AA30053F47F /* scoreboardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F39D1B126AA30053F47F /* scoreboardTests.m */; };
 		7D45F3AC1B1271120053F47F /* SBSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3AB1B1271120053F47F /* SBSetupViewController.m */; };
+		7D54198E1C41AA9E00AE3ABD /* Starfetti.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 7D54198D1C41AA9E00AE3ABD /* Starfetti.scnp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		7D45F39D1B126AA30053F47F /* scoreboardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = scoreboardTests.m; sourceTree = "<group>"; };
 		7D45F3AA1B1271120053F47F /* SBSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSetupViewController.h; sourceTree = "<group>"; };
 		7D45F3AB1B1271120053F47F /* SBSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSetupViewController.m; sourceTree = "<group>"; };
+		7D54198D1C41AA9E00AE3ABD /* Starfetti.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Starfetti.scnp; sourceTree = "<group>"; };
 		8AC5529345ED1248A6EDE297 /* Pods-scoreboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scoreboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-scoreboard/Pods-scoreboard.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 				5BCE28BA1BA480E4001CD3F9 /* spark.png */,
 				7D3946CE1C417E870019766C /* Confetti.scnp */,
 				7D3946CF1C417E870019766C /* confetti.png */,
+				7D54198D1C41AA9E00AE3ABD /* Starfetti.scnp */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 			files = (
 				5BCE28BB1BA480E4001CD3F9 /* HeartParticle.sks in Resources */,
 				5B4A50541BA65E9B003893D8 /* StarParticle.sks in Resources */,
+				7D54198E1C41AA9E00AE3ABD /* Starfetti.scnp in Resources */,
 				7D3946CB1C417E490019766C /* heart.png in Resources */,
 				7D3946D01C417E870019766C /* Confetti.scnp in Resources */,
 				5BCE28BC1BA480E4001CD3F9 /* spark.png in Resources */,

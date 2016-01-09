@@ -122,11 +122,7 @@
     
     
     
-    for (Scorecard *sc in self.playerScorecards) {
-        
-        NSLog(@"\n\n %@ \n\n", CGRectCreateDictionaryRepresentation(sc.heartContainerView.frame));
-        
-    }
+   
     
     //    for (NSInteger i = 0; i < [self.playerScorecards count]; i++) {
     //
@@ -200,79 +196,13 @@
     //                 [self.player5 installTheHeartScene];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    Scorecard *firstScorecard = self.playerScorecards.firstObject;
-    UIView *heartContainerView = firstScorecard.heartContainerView;
-    CGRect frame = CGRectMake(0.0, 0.0, heartContainerView.frame.size.width, heartContainerView.frame.size.height);
-    
-    self.player1SCNView = [[SCNView alloc] initWithFrame:frame];
-    self.player2SCNView = [[SCNView alloc] initWithFrame:frame];
-    self.player3SCNView = [[SCNView alloc] initWithFrame:frame];
-    self.player4SCNView = [[SCNView alloc] initWithFrame:frame];
-    self.player5SCNView = [[SCNView alloc] initWithFrame:frame];
-    self.player6SCNView = [[SCNView alloc] initWithFrame:frame];
-    
-    self.scnviews = @[ self.player1SCNView, self.player2SCNView, self.player3SCNView, self.player4SCNView, self.player5SCNView, self.player6SCNView ];
-    
-    NSLog(@"WUDDUP!!");
-    
-    for (NSInteger i = 0; i < self.scnviews.count; i++) {
-        
-        
-        
-        
-        
-        Scorecard *sc = self.playerScorecards[i];
-        SCNView *view = self.scnviews[i];
-        
-        view.scene = [SCNScene new];
-        view.scene.physicsWorld.contactDelegate = sc;
-        view.backgroundColor = [UIColor clearColor];
-        
-        [sc.heartContainerView addSubview:view];
-        
-        //    heartParticleView.allowsTransparency = YES;
-        //    heartParticleView.ignoresSiblingOrder = NO;
-        //    heartParticleView.backgroundColor = [UIColor clearColor];
-        //    NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
-        
-        
-        
-//        sc.particleSystem = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
-//        
-//        [view.scene.rootNode addParticleSystem:sc.particleSystem];
-        
-        
-//        SCNNode *systemNode = [SCNNode new];
-//        
-//        
-//        [systemNode addParticleSystem:sc.particleSystem];
-//        
-//        systemNode.position = SCNVector3Make(0.0, 0.0, 0.0);
-//        
-//        //    systemNode.position = SCNVector3Make(view.frame.origin.x, view.frame.origin.y, 0.0);
-//        
-//        
-//        [view.scene.rootNode addChildNode:systemNode];
-        
-        
-        
-        
-        //    particleSystem.birthRate = 0.0;
-        
-        
-        
-        
-    }
+
     
     
     
     
     
-    
-}
+
 
 - (void)handleBack:(id)sender {
     [self presentActionSheetForLeaveGame];
@@ -403,7 +333,7 @@
 - (void)hideUnusedScorecards {
     for (NSUInteger i = [self.room.users count] ; i < 6 ; i++) {
         Scorecard *sc = self.playerScorecards[i];
-        sc.hidden = NO;
+        sc.hidden = YES;
     }
     
     //    for (Scorecard *card in self.playerScorecards) {
@@ -507,16 +437,7 @@
 }
 
 - (void)updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:(NSInteger)row {
-    
-    Scorecard *sc = self.playerScorecards[0];
-    SCNView *view = self.scnviews[0];
 
-    
-    SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
-    
-    [view.scene.rootNode addParticleSystem:new];
-  
-    
     NSDictionary *victoryPointChange = @{ @"vp": @(row)};
     
     [self.currentPlayerRef updateChildValues:victoryPointChange
