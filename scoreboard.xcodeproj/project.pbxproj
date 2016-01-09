@@ -22,6 +22,10 @@
 		7D1663111B13B13E002A2BF0 /* SBRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1663101B13B13E002A2BF0 /* SBRoom.m */; };
 		7D1663191B13B26B002A2BF0 /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1663181B13B26B002A2BF0 /* SBUser.m */; };
 		7D2968A41B2E2FA7000E1C7C /* Scorecard.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2968A31B2E2FA7000E1C7C /* Scorecard.m */; };
+		7D3946CB1C417E490019766C /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D3946CA1C417E490019766C /* heart.png */; };
+		7D3946CD1C417E540019766C /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D3946CC1C417E540019766C /* star.png */; };
+		7D3946D01C417E870019766C /* Confetti.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 7D3946CE1C417E870019766C /* Confetti.scnp */; };
+		7D3946D11C417E870019766C /* confetti.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D3946CF1C417E870019766C /* confetti.png */; };
 		7D4295791BCA1C38007B100F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4295781BCA1C38007B100F /* SystemConfiguration.framework */; };
 		7D45F3841B126AA30053F47F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3831B126AA30053F47F /* main.m */; };
 		7D45F3871B126AA30053F47F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45F3861B126AA30053F47F /* AppDelegate.m */; };
@@ -68,6 +72,10 @@
 		7D1663181B13B26B002A2BF0 /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
 		7D2968A21B2E2FA7000E1C7C /* Scorecard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scorecard.h; sourceTree = "<group>"; };
 		7D2968A31B2E2FA7000E1C7C /* Scorecard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scorecard.m; sourceTree = "<group>"; };
+		7D3946CA1C417E490019766C /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
+		7D3946CC1C417E540019766C /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		7D3946CE1C417E870019766C /* Confetti.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Confetti.scnp; sourceTree = "<group>"; };
+		7D3946CF1C417E870019766C /* confetti.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = confetti.png; sourceTree = "<group>"; };
 		7D4295781BCA1C38007B100F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7D45F37E1B126AA30053F47F /* scoreboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scoreboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D45F3821B126AA30053F47F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,7 +123,11 @@
 				5B4A50511BA65E5A003893D8 /* SBStarScene.m */,
 				5BCE28B91BA480E4001CD3F9 /* HeartParticle.sks */,
 				5B4A50531BA65E9B003893D8 /* StarParticle.sks */,
+				7D3946CC1C417E540019766C /* star.png */,
+				7D3946CA1C417E490019766C /* heart.png */,
 				5BCE28BA1BA480E4001CD3F9 /* spark.png */,
+				7D3946CE1C417E870019766C /* Confetti.scnp */,
+				7D3946CF1C417E870019766C /* confetti.png */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -341,10 +353,14 @@
 			files = (
 				5BCE28BB1BA480E4001CD3F9 /* HeartParticle.sks in Resources */,
 				5B4A50541BA65E9B003893D8 /* StarParticle.sks in Resources */,
+				7D3946CB1C417E490019766C /* heart.png in Resources */,
+				7D3946D01C417E870019766C /* Confetti.scnp in Resources */,
 				5BCE28BC1BA480E4001CD3F9 /* spark.png in Resources */,
 				5BCAF1121B2A70A60096C88F /* Scorecard.xib in Resources */,
 				7D45F38D1B126AA30053F47F /* Main.storyboard in Resources */,
 				7D45F3921B126AA30053F47F /* LaunchScreen.xib in Resources */,
+				7D3946D11C417E870019766C /* confetti.png in Resources */,
+				7D3946CD1C417E540019766C /* star.png in Resources */,
 				7D45F38F1B126AA30053F47F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 #import "SBUser.h"
+#import <SceneKit/SceneKit.h>
+
 
 
 @class SBHeartScene;
@@ -23,8 +25,7 @@
 
 @end
 
-
-@interface Scorecard : UIView <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface Scorecard : UIView <UIPickerViewDataSource, UIPickerViewDelegate, SCNPhysicsContactDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UILabel *monsterName;
@@ -49,8 +50,12 @@
 
 @property (strong, nonatomic) NSMutableArray *customSBConstraints;
 
-@property (nonatomic, strong) SBHeartScene *heartScene;
+//@property (nonatomic, strong) SBHeartScene *heartScene;
 //@property (nonatomic, strong) SBStarScene *starScene;
+
+@property (strong, nonatomic) SCNScene *heart;
+
+
 
 
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user;

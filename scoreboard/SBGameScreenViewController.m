@@ -13,6 +13,7 @@
 #import "SBStarScene.h"
 #import "SBSetupViewController.h"
 #import "SBChangeMonsterViewController.h"
+#import <SceneKit/SceneKit.h>
 
 #import <Masonry.h>
 
@@ -51,6 +52,18 @@
 @property (strong, nonatomic) SKView *player6SKView;
 
 @property (strong, nonatomic) NSArray *skviews;
+
+@property (strong, nonatomic) SCNView *player1SCNView;
+@property (strong, nonatomic) SCNView *player2SCNView;
+@property (strong, nonatomic) SCNView *player3SCNView;
+@property (strong, nonatomic) SCNView *player4SCNView;
+@property (strong, nonatomic) SCNView *player5SCNView;
+@property (strong, nonatomic) SCNView *player6SCNView;
+
+@property (strong, nonatomic) NSArray *scnviews;
+
+
+
 
 
 
@@ -95,35 +108,37 @@
     
     self.skviews = @[ self.player1SKView, self.player2SKView, self.player3SKView, self.player4SKView, self.player5SKView, self.player6SKView];
     
-    for (SKView *sk in self.skviews) {
-        
-        [self.view addSubview:sk];
-    }
-
-
+    //    for (SKView *sk in self.skviews) {
+    //
+    //        [self.view addSubview:sk];
+    //    }
+    
+    
+   
+    
     
     
     
     for (Scorecard *sc in self.playerScorecards) {
         
         NSLog(@"\n\n %@ \n\n", CGRectCreateDictionaryRepresentation(sc.heartContainerView.frame));
-
+        
     }
-     
-//    for (NSInteger i = 0; i < [self.playerScorecards count]; i++) {
-//        
-//        NSLog(@"Entering for loop to setup the scorecard!");
-//        
-//        Scorecard *sc = self.playerScorecards[i];
-//        SKView *skview = skviews[i];
-//        
-//        [sc.heartContainerView addSubview:skview];
-////        [skview mas_makeConstraints:^(MASConstraintMaker *make) {
-////            
-////            make.top.and.bottom.and.right.and.left.equalTo(sc.heartContainerView);
-////            
-////        }];
-//    }
+    
+    //    for (NSInteger i = 0; i < [self.playerScorecards count]; i++) {
+    //
+    //        NSLog(@"Entering for loop to setup the scorecard!");
+    //
+    //        Scorecard *sc = self.playerScorecards[i];
+    //        SKView *skview = skviews[i];
+    //
+    //        [sc.heartContainerView addSubview:skview];
+    ////        [skview mas_makeConstraints:^(MASConstraintMaker *make) {
+    ////
+    ////            make.top.and.bottom.and.right.and.left.equalTo(sc.heartContainerView);
+    ////
+    ////        }];
+    //    }
     
     self.navigationController.navigationBar.hidden = NO;
     
@@ -185,26 +200,62 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    for (NSInteger i = 6; i < [self.playerScorecards count]; i++) {
-        
-        NSLog(@"Entering for loop to setup the scorecard!");
+    Scorecard *firstScorecard = self.playerScorecards.firstObject;
+    UIView *heartContainerView = firstScorecard.heartContainerView;
+    CGRect frame = CGRectMake(0.0, 0.0, heartContainerView.frame.size.width, heartContainerView.frame.size.height);
+
+    self.player1SCNView = [[SCNView alloc] initWithFrame:frame];
+    self.player2SCNView = [[SCNView alloc] initWithFrame:frame];
+    self.player3SCNView = [[SCNView alloc] initWithFrame:frame];
+    self.player4SCNView = [[SCNView alloc] initWithFrame:frame];
+    self.player5SCNView = [[SCNView alloc] initWithFrame:frame];
+    self.player6SCNView = [[SCNView alloc] initWithFrame:frame];
+
+    self.scnviews = @[ self.player1SCNView, self.player2SCNView, self.player3SCNView, self.player4SCNView, self.player5SCNView, self.player6SCNView ];
+    
+    for (NSInteger i = 0; i < self.scnviews.count; i++) {
         
         Scorecard *sc = self.playerScorecards[i];
-        SKView *skview = self.skviews[i];
+        SCNView *view = self.scnviews[i];
+        
+        view.scene = [SCNScene new];
+        view.scene.physicsWorld.contactDelegate = sc;
+        view.backgroundColor = [UIColor clearColor];
+    
+        [sc.heartContainerView addSubview:view];
+        
+        //    heartParticleView.allowsTransparency = YES;
+        //    heartParticleView.ignoresSiblingOrder = NO;
+        //    heartParticleView.backgroundColor = [UIColor clearColor];
+        //    NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
+
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"HeartParticle" ofType:@"sks"];
         
         
-//        NSLog(@"\n\n %@ \n\n", CGRectCreateDictionaryRepresentation(sc.heartContainerView.frame));
         
         
-        [sc.heartContainerView addSubview:skview];
-//                [skview mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//                    make.top.and.bottom.and.right.and.left.equalTo(sc.heartContainerView);
-//        
-//                }];
+        NSString *documentdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *tileDirectory = [documentdir stringByAppendingPathComponent:@""];
+        NSLog(@"Tile Directory: %@", tileDirectory);
+        
+        SCNParticleSystem *particleSystem = [SCNParticleSystem particleSystemNamed:@"HeartParticle" inDirectory:documentdir];
+        
+        
+        
+        SCNNode *systemNode = [SCNNode new];
+        
+        [systemNode addParticleSystem:particleSystem];
+        systemNode.position = SCNVector3Make(0.0, 0.0, 0.0);
+        [view.scene.rootNode addChildNode:systemNode];
+        
+        
+        
+        
+        
+        
+        
     }
 
-    
 }
 
 - (void)handleBack:(id)sender {

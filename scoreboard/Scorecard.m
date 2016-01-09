@@ -167,7 +167,7 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     
     
     if ((currentHealthFromPickerView != [user.hp integerValue]) && !self.firstTimeThrough) {
-        [self.heartScene runHearts];
+//        [self.heartScene runHearts];
         [NSTimer scheduledTimerWithTimeInterval:kLengthOfHeartScene
                                          target:self
                                        selector:@selector(pauseHeartTimer)
@@ -187,17 +187,57 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
 }
 
 - (void)pauseHeartTimer {
-    [self.heartScene pauseHearts];
+//    [self.heartScene pauseHearts];
 }
 
 - (void)pauseStarTimer {
 //    [self.starScene pauseStars];
 }
 
+-(void)physicsWorld:(SCNPhysicsWorld *)world didUpdateContact:(SCNPhysicsContact *)contact {
+    
+    NSLog(@"didUpdateContact got called.");
+    
+//    SCNParticleSystem *particleSystem = [SCNParticleSystem particleSystemNamed:@"HeartParticle" inDirectory:nil];
+//    SCNNode *systemNode = [SCNNode new];
+//    
+//    [systemNode addParticleSystem:particleSystem];
+//    systemNode.position = SCNVector3Make(0.0, 0.0, 0.0);
+//    //sceneView.scene.rootNode.addChildNode(systemNode)
+    
+    
+    
+    
+//    NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
+//    
+//    self.heart = [NSKeyedUnarchiver unarchiveObjectWithFile:emitterPath];
+//    self.heart.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
+//    self.heart.name = @"particleHeart";
+//    self.heart.targetNode = self.scene;
+//    [self addChild:self.heart];
+    
+    
+    
+    
+}
 
+//func physicsWorld(world: SCNPhysicsWorld, didUpdateContact contact: SCNPhysicsContact) {
+//    if (contact.nodeA == sphere1 || contact.nodeA == sphere2) && (contact.nodeB == sphere1 || contact.nodeB == sphere2) {
+//        let particleSystem = SCNParticleSystem(named: "Explosion", inDirectory: nil)
+//        let systemNode = SCNNode()
+//        systemNode.addParticleSystem(particleSystem)
+//        systemNode.position = contact.nodeA.position
+//        sceneView.scene?.rootNode.addChildNode(systemNode)
+//        
+//        contact.nodeA.removeFromParentNode()
+//        contact.nodeB.removeFromParentNode()
+//    }
+//}
 
 
 - (void)installTheHeartScene {
+    
+    
     
 //    NSLog(@"installTheHeartScene has been called!");
 //    
