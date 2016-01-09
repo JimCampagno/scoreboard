@@ -114,7 +114,7 @@
     //    }
     
     
-   
+    
     
     
     
@@ -203,59 +203,63 @@
     Scorecard *firstScorecard = self.playerScorecards.firstObject;
     UIView *heartContainerView = firstScorecard.heartContainerView;
     CGRect frame = CGRectMake(0.0, 0.0, heartContainerView.frame.size.width, heartContainerView.frame.size.height);
-
+    
     self.player1SCNView = [[SCNView alloc] initWithFrame:frame];
     self.player2SCNView = [[SCNView alloc] initWithFrame:frame];
     self.player3SCNView = [[SCNView alloc] initWithFrame:frame];
     self.player4SCNView = [[SCNView alloc] initWithFrame:frame];
     self.player5SCNView = [[SCNView alloc] initWithFrame:frame];
     self.player6SCNView = [[SCNView alloc] initWithFrame:frame];
-
+    
     self.scnviews = @[ self.player1SCNView, self.player2SCNView, self.player3SCNView, self.player4SCNView, self.player5SCNView, self.player6SCNView ];
     
-    for (NSInteger i = 0; i < self.scnviews.count; i++) {
-        
-        Scorecard *sc = self.playerScorecards[i];
-        SCNView *view = self.scnviews[i];
-        
-        view.scene = [SCNScene new];
-        view.scene.physicsWorld.contactDelegate = sc;
-        view.backgroundColor = [UIColor clearColor];
     
-        [sc.heartContainerView addSubview:view];
-        
-        //    heartParticleView.allowsTransparency = YES;
-        //    heartParticleView.ignoresSiblingOrder = NO;
-        //    heartParticleView.backgroundColor = [UIColor clearColor];
-        //    NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
-
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"HeartParticle" ofType:@"sks"];
-        
-        
-        
-        
-        NSString *documentdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSString *tileDirectory = [documentdir stringByAppendingPathComponent:@""];
-        NSLog(@"Tile Directory: %@", tileDirectory);
-        
-        SCNParticleSystem *particleSystem = [SCNParticleSystem particleSystemNamed:@"HeartParticle" inDirectory:documentdir];
-        
-        
-        
-        SCNNode *systemNode = [SCNNode new];
-        
-        [systemNode addParticleSystem:particleSystem];
-        systemNode.position = SCNVector3Make(0.0, 0.0, 0.0);
-        [view.scene.rootNode addChildNode:systemNode];
-        
-        
-        
-        
-        
-        
-        
-    }
-
+    Scorecard *sc = self.playerScorecards[0];
+    SCNView *view = self.scnviews[0];
+    
+    view.scene = [SCNScene new];
+    view.scene.physicsWorld.contactDelegate = sc;
+    view.backgroundColor = [UIColor clearColor];
+    
+    [sc.heartContainerView addSubview:view];
+    
+    //    heartParticleView.allowsTransparency = YES;
+    //    heartParticleView.ignoresSiblingOrder = NO;
+    //    heartParticleView.backgroundColor = [UIColor clearColor];
+    //    NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"HeartParticle" ofType:@"sks"];
+    
+    
+    
+    
+    NSString *documentdir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *tileDirectory = [documentdir stringByAppendingPathComponent:@""];
+    NSLog(@"Tile Directory: %@", tileDirectory);
+    
+    SCNParticleSystem *particleSystem = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
+    
+    
+    
+    SCNNode *systemNode = [SCNNode new];
+    
+    [systemNode addParticleSystem:particleSystem];
+    
+    systemNode.position = SCNVector3Make(0.0, 0.0, 0.0);
+    
+//    systemNode.position = SCNVector3Make(view.frame.origin.x, view.frame.origin.y, 0.0);
+    
+    
+    [view.scene.rootNode addChildNode:systemNode];
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 - (void)handleBack:(id)sender {
