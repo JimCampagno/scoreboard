@@ -43,6 +43,21 @@
 @property (weak, nonatomic) IBOutlet Scorecard *player5;
 @property (weak, nonatomic) IBOutlet Scorecard *player6;
 
+@property (strong, nonatomic) SKView *player1SKView;
+@property (strong, nonatomic) SKView *player2SKView;
+@property (strong, nonatomic) SKView *player3SKView;
+@property (strong, nonatomic) SKView *player4SKView;
+@property (strong, nonatomic) SKView *player5SKView;
+@property (strong, nonatomic) SKView *player6SKView;
+
+@property (strong, nonatomic) NSArray *skviews;
+
+
+
+
+
+
+
 @property (strong, nonatomic) NSArray *playerScorecards;
 @property (strong, nonatomic) NSArray *pickerData;
 @property (strong, nonatomic) SBRoom *room;
@@ -68,6 +83,48 @@
     [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
     
+    CGRect frame = CGRectMake(0.0, 0.0, 90.0, 90.0);
+    
+    
+    self.player1SKView = [[SKView alloc] initWithFrame:frame];
+    self.player2SKView = [[SKView alloc] initWithFrame:frame];
+    self.player3SKView = [[SKView alloc] initWithFrame:frame];
+    self.player4SKView = [[SKView alloc] initWithFrame:frame];
+    self.player5SKView = [[SKView alloc] initWithFrame:frame];
+    self.player6SKView = [[SKView alloc] initWithFrame:frame];
+    
+    self.skviews = @[ self.player1SKView, self.player2SKView, self.player3SKView, self.player4SKView, self.player5SKView, self.player6SKView];
+    
+    for (SKView *sk in self.skviews) {
+        
+        [self.view addSubview:sk];
+    }
+
+
+    
+    
+    
+    for (Scorecard *sc in self.playerScorecards) {
+        
+        NSLog(@"\n\n %@ \n\n", CGRectCreateDictionaryRepresentation(sc.heartContainerView.frame));
+
+    }
+     
+//    for (NSInteger i = 0; i < [self.playerScorecards count]; i++) {
+//        
+//        NSLog(@"Entering for loop to setup the scorecard!");
+//        
+//        Scorecard *sc = self.playerScorecards[i];
+//        SKView *skview = skviews[i];
+//        
+//        [sc.heartContainerView addSubview:skview];
+////        [skview mas_makeConstraints:^(MASConstraintMaker *make) {
+////            
+////            make.top.and.bottom.and.right.and.left.equalTo(sc.heartContainerView);
+////            
+////        }];
+//    }
+    
     self.navigationController.navigationBar.hidden = NO;
     
     UIBarButtonItem *leaveGameBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<"
@@ -85,9 +142,70 @@
     self.navigationItem.title = [NSString stringWithFormat:@"%@", _roomDigits];
     NSDictionary *attributesForTitleText = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
     self.navigationController.navigationBar.titleTextAttributes = attributesForTitleText;
+    
+    
+    //    for (Scorecard *sc in self.playerScorecards) {
+    //
+    //
+    //        NSLog(@"installTheHeartScene has been called!");
+    //
+    //        SKView *heartParticleView = [[SKView alloc] init];
+    //
+    //
+    //        [sc.heartContainerView addSubview:heartParticleView];
+    //
+    //        [heartParticleView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //
+    //            make.top.and.bottom.and.right.and.left.equalTo(sc.heartContainerView);
+    //
+    //        }];
+    //
+    //
+    //
+    //        heartParticleView.allowsTransparency = YES;
+    //        heartParticleView.ignoresSiblingOrder = NO;
+    //        heartParticleView.backgroundColor = [UIColor clearColor];
+    //        sc.heartScene = [SBHeartScene sceneWithSize:sc.heartContainerView.bounds.size];
+    //        sc.heartScene.scaleMode = SKSceneScaleModeAspectFill;
+    //        [heartParticleView presentScene:sc.heartScene];
+    //
+    //        [sc.heartScene runHearts];
+    //        [sc.heartScene pauseHearts];
+    //
+    //    }
+    
+    
+    //                 [self.player1 installTheHeartScene];
+    //                 [self.player2 installTheHeartScene];
+    //                 [self.player3 installTheHeartScene];
+    //                 [self.player4 installTheHeartScene];
+    //                 [self.player5 installTheHeartScene];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    for (NSInteger i = 6; i < [self.playerScorecards count]; i++) {
+        
+        NSLog(@"Entering for loop to setup the scorecard!");
+        
+        Scorecard *sc = self.playerScorecards[i];
+        SKView *skview = self.skviews[i];
+        
+        
+//        NSLog(@"\n\n %@ \n\n", CGRectCreateDictionaryRepresentation(sc.heartContainerView.frame));
+        
+        
+        [sc.heartContainerView addSubview:skview];
+//                [skview mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//                    make.top.and.bottom.and.right.and.left.equalTo(sc.heartContainerView);
+//        
+//                }];
+    }
 
+    
+}
 
 - (void)handleBack:(id)sender {
     [self presentActionSheetForLeaveGame];
@@ -177,8 +295,11 @@
          if (numberOfPlayersChanged) {
              tmpself.room = [SBRoom createRoomWithData:snapshot];
              [tmpself setupScorecardWithUsersInfo];
+             
+             
          } else {
              SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
+             
              [tmpself updateScoresWithRoom:changedRoom];
          }
      } withCancelBlock:^(NSError *error) {
@@ -215,8 +336,21 @@
 - (void)hideUnusedScorecards {
     for (NSUInteger i = [self.room.users count] ; i < 6 ; i++) {
         Scorecard *sc = self.playerScorecards[i];
-        sc.hidden = YES;
+        sc.hidden = NO;
     }
+    
+    //    for (Scorecard *card in self.playerScorecards) {
+    //
+    //        if (card.isHidden) {
+    //
+    //
+    //        } else {
+    //
+    //            NSLog(@"Not hidden");
+    //
+    //            [card installTheHeartScene];
+    //        }
+    //    }
 }
 
 - (NSArray *)playerScorecards {
@@ -356,7 +490,7 @@
 //}
 
 - (void)resetMethodHasBeenCalled {
-//    SBSetupViewController *presentingVC = (SBSetupViewController *)self.presentingViewController;
+    //    SBSetupViewController *presentingVC = (SBSetupViewController *)self.presentingViewController;
     
     [self.currentPlayerRef removeValue];
     [Firebase goOffline];
@@ -364,14 +498,14 @@
     
     [self.navigationController popToRootViewControllerAnimated:YES];
     
-//    [self.navigationController dismissViewControllerAnimated:YES
-//                                                  completion:^{
-//                                                      
-//                                                      [presentingVC turnFireBaseOnline];
-//                                                  }];
+    //    [self.navigationController dismissViewControllerAnimated:YES
+    //                                                  completion:^{
+    //
+    //                                                      [presentingVC turnFireBaseOnline];
+    //                                                  }];
     
     
-
+    
 }
 
 #pragma mark - Prepare For Segue
@@ -386,7 +520,7 @@
 - (void)presentActionSheetForLeaveGame {
     
     __weak typeof(self) tmpself = self;
-
+    
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Are you sure you want to leave this game?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {

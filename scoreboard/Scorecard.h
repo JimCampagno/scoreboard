@@ -10,6 +10,10 @@
 #import <SpriteKit/SpriteKit.h>
 #import "SBUser.h"
 
+
+@class SBHeartScene;
+@class SBStarScene;
+
 @protocol ScorecardProtocol <NSObject>
 
 - (void)didScoreVictoryPointsTotalling:(NSInteger)vp;
@@ -27,8 +31,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *playerName;
 @property (weak, nonatomic) IBOutlet UIImageView *monsterImage;
 
-@property (weak, nonatomic) IBOutlet SKView *heartParticleView;
 @property (weak, nonatomic) IBOutlet SKView *starParticleView;
+@property (weak, nonatomic) IBOutlet UIView *heartContainerView;
+@property (strong, nonatomic) SKView *heartParticleView;
+
 
 
 //topPicker is Victory Points
@@ -43,8 +49,13 @@
 
 @property (strong, nonatomic) NSMutableArray *customSBConstraints;
 
+@property (nonatomic, strong) SBHeartScene *heartScene;
+//@property (nonatomic, strong) SBStarScene *starScene;
+
 
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user;
+
+- (void)installTheHeartScene;
 
 
 
