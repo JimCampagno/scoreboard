@@ -177,6 +177,7 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     if (self.hidden == YES) {
         self.hidden = NO;
     }
+    
     self.monsterImage.image = user.monsterImage;
     self.playerName.text = user.name;
     self.monsterName.text = user.monster;
@@ -196,19 +197,6 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
         
         [self.heartView.scene.rootNode addParticleSystem:new];
         
-        
-        
-        
-        
-        
-        
-        
-//        [self.heartScene runHearts];
-//        [NSTimer scheduledTimerWithTimeInterval:kLengthOfHeartScene
-//                                         target:self
-//                                       selector:@selector(pauseHeartTimer)
-//                                       userInfo:nil
-//                                        repeats:NO];
     }
     
     if ((currentVictoryFromPickerView != [user.vp integerValue]) && !self.firstTimeThrough) {
@@ -217,13 +205,6 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
         
         [self.starView.scene.rootNode addParticleSystem:new];
         
-        
-//        [self.starScene runStars];
-//        [NSTimer scheduledTimerWithTimeInterval:kLengthOfStarScene
-//                                         target:self
-//                                       selector:@selector(pauseStarTimer)
-//                                       userInfo:nil
-//                                        repeats:NO];
     }
     self.firstTimeThrough = NO;
 }

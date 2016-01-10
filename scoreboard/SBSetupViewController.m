@@ -696,6 +696,9 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     destVC.IDOfCurrentPlayer = [self.IDOfCurrentUser copy];
     destVC.randomMonsterName = [self.currentUser.monster copy];
     destVC.currentPlayerName = [self.currentUser.name copy];
+    
+    [self.firebaseRef removeAllObservers];
+    
 }
 
 

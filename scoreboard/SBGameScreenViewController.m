@@ -61,21 +61,18 @@
 @property (strong, nonatomic) SCNView *player6SCNView;
 
 @property (strong, nonatomic) NSArray *scnviews;
-
-
-
-
-
-
-
-
-
-
 @property (strong, nonatomic) NSArray *playerScorecards;
 @property (strong, nonatomic) NSArray *pickerData;
 @property (strong, nonatomic) SBRoom *room;
 
 @property (strong, nonatomic) Firebase *currentPlayerRef;
+@property (strong, nonatomic) Firebase *connectedRef;
+
+@property (nonatomic) BOOL isExitingView;
+
+@property (nonatomic) BOOL didLoseConnectionToFireBase;
+
+
 
 - (IBAction)monsterImageTapped:(id)sender;
 
@@ -91,16 +88,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.didLoseConnectionToFireBase = NO;
+    
     NSLog(@"VIEW DID LOAD!!!");
     
     self.room = [[SBRoom alloc] init];
     [self setupPickerViewsDelegateAndDataSource];
-    [self setupListenerToEntireRoomOnFirebase];
-    [self setupCurrentPlayerReferenceToFirebase];
     [self setupMainPlayerScorecard];
     
     CGRect frame = CGRectMake(0.0, 0.0, 90.0, 90.0);
-    
     
     self.player1SKView = [[SKView alloc] initWithFrame:frame];
     self.player2SKView = [[SKView alloc] initWithFrame:frame];
@@ -122,7 +118,7 @@
     
     
     
-   
+    
     
     //    for (NSInteger i = 0; i < [self.playerScorecards count]; i++) {
     //
@@ -196,12 +192,42 @@
     //                 [self.player5 installTheHeartScene];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    __weak typeof(self) tmpself = self;
+    
+    
+    self.connectedRef = [[Firebase alloc] initWithUrl:@"https://boiling-heat-4798.firebaseio.com/.info/connected"];
+    [self.connectedRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if([snapshot.value boolValue]) {
+            
+            NSLog(@"connected----------------\n");
+            
+            [tmpself setupListenerToEntireRoomOnFirebase];
+            [tmpself setupCurrentPlayerReferenceToFirebase];
+            
+        } else {
+            
+            NSLog(@"not connected--------------\n");
+            
+            tmpself.didLoseConnectionToFireBase = YES;
+            
+        }
+    }];
+    
+    
+    
+    
+}
 
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 
 
 - (void)handleBack:(id)sender {
@@ -227,7 +253,9 @@
 }
 
 - (void)setupCurrentPlayerReferenceToFirebase {
+    
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
+    
     [self.currentPlayerRef onDisconnectRemoveValue];
 }
 
@@ -282,10 +310,35 @@
 - (void)setupListenerToEntireRoomOnFirebase {
     __weak typeof(self) tmpself = self;
     
-    [[self.ref childByAppendingPath:self.roomDigits]
+    if (self.didLoseConnectionToFireBase) {
+        
+        [[tmpself.ref childByAppendingPath:tmpself.roomDigits] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
+            if ([currentData hasChildren]) {
+                
+                NSDictionary *newUser = @{ @"name": tmpself.playerName.text,
+                                           @"monster": tmpself.monsterName.text,
+                                           @"hp": tmpself.currentPlayer.hp,
+                                           @"vp": tmpself.currentPlayer.vp };
+                
+                [[currentData childDataByAppendingPath:tmpself.IDOfCurrentPlayer] setValue:newUser];
+            }
+            return [FTransactionResult successWithValue:currentData];
+        } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
+            
+        }];
+        
+        
+    }
+    
+    
+    
+    [[tmpself.ref childByAppendingPath:self.roomDigits]
      
      observeEventType:FEventTypeValue
      withBlock:^(FDataSnapshot *snapshot) {
+         
+         
+         
          
          BOOL numberOfPlayersChanged = [tmpself.room.users count] != snapshot.childrenCount ? YES : NO;
          
@@ -293,12 +346,13 @@
              tmpself.room = [SBRoom createRoomWithData:snapshot];
              [tmpself setupScorecardWithUsersInfo];
              
-             
          } else {
              SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
              
              [tmpself updateScoresWithRoom:changedRoom];
          }
+         
+         
      } withCancelBlock:^(NSError *error) {
          //Still should do something here.
          NSLog(@"ERROR: %@", error.description);
@@ -437,7 +491,7 @@
 }
 
 - (void)updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:(NSInteger)row {
-
+    
     NSDictionary *victoryPointChange = @{ @"vp": @(row)};
     
     [self.currentPlayerRef updateChildValues:victoryPointChange
@@ -488,22 +542,14 @@
 //}
 
 - (void)resetMethodHasBeenCalled {
-    //    SBSetupViewController *presentingVC = (SBSetupViewController *)self.presentingViewController;
-    
     [self.currentPlayerRef removeValue];
+    [self.currentPlayerRef removeAllObservers];
+    [self.ref removeAllObservers];
+    [self.connectedRef removeAllObservers];
+    
     [Firebase goOffline];
     
-    
     [self.navigationController popToRootViewControllerAnimated:YES];
-    
-    //    [self.navigationController dismissViewControllerAnimated:YES
-    //                                                  completion:^{
-    //
-    //                                                      [presentingVC turnFireBaseOnline];
-    //                                                  }];
-    
-    
-    
 }
 
 #pragma mark - Prepare For Segue
