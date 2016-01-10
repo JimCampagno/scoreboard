@@ -107,33 +107,7 @@
     
     self.skviews = @[ self.player1SKView, self.player2SKView, self.player3SKView, self.player4SKView, self.player5SKView, self.player6SKView];
     
-    //    for (SKView *sk in self.skviews) {
-    //
-    //        [self.view addSubview:sk];
-    //    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //    for (NSInteger i = 0; i < [self.playerScorecards count]; i++) {
-    //
-    //        NSLog(@"Entering for loop to setup the scorecard!");
-    //
-    //        Scorecard *sc = self.playerScorecards[i];
-    //        SKView *skview = skviews[i];
-    //
-    //        [sc.heartContainerView addSubview:skview];
-    ////        [skview mas_makeConstraints:^(MASConstraintMaker *make) {
-    ////
-    ////            make.top.and.bottom.and.right.and.left.equalTo(sc.heartContainerView);
-    ////
-    ////        }];
-    //    }
+  
     
     self.navigationController.navigationBar.hidden = NO;
     
@@ -153,43 +127,6 @@
     NSDictionary *attributesForTitleText = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
     self.navigationController.navigationBar.titleTextAttributes = attributesForTitleText;
     
-    
-    //    for (Scorecard *sc in self.playerScorecards) {
-    //
-    //
-    //        NSLog(@"installTheHeartScene has been called!");
-    //
-    //        SKView *heartParticleView = [[SKView alloc] init];
-    //
-    //
-    //        [sc.heartContainerView addSubview:heartParticleView];
-    //
-    //        [heartParticleView mas_makeConstraints:^(MASConstraintMaker *make) {
-    //
-    //            make.top.and.bottom.and.right.and.left.equalTo(sc.heartContainerView);
-    //
-    //        }];
-    //
-    //
-    //
-    //        heartParticleView.allowsTransparency = YES;
-    //        heartParticleView.ignoresSiblingOrder = NO;
-    //        heartParticleView.backgroundColor = [UIColor clearColor];
-    //        sc.heartScene = [SBHeartScene sceneWithSize:sc.heartContainerView.bounds.size];
-    //        sc.heartScene.scaleMode = SKSceneScaleModeAspectFill;
-    //        [heartParticleView presentScene:sc.heartScene];
-    //
-    //        [sc.heartScene runHearts];
-    //        [sc.heartScene pauseHearts];
-    //
-    //    }
-    
-    
-    //                 [self.player1 installTheHeartScene];
-    //                 [self.player2 installTheHeartScene];
-    //                 [self.player3 installTheHeartScene];
-    //                 [self.player4 installTheHeartScene];
-    //                 [self.player5 installTheHeartScene];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -220,14 +157,6 @@
     
     
 }
-
-
-
-
-
-
-
-
 
 
 - (void)handleBack:(id)sender {
@@ -273,38 +202,11 @@
     self.playerName.text = self.currentPlayer.name;
     [self.healthPoints selectRow:[self.currentPlayer.hp integerValue] inComponent:0 animated:YES];
     [self.victoryPoints selectRow:[self.currentPlayer.vp integerValue] inComponent:0 animated:YES];
-    
-    //    [self setupMainHeartParticleView];
-    //    [self setupMainStarParticleView];
 }
 
 
 
-//- (void)setupMainHeartParticleView {
-//    self.mainHeartParticleView.allowsTransparency = YES;
-//    self.mainHeartParticleView.backgroundColor = [UIColor clearColor];
-//    self.mainHeartScene = [SBHeartScene sceneWithSize:self.mainHeartParticleView.bounds.size];
-//    self.mainHeartScene.scaleMode = SKSceneScaleModeAspectFill;
-//
-//    [self.mainHeartParticleView presentScene:self.mainHeartScene];
-//    [self.mainHeartScene runHearts];
-//    [self.mainHeartScene pauseHearts];
-//    [self.mainHeartScene.heart setParticleSize:CGSizeMake(300, 300)];
-//    [self.mainHeartScene.heart setParticlePositionRange:CGVectorMake(50, 50)];
-//}
-//
-//- (void)setupMainStarParticleView {
-//    self.mainStarParticleView.allowsTransparency = YES;
-//    self.mainStarParticleView.backgroundColor = [UIColor clearColor];
-//    self.mainStarScene = [SBStarScene sceneWithSize:self.mainStarParticleView.bounds.size];
-//    self.mainStarScene.scaleMode = SKSceneScaleModeAspectFill;
-//
-//    [self.mainStarParticleView presentScene:self.mainStarScene];
-//    [self.mainStarScene runStars];
-//    [self.mainStarScene pauseStars];
-//    [self.mainStarScene.star setParticleSize:CGSizeMake(300, 300)];
-//    [self.mainStarScene.star setParticlePositionRange:CGVectorMake(50, 50)];
-//}
+
 
 
 - (void)setupListenerToEntireRoomOnFirebase {
@@ -330,15 +232,10 @@
         
     }
     
-    
-    
     [[tmpself.ref childByAppendingPath:self.roomDigits]
      
      observeEventType:FEventTypeValue
      withBlock:^(FDataSnapshot *snapshot) {
-         
-         
-         
          
          BOOL numberOfPlayersChanged = [tmpself.room.users count] != snapshot.childrenCount ? YES : NO;
          
@@ -389,19 +286,7 @@
         Scorecard *sc = self.playerScorecards[i];
         sc.hidden = YES;
     }
-    
-    //    for (Scorecard *card in self.playerScorecards) {
-    //
-    //        if (card.isHidden) {
-    //
-    //
-    //        } else {
-    //
-    //            NSLog(@"Not hidden");
-    //
-    //            [card installTheHeartScene];
-    //        }
-    //    }
+
 }
 
 - (NSArray *)playerScorecards {
@@ -513,33 +398,7 @@
                          }];
 }
 
-//- (void)runTheStarParticles {
-//    [self.mainStarScene runStars];
-//
-//    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainStarScene
-//                                     target:self
-//                                   selector:@selector(pauseStarTimer)
-//                                   userInfo:nil
-//                                    repeats:NO];
-//}
-//
-//- (void)runTheHeartParticles {
-//    [self.mainHeartScene runHearts];
-//
-//    [NSTimer scheduledTimerWithTimeInterval:kLengthOfMainHeartScene
-//                                     target:self
-//                                   selector:@selector(pauseHeartTimer)
-//                                   userInfo:nil
-//                                    repeats:NO];
-//}
-//
-//- (void)pauseHeartTimer {
-//    [self.mainHeartScene pauseHearts];
-//}
-//
-//- (void)pauseStarTimer {
-//    [self.mainStarScene pauseStars];
-//}
+
 
 - (void)resetMethodHasBeenCalled {
     [self.currentPlayerRef removeValue];

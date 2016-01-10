@@ -25,7 +25,7 @@
 
 @end
 
-@interface Scorecard : UIView <UIPickerViewDataSource, UIPickerViewDelegate, SCNPhysicsContactDelegate>
+@interface Scorecard : UIView <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (weak, nonatomic) IBOutlet UILabel *monsterName;
@@ -67,7 +67,6 @@
 
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user;
 
-- (void)installTheHeartScene;
 
 
 

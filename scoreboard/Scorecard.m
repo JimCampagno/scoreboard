@@ -75,7 +75,6 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     
     self.heartView = [SCNView new];
     self.heartView.scene = [SCNScene new];
-    self.heartView.scene.physicsWorld.contactDelegate = self;
     self.heartView.backgroundColor = [UIColor clearColor];
     [self.heartContainerView addSubview:self.heartView];
     
@@ -86,7 +85,6 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     
     self.starView = [SCNView new];
     self.starView.scene = [SCNScene new];
-    self.starView.scene.physicsWorld.contactDelegate = self;
     self.starView.backgroundColor = [UIColor clearColor];
     [self.starContainerView addSubview:self.starView];
     
@@ -96,15 +94,6 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     
     [self setNeedsUpdateConstraints];
     
-    
-//
-//    self.starParticleView.allowsTransparency = YES;
-//    self.starParticleView.backgroundColor = [UIColor clearColor];
-//    self.starScene = [SBStarScene sceneWithSize:self.starParticleView.bounds.size];
-//    self.starScene.scaleMode = SKSceneScaleModeAspectFill;
-//    [self.starParticleView presentScene:self.starScene];
-//    [self.starScene runStars];
-//    [self.starScene pauseStars];
 }
 
 - (void)updateConstraints {
@@ -209,82 +198,5 @@ static const NSTimeInterval kLengthOfStarScene = 0.7;
     self.firstTimeThrough = NO;
 }
 
-- (void)pauseHeartTimer {
-//    [self.heartScene pauseHearts];
-}
-
-- (void)pauseStarTimer {
-//    [self.starScene pauseStars];
-}
-
--(void)physicsWorld:(SCNPhysicsWorld *)world didUpdateContact:(SCNPhysicsContact *)contact {
-    
-    NSLog(@"didUpdateContact got called.");
-    
-//    SCNParticleSystem *particleSystem = [SCNParticleSystem particleSystemNamed:@"HeartParticle" inDirectory:nil];
-//    SCNNode *systemNode = [SCNNode new];
-//    
-//    [systemNode addParticleSystem:particleSystem];
-//    systemNode.position = SCNVector3Make(0.0, 0.0, 0.0);
-//    //sceneView.scene.rootNode.addChildNode(systemNode)
-    
-    
-    
-    
-//    NSString *emitterPath = [[NSBundle mainBundle] pathForResource:kHeartParticle ofType:@"sks"];
-//    
-//    self.heart = [NSKeyedUnarchiver unarchiveObjectWithFile:emitterPath];
-//    self.heart.position = CGPointMake(CGRectGetMidX(self.frame), self.size.height/2);
-//    self.heart.name = @"particleHeart";
-//    self.heart.targetNode = self.scene;
-//    [self addChild:self.heart];
-    
-    
-    
-    
-}
-
-//func physicsWorld(world: SCNPhysicsWorld, didUpdateContact contact: SCNPhysicsContact) {
-//    if (contact.nodeA == sphere1 || contact.nodeA == sphere2) && (contact.nodeB == sphere1 || contact.nodeB == sphere2) {
-//        let particleSystem = SCNParticleSystem(named: "Explosion", inDirectory: nil)
-//        let systemNode = SCNNode()
-//        systemNode.addParticleSystem(particleSystem)
-//        systemNode.position = contact.nodeA.position
-//        sceneView.scene?.rootNode.addChildNode(systemNode)
-//        
-//        contact.nodeA.removeFromParentNode()
-//        contact.nodeB.removeFromParentNode()
-//    }
-//}
-
-
-- (void)installTheHeartScene {
-    
-    
-    
-//    NSLog(@"installTheHeartScene has been called!");
-//    
-//    SKView *heartParticleView = [[SKView alloc] init];
-//    
-//    [self.heartContainerView addSubview:heartParticleView];
-//    
-//    [heartParticleView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.top.and.bottom.and.right.and.left.equalTo(self.heartContainerView);
-//        
-//    }];
-//    
-//    
-//    
-//    heartParticleView.allowsTransparency = YES;
-//    heartParticleView.ignoresSiblingOrder = NO;
-//    heartParticleView.backgroundColor = [UIColor clearColor];
-//    self.heartScene = [SBHeartScene sceneWithSize:self.heartContainerView.bounds.size];
-//    self.heartScene.scaleMode = SKSceneScaleModeAspectFill;
-//    [heartParticleView presentScene:self.heartScene];
-//    
-//    [self.heartScene runHearts];
-//    [self.heartScene pauseHearts];
-}
 
 @end
