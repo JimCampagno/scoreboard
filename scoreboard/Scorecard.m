@@ -20,11 +20,6 @@
 @end
 
 
-static const NSTimeInterval kLengthOfHeartScene = 0.7;
-static const NSTimeInterval kLengthOfStarScene = 0.7;
-
-
-
 @implementation Scorecard
 
 #pragma mark - Initializing the Scorecard object

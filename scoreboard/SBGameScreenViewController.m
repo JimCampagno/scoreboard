@@ -72,6 +72,8 @@
 
 @property (nonatomic) BOOL didLoseConnectionToFireBase;
 
+@property (strong, nonatomic) UIView *noConnectionView;
+
 
 
 - (IBAction)monsterImageTapped:(id)sender;
@@ -96,6 +98,8 @@
     [self setupPickerViewsDelegateAndDataSource];
     [self setupMainPlayerScorecard];
     
+    [self doTheThing];
+    
     CGRect frame = CGRectMake(0.0, 0.0, 90.0, 90.0);
     
     self.player1SKView = [[SKView alloc] initWithFrame:frame];
@@ -107,7 +111,7 @@
     
     self.skviews = @[ self.player1SKView, self.player2SKView, self.player3SKView, self.player4SKView, self.player5SKView, self.player6SKView];
     
-  
+    
     
     self.navigationController.navigationBar.hidden = NO;
     
@@ -129,11 +133,9 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)doTheThing {
     
     __weak typeof(self) tmpself = self;
-    
     
     self.connectedRef = [[Firebase alloc] initWithUrl:@"https://boiling-heat-4798.firebaseio.com/.info/connected"];
     [self.connectedRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -141,10 +143,31 @@
             
             NSLog(@"connected----------------\n");
             
+            if (self.noConnectionView) {
+                
+                NSLog(@"\n\n INSIDE THE noConnectionView if statement\n\n");
+                
+                [UIView animateWithDuration:2.0
+                                 animations:^{
+                                     
+                                     tmpself.noConnectionView.alpha = 0.0;
+                                     
+                                     
+                                 } completion:^(BOOL finished) {
+                                     
+                                     [tmpself.noConnectionView removeFromSuperview];
+                                     tmpself.view.userInteractionEnabled = YES;
+                                     
+                                 }];
+                
+            }
+            
             [tmpself setupListenerToEntireRoomOnFirebase];
             [tmpself setupCurrentPlayerReferenceToFirebase];
             
         } else {
+            
+            [tmpself displayNoConnectionView];
             
             NSLog(@"not connected--------------\n");
             
@@ -152,9 +175,40 @@
             
         }
     }];
+
     
     
     
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    
+    
+    
+    
+}
+
+- (void)displayNoConnectionView {
+    self.noConnectionView = [[UIView alloc] initWithFrame:self.view.frame];
+    
+    self.noConnectionView.userInteractionEnabled = NO;
+    self.view.userInteractionEnabled = NO;
+    
+    self.noConnectionView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8];
+    
+    self.noConnectionView.alpha = 0.0;
+    
+    
+    [self.view addSubview:self.noConnectionView];
+    
+    [UIView animateWithDuration:1.0
+                     animations:^{
+                         
+                         self.noConnectionView.alpha = 1.0;
+                         
+                     }];
     
 }
 
@@ -286,7 +340,7 @@
         Scorecard *sc = self.playerScorecards[i];
         sc.hidden = YES;
     }
-
+    
 }
 
 - (NSArray *)playerScorecards {
