@@ -85,20 +85,20 @@
                                 <constraint firstItem="Xe3-3W-iEg" firstAttribute="centerY" secondItem="sCA-Ec-FRv" secondAttribute="centerY" id="oUS-wY-xHR" userLabel="Bottom Picker View - Center Y"/>
                             </constraints>
                         </view>
-                        <view userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KIf-5Q-neB" userLabel="heartScene">
-                            <rect key="frame" x="14" y="181" width="125" height="125"/>
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIf-5Q-neB" userLabel="heartScene">
+                            <rect key="frame" x="11" y="177" width="130" height="130"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="125" id="oTE-wz-5G5"/>
-                                <constraint firstAttribute="height" constant="125" id="oac-m7-k4f"/>
+                                <constraint firstAttribute="width" constant="130" id="oTE-wz-5G5"/>
+                                <constraint firstAttribute="height" constant="130" id="oac-m7-k4f"/>
                             </constraints>
                         </view>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tuo-He-cKv" userLabel="starScene">
-                            <rect key="frame" x="14" y="19" width="125" height="125"/>
+                            <rect key="frame" x="11" y="16" width="130" height="130"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="125" id="APj-JR-ISy"/>
-                                <constraint firstAttribute="height" constant="125" id="hCN-R1-nTN"/>
+                                <constraint firstAttribute="width" constant="130" id="APj-JR-ISy"/>
+                                <constraint firstAttribute="height" constant="130" id="hCN-R1-nTN"/>
                             </constraints>
                         </view>
                     </subviews>
