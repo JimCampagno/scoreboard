@@ -13,15 +13,14 @@
 #import "SBStarScene.h"
 #import "SBSetupViewController.h"
 #import "SBChangeMonsterViewController.h"
-#import <SceneKit/SceneKit.h>
 
+#import <SceneKit/SceneKit.h>
 #import <Masonry.h>
 
 
 @interface SBGameScreenViewController ()
 
 //Main Player Card
-@property (weak, nonatomic) IBOutlet UIView *mainMonsterView; // <-- being used?
 @property (weak, nonatomic) IBOutlet UILabel *monsterName;
 @property (weak, nonatomic) IBOutlet UILabel *playerName;
 @property (weak, nonatomic) IBOutlet UIButton *monsterImage;
@@ -29,12 +28,6 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *healthPoints;
 @property (strong, nonatomic) NSMutableArray *vpPointsOnPicker;
 @property (strong, nonatomic) NSMutableArray *hpPointsOnPicker;
-
-//@property (weak, nonatomic) IBOutlet SKView *mainHeartParticleView;
-//@property (weak, nonatomic) IBOutlet SKView *mainStarParticleView;
-//@property (nonatomic, strong) SBHeartScene *mainHeartScene;
-//@property (nonatomic, strong) SBStarScene *mainStarScene;
-
 
 //All other player cards (including main)
 @property (weak, nonatomic) IBOutlet Scorecard *player1;
@@ -44,100 +37,62 @@
 @property (weak, nonatomic) IBOutlet Scorecard *player5;
 @property (weak, nonatomic) IBOutlet Scorecard *player6;
 
-@property (strong, nonatomic) SKView *player1SKView;
-@property (strong, nonatomic) SKView *player2SKView;
-@property (strong, nonatomic) SKView *player3SKView;
-@property (strong, nonatomic) SKView *player4SKView;
-@property (strong, nonatomic) SKView *player5SKView;
-@property (strong, nonatomic) SKView *player6SKView;
-
-@property (strong, nonatomic) NSArray *skviews;
-
-@property (strong, nonatomic) SCNView *player1SCNView;
-@property (strong, nonatomic) SCNView *player2SCNView;
-@property (strong, nonatomic) SCNView *player3SCNView;
-@property (strong, nonatomic) SCNView *player4SCNView;
-@property (strong, nonatomic) SCNView *player5SCNView;
-@property (strong, nonatomic) SCNView *player6SCNView;
-
-@property (strong, nonatomic) NSArray *scnviews;
+//Other
 @property (strong, nonatomic) NSArray *playerScorecards;
-@property (strong, nonatomic) NSArray *pickerData;
 @property (strong, nonatomic) SBRoom *room;
-
 @property (strong, nonatomic) Firebase *currentPlayerRef;
 @property (strong, nonatomic) Firebase *connectedRef;
-
-@property (nonatomic) BOOL isExitingView;
-
 @property (nonatomic) BOOL didLoseConnectionToFireBase;
-
 @property (strong, nonatomic) UIView *noConnectionView;
 @property (strong, nonatomic) UIView *initialLoad;
-
 @property (strong, nonatomic) UIVisualEffectView *blurView;
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property (strong, nonatomic) UILabel *loadingGameLabel;
 
-
-
-
 - (IBAction)monsterImageTapped:(id)sender;
 
-- (void)setupMainPlayerScorecard;
 @end
 
-//static const NSTimeInterval kLengthOfMainHeartScene = 0.7;
-//static const NSTimeInterval kLengthOfMainStarScene = 0.7;
 
 @implementation SBGameScreenViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.didLoseConnectionToFireBase = NO;
-    
     self.room = [[SBRoom alloc] init];
+    
     [self setupPickerViewsDelegateAndDataSource];
     [self setupMainPlayerScorecard];
-    
-    [self doTheThing];
-    
-    
-    
+    [self doTheThing]; // fix this method name
     [self displayInitialLoad];
-    
-    
+    [self setupNavigationBar];
+}
+
+- (void)setupNavigationBar {
     self.navigationController.navigationBar.hidden = NO;
-    
     UIBarButtonItem *leaveGameBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<"
                                                                                style:UIBarButtonItemStylePlain
                                                                               target:self
                                                                               action:@selector(handleBack:)];
-    
     self.navigationItem.leftBarButtonItem = leaveGameBarButtonItem;
     
     NSUInteger size = 26;
     UIFont *font = [UIFont systemFontOfSize:size];
     NSDictionary *attributes = @{ NSFontAttributeName: font };
     [self.navigationItem.leftBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    
     self.navigationItem.title = [NSString stringWithFormat:@"%@", _roomDigits];
     NSDictionary *attributesForTitleText = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
     self.navigationController.navigationBar.titleTextAttributes = attributesForTitleText;
-    
 }
 
 - (void)doTheThing {
-    
     __weak typeof(self) tmpself = self;
     
     self.connectedRef = [[Firebase alloc] initWithUrl:@"https://boiling-heat-4798.firebaseio.com/.info/connected"];
+    
     [self.connectedRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if([snapshot.value boolValue]) {
-            
-            NSLog(@"connected----------------\n");
             
             if (tmpself.didLoseConnectionToFireBase) {
                 
@@ -145,75 +100,36 @@
                 tmpself.view.userInteractionEnabled = YES;
             }
             
-            
-//            if (self.noConnectionView) {
-//                
-//                NSLog(@"\n\n INSIDE THE noConnectionView if statement\n\n");
-//                
-//                [UIView animateWithDuration:2.0
-//                                 animations:^{
-//                                     
-//                                     tmpself.noConnectionView.alpha = 0.0;
-//                                     
-//                                     
-//                                 } completion:^(BOOL finished) {
-//                                     
-//                                     [tmpself doMagic];
-////                                     [tmpself.noConnectionView removeFromSuperview];
-//                                     tmpself.view.userInteractionEnabled = YES;
-//                                     
-//                                 }];
-//                
-//            }
-            
             [tmpself setupListenerToEntireRoomOnFirebase];
             [tmpself setupCurrentPlayerReferenceToFirebase];
             
         } else {
             
             [tmpself displayNoConnectionView];
-            
-            NSLog(@"not connected--------------\n");
-            
             tmpself.didLoseConnectionToFireBase = YES;
-            
         }
     }];
-    
-    
-    
-    
 }
 
 - (void)displayInitialLoad {
-    
-    self.initialLoad = [[UIView alloc] initWithFrame:self.view.frame];
-    
-    
-    self.initialLoad.backgroundColor = [UIColor clearColor];
-    
-    self.initialLoad.userInteractionEnabled = NO;
     self.view.userInteractionEnabled = NO;
     
+    self.initialLoad = [[UIView alloc] initWithFrame:self.view.frame];
+    self.initialLoad.backgroundColor = [UIColor clearColor];
+    self.initialLoad.userInteractionEnabled = NO;
     [self.view addSubview:self.initialLoad];
-    
     
     UIVisualEffect *blurEffect;
     blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    
     self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    
     self.blurView.frame = self.view.bounds;
+    
     [self.initialLoad addSubview:self.blurView];
     
     self.loadingGameLabel = [UILabel new];
     self.loadingGameLabel.textAlignment = NSTextAlignmentCenter;
     self.loadingGameLabel.text = @"assembling monsters...";
     [self.loadingGameLabel setFont:[UIFont systemFontOfSize:25]];
-    //    loadingGameLabel.backgroundColor = [UIColor colorWithRed:0.43 green:0.46 blue:0.53 alpha:1];
-    //    loadingGameLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    //    loadingGameLabel.layer.borderWidth = 0.5;
-    //    loadingGameLabel.layer.cornerRadius = 10.0f;
     self.loadingGameLabel.clipsToBounds = YES;
     self.loadingGameLabel.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] ;
     self.loadingGameLabel.numberOfLines = 1;
@@ -223,7 +139,6 @@
     [self.initialLoad addSubview:self.loadingGameLabel];
     
     [self.loadingGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         make.centerX.equalTo(self.initialLoad);
         make.centerY.equalTo(self.initialLoad).multipliedBy(0.7);
     }];
@@ -233,7 +148,6 @@
     [self.initialLoad addSubview:self.loadingIndicator];
     
     [self.loadingIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         make.top.equalTo(self.loadingGameLabel.mas_bottom).with.offset(16);
         make.centerX.equalTo(self.view);
         
@@ -259,67 +173,30 @@
 }
 
 - (void)doMagic {
-    
-    NSLog(@"YO WHAT IS HAPPENING HERE!!");
-    
     [UIView animateWithDuration:0.5
                      animations:^{
                          
                          self.initialLoad.alpha = 0.0;
                          
                      } completion:^(BOOL finished) {
+                         
                          [self.loadingIndicator stopAnimating];
-                         
                          self.initialLoad.hidden = YES;
-                         
-                         
                      }];
 }
 
-
-
 - (void)displayNoConnectionView {
-    
-    
-    
-    
     self.loadingGameLabel.text = @"no internet connection 🚧";
-
     self.initialLoad.hidden = NO;
-    
-    
-    
-    
-    
-    
-    
-    
     self.view.userInteractionEnabled = NO;
-
-    
-    
-//    self.noConnectionView = [[UIView alloc] initWithFrame:self.view.frame];
-//    
-//    self.noConnectionView.userInteractionEnabled = NO;
-//    
-//    self.noConnectionView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8];
-//    
-//    self.noConnectionView.alpha = 0.0;
-//    
-//    
-//    [self.view addSubview:self.noConnectionView];
     
     [UIView animateWithDuration:0.7
                      animations:^{
                          
                          self.initialLoad.alpha = 1.0;
-                         
-//                         self.noConnectionView.alpha = 1.0;
-                         
                      }];
     
 }
-
 
 - (void)handleBack:(id)sender {
     [self presentActionSheetForLeaveGame];
@@ -366,11 +243,6 @@
     [self.victoryPoints selectRow:[self.currentPlayer.vp integerValue] inComponent:0 animated:YES];
 }
 
-
-
-
-
-
 - (void)setupListenerToEntireRoomOnFirebase {
     __weak typeof(self) tmpself = self;
     
@@ -390,8 +262,6 @@
         } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
             
         }];
-        
-        
     }
     
     [[tmpself.ref childByAppendingPath:self.roomDigits]
@@ -601,15 +471,5 @@
     
     [tmpself presentViewController:actionSheet animated:YES completion:nil];
 }
-
-
-
-
-
-
-
-
-
-
 
 @end

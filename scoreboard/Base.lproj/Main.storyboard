@@ -389,7 +389,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="healthPoints" destination="duY-S7-QdS" id="NMv-xT-R8f"/>
-                        <outlet property="mainMonsterView" destination="eJz-5s-qDy" id="6dk-5x-IZn"/>
                         <outlet property="monsterImage" destination="cp3-Ya-5xK" id="IdU-qd-Rox"/>
                         <outlet property="monsterName" destination="tVL-fj-6uz" id="57j-XW-0z2"/>
                         <outlet property="player1" destination="u6j-n3-LDs" id="QFJ-CE-ujv"/>
