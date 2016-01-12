@@ -77,6 +77,7 @@
 
 @property (strong, nonatomic) UIVisualEffectView *blurView;
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+@property (strong, nonatomic) UILabel *loadingGameLabel;
 
 
 
@@ -138,24 +139,32 @@
             
             NSLog(@"connected----------------\n");
             
-            if (self.noConnectionView) {
+            if (tmpself.didLoseConnectionToFireBase) {
                 
-                NSLog(@"\n\n INSIDE THE noConnectionView if statement\n\n");
-                
-                [UIView animateWithDuration:2.0
-                                 animations:^{
-                                     
-                                     tmpself.noConnectionView.alpha = 0.0;
-                                     
-                                     
-                                 } completion:^(BOOL finished) {
-                                     
-                                     [tmpself.noConnectionView removeFromSuperview];
-                                     tmpself.view.userInteractionEnabled = YES;
-                                     
-                                 }];
-                
+                [tmpself doMagic];
+                tmpself.view.userInteractionEnabled = YES;
             }
+            
+            
+//            if (self.noConnectionView) {
+//                
+//                NSLog(@"\n\n INSIDE THE noConnectionView if statement\n\n");
+//                
+//                [UIView animateWithDuration:2.0
+//                                 animations:^{
+//                                     
+//                                     tmpself.noConnectionView.alpha = 0.0;
+//                                     
+//                                     
+//                                 } completion:^(BOOL finished) {
+//                                     
+//                                     [tmpself doMagic];
+////                                     [tmpself.noConnectionView removeFromSuperview];
+//                                     tmpself.view.userInteractionEnabled = YES;
+//                                     
+//                                 }];
+//                
+//            }
             
             [tmpself setupListenerToEntireRoomOnFirebase];
             [tmpself setupCurrentPlayerReferenceToFirebase];
@@ -197,25 +206,23 @@
     self.blurView.frame = self.view.bounds;
     [self.initialLoad addSubview:self.blurView];
     
-    
-    
-    UILabel *loadingGameLabel = [UILabel new];
-    loadingGameLabel.textAlignment = NSTextAlignmentCenter;
-    loadingGameLabel.text = @"assembling monsters...";
-    [loadingGameLabel setFont:[UIFont systemFontOfSize:25]];
+    self.loadingGameLabel = [UILabel new];
+    self.loadingGameLabel.textAlignment = NSTextAlignmentCenter;
+    self.loadingGameLabel.text = @"assembling monsters...";
+    [self.loadingGameLabel setFont:[UIFont systemFontOfSize:25]];
     //    loadingGameLabel.backgroundColor = [UIColor colorWithRed:0.43 green:0.46 blue:0.53 alpha:1];
     //    loadingGameLabel.layer.borderColor = [UIColor blackColor].CGColor;
     //    loadingGameLabel.layer.borderWidth = 0.5;
     //    loadingGameLabel.layer.cornerRadius = 10.0f;
-    loadingGameLabel.clipsToBounds = YES;
-    loadingGameLabel.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] ;
-    loadingGameLabel.numberOfLines = 1;
-    loadingGameLabel.adjustsFontSizeToFitWidth = YES;
-    loadingGameLabel.lineBreakMode = NSLineBreakByClipping;
+    self.loadingGameLabel.clipsToBounds = YES;
+    self.loadingGameLabel.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] ;
+    self.loadingGameLabel.numberOfLines = 1;
+    self.loadingGameLabel.adjustsFontSizeToFitWidth = YES;
+    self.loadingGameLabel.lineBreakMode = NSLineBreakByClipping;
     
-    [self.initialLoad addSubview:loadingGameLabel];
+    [self.initialLoad addSubview:self.loadingGameLabel];
     
-    [loadingGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.loadingGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(self.initialLoad);
         make.centerY.equalTo(self.initialLoad).multipliedBy(0.7);
@@ -227,7 +234,7 @@
     
     [self.loadingIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(loadingGameLabel.mas_bottom).with.offset(16);
+        make.top.equalTo(self.loadingGameLabel.mas_bottom).with.offset(16);
         make.centerX.equalTo(self.view);
         
     }];
@@ -247,15 +254,13 @@
         }
         
         self.view.userInteractionEnabled = YES;
-        
-        
-        
-        
     }
     
 }
 
 - (void)doMagic {
+    
+    NSLog(@"YO WHAT IS HAPPENING HERE!!");
     
     [UIView animateWithDuration:0.5
                      animations:^{
@@ -265,7 +270,8 @@
                      } completion:^(BOOL finished) {
                          [self.loadingIndicator stopAnimating];
                          
-                         [self.initialLoad removeFromSuperview];
+                         self.initialLoad.hidden = YES;
+                         
                          
                      }];
 }
@@ -273,22 +279,42 @@
 
 
 - (void)displayNoConnectionView {
-    self.noConnectionView = [[UIView alloc] initWithFrame:self.view.frame];
     
-    self.noConnectionView.userInteractionEnabled = NO;
+    
+    
+    
+    self.loadingGameLabel.text = @"no internet connection 🚧";
+
+    self.initialLoad.hidden = NO;
+    
+    
+    
+    
+    
+    
+    
+    
     self.view.userInteractionEnabled = NO;
-    
-    self.noConnectionView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8];
-    
-    self.noConnectionView.alpha = 0.0;
+
     
     
-    [self.view addSubview:self.noConnectionView];
+//    self.noConnectionView = [[UIView alloc] initWithFrame:self.view.frame];
+//    
+//    self.noConnectionView.userInteractionEnabled = NO;
+//    
+//    self.noConnectionView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8];
+//    
+//    self.noConnectionView.alpha = 0.0;
+//    
+//    
+//    [self.view addSubview:self.noConnectionView];
     
-    [UIView animateWithDuration:1.0
+    [UIView animateWithDuration:0.7
                      animations:^{
                          
-                         self.noConnectionView.alpha = 1.0;
+                         self.initialLoad.alpha = 1.0;
+                         
+//                         self.noConnectionView.alpha = 1.0;
                          
                      }];
     
