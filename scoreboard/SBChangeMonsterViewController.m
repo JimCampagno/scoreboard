@@ -190,7 +190,6 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
     monsterLabel.numberOfLines = 1;
     monsterLabel.adjustsFontSizeToFitWidth = YES;
     monsterLabel.lineBreakMode = NSLineBreakByClipping;
-    monsterLabel.adjustsFontSizeToFitWidth = YES;
     
     [self.view addSubview:monsterLabel];
     

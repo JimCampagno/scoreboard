@@ -67,7 +67,11 @@
     
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.view];
+    [self setNeedsUpdateConstraints];
     
+}
+
+- (void)createHeartAndStarViews {
     self.heartView = [SCNView new];
     self.heartView.scene = [SCNScene new];
     self.heartView.backgroundColor = [UIColor clearColor];
@@ -86,9 +90,6 @@
     [self.starView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.and.bottom.equalTo(self.starContainerView);
     }];
-    
-    [self setNeedsUpdateConstraints];
-    
 }
 
 - (void)updateConstraints {

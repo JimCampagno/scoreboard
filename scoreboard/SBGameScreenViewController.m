@@ -73,6 +73,11 @@
 @property (nonatomic) BOOL didLoseConnectionToFireBase;
 
 @property (strong, nonatomic) UIView *noConnectionView;
+@property (strong, nonatomic) UIView *initialLoad;
+
+@property (strong, nonatomic) UIVisualEffectView *blurView;
+@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+
 
 
 
@@ -92,25 +97,15 @@
     
     self.didLoseConnectionToFireBase = NO;
     
-    NSLog(@"VIEW DID LOAD!!!");
-    
     self.room = [[SBRoom alloc] init];
     [self setupPickerViewsDelegateAndDataSource];
     [self setupMainPlayerScorecard];
     
     [self doTheThing];
     
-    CGRect frame = CGRectMake(0.0, 0.0, 90.0, 90.0);
     
-    self.player1SKView = [[SKView alloc] initWithFrame:frame];
-    self.player2SKView = [[SKView alloc] initWithFrame:frame];
-    self.player3SKView = [[SKView alloc] initWithFrame:frame];
-    self.player4SKView = [[SKView alloc] initWithFrame:frame];
-    self.player5SKView = [[SKView alloc] initWithFrame:frame];
-    self.player6SKView = [[SKView alloc] initWithFrame:frame];
     
-    self.skviews = @[ self.player1SKView, self.player2SKView, self.player3SKView, self.player4SKView, self.player5SKView, self.player6SKView];
-    
+    [self displayInitialLoad];
     
     
     self.navigationController.navigationBar.hidden = NO;
@@ -175,20 +170,107 @@
             
         }
     }];
-
+    
     
     
     
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)displayInitialLoad {
+    
+    self.initialLoad = [[UIView alloc] initWithFrame:self.view.frame];
+    
+    
+    self.initialLoad.backgroundColor = [UIColor clearColor];
+    
+    self.initialLoad.userInteractionEnabled = NO;
+    self.view.userInteractionEnabled = NO;
+    
+    [self.view addSubview:self.initialLoad];
+    
+    
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    
+    self.blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
+    self.blurView.frame = self.view.bounds;
+    [self.initialLoad addSubview:self.blurView];
+    
+    
+    
+    UILabel *loadingGameLabel = [UILabel new];
+    loadingGameLabel.textAlignment = NSTextAlignmentCenter;
+    loadingGameLabel.text = @"assembling monsters...";
+    [loadingGameLabel setFont:[UIFont systemFontOfSize:25]];
+    //    loadingGameLabel.backgroundColor = [UIColor colorWithRed:0.43 green:0.46 blue:0.53 alpha:1];
+    //    loadingGameLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    //    loadingGameLabel.layer.borderWidth = 0.5;
+    //    loadingGameLabel.layer.cornerRadius = 10.0f;
+    loadingGameLabel.clipsToBounds = YES;
+    loadingGameLabel.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] ;
+    loadingGameLabel.numberOfLines = 1;
+    loadingGameLabel.adjustsFontSizeToFitWidth = YES;
+    loadingGameLabel.lineBreakMode = NSLineBreakByClipping;
+    
+    [self.initialLoad addSubview:loadingGameLabel];
+    
+    [loadingGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(self.initialLoad);
+        make.centerY.equalTo(self.initialLoad).multipliedBy(0.7);
+    }];
+    
+    self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    
+    [self.initialLoad addSubview:self.loadingIndicator];
+    
+    [self.loadingIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(loadingGameLabel.mas_bottom).with.offset(16);
+        make.centerX.equalTo(self.view);
+        
+    }];
+    
+    [self.loadingIndicator startAnimating];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    
-    
-    
+    if ([self isBeingPresented] || [self isMovingToParentViewController]) {
+        
+        [self performSelector:@selector(doMagic) withObject:self afterDelay:4.2];
+        
+        for (Scorecard *sc in self.playerScorecards) {
+            [sc createHeartAndStarViews];
+        }
+        
+        self.view.userInteractionEnabled = YES;
+        
+        
+        
+        
+    }
     
 }
+
+- (void)doMagic {
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         
+                         self.initialLoad.alpha = 0.0;
+                         
+                     } completion:^(BOOL finished) {
+                         [self.loadingIndicator stopAnimating];
+                         
+                         [self.initialLoad removeFromSuperview];
+                         
+                     }];
+}
+
+
 
 - (void)displayNoConnectionView {
     self.noConnectionView = [[UIView alloc] initWithFrame:self.view.frame];
