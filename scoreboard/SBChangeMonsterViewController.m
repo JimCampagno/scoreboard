@@ -97,6 +97,9 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
         cell.detailTextLabel.textColor = [UIColor blackColor];
     }
     
+//    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.currentPlayer.monster]];
+
+    
     cell.textLabel.text = @"Jim Campagno";
     cell.detailTextLabel.text = @"Flatiron School";
     cell.imageView.image = [UIImage imageNamed:@"DRAKONIS_384"];
