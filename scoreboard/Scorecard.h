@@ -40,6 +40,7 @@
 @property (strong, nonatomic) SCNParticleSystem *particleSystem;
 @property (strong, nonatomic) SCNView *heartView;
 @property (strong, nonatomic) SCNView *starView;
+@property (nonatomic) BOOL unHidden;
 
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user;
 - (void)createHeartAndStarViews;

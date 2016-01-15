@@ -58,7 +58,8 @@
 
 - (void)commonInit {
     _customSBConstraints = [[NSMutableArray alloc] init];
-    _firstTimeThrough = YES;
+    self.firstTimeThrough = YES;
+    self.unHidden = NO;
     [self setupHealthAndVictoryPoints];
     [[NSBundle mainBundle] loadNibNamed:@"Scorecard"
                                   owner:self
@@ -175,19 +176,13 @@
     
     
     if ((currentHealthFromPickerView != [user.hp integerValue]) && !self.firstTimeThrough) {
-        
-    
-        
         SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
-        
         [self.heartView.scene.rootNode addParticleSystem:new];
         
     }
     
     if ((currentVictoryFromPickerView != [user.vp integerValue]) && !self.firstTimeThrough) {
-        
         SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Starfetti" inDirectory:nil];
-        
         [self.starView.scene.rootNode addParticleSystem:new];
         
     }

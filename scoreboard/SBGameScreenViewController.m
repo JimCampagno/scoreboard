@@ -49,6 +49,8 @@
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property (strong, nonatomic) UILabel *loadingGameLabel;
 
+@property (nonatomic) NSInteger numberOfPlayers;
+
 - (IBAction)monsterImageTapped:(id)sender;
 
 @end
@@ -305,9 +307,19 @@
     for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
         SBUser *user = self.room.users[i];
         Scorecard *currentScorecard = self.playerScorecards[i];
+        currentScorecard.unHidden = YES;
         [currentScorecard updateScorecardWithInfoFromUser:user];
     }
     
+    if (self.numberOfPlayers == self.room.users.count) {
+        
+        Scorecard *sc = self.playerScorecards[self.room.users.count - 1];
+        sc.hidden = YES;
+    }
+    
+    
+    self.numberOfPlayers = self.room.users.count;
+
     if ([self.room.users count] < 6) {
         [self hideUnusedScorecards];
     }
@@ -316,7 +328,11 @@
 - (void)hideUnusedScorecards {
     for (NSUInteger i = [self.room.users count] ; i < 6 ; i++) {
         Scorecard *sc = self.playerScorecards[i];
-        sc.hidden = YES;
+        
+        if (!sc.unHidden) {
+            sc.hidden = YES;
+        }
+        
     }
     
 }
