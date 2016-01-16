@@ -50,6 +50,7 @@
 @property (strong, nonatomic) UILabel *loadingGameLabel;
 
 @property (nonatomic) NSInteger numberOfPlayers;
+@property (strong, nonatomic) NSMutableArray *userKeys;
 
 - (IBAction)monsterImageTapped:(id)sender;
 
@@ -63,6 +64,7 @@
     
     self.didLoseConnectionToFireBase = NO;
     self.room = [[SBRoom alloc] init];
+    self.userKeys = [NSMutableArray new];
     
     [self setupPickerViewsDelegateAndDataSource];
     [self setupMainPlayerScorecard];
@@ -279,7 +281,6 @@
              
          } else {
              SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
-             
              [tmpself updateScoresWithRoom:changedRoom];
          }
          
@@ -292,25 +293,46 @@
 
 
 - (void)updateScoresWithRoom:(SBRoom *)room {
-    for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
-        SBUser *currentUser = self.room.users[i];
-        SBUser *userOnServer = room.users[i];
+    
+    for (SBUser *user in self.room.users) {
         
-        if ([currentUser didAttributesChangeWithUserOnServer:userOnServer]) {
-            [currentUser updateAttributesToMatchUser:userOnServer];
-            [self.playerScorecards[i] updateScorecardWithInfoFromUser:self.room.users[i]];
+        NSUInteger indexOfUser = [self.room.users indexOfObject:user];
+        SBUser *userOnServer = room.users[indexOfUser];
+        
+        if ([user didAttributesChangeWithUserOnServer:userOnServer]) {
+            
+            [user updateAttributesToMatchUser:userOnServer];
+            
+            [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+            
+            NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];
+            
+            [self.playerScorecards[indexOfKey] updateScorecardWithInfoFromUser:user];
+            
         }
     }
+    
 }
 
 - (void)setupScorecardWithUsersInfo {
-    for (NSInteger i = 0 ; i < [self.room.users count] ; i++) {
-        SBUser *user = self.room.users[i];
-        Scorecard *currentScorecard = self.playerScorecards[i];
-        currentScorecard.unHidden = YES;
-        [currentScorecard updateScorecardWithInfoFromUser:user];
+    
+    for (SBUser *user in self.room.users) {
+        
+        if (![self.userKeys containsObject:user.key]) {
+            
+            [self removeUnusedKey];
+            [self.userKeys addObject:[user.key copy]];
+        }
+        
+        [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];
+        Scorecard *scorecard = self.playerScorecards[indexOfKey];
+        scorecard.unHidden = YES;
+        [scorecard updateScorecardWithInfoFromUser:user];
     }
     
+    
+    //TODO: Should I remove this?  I feel like I don't need it.
     if (self.numberOfPlayers == self.room.users.count) {
         
         Scorecard *sc = self.playerScorecards[self.room.users.count - 1];
@@ -319,9 +341,36 @@
     
     
     self.numberOfPlayers = self.room.users.count;
-
+    
     if ([self.room.users count] < 6) {
         [self hideUnusedScorecards];
+    }
+}
+
+- (void)removeUnusedKey {
+    
+    //TODO: This is ugly, clean this up.  THIS IS ONLY removing key if count were to exceed 6 (maybe change this to somehow KNOWING when a user actually exits the game by tapping the back button to exit the game by selecting YES or by closing the app with a swipe (where the view would die).  If this is the case then this is when you would remove the key.  How though would firebase be able to distinguish between the two.  If on disconnect through a certain method (possible?) store some value (bool/string) on firebase letting firebase know that HEY this user is just disconnected but this view is still alive (maybe they are idle for too long or lost internet connection) which would keep the key in this array.
+
+    if (self.userKeys.count + 1 == 7) {
+        
+        for (NSString *key in self.userKeys) {
+            
+            BOOL foundMatch = NO;
+            
+            for (SBUser *userAgain in self.room.users) {
+                
+                if ([key isEqualToString:userAgain.key]) {
+                    
+                    foundMatch = YES;
+                    break;
+                }
+            }
+            
+            if (!foundMatch) {
+                
+                [self.userKeys removeObject:key];
+            }
+        }
     }
 }
 

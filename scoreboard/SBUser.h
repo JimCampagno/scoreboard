@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSNumber *hp;
 @property (strong, nonatomic) NSNumber *vp;
 @property (strong, nonatomic) UIImage *monsterImage;
+@property (strong, nonatomic) NSString *key;
 
 - (instancetype)init;
 - (instancetype)initWithName:(NSString *)name

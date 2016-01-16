@@ -26,11 +26,14 @@
     
     for (FDataSnapshot* child in data.children) {
         NSDictionary *person = child.value;
-
         SBUser *currentPerson = [[SBUser alloc] initWithName:person[@"name"]
                                                  monsterName:person[@"monster"]
                                                           hp:person[@"hp"]
                                                           vp:person[@"vp"]];
+        
+        NSString *key = child.key;
+        currentPerson.key = [key copy];
+        
         [newRoom.users addObject:currentPerson];
     }
 
