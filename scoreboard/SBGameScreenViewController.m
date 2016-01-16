@@ -303,14 +303,25 @@
             
             [user updateAttributesToMatchUser:userOnServer];
             
-            [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+            NSArray *sortedKeys = [self.userKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
             
-            NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];
-            
-            [self.playerScorecards[indexOfKey] updateScorecardWithInfoFromUser:user];
-            
+            if ([sortedKeys isEqualToArray:self.userKeys]) {
+                
+                NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];
+                
+                [self.playerScorecards[indexOfKey] updateScorecardWithInfoFromUser:user];
+                
+            } else {
+                
+                NSUInteger indexOfKey = [sortedKeys indexOfObject:user.key];
+                
+                [self.playerScorecards[indexOfKey] updateScorecardWithNoAnimationFromUser:user];
+                
+            }
         }
     }
+    
+    [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
 }
 
@@ -324,12 +335,28 @@
             [self.userKeys addObject:[user.key copy]];
         }
         
-        [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];
-        Scorecard *scorecard = self.playerScorecards[indexOfKey];
-        scorecard.unHidden = YES;
-        [scorecard updateScorecardWithInfoFromUser:user];
+        NSArray *sortedKeys = [self.userKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        
+        if ([sortedKeys isEqualToArray:self.userKeys]) {
+            
+            NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];
+            Scorecard *scorecard = self.playerScorecards[indexOfKey];
+            scorecard.unHidden = YES;
+            [scorecard updateScorecardWithInfoFromUser:user];
+            
+        } else {
+            
+            NSUInteger indexOfKey = [sortedKeys indexOfObject:user.key];
+            Scorecard *scorecard = self.playerScorecards[indexOfKey];
+            scorecard.unHidden = YES;
+            [scorecard updateScorecardWithNoAnimationFromUser:user];
+            
+        }
+        
     }
+    
+    [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+
     
     
     //TODO: Should I remove this?  I feel like I don't need it.
@@ -350,7 +377,7 @@
 - (void)removeUnusedKey {
     
     //TODO: This is ugly, clean this up.  THIS IS ONLY removing key if count were to exceed 6 (maybe change this to somehow KNOWING when a user actually exits the game by tapping the back button to exit the game by selecting YES or by closing the app with a swipe (where the view would die).  If this is the case then this is when you would remove the key.  How though would firebase be able to distinguish between the two.  If on disconnect through a certain method (possible?) store some value (bool/string) on firebase letting firebase know that HEY this user is just disconnected but this view is still alive (maybe they are idle for too long or lost internet connection) which would keep the key in this array.
-
+    
     if (self.userKeys.count + 1 == 7) {
         
         for (NSString *key in self.userKeys) {

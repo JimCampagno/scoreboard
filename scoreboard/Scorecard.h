@@ -43,6 +43,7 @@
 @property (nonatomic) BOOL unHidden;
 
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user;
+- (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user;
 - (void)createHeartAndStarViews;
 
 @end

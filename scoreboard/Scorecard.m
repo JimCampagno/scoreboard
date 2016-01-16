@@ -189,5 +189,22 @@
     self.firstTimeThrough = NO;
 }
 
+- (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user {
+
+    if (self.hidden == YES) {
+        self.hidden = NO;
+    }
+    
+    self.monsterImage.image = user.monsterImage;
+    self.playerName.text = user.name;
+    self.monsterName.text = user.monster;
+        
+    [self.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
+    [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
+    
+    self.firstTimeThrough = NO;
+}
+
+
 
 @end
