@@ -93,24 +93,51 @@
 - (void)doTheThing {
     __weak typeof(self) tmpself = self;
     
+    NSLog(@"DO THE THING HAS BEEN CALLED!");
+    
     self.connectedRef = [[Firebase alloc] initWithUrl:@"https://boiling-heat-4798.firebaseio.com/.info/connected"];
     
     [self.connectedRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if([snapshot.value boolValue]) {
             
+            NSLog(@"snap shot bool value");
+            
             if (tmpself.didLoseConnectionToFireBase) {
+                
+                for (Scorecard *sc in tmpself.playerScorecards) {
+                    
+                    sc.firstTimeThrough = YES;
+                }
+
+                
+                NSLog(@"DID LOSE CONNECTION TO FIREBASE");
+                
                 
                 [tmpself doMagic];
                 tmpself.view.userInteractionEnabled = YES;
             }
+            
+            NSLog(@"COOL DEAD SPACE BRO!");
+            
             
             [tmpself setupListenerToEntireRoomOnFirebase];
             [tmpself setupCurrentPlayerReferenceToFirebase];
             
         } else {
             
+
+            for (Scorecard *sc in tmpself.playerScorecards) {
+                
+                sc.wasDisconnected = YES;
+                sc.firstTimeThrough = YES;
+                NSLog(@"UPDATE: %@ is the new value for this scorecard: %@", @(sc.wasDisconnected), sc.playerName.text);
+            }
+            
             [tmpself displayNoConnectionView];
             tmpself.didLoseConnectionToFireBase = YES;
+            
+            
+           
         }
     }];
 }
@@ -356,7 +383,7 @@
     }
     
     [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
+    
     
     
     //TODO: Should I remove this?  I feel like I don't need it.

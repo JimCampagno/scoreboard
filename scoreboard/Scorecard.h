@@ -41,6 +41,9 @@
 @property (strong, nonatomic) SCNView *heartView;
 @property (strong, nonatomic) SCNView *starView;
 @property (nonatomic) BOOL unHidden;
+@property (nonatomic) BOOL firstTimeThrough;
+@property (nonatomic) BOOL wasDisconnected;
+
 
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user;
 - (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user;

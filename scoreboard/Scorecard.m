@@ -15,8 +15,6 @@
 @interface Scorecard ()
 
 
-@property (nonatomic) BOOL firstTimeThrough;
-
 @end
 
 
@@ -60,6 +58,7 @@
     _customSBConstraints = [[NSMutableArray alloc] init];
     self.firstTimeThrough = YES;
     self.unHidden = NO;
+    _wasDisconnected = NO;
     [self setupHealthAndVictoryPoints];
     [[NSBundle mainBundle] loadNibNamed:@"Scorecard"
                                   owner:self
@@ -164,9 +163,13 @@
         self.hidden = NO;
     }
     
+    
     self.monsterImage.image = user.monsterImage;
     self.playerName.text = user.name;
     self.monsterName.text = user.monster;
+    
+    NSLog(@"<<< update called for %@ >>> FirstTimeThrough: %@ WasDisconnected: %@", self.playerName.text,  @(self.firstTimeThrough), @(self.wasDisconnected));
+
 
     NSInteger currentHealthFromPickerView = [self.bottomPicker selectedRowInComponent:0];
     NSInteger currentVictoryFromPickerView = [self.topPicker selectedRowInComponent:0];
@@ -175,18 +178,37 @@
     [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
     
     
-    if ((currentHealthFromPickerView != [user.hp integerValue]) && !self.firstTimeThrough) {
+    
+    if ((currentHealthFromPickerView != [user.hp integerValue]) && !self.firstTimeThrough && !self.wasDisconnected) {
+        
+        NSLog(@"Health Changed for %@, firstTimeThrough property is %@\n\n\n", self.playerName.text, @(self.firstTimeThrough));
+        
         SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
         [self.heartView.scene.rootNode addParticleSystem:new];
         
     }
     
-    if ((currentVictoryFromPickerView != [user.vp integerValue]) && !self.firstTimeThrough) {
+    if ((currentVictoryFromPickerView != [user.vp integerValue]) && !self.firstTimeThrough && !self.wasDisconnected) {
+        
+        NSLog(@"Victory Points Changed for %@, firstTimeThrough property is %@\n\n\n", self.playerName.text, @(self.firstTimeThrough));
+
+        
         SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Starfetti" inDirectory:nil];
         [self.starView.scene.rootNode addParticleSystem:new];
         
     }
+    
+    if (!self.firstTimeThrough) {
+        
+        self.wasDisconnected = NO;
+        NSLog(@"**just switched the wasDisconnectedSwitch for %@", self.playerName.text);
+    }
+    
     self.firstTimeThrough = NO;
+    
+    NSString *thing = self.firstTimeThrough ? @"YES" : @"NO";
+    
+    NSLog(@"*** FirstTimeThrough was just set to : %@ for user: %@", thing, self.playerName.text);
 }
 
 - (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user {
