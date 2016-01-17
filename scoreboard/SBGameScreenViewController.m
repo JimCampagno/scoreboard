@@ -335,21 +335,14 @@
          if (numberOfPlayersChanged) {
              
              NSLog(@"if statement - numberOfPlayers Changed");
-             NSLog(@"if statement - numberOfPlayers Changed - about to createRoomWithData");
              NSLog(@"if statement - numberOfPlayers Changed - about to call on setupScorecardWithUsersInfo");
-
-             
              
              tmpself.room = [SBRoom createRoomWithData:snapshot];
              [tmpself setupScorecardWithUsersInfo];
              
          } else {
              NSLog(@"if statement - numberOfPlayers did not change");
-             NSLog(@"if statement - numberOfPlayers did not change - about to createRoomWithData");
              NSLog(@"if statement - numberOfPlayers did not change - about to call on updateScoresWithRoom");
-             
-             
-             
              
              SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
              [tmpself updateScoresWithRoom:changedRoom];
