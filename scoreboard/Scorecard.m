@@ -58,7 +58,8 @@
     _customSBConstraints = [[NSMutableArray alloc] init];
     self.firstTimeThrough = YES;
     self.unHidden = NO;
-    _wasDisconnected = NO;
+    self.wasDisconnected = NO;
+    self.updatedBetweenDisc = NO;
     [self setupHealthAndVictoryPoints];
     [[NSBundle mainBundle] loadNibNamed:@"Scorecard"
                                   owner:self
@@ -163,6 +164,10 @@
         self.hidden = NO;
     }
     
+    if (!_updatedBetweenDisc) {
+        
+        self.wasDisconnected = NO;
+    }
     
     self.monsterImage.image = user.monsterImage;
     self.playerName.text = user.name;
@@ -224,7 +229,14 @@
     [self.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
     [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
     
-    self.firstTimeThrough = NO;
+    NSLog(@"(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
+    NSLog(@"\n\n Updated between disc: %@\n\n", self.playerName.text);
+    NSLog(@"(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
+
+    
+    self.updatedBetweenDisc = YES;
+    
+//    self.firstTimeThrough = NO;
 }
 
 

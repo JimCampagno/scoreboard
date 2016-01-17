@@ -45,6 +45,9 @@
 @property (nonatomic) BOOL wasDisconnected;
 
 
+@property (nonatomic) BOOL updatedBetweenDisc;
+
+
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user;
 - (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user;
 - (void)createHeartAndStarViews;

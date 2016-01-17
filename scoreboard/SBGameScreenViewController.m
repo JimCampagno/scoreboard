@@ -349,6 +349,8 @@
                 
                 NSUInteger indexOfKey = [sortedKeys indexOfObject:user.key];
                 
+                NSLog(@"\n\n\n\n YEAAAAAAAA");
+                
                 [self.playerScorecards[indexOfKey] updateScorecardWithNoAnimationFromUser:user];
                 
             }
