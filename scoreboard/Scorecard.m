@@ -163,48 +163,50 @@
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user {
     
     NSLog(@"BEGIN updateScorecardWithInfoFromUser: for %@", user.name);
-        
+    
     if (self.hidden == YES) {
         self.hidden = NO;
     }
     
-//    if (!_updatedBetweenDisc) {
-//        
-//        self.wasDisconnected = NO;
-//    }
+    //    if (!_updatedBetweenDisc) {
+    //
+    //        self.wasDisconnected = NO;
+    //    }
     
     self.monsterImage.image = user.monsterImage;
     self.playerName.text = user.name;
     self.monsterName.text = user.monster;
     
-
-
+    
+    
     NSInteger currentHealthFromPickerView = [self.bottomPicker selectedRowInComponent:0];
     NSInteger currentVictoryFromPickerView = [self.topPicker selectedRowInComponent:0];
     
     [self.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
     [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
     
-    
-    
-    if ((currentHealthFromPickerView != [user.hp integerValue]) && !_firstTimeThrough && !_wasDisconnected) {
+    if (!_itGotDoneDisconnected) {
         
-        NSLog(@"<3 <3 <3 animation is set to begin for %@", user.name);
+        if ((currentHealthFromPickerView != [user.hp integerValue]) && !_firstTimeThrough && !_wasDisconnected) {
+            
+            NSLog(@"<3 <3 <3 animation is set to begin for %@", user.name);
+            
+            
+            SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
+            [self.heartView.scene.rootNode addParticleSystem:new];
+            
+        }
         
-        
-        SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
-        [self.heartView.scene.rootNode addParticleSystem:new];
-        
-    }
-    
-    if ((currentVictoryFromPickerView != [user.vp integerValue]) && !_firstTimeThrough && !_wasDisconnected) {
-        
-        NSLog(@"* * *  animation is set to begin for %@", user.name);
-
-        
-        
-        SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Starfetti" inDirectory:nil];
-        [self.starView.scene.rootNode addParticleSystem:new];
+        if ((currentVictoryFromPickerView != [user.vp integerValue]) && !_firstTimeThrough && !_wasDisconnected) {
+            
+            NSLog(@"* * *  animation is set to begin for %@", user.name);
+            
+            
+            
+            SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Starfetti" inDirectory:nil];
+            [self.starView.scene.rootNode addParticleSystem:new];
+            
+        }
         
     }
     
@@ -218,22 +220,22 @@
     
     NSString *thing = _firstTimeThrough ? @"YES" : @"NO";
     NSLog(@"END updateScorecardWithInfoFromUser: for %@\n\n", user.name);
-
+    
     
     
 }
 
 //- (BOOL)firstTimeThrough {
-//    
+//
 //    NSLog(@"-------------------------");
 //    NSLog(@"%@ is about to SET the firstTimeThrough property", self.playerName.text);
 //    NSLog(@"-------------------------");
-//    
+//
 //    return _firstTimeThrough;
 //}
 //
 //- (BOOL)wasDisconnected {
-//    
+//
 //    NSLog(@"-------------------------");
 //    NSLog(@"%@ is about to SET the wasDisconnected property", self.playerName.text);
 //    NSLog(@"-------------------------");
@@ -246,8 +248,8 @@
 - (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user {
     
     NSLog(@"updateScorecardWithNoAnimationFromUser: called with user: %@", user.name);
-
-
+    
+    
     if (self.hidden == YES) {
         self.hidden = NO;
     }
@@ -255,11 +257,11 @@
     self.monsterImage.image = user.monsterImage;
     self.playerName.text = user.name;
     self.monsterName.text = user.monster;
-        
+    
     [self.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
     [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
     
-
+    
     
     
     self.firstTimeThrough = NO;

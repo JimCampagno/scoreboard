@@ -53,7 +53,11 @@
 @property (strong, nonatomic) NSMutableArray *userKeys;
 @property (nonatomic) BOOL comingBackFromDisconnect;
 
+@property (nonatomic) BOOL viewResignedActive;
+
 - (IBAction)monsterImageTapped:(id)sender;
+- (void)aboutToLeaveTheScreen;
+
 
 @end
 
@@ -67,28 +71,39 @@
     self.room = [[SBRoom alloc] init];
     self.userKeys = [NSMutableArray new];
     self.comingBackFromDisconnect = NO;
+    self.viewResignedActive = NO;
     
     [self setupPickerViewsDelegateAndDataSource];
     [self setupMainPlayerScorecard];
     [self doTheThing]; // fix this method name
     [self displayInitialLoad];
     [self setupNavigationBar];
+    [self observeCertainNotifications];
 }
 
+- (void)observeCertainNotifications {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(aboutToLeaveTheScreen)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(aboutToEnterView)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+}
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    NSLog(@"=========== view did dissappear called");
+- (void)aboutToLeaveTheScreen {
     
     
-//    NSString *boolThing = self.didLoseConnectionToFireBase ? @"YES" : @"NO";
-//    NSLog(@"if statement - in the else when self.didLoseConectionToFireBase is %@", boolThing);
     
-    
+    NSLog(@"\n\n About to leave the screen. \n\n");
     self.comingBackFromDisconnect = YES;
     
     for (Scorecard *sc in self.playerScorecards) {
+        
+        sc.itGotDoneDisconnected = YES;
         
         sc.wasDisconnected = YES;
         sc.firstTimeThrough = YES;
@@ -98,8 +113,31 @@
     }
     
     self.didLoseConnectionToFireBase = YES;
+    self.viewResignedActive = YES;
+    
+    
+    
+    
 }
 
+- (void)setDisconnectPropertyForAllScorecardsToNo {
+    
+    NSLog(@"\n\n\n\n\n SET DISCONNECT CALLED \n\n\n\n\n");
+    
+    for (Scorecard *sc in self.playerScorecards) {
+        
+        sc.itGotDoneDisconnected = NO;
+    }
+    
+}
+
+- (void)aboutToEnterView {
+    
+    [self performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo)
+               withObject:nil
+               afterDelay:2.0];
+    
+}
 
 
 - (void)setupNavigationBar {
@@ -250,7 +288,7 @@
     }
     
     NSLog(@"++++++++++++ viewDidAppear: has been called");
-
+    
     
 }
 
@@ -427,23 +465,45 @@
     
     [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
+    
+    
+    
+    
+    
+    
     for (Scorecard *card in self.playerScorecards) {
         
-   
+        if ([card.playerName.text.lowercaseString isEqualToString:@"player name"]) {
+            
+            continue;
+        }
+        
+        NSLog(@"*****************************************************");
+        
+        NSLog(@"BEFORE CHANGE: %@ - firstTimeThrough: %@ - wasDisconnected: %@", card.playerName.text.capitalizedString, @(card.firstTimeThrough), @(card.wasDisconnected));
         
         
-        if (card.wasDisconnected) {
+        if (!_viewResignedActive) {
+            
+            NSLog(@"%@ will set wasDisconnected to NO", card.playerName.text.uppercaseString);
             
             card.wasDisconnected = NO;
         }
         
+        
+        
+        
+        
+        
+        
+        NSLog(@"AFTER CHANGE: %@ - firstTimeThrough: %@ - wasDisconnected: %@", card.playerName.text.capitalizedString, @(card.firstTimeThrough), @(card.wasDisconnected));
+        
         NSLog(@"*****************************************************\n\n");
         
-        NSLog(@"%@ - firstTimeThrough: %@ - wasDisconnected: %@", card.playerName.text.capitalizedString, @(card.firstTimeThrough), @(card.wasDisconnected));
-        
-        NSLog(@"*****************************************************\n\n");
-
     }
+    
+    self.viewResignedActive = NO;
+    
     
     
     
@@ -506,7 +566,7 @@
             Scorecard *scorecard = self.playerScorecards[indexOfKey];
             
             NSLog(@"%@ is about to set the wasDisconnected to NO in the ELSE of the if sortedkeysequalarray", scorecard.playerName.text.capitalizedString);
-
+            
             scorecard.wasDisconnected = NO;
             
             
@@ -520,7 +580,7 @@
                 if (sc.wasDisconnected && !sc.firstTimeThrough) {
                     
                     NSLog(@"%@ is about to set the wasDisconnected Property in this weird if statement.", sc.playerName.text.capitalizedString);
-
+                    
                     sc.wasDisconnected = NO;
                 };
             }
