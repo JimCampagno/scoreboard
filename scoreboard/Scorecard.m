@@ -60,6 +60,7 @@
     self.unHidden = NO;
     self.wasDisconnected = NO;
     self.updatedBetweenDisc = NO;
+    self.itGotDoneDisconnected = NO;
     [self setupHealthAndVictoryPoints];
     [[NSBundle mainBundle] loadNibNamed:@"Scorecard"
                                   owner:self
@@ -160,6 +161,9 @@
 }
 
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user {
+    
+    NSLog(@"BEGIN updateScorecardWithInfoFromUser: for %@", user.name);
+        
     if (self.hidden == YES) {
         self.hidden = NO;
     }
@@ -173,7 +177,6 @@
     self.playerName.text = user.name;
     self.monsterName.text = user.monster;
     
-    NSLog(@"<<< update called for %@ >>> FirstTimeThrough: %@ WasDisconnected: %@", self.playerName.text,  @(self.firstTimeThrough), @(self.wasDisconnected));
 
 
     NSInteger currentHealthFromPickerView = [self.bottomPicker selectedRowInComponent:0];
@@ -186,7 +189,8 @@
     
     if ((currentHealthFromPickerView != [user.hp integerValue]) && !self.firstTimeThrough && !self.wasDisconnected) {
         
-        NSLog(@"Health Changed for %@, firstTimeThrough property is %@\n\n\n", self.playerName.text, @(self.firstTimeThrough));
+        NSLog(@"<3 <3 <3 animation is set to begin for %@", user.name);
+        
         
         SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
         [self.heartView.scene.rootNode addParticleSystem:new];
@@ -195,8 +199,9 @@
     
     if ((currentVictoryFromPickerView != [user.vp integerValue]) && !self.firstTimeThrough && !self.wasDisconnected) {
         
-        NSLog(@"Victory Points Changed for %@, firstTimeThrough property is %@\n\n\n", self.playerName.text, @(self.firstTimeThrough));
+        NSLog(@"* * *  animation is set to begin for %@", user.name);
 
+        
         
         SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Starfetti" inDirectory:nil];
         [self.starView.scene.rootNode addParticleSystem:new];
@@ -206,17 +211,21 @@
     if (!self.firstTimeThrough) {
         
         self.wasDisconnected = NO;
-        NSLog(@"**just switched the wasDisconnectedSwitch for %@", self.playerName.text);
     }
     
     self.firstTimeThrough = NO;
     
     NSString *thing = self.firstTimeThrough ? @"YES" : @"NO";
+    NSLog(@"END updateScorecardWithInfoFromUser: for %@\n\n", user.name);
+
     
-    NSLog(@"*** FirstTimeThrough was just set to : %@ for user: %@", thing, self.playerName.text);
+    
 }
 
 - (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user {
+    
+    NSLog(@"updateScorecardWithNoAnimationFromUser: called with user: %@", user.name);
+
 
     if (self.hidden == YES) {
         self.hidden = NO;
@@ -229,14 +238,11 @@
     [self.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
     [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
     
-    NSLog(@"(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
-    NSLog(@"\n\n Updated between disc: %@\n\n", self.playerName.text);
-    NSLog(@"(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((");
 
     
-    self.updatedBetweenDisc = YES;
     
-//    self.firstTimeThrough = NO;
+    self.firstTimeThrough = NO;
+    
 }
 
 

@@ -93,33 +93,43 @@
 }
 
 - (void)doTheThing {
+    
+    NSLog(@"BEGIN doTheThing");
+    
     __weak typeof(self) tmpself = self;
     
-    NSLog(@"DO THE THING HAS BEEN CALLED!");
     
     self.connectedRef = [[Firebase alloc] initWithUrl:@"https://boiling-heat-4798.firebaseio.com/.info/connected"];
     
     [self.connectedRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if([snapshot.value boolValue]) {
             
-            NSLog(@"snap shot bool value");
+            NSString *boolThing = [snapshot.value boolValue] ? @"YES" : @"NO";
+            NSLog(@"if statement - [snapshot.value boolValue] is %@", boolThing);
+            
             
             if (tmpself.didLoseConnectionToFireBase) {
+                
+                
+                NSString *boolThing = tmpself.didLoseConnectionToFireBase ? @"YES" : @"NO";
+                NSLog(@"if statement - if self.didLoseConnectionToFireBase is %@", boolThing);
+            
                 
                 for (Scorecard *sc in tmpself.playerScorecards) {
                     
                     sc.firstTimeThrough = YES;
+                    sc.itGotDoneDisconnected = YES;
                 }
                 
+                NSLog(@"if statement - just looped through the scorecards and set their firstTimeThrough and itGotDoneDisconnected property to yes.");
                 
-                NSLog(@"DID LOSE CONNECTION TO FIREBASE");
+                
                 
                 
                 [tmpself doMagic];
                 tmpself.view.userInteractionEnabled = YES;
             }
             
-            NSLog(@"COOL DEAD SPACE BRO!");
             
             
             [tmpself setupListenerToEntireRoomOnFirebase];
@@ -127,6 +137,8 @@
             
         } else {
             
+            NSString *boolThing = tmpself.didLoseConnectionToFireBase ? @"YES" : @"NO";
+            NSLog(@"if statement - in the else when self.didLoseConectionToFireBase is %@", boolThing);
             
             
             self.comingBackFromDisconnect = YES;
@@ -138,7 +150,6 @@
                 
                 
                 
-                NSLog(@"UPDATE: %@ is the new value for this scorecard: %@", @(sc.wasDisconnected), sc.playerName.text);
             }
             
             [tmpself displayNoConnectionView];
@@ -147,6 +158,9 @@
             
         }
     }];
+    
+    NSLog(@"END doTheThing\n\n");
+
 }
 
 - (void)displayInitialLoad {
@@ -211,6 +225,9 @@
 }
 
 - (void)doMagic {
+    
+    NSLog(@"BEGIN doMagic called.");
+    
     [UIView animateWithDuration:0.5
                      animations:^{
                          
@@ -221,6 +238,8 @@
                          [self.loadingIndicator stopAnimating];
                          self.initialLoad.hidden = YES;
                      }];
+    
+    NSLog(@"END doMagic.\n\n");
 }
 
 - (void)displayNoConnectionView {
@@ -284,7 +303,11 @@
 - (void)setupListenerToEntireRoomOnFirebase {
     __weak typeof(self) tmpself = self;
     
+    NSLog(@"BEGIN setupListenerToEntireRoomOnFirebase");
+    
     if (self.didLoseConnectionToFireBase) {
+        
+        NSLog(@"if statement - self.didLoseConnectionToFireBase is %@", @(self.didLoseConnectionToFireBase));
         
         [[tmpself.ref childByAppendingPath:tmpself.roomDigits] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
             if ([currentData hasChildren]) {
@@ -310,10 +333,24 @@
          BOOL numberOfPlayersChanged = [tmpself.room.users count] != snapshot.childrenCount ? YES : NO;
          
          if (numberOfPlayersChanged) {
+             
+             NSLog(@"if statement - numberOfPlayers Changed");
+             NSLog(@"if statement - numberOfPlayers Changed - about to createRoomWithData");
+             NSLog(@"if statement - numberOfPlayers Changed - about to call on setupScorecardWithUsersInfo");
+
+             
+             
              tmpself.room = [SBRoom createRoomWithData:snapshot];
              [tmpself setupScorecardWithUsersInfo];
              
          } else {
+             NSLog(@"if statement - numberOfPlayers did not change");
+             NSLog(@"if statement - numberOfPlayers did not change - about to createRoomWithData");
+             NSLog(@"if statement - numberOfPlayers did not change - about to call on updateScoresWithRoom");
+             
+             
+             
+             
              SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
              [tmpself updateScoresWithRoom:changedRoom];
          }
@@ -349,7 +386,6 @@
                 
                 NSUInteger indexOfKey = [sortedKeys indexOfObject:user.key];
                 
-                NSLog(@"\n\n\n\n YEAAAAAAAA");
                 
                 [self.playerScorecards[indexOfKey] updateScorecardWithNoAnimationFromUser:user];
                 
@@ -366,8 +402,6 @@
     NSString *unusedKey;
     
     if (_comingBackFromDisconnect) {
-        
-        NSLog(@"COMING BACK FROM DISCONNECT!!!!!!!!!!!!!!!!!!!!!!!");
         
         NSMutableArray *unusedKeys = [self.userKeys mutableCopy];
         
@@ -386,7 +420,6 @@
     
         unusedKey = [unusedKeys firstObject];
         
-        NSLog(@"UNUSED KEY IS %@", unusedKey);
         
         NSArray *sortedKeys = [self.userKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         
@@ -394,7 +427,6 @@
             
             NSUInteger indexOfKey = [self.userKeys indexOfObject:unusedKey];
             Scorecard *scorecard = self.playerScorecards[indexOfKey];
-            NSLog(@"--------------------------------------- DID THIS WORK FOR %@", scorecard.playerName.text);
             
             scorecard.wasDisconnected = NO;
             
@@ -412,7 +444,6 @@
             
             NSUInteger indexOfKey = [sortedKeys indexOfObject:unusedKey];
             Scorecard *scorecard = self.playerScorecards[indexOfKey];
-            NSLog(@"--------------------------------------- DID THIS WORK FOR %@", scorecard.playerName.text);
             scorecard.wasDisconnected = NO;
             
             
@@ -450,9 +481,6 @@
     
     for (SBUser *user in self.room.users) {
         
-        NSLog(@"===");
-        NSLog(@"Setup being called on %@, total number of users in room is %ld", user.name, self.room.users.count);
-        NSLog(@"===");
         
         if (![self.userKeys containsObject:user.key]) {
             
@@ -464,7 +492,6 @@
         
         if ([sortedKeys isEqualToArray:self.userKeys]) {
             
-            NSLog(@"Count of keys: %ld", self.userKeys.count);
             
             
             NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];

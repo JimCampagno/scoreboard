@@ -44,6 +44,8 @@
 @property (nonatomic) BOOL firstTimeThrough;
 @property (nonatomic) BOOL wasDisconnected;
 
+@property (nonatomic) BOOL itGotDoneDisconnected;
+
 
 @property (nonatomic) BOOL updatedBetweenDisc;
 
