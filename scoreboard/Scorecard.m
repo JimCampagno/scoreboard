@@ -187,7 +187,7 @@
     
     if (!_itGotDoneDisconnected) {
         
-        if ((currentHealthFromPickerView != [user.hp integerValue]) && !_firstTimeThrough && !_wasDisconnected) {
+        if ((currentHealthFromPickerView != [user.hp integerValue]) && !_firstTimeThrough) {
             
             NSLog(@"<3 <3 <3 animation is set to begin for %@", user.name);
             
@@ -197,7 +197,7 @@
             
         }
         
-        if ((currentVictoryFromPickerView != [user.vp integerValue]) && !_firstTimeThrough && !_wasDisconnected) {
+        if ((currentVictoryFromPickerView != [user.vp integerValue]) && !_firstTimeThrough) {
             
             NSLog(@"* * *  animation is set to begin for %@", user.name);
             

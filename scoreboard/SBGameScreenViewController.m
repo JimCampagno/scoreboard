@@ -96,36 +96,17 @@
 
 - (void)aboutToLeaveTheScreen {
     
-    
-    
-    NSLog(@"\n\n About to leave the screen. \n\n");
-    self.comingBackFromDisconnect = YES;
-    
     for (Scorecard *sc in self.playerScorecards) {
-        
         sc.itGotDoneDisconnected = YES;
-        
-        sc.wasDisconnected = YES;
-        sc.firstTimeThrough = YES;
-        
-        
-        
     }
-    
-    self.didLoseConnectionToFireBase = YES;
-    self.viewResignedActive = YES;
-    
-    
-    
     
 }
 
 - (void)setDisconnectPropertyForAllScorecardsToNo {
     
-    NSLog(@"\n\n\n\n\n SET DISCONNECT CALLED \n\n\n\n\n");
+    NSLog(@"============================================ SET DISCONNECT CALLED ===================================\n\n");
     
     for (Scorecard *sc in self.playerScorecards) {
-        
         sc.itGotDoneDisconnected = NO;
     }
     
@@ -135,7 +116,7 @@
     
     [self performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo)
                withObject:nil
-               afterDelay:2.0];
+               afterDelay:1.5];
     
 }
 
@@ -183,12 +164,11 @@
                 for (Scorecard *sc in tmpself.playerScorecards) {
                     
                     sc.firstTimeThrough = YES;
-                    sc.itGotDoneDisconnected = YES;
                 }
                 
                 NSLog(@"if statement - just looped through the scorecards and set their firstTimeThrough and itGotDoneDisconnected property to yes.");
                 
-                
+                [tmpself performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo) withObject:nil afterDelay:1.5];
                 
                 
                 [tmpself doMagic];
@@ -212,6 +192,8 @@
                 
                 sc.wasDisconnected = YES;
                 sc.firstTimeThrough = YES;
+                
+                sc.itGotDoneDisconnected = YES;
                 
                 
                 
@@ -292,6 +274,12 @@
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    NSLog(@"\n\n\nTHE VIEW WILL DISAPPEAR MY BRO!!!");
+}
+
 - (void)doMagic {
     
     NSLog(@"BEGIN doMagic called.");
@@ -349,7 +337,7 @@
     
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
     
-    [self.currentPlayerRef onDisconnectRemoveValue];
+    // [self.currentPlayerRef onDisconnectRemoveValue];
 }
 
 - (IBAction)monsterImageTapped:(id)sender {
@@ -538,11 +526,11 @@
         if ([sortedKeys isEqualToArray:self.userKeys]) {
             
             NSUInteger indexOfKey = [self.userKeys indexOfObject:unusedKey];
-            Scorecard *scorecard = self.playerScorecards[indexOfKey];
+            // Scorecard *scorecard = self.playerScorecards[indexOfKey];
             
-            NSLog(@"%@ is about to set the wasDisconnected to NO in the if sortedKeysEqualArray", scorecard.playerName.text.capitalizedString);
+          //fsdf  NSLog(@"%@ is about to set the wasDisconnected to NO in the if sortedKeysEqualArray", scorecard.playerName.text.capitalizedString);
             
-            scorecard.wasDisconnected = NO;
+            // scorecard.wasDisconnected = NO;
             
             for (NSString *key in self.userKeys) {
                 
