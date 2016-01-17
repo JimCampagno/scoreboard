@@ -75,6 +75,33 @@
     [self setupNavigationBar];
 }
 
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    NSLog(@"=========== view did dissappear called");
+    
+    
+//    NSString *boolThing = self.didLoseConnectionToFireBase ? @"YES" : @"NO";
+//    NSLog(@"if statement - in the else when self.didLoseConectionToFireBase is %@", boolThing);
+    
+    
+    self.comingBackFromDisconnect = YES;
+    
+    for (Scorecard *sc in self.playerScorecards) {
+        
+        sc.wasDisconnected = YES;
+        sc.firstTimeThrough = YES;
+        
+        
+        
+    }
+    
+    self.didLoseConnectionToFireBase = YES;
+}
+
+
+
 - (void)setupNavigationBar {
     self.navigationController.navigationBar.hidden = NO;
     UIBarButtonItem *leaveGameBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<"
@@ -113,7 +140,7 @@
                 
                 NSString *boolThing = tmpself.didLoseConnectionToFireBase ? @"YES" : @"NO";
                 NSLog(@"if statement - if self.didLoseConnectionToFireBase is %@", boolThing);
-            
+                
                 
                 for (Scorecard *sc in tmpself.playerScorecards) {
                     
@@ -160,7 +187,7 @@
     }];
     
     NSLog(@"END doTheThing\n\n");
-
+    
 }
 
 - (void)displayInitialLoad {
@@ -221,6 +248,9 @@
         
         self.view.userInteractionEnabled = YES;
     }
+    
+    NSLog(@"++++++++++++ viewDidAppear: has been called");
+
     
 }
 
@@ -305,7 +335,7 @@
     
     NSLog(@"BEGIN setupListenerToEntireRoomOnFirebase");
     
-    if (self.didLoseConnectionToFireBase) {
+    if (_didLoseConnectionToFireBase) {
         
         NSLog(@"if statement - self.didLoseConnectionToFireBase is %@", @(self.didLoseConnectionToFireBase));
         
@@ -323,36 +353,45 @@
         } andCompletionBlock:^(NSError *error, BOOL committed, FDataSnapshot *snapshot) {
             
         }];
+        
+        
+    } else {
+        
+        [[tmpself.ref childByAppendingPath:self.roomDigits]
+         observeEventType:FEventTypeValue
+         withBlock:^(FDataSnapshot *snapshot) {
+             
+             BOOL numberOfPlayersChanged = [tmpself.room.users count] != snapshot.childrenCount ? YES : NO;
+             
+             if (numberOfPlayersChanged) {
+                 
+                 NSLog(@"if statement - numberOfPlayers Changed");
+                 NSLog(@"SETUP scorecardWithUsersInfo");
+                 
+                 tmpself.room = [SBRoom createRoomWithData:snapshot];
+                 [tmpself setupScorecardWithUsersInfo];
+                 
+             } else {
+                 NSLog(@"if statement - numberOfPlayers did not change");
+                 NSLog(@"UPDATE scorecardWithUsersInfo");
+                 
+                 SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
+                 [tmpself updateScoresWithRoom:changedRoom];
+             }
+             
+             
+         } withCancelBlock:^(NSError *error) {
+             //Still should do something here.
+             NSLog(@"ERROR: %@", error.description);
+         }];
+        
+        
+        
+        
+        
     }
     
-    [[tmpself.ref childByAppendingPath:self.roomDigits]
-     
-     observeEventType:FEventTypeValue
-     withBlock:^(FDataSnapshot *snapshot) {
-         
-         BOOL numberOfPlayersChanged = [tmpself.room.users count] != snapshot.childrenCount ? YES : NO;
-         
-         if (numberOfPlayersChanged) {
-             
-             NSLog(@"if statement - numberOfPlayers Changed");
-             NSLog(@"if statement - numberOfPlayers Changed - about to call on setupScorecardWithUsersInfo");
-             
-             tmpself.room = [SBRoom createRoomWithData:snapshot];
-             [tmpself setupScorecardWithUsersInfo];
-             
-         } else {
-             NSLog(@"if statement - numberOfPlayers did not change");
-             NSLog(@"if statement - numberOfPlayers did not change - about to call on updateScoresWithRoom");
-             
-             SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
-             [tmpself updateScoresWithRoom:changedRoom];
-         }
-         
-         
-     } withCancelBlock:^(NSError *error) {
-         //Still should do something here.
-         NSLog(@"ERROR: %@", error.description);
-     }];
+    
 }
 
 
@@ -388,6 +427,26 @@
     
     [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
+    for (Scorecard *card in self.playerScorecards) {
+        
+   
+        
+        
+        if (card.wasDisconnected) {
+            
+            card.wasDisconnected = NO;
+        }
+        
+        NSLog(@"*****************************************************\n\n");
+        
+        NSLog(@"%@ - firstTimeThrough: %@ - wasDisconnected: %@", card.playerName.text.capitalizedString, @(card.firstTimeThrough), @(card.wasDisconnected));
+        
+        NSLog(@"*****************************************************\n\n");
+
+    }
+    
+    
+    
 }
 
 - (void)setupScorecardWithUsersInfo {
@@ -410,7 +469,7 @@
                 }
             }
         }
-    
+        
         unusedKey = [unusedKeys firstObject];
         
         
@@ -421,6 +480,8 @@
             NSUInteger indexOfKey = [self.userKeys indexOfObject:unusedKey];
             Scorecard *scorecard = self.playerScorecards[indexOfKey];
             
+            NSLog(@"%@ is about to set the wasDisconnected to NO in the if sortedKeysEqualArray", scorecard.playerName.text.capitalizedString);
+            
             scorecard.wasDisconnected = NO;
             
             for (NSString *key in self.userKeys) {
@@ -428,7 +489,13 @@
                 NSUInteger index = [self.userKeys indexOfObject:key];
                 Scorecard *sc = self.playerScorecards[index];
                 
-                if (sc.wasDisconnected && !sc.firstTimeThrough) { sc.wasDisconnected = NO; };
+                NSLog(@"if statement about to happen with wasDisconnected/firsTThrimgGhrough");
+                
+                if (sc.wasDisconnected && !sc.firstTimeThrough) {
+                    
+                    NSLog(@"%@ is about to set the wasDisconnected Property in this weird if statement.", sc.playerName.text.capitalizedString);
+                    sc.wasDisconnected = NO;
+                };
             }
             
             
@@ -437,6 +504,9 @@
             
             NSUInteger indexOfKey = [sortedKeys indexOfObject:unusedKey];
             Scorecard *scorecard = self.playerScorecards[indexOfKey];
+            
+            NSLog(@"%@ is about to set the wasDisconnected to NO in the ELSE of the if sortedkeysequalarray", scorecard.playerName.text.capitalizedString);
+
             scorecard.wasDisconnected = NO;
             
             
@@ -445,7 +515,14 @@
                 NSUInteger index = [sortedKeys indexOfObject:key];
                 Scorecard *sc = self.playerScorecards[index];
                 
-                if (sc.wasDisconnected && !sc.firstTimeThrough) { sc.wasDisconnected = NO; };
+                NSLog(@"if statement about to happen with wasDisconnected and firstTimeThrough");
+                
+                if (sc.wasDisconnected && !sc.firstTimeThrough) {
+                    
+                    NSLog(@"%@ is about to set the wasDisconnected Property in this weird if statement.", sc.playerName.text.capitalizedString);
+
+                    sc.wasDisconnected = NO;
+                };
             }
             
             

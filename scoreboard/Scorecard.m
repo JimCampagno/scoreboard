@@ -168,10 +168,10 @@
         self.hidden = NO;
     }
     
-    if (!_updatedBetweenDisc) {
-        
-        self.wasDisconnected = NO;
-    }
+//    if (!_updatedBetweenDisc) {
+//        
+//        self.wasDisconnected = NO;
+//    }
     
     self.monsterImage.image = user.monsterImage;
     self.playerName.text = user.name;
@@ -187,7 +187,7 @@
     
     
     
-    if ((currentHealthFromPickerView != [user.hp integerValue]) && !self.firstTimeThrough && !self.wasDisconnected) {
+    if ((currentHealthFromPickerView != [user.hp integerValue]) && !_firstTimeThrough && !_wasDisconnected) {
         
         NSLog(@"<3 <3 <3 animation is set to begin for %@", user.name);
         
@@ -197,7 +197,7 @@
         
     }
     
-    if ((currentVictoryFromPickerView != [user.vp integerValue]) && !self.firstTimeThrough && !self.wasDisconnected) {
+    if ((currentVictoryFromPickerView != [user.vp integerValue]) && !_firstTimeThrough && !_wasDisconnected) {
         
         NSLog(@"* * *  animation is set to begin for %@", user.name);
 
@@ -208,19 +208,40 @@
         
     }
     
-    if (!self.firstTimeThrough) {
+    if (!_firstTimeThrough) {
         
+        NSLog(@"%@is about to set their wasDisconnected property to NO because the _firstTimethrough property is set to NO.", _playerName.text);
         self.wasDisconnected = NO;
     }
     
     self.firstTimeThrough = NO;
     
-    NSString *thing = self.firstTimeThrough ? @"YES" : @"NO";
+    NSString *thing = _firstTimeThrough ? @"YES" : @"NO";
     NSLog(@"END updateScorecardWithInfoFromUser: for %@\n\n", user.name);
 
     
     
 }
+
+//- (BOOL)firstTimeThrough {
+//    
+//    NSLog(@"-------------------------");
+//    NSLog(@"%@ is about to SET the firstTimeThrough property", self.playerName.text);
+//    NSLog(@"-------------------------");
+//    
+//    return _firstTimeThrough;
+//}
+//
+//- (BOOL)wasDisconnected {
+//    
+//    NSLog(@"-------------------------");
+//    NSLog(@"%@ is about to SET the wasDisconnected property", self.playerName.text);
+//    NSLog(@"-------------------------");
+//
+//    return _wasDisconnected;
+//}
+
+
 
 - (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user {
     
