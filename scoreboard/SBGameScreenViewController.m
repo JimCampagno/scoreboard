@@ -51,6 +51,7 @@
 
 @property (nonatomic) NSInteger numberOfPlayers;
 @property (strong, nonatomic) NSMutableArray *userKeys;
+@property (nonatomic) BOOL comingBackFromDisconnect;
 
 - (IBAction)monsterImageTapped:(id)sender;
 
@@ -65,6 +66,7 @@
     self.didLoseConnectionToFireBase = NO;
     self.room = [[SBRoom alloc] init];
     self.userKeys = [NSMutableArray new];
+    self.comingBackFromDisconnect = NO;
     
     [self setupPickerViewsDelegateAndDataSource];
     [self setupMainPlayerScorecard];
@@ -108,7 +110,7 @@
                     
                     sc.firstTimeThrough = YES;
                 }
-
+                
                 
                 NSLog(@"DID LOSE CONNECTION TO FIREBASE");
                 
@@ -125,11 +127,17 @@
             
         } else {
             
-
+            
+            
+            self.comingBackFromDisconnect = YES;
+            
             for (Scorecard *sc in tmpself.playerScorecards) {
                 
                 sc.wasDisconnected = YES;
                 sc.firstTimeThrough = YES;
+                
+                
+                
                 NSLog(@"UPDATE: %@ is the new value for this scorecard: %@", @(sc.wasDisconnected), sc.playerName.text);
             }
             
@@ -137,7 +145,6 @@
             tmpself.didLoseConnectionToFireBase = YES;
             
             
-           
         }
     }];
 }
@@ -354,7 +361,96 @@
 
 - (void)setupScorecardWithUsersInfo {
     
+    NSString *unusedKey;
+    
+    if (_comingBackFromDisconnect) {
+        
+        NSLog(@"COMING BACK FROM DISCONNECT!!!!!!!!!!!!!!!!!!!!!!!");
+        
+        NSMutableArray *unusedKeys = [self.userKeys mutableCopy];
+        
+        for (NSString *key in self.userKeys) {
+            
+            for (SBUser *user in self.room.users) {
+                
+                if ([key isEqualToString:user.key]) {
+                    
+                    [unusedKeys removeObject:key];
+                    
+                    
+                }
+            }
+        }
+    
+        unusedKey = [unusedKeys firstObject];
+        
+        NSLog(@"UNUSED KEY IS %@", unusedKey);
+        
+        NSArray *sortedKeys = [self.userKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        
+        if ([sortedKeys isEqualToArray:self.userKeys]) {
+            
+            NSUInteger indexOfKey = [self.userKeys indexOfObject:unusedKey];
+            Scorecard *scorecard = self.playerScorecards[indexOfKey];
+            NSLog(@"--------------------------------------- DID THIS WORK FOR %@", scorecard.playerName.text);
+            
+            scorecard.wasDisconnected = NO;
+            
+            for (NSString *key in self.userKeys) {
+                
+                NSUInteger index = [self.userKeys indexOfObject:key];
+                Scorecard *sc = self.playerScorecards[index];
+                
+                if (sc.wasDisconnected && !sc.firstTimeThrough) { sc.wasDisconnected = NO; };
+            }
+            
+            
+            
+        } else {
+            
+            NSUInteger indexOfKey = [sortedKeys indexOfObject:unusedKey];
+            Scorecard *scorecard = self.playerScorecards[indexOfKey];
+            NSLog(@"--------------------------------------- DID THIS WORK FOR %@", scorecard.playerName.text);
+            scorecard.wasDisconnected = NO;
+            
+            
+            for (NSString *key in self.userKeys) {
+                
+                NSUInteger index = [sortedKeys indexOfObject:key];
+                Scorecard *sc = self.playerScorecards[index];
+                
+                if (sc.wasDisconnected && !sc.firstTimeThrough) { sc.wasDisconnected = NO; };
+            }
+            
+            
+            
+            
+        }
+        
+        
+        self.comingBackFromDisconnect = NO;
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     for (SBUser *user in self.room.users) {
+        
+        NSLog(@"===");
+        NSLog(@"Setup being called on %@, total number of users in room is %ld", user.name, self.room.users.count);
+        NSLog(@"===");
         
         if (![self.userKeys containsObject:user.key]) {
             
@@ -365,6 +461,9 @@
         NSArray *sortedKeys = [self.userKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         
         if ([sortedKeys isEqualToArray:self.userKeys]) {
+            
+            NSLog(@"Count of keys: %ld", self.userKeys.count);
+            
             
             NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];
             Scorecard *scorecard = self.playerScorecards[indexOfKey];
@@ -381,6 +480,11 @@
         }
         
     }
+    
+    
+    
+    
+    
     
     [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
