@@ -125,7 +125,7 @@
     
     [self.loadingGameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.initialLoad);
-        make.centerY.equalTo(self.initialLoad).multipliedBy(0.7);
+        make.centerY.equalTo(self.initialLoad);
     }];
     
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -273,7 +273,8 @@
 }
 
 - (void)displayNoConnectionView {
-    self.loadingGameLabel.text = @"reconnecting ❗️";
+    self.loadingGameLabel.text = @"reconnecting";
+    [self.loadingIndicator startAnimating];
     self.initialLoad.hidden = NO;
     self.view.userInteractionEnabled = NO;
     
