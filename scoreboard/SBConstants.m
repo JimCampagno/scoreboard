@@ -21,7 +21,7 @@ unsigned int const MAX_VALUE = 999999;
 }
 
 + (NSString *)randomMonsterName {
-    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
+    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF", @"ALIENOID", @"BOOGIE WOOGIE", @"CYBER BUNNY", @"GIGAZAUR", @"KRAKEN", @"MEKA DRAGON", @"PANDAKAI", @"PUMPKIN JACK", @"THE KING"];
     NSString *monster = monsterNames[arc4random_uniform((uint32_t)[monsterNames count])];
     return monster;
 }

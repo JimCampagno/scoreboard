@@ -41,7 +41,7 @@
                     <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Dq-2HO" userLabel="Monster Image">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Dq-2HO" userLabel="Monster Image">
                     <rect key="frame" x="0.0" y="50" width="217" height="223"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE" userLabel="MAIN - holding top/bottom PV">
@@ -146,7 +146,7 @@
         </view>
     </objects>
     <resources>
-        <image name="heart" width="256" height="256"/>
-        <image name="star" width="256" height="256"/>
+        <image name="heart" width="248" height="228"/>
+        <image name="star" width="244" height="233"/>
     </resources>
 </document>
