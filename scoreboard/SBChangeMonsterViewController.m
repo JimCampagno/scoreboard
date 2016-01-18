@@ -39,6 +39,8 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"VIEW DID LOAD IS CALLED!!!");
+    
     _sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil
                                                     ascending:YES
                                                      selector:@selector(localizedCaseInsensitiveCompare:)];
@@ -116,13 +118,12 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
     }
     
     cell.textLabel.text = monsterName;
-    cell.detailTextLabel.text = versionName;
+    //    cell.detailTextLabel.text = versionName;
+    
+    cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    //    cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+    
     cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", monsterName]];
-    
-    
-//    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    cell.imageView.clipsToBounds = YES;
-    
     
     return cell;
 }
@@ -139,6 +140,20 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
     return versionName;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *versionName = self.sortedVersionNames[indexPath.section];
+    NSArray *monstersInVersion = self.allVersions[versionName];
+    NSString *monsterName = monstersInVersion[indexPath.row];
+    [self.delegate userHasChangedToMonsterWithName:[monsterName copy]];
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+       
+        NSLog(@"dismissing");
+    }];
+    
+    
+    
+}
 
 #pragma mark - Setting up views
 

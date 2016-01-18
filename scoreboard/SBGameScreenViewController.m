@@ -291,11 +291,14 @@
 }
 
 - (void)userHasChangedToMonsterWithName:(NSString *)name {
-    NSDictionary *monsterNameChange = @{@"monster": name};
-    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", name]];
+    
+    NSString *nameToUse = [name copy];
+    
+    NSDictionary *monsterNameChange = @{@"monster": nameToUse};
+    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", nameToUse]];
     [self.monsterImage setImage:imageOfMonster forState:UIControlStateNormal];
     
-    self.monsterName.text = name;
+    self.monsterName.text = nameToUse;
     
     [self.currentPlayerRef updateChildValues:monsterNameChange
                          withCompletionBlock:^(NSError *error, Firebase *ref) {
@@ -601,6 +604,16 @@
 
 
 - (void)resetMethodHasBeenCalled {
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationWillResignActiveNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationWillEnterForegroundNotification
+                                                  object:nil];
+    
     [self.currentPlayerRef removeValue];
     [self.currentPlayerRef removeAllObservers];
     [self.ref removeAllObservers];
@@ -614,10 +627,10 @@
 #pragma mark - Prepare For Segue
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    SBChangeMonsterViewController *destVC = segue.destinationViewController;
+//    SBChangeMonsterViewController *destVC = segue.destinationViewController;
     
-    destVC.delegate = self;
-    destVC.roomID = [self.roomDigits copy];
+//    destVC.delegate = self;
+//    destVC.roomID = [self.roomDigits copy];
 }
 
 - (void)presentActionSheetForLeaveGame {
