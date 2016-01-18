@@ -116,7 +116,7 @@
     self.loadingGameLabel.text = @"assembling monsters...";
     [self.loadingGameLabel setFont:[UIFont systemFontOfSize:25]];
     self.loadingGameLabel.clipsToBounds = YES;
-    self.loadingGameLabel.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] ;
+    self.loadingGameLabel.textColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1];
     self.loadingGameLabel.numberOfLines = 1;
     self.loadingGameLabel.adjustsFontSizeToFitWidth = YES;
     self.loadingGameLabel.lineBreakMode = NSLineBreakByClipping;
@@ -154,19 +154,69 @@
 
 - (void)setupNavigationBar {
     self.navigationController.navigationBar.hidden = NO;
+    
+    NSUInteger size = 26;
+    UIFont *font = [UIFont systemFontOfSize:size];
+    NSDictionary *attributes = @{ NSFontAttributeName: font };
+    
     UIBarButtonItem *leaveGameBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<"
                                                                                style:UIBarButtonItemStylePlain
                                                                               target:self
                                                                               action:@selector(handleBack:)];
     self.navigationItem.leftBarButtonItem = leaveGameBarButtonItem;
     
-    NSUInteger size = 26;
-    UIFont *font = [UIFont systemFontOfSize:size];
-    NSDictionary *attributes = @{ NSFontAttributeName: font };
     [self.navigationItem.leftBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    self.navigationItem.title = [NSString stringWithFormat:@"%@", _roomDigits];
+    
+    // [NSString stringWithFormat:@"%@", _roomDigits]
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"#%@", _roomDigits]
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(handleBack:)];
+    
+//    NSDictionary *attributesForRightBar= @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
+    
+    NSDictionary *attributesOther = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
+    
+    self.navigationItem.rightBarButtonItem = rightBarItem;
+    
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:attributesOther forState:UIControlStateNormal];
+    
+    
+
+
+    self.navigationItem.title = @"King of Tokyo";
+    
     NSDictionary *attributesForTitleText = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
     self.navigationController.navigationBar.titleTextAttributes = attributesForTitleText;
+    
+    
+    
+    
+    
+    //self.tabBar.tintColor = [UIColor colorWithRed:0.06 green:0.73 blue:0.86 alpha:1];
+    
+    //    UIImage *image = [UIImage imageNamed:@"KOTLOGO"];
+    //    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    //    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    //    imageView.image = image;
+    //
+    //    self.navigationItem.titleView = imageView;
+    //    self.navigationItem.titleView.center = self.navigationController.navigationBar.center;
+    
+    // FAKIonIcons *logoutIcon = [FAKIonIcons logOutIconWithSize:25];
+    // UIImage *logoutImage = [logoutIcon imageWithSize:CGSizeMake(25, 25)];
+    //UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithImage:logoutImage style:UIBarButtonItemStylePlain target:self action:@selector(presentLogOutConfirmation)];
+    //    logOutButton.tintColor = [UIColor colorWithRed:0.06 green:0.73 blue:0.86 alpha:1];
+    // ^handled by [UINavigationBar appearance] in app delegate. pretty cool.
+    //[self.navigationItem setRightBarButtonItem:logOutButton];
+    
+    //    UIBarButtonItem *fakeButton = [[UIBarButtonItem alloc] initWithImage:logoutImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    //    fakeButton.tintColor = [UIColor clearColor];
+    //    [self.navigationItem setLeftBarButtonItem:fakeButton];
+    
+    
+    
+    
 }
 
 - (void)observeCertainNotifications {
@@ -239,7 +289,7 @@
             [tmpself setupCurrentPlayerReferenceToFirebase];
             
         } else {
-        
+            
             self.comingBackFromDisconnect = YES;
             
             for (Scorecard *sc in tmpself.playerScorecards) {
@@ -314,7 +364,7 @@
 - (void)setupCurrentPlayerReferenceToFirebase {
     
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
-
+    
 }
 
 - (IBAction)monsterImageTapped:(id)sender {
@@ -355,7 +405,7 @@
              BOOL numberOfPlayersChanged = [tmpself.room.users count] != snapshot.childrenCount ? YES : NO;
              
              if (numberOfPlayersChanged) {
-                
+                 
                  tmpself.room = [SBRoom createRoomWithData:snapshot];
                  [tmpself setupScorecardWithUsersInfo];
                  
@@ -364,7 +414,7 @@
                  SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
                  [tmpself updateScoresWithRoom:changedRoom];
              }
-        
+             
          } withCancelBlock:^(NSError *error) {
              
              NSLog(@"ERROR: %@", error.description);
@@ -407,7 +457,7 @@
 - (void)setupScorecardWithUsersInfo {
     
     if (_comingBackFromDisconnect) {
-    
+        
         self.comingBackFromDisconnect = NO;
         
     }
@@ -441,7 +491,7 @@
     }
     
     [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
+    
     if (self.numberOfPlayers == self.room.users.count) {
         Scorecard *sc = self.playerScorecards[self.room.users.count - 1];
         sc.hidden = YES;
@@ -629,8 +679,8 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     SBChangeMonsterViewController *destVC = segue.destinationViewController;
     
+    destVC.roomID = [self.roomDigits copy];
     destVC.delegate = self;
-//    destVC.roomID = [self.roomDigits copy];
 }
 
 - (void)presentActionSheetForLeaveGame {

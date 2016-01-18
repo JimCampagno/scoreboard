@@ -308,7 +308,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-gP-ZxZ" userLabel="Right Container View">
                                 <rect key="frame" x="211" y="302" width="195" height="426"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fhv-nM-dLd" userLabel="player4" customClass="Scorecard">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fhv-nM-dLd" userLabel="player4" customClass="Scorecard">
                                         <rect key="frame" x="0.0" y="145" width="195" height="136"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -343,7 +343,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="195" height="137"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-oW-eVT" userLabel="player3" customClass="Scorecard">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6w-oW-eVT" userLabel="player3" customClass="Scorecard">
                                         <rect key="frame" x="0.0" y="145" width="195" height="136"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>

@@ -78,6 +78,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.invisibleDigits.delegate = self;
     self.isInJoinScreenMode = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.8 green:0.82 blue:0.91 alpha:1];
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -697,9 +699,14 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     destVC.randomMonsterName = [self.currentUser.monster copy];
     destVC.currentPlayerName = [self.currentUser.name copy];
     
+    
+
+
+    
     [self.firebaseRef removeAllObservers];
     
 }
+
 
 
 

@@ -39,8 +39,6 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"VIEW DID LOAD IS CALLED!!!");
-    
     _sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil
                                                     ascending:YES
                                                      selector:@selector(localizedCaseInsensitiveCompare:)];
