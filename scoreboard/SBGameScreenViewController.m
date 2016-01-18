@@ -81,140 +81,19 @@
     [self observeCertainNotifications];
 }
 
-- (void)observeCertainNotifications {
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(aboutToLeaveTheScreen)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(aboutToEnterView)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-}
-
-- (void)aboutToLeaveTheScreen {
-    
-    for (Scorecard *sc in self.playerScorecards) {
-        sc.itGotDoneDisconnected = YES;
-    }
-    
-}
-
-- (void)setDisconnectPropertyForAllScorecardsToNo {
-    
-    
-    //if some property is still set to NO as in this didn't get set to YES below - delay it some more?? animations don't appear to do the thing or maybe trying to animate it really fast is bad?? when coming back
-    NSLog(@"============================================ SET DISCONNECT CALLED ===================================\n\n");
-    
-    for (Scorecard *sc in self.playerScorecards) {
-        sc.itGotDoneDisconnected = NO;
+    if ([self isBeingPresented] || [self isMovingToParentViewController]) {
         
-        if (sc.firstTimeThrough) {
-            
-            sc.firstTimeThrough = NO;
+        [self performSelector:@selector(doMagic) withObject:self afterDelay:4.2];
+        
+        for (Scorecard *sc in self.playerScorecards) {
+            [sc createHeartAndStarViews];
         }
+        
+        self.view.userInteractionEnabled = YES;
     }
-    
-}
-
-- (void)aboutToEnterView {
-    
-    [self performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo)
-               withObject:nil
-               afterDelay:2.0];
-    
-}
-
-
-- (void)setupNavigationBar {
-    self.navigationController.navigationBar.hidden = NO;
-    UIBarButtonItem *leaveGameBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<"
-                                                                               style:UIBarButtonItemStylePlain
-                                                                              target:self
-                                                                              action:@selector(handleBack:)];
-    self.navigationItem.leftBarButtonItem = leaveGameBarButtonItem;
-    
-    NSUInteger size = 26;
-    UIFont *font = [UIFont systemFontOfSize:size];
-    NSDictionary *attributes = @{ NSFontAttributeName: font };
-    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    self.navigationItem.title = [NSString stringWithFormat:@"%@", _roomDigits];
-    NSDictionary *attributesForTitleText = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
-    self.navigationController.navigationBar.titleTextAttributes = attributesForTitleText;
-}
-
-- (void)doTheThing {
-    
-    NSLog(@"BEGIN doTheThing");
-    
-    __weak typeof(self) tmpself = self;
-    
-    
-    self.connectedRef = [[Firebase alloc] initWithUrl:@"https://boiling-heat-4798.firebaseio.com/.info/connected"];
-    
-    [self.connectedRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        if([snapshot.value boolValue]) {
-            
-            NSString *boolThing = [snapshot.value boolValue] ? @"YES" : @"NO";
-            NSLog(@"if statement - [snapshot.value boolValue] is %@", boolThing);
-            
-            
-            if (tmpself.didLoseConnectionToFireBase) {
-                
-                
-                NSString *boolThing = tmpself.didLoseConnectionToFireBase ? @"YES" : @"NO";
-                NSLog(@"if statement - if self.didLoseConnectionToFireBase is %@", boolThing);
-                
-                
-                for (Scorecard *sc in tmpself.playerScorecards) {
-                    
-                    sc.firstTimeThrough = YES;
-                }
-                
-                NSLog(@"if statement - just looped through the scorecards and set their firstTimeThrough and itGotDoneDisconnected property to yes.");
-                
-                [tmpself performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo) withObject:nil afterDelay:2.0];
-                
-                
-                [tmpself doMagic];
-                tmpself.view.userInteractionEnabled = YES;
-            }
-            
-            
-            
-            [tmpself setupListenerToEntireRoomOnFirebase];
-            [tmpself setupCurrentPlayerReferenceToFirebase];
-            
-        } else {
-            
-            NSString *boolThing = tmpself.didLoseConnectionToFireBase ? @"YES" : @"NO";
-            NSLog(@"if statement - in the else when self.didLoseConectionToFireBase is %@", boolThing);
-            
-            
-            self.comingBackFromDisconnect = YES;
-            
-            for (Scorecard *sc in tmpself.playerScorecards) {
-                
-                sc.wasDisconnected = YES;
-                sc.firstTimeThrough = YES;
-                
-                sc.itGotDoneDisconnected = YES;
-                
-                
-                
-            }
-            
-            [tmpself displayNoConnectionView];
-            tmpself.didLoseConnectionToFireBase = YES;
-            
-            
-        }
-    }];
-    
-    NSLog(@"END doTheThing\n\n");
-    
 }
 
 - (void)displayInitialLoad {
@@ -262,34 +141,124 @@
     [self.loadingIndicator startAnimating];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)setupMainPlayerScorecard {
+    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.currentPlayer.monster]];
+    [self.monsterImage setImage:imageOfMonster forState:UIControlStateNormal];
+    [self.monsterImage.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
-    if ([self isBeingPresented] || [self isMovingToParentViewController]) {
-        
-        [self performSelector:@selector(doMagic) withObject:self afterDelay:4.2];
-        
-        for (Scorecard *sc in self.playerScorecards) {
-            [sc createHeartAndStarViews];
-        }
-        
-        self.view.userInteractionEnabled = YES;
+    self.monsterName.text = self.currentPlayer.monster;
+    self.playerName.text = self.currentPlayer.name;
+    [self.healthPoints selectRow:[self.currentPlayer.hp integerValue] inComponent:0 animated:YES];
+    [self.victoryPoints selectRow:[self.currentPlayer.vp integerValue] inComponent:0 animated:YES];
+}
+
+- (void)setupNavigationBar {
+    self.navigationController.navigationBar.hidden = NO;
+    UIBarButtonItem *leaveGameBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<"
+                                                                               style:UIBarButtonItemStylePlain
+                                                                              target:self
+                                                                              action:@selector(handleBack:)];
+    self.navigationItem.leftBarButtonItem = leaveGameBarButtonItem;
+    
+    NSUInteger size = 26;
+    UIFont *font = [UIFont systemFontOfSize:size];
+    NSDictionary *attributes = @{ NSFontAttributeName: font };
+    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@", _roomDigits];
+    NSDictionary *attributesForTitleText = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
+    self.navigationController.navigationBar.titleTextAttributes = attributesForTitleText;
+}
+
+- (void)observeCertainNotifications {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(aboutToLeaveTheScreen)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(aboutToEnterView)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+}
+
+- (void)aboutToLeaveTheScreen {
+    
+    for (Scorecard *sc in self.playerScorecards) {
+        sc.itGotDoneDisconnected = YES;
     }
-    
-    NSLog(@"++++++++++++ viewDidAppear: has been called");
-    
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)aboutToEnterView {
     
-    [super viewWillDisappear:animated];
-    NSLog(@"\n\n\nTHE VIEW WILL DISAPPEAR MY BRO!!!");
+    [self performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo)
+               withObject:nil
+               afterDelay:2.0];
+    
+}
+
+- (void)setDisconnectPropertyForAllScorecardsToNo {
+    
+    for (Scorecard *sc in self.playerScorecards) {
+        
+        if (sc.itGotDoneDisconnected) {
+            sc.itGotDoneDisconnected = NO;
+        }
+        
+        if (sc.firstTimeThrough) {
+            sc.firstTimeThrough = NO;
+        }
+        
+    }
+    
+}
+
+- (void)doTheThing {
+    
+    __weak typeof(self) tmpself = self;
+    
+    self.connectedRef = [[Firebase alloc] initWithUrl:@"https://boiling-heat-4798.firebaseio.com/.info/connected"];
+    
+    [self.connectedRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        
+        if([snapshot.value boolValue]) {
+            
+            if (tmpself.didLoseConnectionToFireBase) {
+                
+                for (Scorecard *sc in tmpself.playerScorecards) {
+                    sc.firstTimeThrough = YES;
+                }
+                
+                [tmpself performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo) withObject:nil afterDelay:2.0];
+                [tmpself doMagic];
+                tmpself.view.userInteractionEnabled = YES;
+            }
+            
+            [tmpself setupListenerToEntireRoomOnFirebase];
+            [tmpself setupCurrentPlayerReferenceToFirebase];
+            
+        } else {
+        
+            self.comingBackFromDisconnect = YES;
+            
+            for (Scorecard *sc in tmpself.playerScorecards) {
+                
+                if (!sc.itGotDoneDisconnected) {
+                    sc.itGotDoneDisconnected = YES;
+                }
+                
+            }
+            
+            [tmpself displayNoConnectionView];
+            tmpself.didLoseConnectionToFireBase = YES;
+        }
+        
+    }];
+    
 }
 
 - (void)doMagic {
-    
-    NSLog(@"BEGIN doMagic called.");
     
     [UIView animateWithDuration:0.5
                      animations:^{
@@ -301,12 +270,10 @@
                          [self.loadingIndicator stopAnimating];
                          self.initialLoad.hidden = YES;
                      }];
-    
-    NSLog(@"END doMagic.\n\n");
 }
 
 - (void)displayNoConnectionView {
-    self.loadingGameLabel.text = @"no internet connection 🚧";
+    self.loadingGameLabel.text = @"reconnecting ❗️";
     self.initialLoad.hidden = NO;
     self.view.userInteractionEnabled = NO;
     
@@ -343,8 +310,7 @@
 - (void)setupCurrentPlayerReferenceToFirebase {
     
     self.currentPlayerRef = [[self.ref childByAppendingPath: self.roomDigits] childByAppendingPath:self.IDOfCurrentPlayer];
-    
-    // [self.currentPlayerRef onDisconnectRemoveValue];
+
 }
 
 - (IBAction)monsterImageTapped:(id)sender {
@@ -352,25 +318,13 @@
     [self performSegueWithIdentifier:@"changeMonster" sender:nil];
 }
 
-- (void)setupMainPlayerScorecard {
-    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.currentPlayer.monster]];
-    [self.monsterImage setImage:imageOfMonster forState:UIControlStateNormal];
-    [self.monsterImage.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    
-    self.monsterName.text = self.currentPlayer.monster;
-    self.playerName.text = self.currentPlayer.name;
-    [self.healthPoints selectRow:[self.currentPlayer.hp integerValue] inComponent:0 animated:YES];
-    [self.victoryPoints selectRow:[self.currentPlayer.vp integerValue] inComponent:0 animated:YES];
-}
+
 
 - (void)setupListenerToEntireRoomOnFirebase {
+    
     __weak typeof(self) tmpself = self;
     
-    NSLog(@"BEGIN setupListenerToEntireRoomOnFirebase");
-    
     if (_didLoseConnectionToFireBase) {
-        
-        NSLog(@"if statement - self.didLoseConnectionToFireBase is %@", @(self.didLoseConnectionToFireBase));
         
         [[tmpself.ref childByAppendingPath:tmpself.roomDigits] runTransactionBlock:^FTransactionResult *(FMutableData *currentData) {
             if ([currentData hasChildren]) {
@@ -397,36 +351,24 @@
              BOOL numberOfPlayersChanged = [tmpself.room.users count] != snapshot.childrenCount ? YES : NO;
              
              if (numberOfPlayersChanged) {
-                 
-                 NSLog(@"if statement - numberOfPlayers Changed");
-                 NSLog(@"SETUP scorecardWithUsersInfo");
-                 
+                
                  tmpself.room = [SBRoom createRoomWithData:snapshot];
                  [tmpself setupScorecardWithUsersInfo];
                  
              } else {
-                 NSLog(@"if statement - numberOfPlayers did not change");
-                 NSLog(@"UPDATE scorecardWithUsersInfo");
                  
                  SBRoom *changedRoom = [SBRoom createRoomWithData:snapshot];
                  [tmpself updateScoresWithRoom:changedRoom];
              }
-             
-             
+        
          } withCancelBlock:^(NSError *error) {
-             //Still should do something here.
+             
              NSLog(@"ERROR: %@", error.description);
+             
          }];
-        
-        
-        
-        
-        
     }
     
-    
 }
-
 
 - (void)updateScoresWithRoom:(SBRoom *)room {
     
@@ -444,14 +386,11 @@
             if ([sortedKeys isEqualToArray:self.userKeys]) {
                 
                 NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];
-                
                 [self.playerScorecards[indexOfKey] updateScorecardWithInfoFromUser:user];
                 
             } else {
                 
                 NSUInteger indexOfKey = [sortedKeys indexOfObject:user.key];
-                
-                
                 [self.playerScorecards[indexOfKey] updateScorecardWithNoAnimationFromUser:user];
                 
             }
@@ -459,153 +398,17 @@
     }
     
     [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    
-    
-    
-    
-    
-    
-    
-    for (Scorecard *card in self.playerScorecards) {
-        
-        if ([card.playerName.text.lowercaseString isEqualToString:@"player name"]) {
-            
-            continue;
-        }
-        
-        NSLog(@"*****************************************************");
-        
-        NSLog(@"BEFORE CHANGE: %@ - firstTimeThrough: %@ - wasDisconnected: %@", card.playerName.text.capitalizedString, @(card.firstTimeThrough), @(card.wasDisconnected));
-        
-        
-        if (!_viewResignedActive) {
-            
-            NSLog(@"%@ will set wasDisconnected to NO", card.playerName.text.uppercaseString);
-            
-            card.wasDisconnected = NO;
-        }
-        
-        
-        
-        
-        
-        
-        
-        NSLog(@"AFTER CHANGE: %@ - firstTimeThrough: %@ - wasDisconnected: %@", card.playerName.text.capitalizedString, @(card.firstTimeThrough), @(card.wasDisconnected));
-        
-        NSLog(@"*****************************************************\n\n");
-        
-    }
-    
-    self.viewResignedActive = NO;
-    
-    
-    
-    
 }
 
 - (void)setupScorecardWithUsersInfo {
     
-    NSString *unusedKey;
-    
     if (_comingBackFromDisconnect) {
-        
-        NSMutableArray *unusedKeys = [self.userKeys mutableCopy];
-        
-        for (NSString *key in self.userKeys) {
-            
-            for (SBUser *user in self.room.users) {
-                
-                if ([key isEqualToString:user.key]) {
-                    
-                    [unusedKeys removeObject:key];
-                    
-                    
-                }
-            }
-        }
-        
-        unusedKey = [unusedKeys firstObject];
-        
-        
-        NSArray *sortedKeys = [self.userKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        
-        if ([sortedKeys isEqualToArray:self.userKeys]) {
-            
-            NSUInteger indexOfKey = [self.userKeys indexOfObject:unusedKey];
-            // Scorecard *scorecard = self.playerScorecards[indexOfKey];
-            
-          //fsdf  NSLog(@"%@ is about to set the wasDisconnected to NO in the if sortedKeysEqualArray", scorecard.playerName.text.capitalizedString);
-            
-            // scorecard.wasDisconnected = NO;
-            
-            for (NSString *key in self.userKeys) {
-                
-                NSUInteger index = [self.userKeys indexOfObject:key];
-                Scorecard *sc = self.playerScorecards[index];
-                
-                NSLog(@"if statement about to happen with wasDisconnected/firsTThrimgGhrough");
-                
-                if (sc.wasDisconnected && !sc.firstTimeThrough) {
-                    
-                    NSLog(@"%@ is about to set the wasDisconnected Property in this weird if statement.", sc.playerName.text.capitalizedString);
-                    sc.wasDisconnected = NO;
-                };
-            }
-            
-            
-            
-        } else {
-            
-            NSUInteger indexOfKey = [sortedKeys indexOfObject:unusedKey];
-            Scorecard *scorecard = self.playerScorecards[indexOfKey];
-            
-            NSLog(@"%@ is about to set the wasDisconnected to NO in the ELSE of the if sortedkeysequalarray", scorecard.playerName.text.capitalizedString);
-            
-            scorecard.wasDisconnected = NO;
-            
-            
-            for (NSString *key in self.userKeys) {
-                
-                NSUInteger index = [sortedKeys indexOfObject:key];
-                Scorecard *sc = self.playerScorecards[index];
-                
-                NSLog(@"if statement about to happen with wasDisconnected and firstTimeThrough");
-                
-                if (sc.wasDisconnected && !sc.firstTimeThrough) {
-                    
-                    NSLog(@"%@ is about to set the wasDisconnected Property in this weird if statement.", sc.playerName.text.capitalizedString);
-                    
-                    sc.wasDisconnected = NO;
-                };
-            }
-            
-            
-            
-            
-        }
-        
-        
+    
         self.comingBackFromDisconnect = NO;
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     for (SBUser *user in self.room.users) {
-        
         
         if (![self.userKeys containsObject:user.key]) {
             
@@ -616,8 +419,6 @@
         NSArray *sortedKeys = [self.userKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         
         if ([sortedKeys isEqualToArray:self.userKeys]) {
-            
-            
             
             NSUInteger indexOfKey = [self.userKeys indexOfObject:user.key];
             Scorecard *scorecard = self.playerScorecards[indexOfKey];
@@ -635,22 +436,12 @@
         
     }
     
-    
-    
-    
-    
-    
     [self.userKeys sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    
-    
-    
-    //TODO: Should I remove this?  I feel like I don't need it.
+
     if (self.numberOfPlayers == self.room.users.count) {
-        
         Scorecard *sc = self.playerScorecards[self.room.users.count - 1];
         sc.hidden = YES;
     }
-    
     
     self.numberOfPlayers = self.room.users.count;
     
@@ -660,7 +451,6 @@
 }
 
 - (void)removeUnusedKey {
-    
     //TODO: This is ugly, clean this up.  THIS IS ONLY removing key if count were to exceed 6 (maybe change this to somehow KNOWING when a user actually exits the game by tapping the back button to exit the game by selecting YES or by closing the app with a swipe (where the view would die).  If this is the case then this is when you would remove the key.  How though would firebase be able to distinguish between the two.  If on disconnect through a certain method (possible?) store some value (bool/string) on firebase letting firebase know that HEY this user is just disconnected but this view is still alive (maybe they are idle for too long or lost internet connection) which would keep the key in this array.
     
     if (self.userKeys.count + 1 == 7) {
