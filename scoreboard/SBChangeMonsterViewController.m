@@ -12,7 +12,9 @@
 
 @interface SBChangeMonsterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UIView *changeMonsterView;
-@property (strong, nonatomic) NSArray *monsterNames;
+@property (strong, nonatomic) NSDictionary *allVersions;
+@property (strong, nonatomic) NSSortDescriptor *sortDescriptor;
+@property (strong, nonatomic) NSArray *sortedVersionNames;
 @property (strong, nonatomic) UIButton *monsterOne;
 @property (strong, nonatomic) UIButton *monsterTwo;
 @property (strong, nonatomic) UIButton *monsterThree;
@@ -36,9 +38,17 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil
+                                                    ascending:YES
+                                                     selector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    _sortedVersionNames = [self.allVersions.allKeys sortedArrayUsingDescriptors:@[_sortDescriptor]];
+    
+    
+    
     [self setupBlurredViewToContainMonsters];
     [self setupLabel];
-    
     [self setupMonsterChoosingTableView];
 }
 
@@ -62,12 +72,12 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
-
+    
     [_tableView registerClass:[UITableViewCell class]
        forCellReuseIdentifier:kCellIdentifier];
     
     [_changeMonsterView addSubview:_tableView];
-
+    
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.bottom.left.and.right.equalTo(_changeMonsterView);
@@ -78,7 +88,11 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    
+    NSString *nameOfSection = self.sortedVersionNames[section];
+    NSArray *monstersInSection = self.allVersions[nameOfSection];
+    return monstersInSection.count;
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -86,6 +100,10 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *versionName = self.sortedVersionNames[indexPath.section];
+    NSArray *monstersInVersion = self.allVersions[versionName];
+    NSString *monsterName = monstersInVersion[indexPath.row];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     
@@ -97,31 +115,35 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
         cell.detailTextLabel.textColor = [UIColor blackColor];
     }
     
-//    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", self.currentPlayer.monster]];
-
+    cell.textLabel.text = monsterName;
+    cell.detailTextLabel.text = versionName;
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", monsterName]];
     
-    cell.textLabel.text = @"Jim Campagno";
-    cell.detailTextLabel.text = @"Flatiron School";
-    cell.imageView.image = [UIImage imageNamed:@"DRAKONIS_384"];
+    
+//    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    cell.imageView.clipsToBounds = YES;
+    
     
     return cell;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 4;
+    return self.allVersions.allKeys.count;
+    
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    return @"Human";
+    NSString *versionName = self.sortedVersionNames[section];
+    return versionName;
 }
 
 
 #pragma mark - Setting up views
 
 - (void)setupBlurredViewToContainMonsters {
-//    self.view.backgroundColor = [UIColor colorWithRed:0.26 green:0.43 blue:0.56 alpha:0.9];
+    //    self.view.backgroundColor = [UIColor colorWithRed:0.26 green:0.43 blue:0.56 alpha:0.9];
     self.view.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8];
     self.changeMonsterView = [[UIView alloc] init];
     self.changeMonsterView.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
@@ -143,7 +165,7 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 //- (void)setupMonsterButtons {
 //    NSInteger numberOfAvailableMonsters = [self.monsterNames count];
 //    for (NSInteger i = 0; i < numberOfAvailableMonsters; ++i) {
-//        
+//
 //        switch (i) {
 //            case 0:
 //                self.monsterOne = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
@@ -239,7 +261,7 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 
 //- (UIButton *)createMonsterButtonWithMonsterName:(NSString *)monsterName {
 //    UIButton *monsterButton = [UIButton buttonWithType:UIButtonTypeSystem];
-//    
+//
 //    [monsterButton addTarget:self
 //                      action:@selector(monsterTapped:)
 //            forControlEvents:UIControlEventTouchUpInside];
@@ -248,7 +270,7 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 //                   forState:UIControlStateNormal];
 //    [monsterButton setTitleColor:[UIColor clearColor]
 //                        forState:UIControlStateNormal];
-//    
+//
 //    UIImage *robMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", monsterName]];
 //    [monsterButton setBackgroundImage:robMonster
 //                             forState:UIControlStateNormal];
@@ -290,9 +312,6 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 //    }];
 //}
 
-
-
-
 #pragma mark - Action Methods
 
 - (void)leaveGame {
@@ -314,11 +333,23 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 
 #pragma mark - Lazy Insatiation
 
-- (NSArray *)monsterNames {
-    if (!_monsterNames) {
-        _monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
+- (NSDictionary *)allVersions {
+    
+    if (!_allVersions) {
+        
+        NSArray *kingOfTokyo = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
+        NSArray *kingOfNewYork = @[@"ALIENOID", @"CYBER BUNNY", @"GIGAZAUR", @"KRAKEN", @"MEKA DRAGON", @"THE KING"];
+        NSArray *kingOfTokyoHalloween = @[@"BOOGIE WOOGIE", @"PUMPKIN JACK"];
+        NSArray *kingOfTokyoPowerUp = @[@"PANDAKAI"];
+        
+        _allVersions = @{ @"King of Tokyo": kingOfTokyo,
+                          @"King of New York": kingOfNewYork,
+                          @"King of Tokyo: Halloween": kingOfTokyoHalloween,
+                          @"King of Tokyo: Power Up!": kingOfTokyoPowerUp };
+        
     }
-    return _monsterNames;
+    
+    return _allVersions;
 }
 
 

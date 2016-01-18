@@ -445,8 +445,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" width="256" height="256"/>
-        <image name="star" width="256" height="256"/>
+        <image name="heart" width="248" height="228"/>
+        <image name="star" width="244" height="233"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dmd-Sd-Ep2"/>
