@@ -104,10 +104,17 @@
 
 - (void)setDisconnectPropertyForAllScorecardsToNo {
     
+    
+    //if some property is still set to NO as in this didn't get set to YES below - delay it some more?? animations don't appear to do the thing or maybe trying to animate it really fast is bad?? when coming back
     NSLog(@"============================================ SET DISCONNECT CALLED ===================================\n\n");
     
     for (Scorecard *sc in self.playerScorecards) {
         sc.itGotDoneDisconnected = NO;
+        
+        if (sc.firstTimeThrough) {
+            
+            sc.firstTimeThrough = NO;
+        }
     }
     
 }
@@ -116,7 +123,7 @@
     
     [self performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo)
                withObject:nil
-               afterDelay:1.5];
+               afterDelay:2.0];
     
 }
 
@@ -168,7 +175,7 @@
                 
                 NSLog(@"if statement - just looped through the scorecards and set their firstTimeThrough and itGotDoneDisconnected property to yes.");
                 
-                [tmpself performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo) withObject:nil afterDelay:1.5];
+                [tmpself performSelector:@selector(setDisconnectPropertyForAllScorecardsToNo) withObject:nil afterDelay:2.0];
                 
                 
                 [tmpself doMagic];
