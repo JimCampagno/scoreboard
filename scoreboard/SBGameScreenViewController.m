@@ -627,9 +627,9 @@
 #pragma mark - Prepare For Segue
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    SBChangeMonsterViewController *destVC = segue.destinationViewController;
+    SBChangeMonsterViewController *destVC = segue.destinationViewController;
     
-//    destVC.delegate = self;
+    destVC.delegate = self;
 //    destVC.roomID = [self.roomDigits copy];
 }
 
