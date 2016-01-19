@@ -41,6 +41,11 @@
 
 @property (nonatomic, strong) UIView *viewToHandleDismissalOfKeyboardOnTap;
 
+@property (nonatomic, strong) UILabel *instructions;
+
+@property (nonatomic, strong) UIButton *info;
+
+@property (nonatomic) BOOL instructionOnScreen;
 
 - (IBAction)cancel:(id)sender;
 @end
@@ -60,6 +65,9 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     [self setupTheDisplayJoinGameDigits];
     [self setupTheConnectAndCancelButtons];
     [self setUpActivityViews];
+    [self setupInstructions];
+    
+    _instructionOnScreen = NO;
     
     
     self.navigationController.navigationBar.hidden = YES;
@@ -88,6 +96,124 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.navigationController.navigationBar.hidden = YES;
     [Firebase goOnline];
     
+    
+}
+
+- (void)instructionTapped {
+    
+    
+    self.info.userInteractionEnabled = NO;
+    
+    if (!self.instructionOnScreen) {
+        
+        [UIView animateWithDuration:0.7
+                         animations:^{
+                             
+                             self.instructions.alpha = 1.0;
+                             
+                         } completion:^(BOOL finished) {
+                             
+                             self.info.userInteractionEnabled = YES;
+                             self.instructionOnScreen = YES;
+                             
+                         }];
+    } else {
+        
+        [UIView animateWithDuration:0.7
+                         animations:^{
+                             
+                             self.instructions.alpha = 0.0;
+                             
+                         } completion:^(BOOL finished) {
+                             
+                             self.info.userInteractionEnabled = YES;
+                             self.instructionOnScreen = NO;
+                             
+                         }];
+        
+        
+    }
+    
+  
+    
+}
+
+- (void)setupInstructions {
+    
+    self.instructions = [UILabel new];
+    self.instructions.textAlignment = NSTextAlignmentLeft;
+    self.instructions.text = @"  🙋🏼\n• one person creates a new game, then provides the game number\n\n• all others join that game\n\n• change monsters by tapping your monster image\n\n• you can't change your name in game\n\n• board game required";
+    [self.instructions setFont:[UIFont systemFontOfSize:18]];
+    //    monsterLabel.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    
+    //    monsterLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    //    monsterLabel.layer.borderWidth = 0.6f;
+    //    monsterLabel.layer.cornerRadius = 10.0f;
+    self.instructions.clipsToBounds = YES;
+    self.instructions.textColor = [UIColor blackColor] ;
+    
+    self.instructions.numberOfLines = 15;
+    self.instructions.adjustsFontSizeToFitWidth = YES;
+    self.instructions.lineBreakMode = NSLineBreakByClipping;
+    
+    [self.view addSubview:self.instructions];
+    
+    [self.instructions mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.joinGameProp);
+        make.right.equalTo(self.joinGameProp);
+        make.top.equalTo(self.joinGameProp.mas_bottom).with.offset(20);
+        
+    }];
+    
+    
+    self.instructions.alpha = 0.0;
+    
+    self.info = [UIButton buttonWithType:UIButtonTypeSystem];
+    
+    
+    [self.info addTarget:self
+                  action:@selector(instructionTapped)
+        forControlEvents:UIControlEventTouchUpInside];
+    
+    //    newButton.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
+    // newButton.layer.borderColor = [UIColor blackColor].CGColor;
+    //  newButton.layer.borderWidth = 0.6f;
+    // newButton.layer.cornerRadius = 10.0f;
+    
+    self.info.titleLabel.font = [UIFont systemFontOfSize:24.0];
+    [self.info setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    
+    [self.info setTitle:@"ⓘ"
+               forState:UIControlStateNormal];
+    
+    self.info.titleLabel.numberOfLines = 1;
+    self.info.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.info.titleLabel.lineBreakMode = NSLineBreakByClipping;
+    
+    [self.view addSubview:self.info];
+    
+    
+    [self.info mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(self.view).with.offset(-20);
+        make.right.equalTo(self.view).with.offset(-20);
+        make.width.equalTo(@40);
+        make.height.equalTo(@40);
+    }];
+    
+    
+    
+    
+    
+    //
+    //
+    //
+    //
+    //    UILabel *enterRoomDigitsLabel = [UILabel new];
+    //    enterRoomDigitsLabel.text = @"tap your monster image to change ";
+    //    enterRoomDigitsLabel.font = [UIFont systemFontOfSize:20];
+    //    enterRoomDigitsLabel.adjustsFontSizeToFitWidth = YES;
+    //    enterRoomDigitsLabel.textColor = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
     
 }
 
@@ -185,7 +311,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
     
     UILabel *enterRoomDigitsLabel = [UILabel new];
-    enterRoomDigitsLabel.text = @"Enter Room Digits";
+    enterRoomDigitsLabel.text = @"Enter game number:";
     enterRoomDigitsLabel.font = [UIFont systemFontOfSize:20];
     enterRoomDigitsLabel.adjustsFontSizeToFitWidth = YES;
     enterRoomDigitsLabel.textColor = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
@@ -376,6 +502,21 @@ static const NSInteger kMaxNumberOfPlayers = 6;
         [self displayNoNetworkAlert];
     } else {
         
+        if (self.instructionOnScreen) {
+            
+            [UIView animateWithDuration:0.2
+                             animations:^{
+                                 
+                                 self.instructions.alpha = 0.0;
+                                 
+                             } completion:^(BOOL finished) {
+                                 
+                                 self.instructionOnScreen = NO;
+                                 
+                             }];
+        }
+        
+        
         [self.createGameActivityView startAnimating];
         self.joinGameProp.userInteractionEnabled = NO;
         self.createGameProp.userInteractionEnabled = NO;
@@ -456,6 +597,21 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     if ([self.enterName isFirstResponder]) {
         [self.enterName resignFirstResponder];
     }
+    
+    if (self.instructionOnScreen) {
+        
+        [UIView animateWithDuration:0.2
+                         animations:^{
+                             
+                             self.instructions.alpha = 0.0;
+                             
+                         } completion:^(BOOL finished) {
+                             
+                             self.instructionOnScreen = NO;
+                             
+                         }];
+    }
+
     
     self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = NO;
     self.enterName.userInteractionEnabled = NO;
@@ -700,8 +856,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     destVC.currentPlayerName = [self.currentUser.name copy];
     
     
-
-
+    
+    
     
     [self.firebaseRef removeAllObservers];
     
