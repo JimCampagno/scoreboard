@@ -130,7 +130,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
     self.instructions = [UILabel new];
     self.instructions.textAlignment = NSTextAlignmentLeft;
-    self.instructions.text = @"\n• one person creates a new game, then provides the game number\n• all others join that game\n• change monsters by tapping your monster image\n• you can't change your name in game\n• board game required";
+    self.instructions.text = @"• one person creates a new game, then provides the game number\n• all others join that game\n• change monsters by tapping your monster image\n• you can't change your name in game\n• board game required";
 //    [self.instructions setFont:[UIFont systemFontOfSize:18]];
     [self.instructions setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
     //    monsterLabel.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
@@ -150,7 +150,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     [self.instructions mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.joinGameProp);
         make.right.equalTo(self.joinGameProp);
-        make.top.equalTo(self.joinGameProp.mas_bottom).with.offset(20);
+        make.top.equalTo(self.joinGameProp.mas_bottom).with.offset(24);
         
     }];
     
