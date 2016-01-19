@@ -78,10 +78,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.35 green:0.38 blue:0.46 alpha:1];
     
-    
-    
-    
-    
     self.firebaseRef = [[Firebase alloc] initWithUrl: FIREBASE_URL];
     self.invisibleDigits.delegate = self;
     self.isInJoinScreenMode = NO;
@@ -95,12 +91,9 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
     self.navigationController.navigationBar.hidden = YES;
     [Firebase goOnline];
-    
-    
 }
 
 - (void)instructionTapped {
-    
     
     self.info.userInteractionEnabled = NO;
     
@@ -130,20 +123,16 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                              self.instructionOnScreen = NO;
                              
                          }];
-        
-        
     }
-    
-  
-    
 }
 
 - (void)setupInstructions {
     
     self.instructions = [UILabel new];
     self.instructions.textAlignment = NSTextAlignmentLeft;
-    self.instructions.text = @"  🙋🏼\n• one person creates a new game, then provides the game number\n\n• all others join that game\n\n• change monsters by tapping your monster image\n\n• you can't change your name in game\n\n• board game required";
-    [self.instructions setFont:[UIFont systemFontOfSize:18]];
+    self.instructions.text = @"\n• one person creates a new game, then provides the game number\n• all others join that game\n• change monsters by tapping your monster image\n• you can't change your name in game\n• board game required";
+//    [self.instructions setFont:[UIFont systemFontOfSize:18]];
+    [self.instructions setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
     //    monsterLabel.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     
     //    monsterLabel.layer.borderColor = [UIColor blackColor].CGColor;
@@ -181,7 +170,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     // newButton.layer.cornerRadius = 10.0f;
     
     self.info.titleLabel.font = [UIFont systemFontOfSize:24.0];
-    [self.info setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.info setTitleColor:[UIColor colorWithRed:0.30 green:0.10 blue:0.95 alpha:1] forState:UIControlStateNormal];
     
     [self.info setTitle:@"ⓘ"
                forState:UIControlStateNormal];
