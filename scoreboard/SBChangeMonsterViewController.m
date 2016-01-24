@@ -140,7 +140,6 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
     
     [self dismissViewControllerAnimated:YES completion:^{
        
-        NSLog(@"dismissing");
     }];
     
     

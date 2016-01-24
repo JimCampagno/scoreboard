@@ -344,7 +344,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 }
 
 -(void)dismissKeyboard:(id)sender {
-    NSLog(@"DismissKeyBoard: is being called.");
     if ([self.enterName isFirstResponder]) {
         [self.enterName resignFirstResponder];
     }

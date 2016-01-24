@@ -22,7 +22,21 @@ unsigned int const MAX_VALUE = 999999;
 
 //The other place a monsterNames array is created is in the SBChangeMonsterViewController.m file
 + (NSString *)randomMonsterName {
-    NSArray *monsterNames = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF", @"ALIENOID", @"BOOGIE WOOGIE", @"CYBER BUNNY", @"GIGAZAUR", @"KRAKEN", @"MEKA DRAGON", @"PANDAKAI", @"PUMPKIN JACK", @"THE KING"];
+    NSArray *monsterNames = @[@"CAPTAIN FISH",
+                              @"DRAKONIS",
+                              @"KONG",
+                              @"MANTIS",
+                              @"ROB",
+                              @"SHERIFF",
+                              @"ALIENOID",
+                              @"BOOGIE WOOGIE",
+                              @"CYBER BUNNY",
+                              @"GIGAZAUR",
+                              @"KRAKEN",
+                              @"MEKA DRAGON",
+                              @"PANDAKAI",
+                              @"PUMPKIN JACK",
+                              @"THE KING"];
     NSString *monster = monsterNames[arc4random_uniform((uint32_t)[monsterNames count])];
     return monster;
 }

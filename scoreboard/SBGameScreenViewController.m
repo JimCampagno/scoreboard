@@ -9,8 +9,6 @@
 #import "SBGameScreenViewController.h"
 #import "Scorecard.h"
 #import "SBUser.h"
-#import "SBHeartScene.h"
-#import "SBStarScene.h"
 #import "SBSetupViewController.h"
 #import "SBChangeMonsterViewController.h"
 

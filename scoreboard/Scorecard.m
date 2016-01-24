@@ -8,8 +8,6 @@
 
 #import "Scorecard.h"
 #import <Masonry.h>
-#import "SBHeartScene.h"
-#import "SBStarScene.h"
 
 
 @interface Scorecard ()
