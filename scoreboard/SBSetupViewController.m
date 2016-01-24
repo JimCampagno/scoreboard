@@ -131,7 +131,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.instructions = [UILabel new];
     self.instructions.textAlignment = NSTextAlignmentLeft;
     self.instructions.text = @"• one person creates a new game, then provides the game number\n• all others join that game\n• change monsters by tapping your monster image\n• you can't change your name in game\n• board game required";
-//    [self.instructions setFont:[UIFont systemFontOfSize:18]];
+    //    [self.instructions setFont:[UIFont systemFontOfSize:18]];
     [self.instructions setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
     //    monsterLabel.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     
@@ -157,43 +157,47 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
     self.instructions.alpha = 0.0;
     
-    self.info = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    
-    [self.info addTarget:self
-                  action:@selector(instructionTapped)
-        forControlEvents:UIControlEventTouchUpInside];
+//    self.info = [UIButton new];
+//    
+////    self.info = [UIButton buttonWithType:UIButtonTypeSystem];
+//    
+//    
+//    [self.info addTarget:self
+//                  action:@selector(instructionTapped)
+//        forControlEvents:UIControlEventTouchUpInside];
     
     //    newButton.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     // newButton.layer.borderColor = [UIColor blackColor].CGColor;
     //  newButton.layer.borderWidth = 0.6f;
     // newButton.layer.cornerRadius = 10.0f;
     
-    self.info.titleLabel.font = [UIFont systemFontOfSize:24.0];
-    [self.info setTitleColor:[UIColor colorWithRed:0.30 green:0.10 blue:0.95 alpha:1] forState:UIControlStateNormal];
+    //    self.info.titleLabel.font = [UIFont systemFontOfSize:24.0];
+    //    [self.info setTitleColor:[UIColor colorWithRed:0.30 green:0.10 blue:0.95 alpha:1] forState:UIControlStateNormal];
     
-    [self.info setTitle:@"ⓘ"
-               forState:UIControlStateNormal];
+    //    [self.info setTitle:@"ⓘ"
+    //               forState:UIControlStateNormal];
+    //
+    //    self.info.titleLabel.numberOfLines = 1;
+    //    self.info.titleLabel.adjustsFontSizeToFitWidth = YES;
+    //    self.info.titleLabel.lineBreakMode = NSLineBreakByClipping;
     
-    self.info.titleLabel.numberOfLines = 1;
-    self.info.titleLabel.adjustsFontSizeToFitWidth = YES;
-    self.info.titleLabel.lineBreakMode = NSLineBreakByClipping;
+//    NSString *randomMonster = [SBConstants randomMonsterName];
+//    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", randomMonster]];
+//    
+//    [self.info setImage:imageOfMonster forState:UIControlStateNormal];
+//    [self.info.imageView setContentMode:UIViewContentModeScaleAspectFit];
+//    
+//    [self.view addSubview:self.info];
+//    
+//    [self.info mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.bottom.equalTo(self.view).with.offset(-20);
+//        make.right.equalTo(self.view).with.offset(-20);
+//        make.width.equalTo(@40);
+//        make.height.equalTo(@40);
+//    }];
     
-    [self.view addSubview:self.info];
-    
-    
-    [self.info mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.bottom.equalTo(self.view).with.offset(-20);
-        make.right.equalTo(self.view).with.offset(-20);
-        make.width.equalTo(@40);
-        make.height.equalTo(@40);
-    }];
-    
-    
-    
-    
-    
+
     //
     //
     //
@@ -600,7 +604,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                              
                          }];
     }
-
+    
     
     self.viewToHandleDismissalOfKeyboardOnTap.userInteractionEnabled = NO;
     self.enterName.userInteractionEnabled = NO;
