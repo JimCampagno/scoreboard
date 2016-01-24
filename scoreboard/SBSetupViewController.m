@@ -240,7 +240,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.joinGameProp.layer.borderWidth = 0.2f;
     self.joinGameProp.layer.cornerRadius = 3.5;
     
-    self.joinGameProp.titleLabel.font = [UIFont systemFontOfSize:18.0];
+  //  self.joinGameProp.titleLabel.font = [UIFont systemFontOfSize:18.0];
     [self.joinGameProp setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
     
     self.joinGameProp.titleLabel.numberOfLines = 1;
@@ -254,7 +254,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.createGameProp.layer.borderWidth = 0.2f;
     self.createGameProp.layer.cornerRadius = 3.5;
     
-    self.createGameProp.titleLabel.font = [UIFont systemFontOfSize:18.0];
+    //self.createGameProp.titleLabel.font = [UIFont systemFontOfSize:18.0];
     [self.createGameProp setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
     
     self.createGameProp.titleLabel.numberOfLines = 1;

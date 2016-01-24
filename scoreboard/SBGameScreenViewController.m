@@ -86,6 +86,7 @@
     
     if ([self isBeingPresented] || [self isMovingToParentViewController]) {
         
+        
         [self performSelector:@selector(doMagic) withObject:self afterDelay:4.2];
         
         [self performSelector:@selector(letThemChooseMonster) withObject:self afterDelay:4.3];
@@ -103,9 +104,8 @@
 - (void)letThemChooseMonster {
     
     [self performSegueWithIdentifier:@"changeMonster" sender:nil];
+    self.navigationItem.leftBarButtonItem.enabled = YES;
 
-    
-    
     
     
 }
@@ -185,7 +185,7 @@
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"#%@", _roomDigits]
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
-                                                                    action:@selector(handleBack:)];
+                                                                    action:nil];
     
 //    NSDictionary *attributesForRightBar= @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
     
@@ -204,6 +204,7 @@
     self.navigationController.navigationBar.titleTextAttributes = attributesForTitleText;
     
     
+    self.navigationItem.leftBarButtonItem.enabled = NO;
     
     
     

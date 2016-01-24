@@ -20,117 +20,117 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LUE-8k-7FF">
-                                <rect key="frame" x="20" y="401" width="374" height="327"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="LUE-8k-7FF">
+                                <rect key="frame" x="20" y="409" width="374" height="319"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="A15-aG-bmJ" userLabel="anotherTop">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="82.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ALIENOID_384" translatesAutoresizingMaskIntoConstraints="NO" id="6Jk-pd-Lvn">
-                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BOOGIE WOOGIE_384" translatesAutoresizingMaskIntoConstraints="NO" id="bek-zd-BvQ">
-                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="53.5" y="0.0" width="52" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CAPTAIN FISH_384" translatesAutoresizingMaskIntoConstraints="NO" id="6kj-oU-uwp">
-                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CYBER BUNNY_384" translatesAutoresizingMaskIntoConstraints="NO" id="x8h-Di-CSO">
-                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="161" y="0.0" width="52" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DRAKONIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="jHG-ft-bEU">
-                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="215" y="0.0" width="51.5" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GIGAZAUR_384" translatesAutoresizingMaskIntoConstraints="NO" id="LaA-Mj-O6N">
-                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="268.5" y="0.0" width="52" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KONG_384" translatesAutoresizingMaskIntoConstraints="NO" id="DYs-Ag-LmH">
-                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="80"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="jfc-TG-Xk8" userLabel="anotherBottom">
-                                        <rect key="frame" x="0.0" y="81.5" width="374" height="82.5"/>
+                                        <rect key="frame" x="0.0" y="80" width="374" height="79.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KRAKEN_384" translatesAutoresizingMaskIntoConstraints="NO" id="XXA-3r-F4r">
-                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MANTIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="iOn-nq-zfZ">
-                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="53.5" y="0.0" width="52" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MEKA DRAGON_384" translatesAutoresizingMaskIntoConstraints="NO" id="IDe-hr-Tlr">
-                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PANDAKAI_384" translatesAutoresizingMaskIntoConstraints="NO" id="HP1-FE-QTY">
-                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="161" y="0.0" width="52" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PUMPKIN JACK_384" translatesAutoresizingMaskIntoConstraints="NO" id="QGp-zQ-ud6">
-                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="215" y="0.0" width="51.5" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ROB_384" translatesAutoresizingMaskIntoConstraints="NO" id="rB9-Sw-nlK">
-                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="268.5" y="0.0" width="52" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SHERIFF_384" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-3B-Ecy">
-                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="79.5"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="VA5-cM-TUF" userLabel="topStackView">
-                                        <rect key="frame" x="0.0" y="163" width="374" height="82.5"/>
+                                        <rect key="frame" x="0.0" y="159.5" width="374" height="80"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="THE KING_384" translatesAutoresizingMaskIntoConstraints="NO" id="neW-VJ-IVo">
-                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KONG_384" translatesAutoresizingMaskIntoConstraints="NO" id="UEp-VA-FNr">
-                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="53.5" y="0.0" width="52" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CYBER BUNNY_384" translatesAutoresizingMaskIntoConstraints="NO" id="2jd-OI-93Y">
-                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DRAKONIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="Iz4-Qy-hdy">
-                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="161" y="0.0" width="52" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ALIENOID_384" translatesAutoresizingMaskIntoConstraints="NO" id="f5o-5R-Ltv">
-                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="215" y="0.0" width="51.5" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BOOGIE WOOGIE_384" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-5Y-69Y">
-                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="268.5" y="0.0" width="52" height="80"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GIGAZAUR_384" translatesAutoresizingMaskIntoConstraints="NO" id="BSP-MK-Z2o">
-                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="80"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="bQF-eF-HBn" userLabel="bottomStackView">
-                                        <rect key="frame" x="0.0" y="244.5" width="374" height="82.5"/>
+                                        <rect key="frame" x="0.0" y="239.5" width="374" height="79.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CAPTAIN FISH_384" translatesAutoresizingMaskIntoConstraints="NO" id="TRr-CY-SG5">
-                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PANDAKAI_384" translatesAutoresizingMaskIntoConstraints="NO" id="iU0-pQ-30M">
-                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="53.5" y="0.0" width="52" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SHERIFF_384" translatesAutoresizingMaskIntoConstraints="NO" id="dRS-Xc-e7v">
-                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PUMPKIN JACK_384" translatesAutoresizingMaskIntoConstraints="NO" id="xhy-Rv-NoC">
-                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="161" y="0.0" width="52" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KRAKEN_384" translatesAutoresizingMaskIntoConstraints="NO" id="UdP-n7-FsP">
-                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="215" y="0.0" width="51.5" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MEKA DRAGON_384" translatesAutoresizingMaskIntoConstraints="NO" id="4XS-FO-mTH">
-                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
+                                                <rect key="frame" x="268.5" y="0.0" width="52" height="79.5"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ROB_384" translatesAutoresizingMaskIntoConstraints="NO" id="5LB-qe-grQ">
-                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
+                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="79.5"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VM-md-5Mi" userLabel="DisplayJoinGameCode">
-                                <rect key="frame" x="20" y="226" width="374" height="155"/>
+                                <rect key="frame" x="20" y="228.5" width="374" height="155"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETJ-mx-yPA" userLabel="oneDigit">
                                         <rect key="frame" x="52" y="78" width="0.0" height="0.0"/>
@@ -219,36 +219,51 @@
                                     <constraint firstItem="ETJ-mx-yPA" firstAttribute="centerX" secondItem="5VM-md-5Mi" secondAttribute="centerX" multiplier="0.277778" id="uCb-h7-rss"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueS-eC-LeI">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ueS-eC-LeI">
                                 <rect key="frame" x="20" y="251" width="374" height="50"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="0.63" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="PPN-zQ-ULU"/>
                                 </constraints>
-                                <state key="normal" title="CREATE NEW GAME">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="CREATE NEW GAME">
+                                            <attributes>
+                                                <color key="NSColor" red="0.95686274509803926" green="0.75686274509803919" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                 </state>
                                 <connections>
                                     <action selector="createGame:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vAb-9h-opu"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter name here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u2f-Ay-Hv6">
-                                <rect key="frame" x="107" y="132" width="200" height="30"/>
+                                <rect key="frame" x="107" y="129.5" width="200" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="Fzv-CE-jvP"/>
-                                    <constraint firstAttribute="height" constant="30" id="HVs-GB-oNa"/>
+                                    <constraint firstAttribute="height" constant="35" id="HVs-GB-oNa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZD-2g-G3E">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fZD-2g-G3E">
                                 <rect key="frame" x="20" y="343" width="374" height="50"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="0.63" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bHZ-ie-KN3"/>
                                 </constraints>
-                                <state key="normal" title="JOIN EXISTING GAME">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="JOIN EXISTING GAME">
+                                            <attributes>
+                                                <color key="NSColor" red="0.95686274509803926" green="0.75686274509803919" blue="0.039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="20" name="AvenirNext-Regular"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                 </state>
                                 <connections>
                                     <action selector="joinGame:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="WH7-su-oXs"/>
@@ -264,7 +279,7 @@
                         <constraints>
                             <constraint firstItem="ueS-eC-LeI" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="0.75" id="2GO-bc-gVQ"/>
                             <constraint firstItem="ueS-eC-LeI" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="9Ly-qb-0e9"/>
-                            <constraint firstItem="LUE-8k-7FF" firstAttribute="top" secondItem="fZD-2g-G3E" secondAttribute="bottom" constant="8" id="EAQ-rF-tfI"/>
+                            <constraint firstItem="LUE-8k-7FF" firstAttribute="top" secondItem="fZD-2g-G3E" secondAttribute="bottom" constant="16" id="EAQ-rF-tfI"/>
                             <constraint firstItem="5VM-md-5Mi" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Evh-FY-nUs"/>
                             <constraint firstItem="fZD-2g-G3E" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="HPh-BM-vIa"/>
                             <constraint firstItem="ueS-eC-LeI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="PV2-P6-jq6"/>
