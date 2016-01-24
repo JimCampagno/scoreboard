@@ -67,6 +67,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     [self setUpActivityViews];
     [self setupInstructions];
     
+    [self.enterName becomeFirstResponder];
+    
     _instructionOnScreen = NO;
     
     
@@ -236,7 +238,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.joinGameProp.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     self.joinGameProp.layer.borderColor = [UIColor blackColor].CGColor;
     self.joinGameProp.layer.borderWidth = 0.2f;
-    self.joinGameProp.layer.cornerRadius = 10.0f;
+    self.joinGameProp.layer.cornerRadius = 3.5;
     
     self.joinGameProp.titleLabel.font = [UIFont systemFontOfSize:18.0];
     [self.joinGameProp setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
@@ -250,7 +252,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.createGameProp.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     self.createGameProp.layer.borderColor = [UIColor blackColor].CGColor;
     self.createGameProp.layer.borderWidth = 0.2f;
-    self.createGameProp.layer.cornerRadius = 10.0f;
+    self.createGameProp.layer.cornerRadius = 3.5;
     
     self.createGameProp.titleLabel.font = [UIFont systemFontOfSize:18.0];
     [self.createGameProp setTitleColor:[UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] forState:UIControlStateNormal];
