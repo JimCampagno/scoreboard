@@ -88,12 +88,26 @@
         
         [self performSelector:@selector(doMagic) withObject:self afterDelay:4.2];
         
+        [self performSelector:@selector(letThemChooseMonster) withObject:self afterDelay:4.3];
+        
+        
         for (Scorecard *sc in self.playerScorecards) {
             [sc createHeartAndStarViews];
         }
         
         self.view.userInteractionEnabled = YES;
     }
+}
+
+
+- (void)letThemChooseMonster {
+    
+    [self performSegueWithIdentifier:@"changeMonster" sender:nil];
+
+    
+    
+    
+    
 }
 
 - (void)displayInitialLoad {
