@@ -21,6 +21,115 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LUE-8k-7FF">
+                                <rect key="frame" x="20" y="401" width="374" height="327"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="A15-aG-bmJ" userLabel="anotherTop">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="82.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ALIENOID_384" translatesAutoresizingMaskIntoConstraints="NO" id="6Jk-pd-Lvn">
+                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BOOGIE WOOGIE_384" translatesAutoresizingMaskIntoConstraints="NO" id="bek-zd-BvQ">
+                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CAPTAIN FISH_384" translatesAutoresizingMaskIntoConstraints="NO" id="6kj-oU-uwp">
+                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CYBER BUNNY_384" translatesAutoresizingMaskIntoConstraints="NO" id="x8h-Di-CSO">
+                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DRAKONIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="jHG-ft-bEU">
+                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GIGAZAUR_384" translatesAutoresizingMaskIntoConstraints="NO" id="LaA-Mj-O6N">
+                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KONG_384" translatesAutoresizingMaskIntoConstraints="NO" id="DYs-Ag-LmH">
+                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="jfc-TG-Xk8" userLabel="anotherBottom">
+                                        <rect key="frame" x="0.0" y="81.5" width="374" height="82.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KRAKEN_384" translatesAutoresizingMaskIntoConstraints="NO" id="XXA-3r-F4r">
+                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MANTIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="iOn-nq-zfZ">
+                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MEKA DRAGON_384" translatesAutoresizingMaskIntoConstraints="NO" id="IDe-hr-Tlr">
+                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PANDAKAI_384" translatesAutoresizingMaskIntoConstraints="NO" id="HP1-FE-QTY">
+                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PUMPKIN JACK_384" translatesAutoresizingMaskIntoConstraints="NO" id="QGp-zQ-ud6">
+                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ROB_384" translatesAutoresizingMaskIntoConstraints="NO" id="rB9-Sw-nlK">
+                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SHERIFF_384" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-3B-Ecy">
+                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="VA5-cM-TUF" userLabel="topStackView">
+                                        <rect key="frame" x="0.0" y="163" width="374" height="82.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="THE KING_384" translatesAutoresizingMaskIntoConstraints="NO" id="neW-VJ-IVo">
+                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KONG_384" translatesAutoresizingMaskIntoConstraints="NO" id="UEp-VA-FNr">
+                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CYBER BUNNY_384" translatesAutoresizingMaskIntoConstraints="NO" id="2jd-OI-93Y">
+                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DRAKONIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="Iz4-Qy-hdy">
+                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ALIENOID_384" translatesAutoresizingMaskIntoConstraints="NO" id="f5o-5R-Ltv">
+                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BOOGIE WOOGIE_384" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-5Y-69Y">
+                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GIGAZAUR_384" translatesAutoresizingMaskIntoConstraints="NO" id="BSP-MK-Z2o">
+                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="bQF-eF-HBn" userLabel="bottomStackView">
+                                        <rect key="frame" x="0.0" y="244.5" width="374" height="82.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CAPTAIN FISH_384" translatesAutoresizingMaskIntoConstraints="NO" id="TRr-CY-SG5">
+                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PANDAKAI_384" translatesAutoresizingMaskIntoConstraints="NO" id="iU0-pQ-30M">
+                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SHERIFF_384" translatesAutoresizingMaskIntoConstraints="NO" id="dRS-Xc-e7v">
+                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PUMPKIN JACK_384" translatesAutoresizingMaskIntoConstraints="NO" id="xhy-Rv-NoC">
+                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KRAKEN_384" translatesAutoresizingMaskIntoConstraints="NO" id="UdP-n7-FsP">
+                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MEKA DRAGON_384" translatesAutoresizingMaskIntoConstraints="NO" id="4XS-FO-mTH">
+                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ROB_384" translatesAutoresizingMaskIntoConstraints="NO" id="5LB-qe-grQ">
+                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VM-md-5Mi" userLabel="DisplayJoinGameCode">
                                 <rect key="frame" x="20" y="226" width="374" height="155"/>
                                 <subviews>
@@ -151,115 +260,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LUE-8k-7FF">
-                                <rect key="frame" x="20" y="401" width="374" height="327"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="A15-aG-bmJ" userLabel="anotherTop">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="82.5"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ALIENOID_384" translatesAutoresizingMaskIntoConstraints="NO" id="6Jk-pd-Lvn">
-                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BOOGIE WOOGIE_384" translatesAutoresizingMaskIntoConstraints="NO" id="bek-zd-BvQ">
-                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CAPTAIN FISH_384" translatesAutoresizingMaskIntoConstraints="NO" id="6kj-oU-uwp">
-                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CYBER BUNNY_384" translatesAutoresizingMaskIntoConstraints="NO" id="x8h-Di-CSO">
-                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DRAKONIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="jHG-ft-bEU">
-                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GIGAZAUR_384" translatesAutoresizingMaskIntoConstraints="NO" id="LaA-Mj-O6N">
-                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KONG_384" translatesAutoresizingMaskIntoConstraints="NO" id="DYs-Ag-LmH">
-                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="jfc-TG-Xk8" userLabel="anotherBottom">
-                                        <rect key="frame" x="0.0" y="81.5" width="374" height="82.5"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KRAKEN_384" translatesAutoresizingMaskIntoConstraints="NO" id="XXA-3r-F4r">
-                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MANTIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="iOn-nq-zfZ">
-                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MEKA DRAGON_384" translatesAutoresizingMaskIntoConstraints="NO" id="IDe-hr-Tlr">
-                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PANDAKAI_384" translatesAutoresizingMaskIntoConstraints="NO" id="HP1-FE-QTY">
-                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PUMPKIN JACK_384" translatesAutoresizingMaskIntoConstraints="NO" id="QGp-zQ-ud6">
-                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ROB_384" translatesAutoresizingMaskIntoConstraints="NO" id="rB9-Sw-nlK">
-                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SHERIFF_384" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-3B-Ecy">
-                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="VA5-cM-TUF" userLabel="topStackView">
-                                        <rect key="frame" x="0.0" y="163" width="374" height="82.5"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="THE KING_384" translatesAutoresizingMaskIntoConstraints="NO" id="neW-VJ-IVo">
-                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KONG_384" translatesAutoresizingMaskIntoConstraints="NO" id="UEp-VA-FNr">
-                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CYBER BUNNY_384" translatesAutoresizingMaskIntoConstraints="NO" id="2jd-OI-93Y">
-                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DRAKONIS_384" translatesAutoresizingMaskIntoConstraints="NO" id="Iz4-Qy-hdy">
-                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ALIENOID_384" translatesAutoresizingMaskIntoConstraints="NO" id="f5o-5R-Ltv">
-                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BOOGIE WOOGIE_384" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-5Y-69Y">
-                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GIGAZAUR_384" translatesAutoresizingMaskIntoConstraints="NO" id="BSP-MK-Z2o">
-                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="bQF-eF-HBn" userLabel="bottomStackView">
-                                        <rect key="frame" x="0.0" y="244.5" width="374" height="82.5"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CAPTAIN FISH_384" translatesAutoresizingMaskIntoConstraints="NO" id="TRr-CY-SG5">
-                                                <rect key="frame" x="0.0" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PANDAKAI_384" translatesAutoresizingMaskIntoConstraints="NO" id="iU0-pQ-30M">
-                                                <rect key="frame" x="53.5" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SHERIFF_384" translatesAutoresizingMaskIntoConstraints="NO" id="dRS-Xc-e7v">
-                                                <rect key="frame" x="107.5" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PUMPKIN JACK_384" translatesAutoresizingMaskIntoConstraints="NO" id="xhy-Rv-NoC">
-                                                <rect key="frame" x="161" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KRAKEN_384" translatesAutoresizingMaskIntoConstraints="NO" id="UdP-n7-FsP">
-                                                <rect key="frame" x="215" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MEKA DRAGON_384" translatesAutoresizingMaskIntoConstraints="NO" id="4XS-FO-mTH">
-                                                <rect key="frame" x="268.5" y="0.0" width="52" height="82.5"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ROB_384" translatesAutoresizingMaskIntoConstraints="NO" id="5LB-qe-grQ">
-                                                <rect key="frame" x="322.5" y="0.0" width="51.5" height="82.5"/>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
