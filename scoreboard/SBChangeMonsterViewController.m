@@ -39,13 +39,7 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:nil
-                                                    ascending:YES
-                                                     selector:@selector(localizedCaseInsensitiveCompare:)];
-    
-    _sortedVersionNames = [self.allVersions.allKeys sortedArrayUsingDescriptors:@[_sortDescriptor]];
-    
-    
+    _sortedVersionNames = @[ @"King of Tokyo", @"King of New York", @"King of Tokyo: Halloween", @"King of Tokyo: Power Up!" ];
     
     [self setupBlurredViewToContainMonsters];
     [self setupLabel];
@@ -350,8 +344,8 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
     
     if (!_allVersions) {
         
-        NSArray *kingOfTokyo = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
-        NSArray *kingOfNewYork = @[@"ALIENOID", @"CYBER BUNNY", @"GIGAZAUR", @"KRAKEN", @"MEKA DRAGON", @"THE KING"];
+        NSArray *kingOfNewYork = @[@"CAPTAIN FISH", @"DRAKONIS", @"KONG", @"MANTIS", @"ROB", @"SHERIFF"];
+        NSArray *kingOfTokyo = @[@"ALIENOID", @"CYBER BUNNY", @"GIGAZAUR", @"KRAKEN", @"MEKA DRAGON", @"THE KING"];
         NSArray *kingOfTokyoHalloween = @[@"BOOGIE WOOGIE", @"PUMPKIN JACK"];
         NSArray *kingOfTokyoPowerUp = @[@"PANDAKAI"];
         

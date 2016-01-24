@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bfr-lM-Fap">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -579,7 +578,7 @@
         <image name="ROB_384" width="400" height="400"/>
         <image name="SHERIFF_384" width="400" height="400"/>
         <image name="THE KING_384" width="400" height="400"/>
-        <image name="heart" width="248" height="228"/>
+        <image name="heart" width="300" height="300"/>
         <image name="star" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
