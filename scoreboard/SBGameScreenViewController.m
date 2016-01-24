@@ -105,8 +105,6 @@
     
     [self performSegueWithIdentifier:@"changeMonster" sender:nil];
     self.navigationItem.leftBarButtonItem.enabled = YES;
-
-    
     
 }
 
