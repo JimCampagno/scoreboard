@@ -192,25 +192,47 @@
     
     NSInteger currentHealthFromPickerView = [self.bottomPicker selectedRowInComponent:0];
     NSInteger currentVictoryFromPickerView = [self.topPicker selectedRowInComponent:0];
-
+    
     [self.bottomPicker selectRow:[user.hp integerValue] inComponent:0 animated:YES];
     [self.topPicker selectRow:[user.vp integerValue] inComponent:0 animated:YES];
     
     if (!_itGotDoneDisconnected) {
         
         if ((currentHealthFromPickerView != [user.hp integerValue]) && !_firstTimeThrough) {
-            SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
-            [self.heartView.scene.rootNode addParticleSystem:new];
+            
+            if ([self.delegate canIPerformTheStartOrHeartAnimation]) {
+                
+                SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
+                [self.heartView.scene.rootNode addParticleSystem:new];
+                
+                [self performSelector:@selector(heartStarAnimationComplete) withObject:nil afterDelay:5.5];
+                
+                
+            }
         }
         
         if ((currentVictoryFromPickerView != [user.vp integerValue]) && !_firstTimeThrough) {
-            SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Starfetti" inDirectory:nil];
-            [self.starView.scene.rootNode addParticleSystem:new];
+            
+            if([self.delegate canIPerformTheStartOrHeartAnimation]) {
+                
+                SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Starfetti" inDirectory:nil];
+                [self.starView.scene.rootNode addParticleSystem:new];
+                
+                [self performSelector:@selector(heartStarAnimationComplete) withObject:nil afterDelay:5.5];
+            }
+            
         }
     }
     
     self.firstTimeThrough = NO;
 }
+
+- (void)heartStarAnimationComplete {
+    
+    [self.delegate imDoneAnimating];
+    
+}
+
 
 - (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user {
     

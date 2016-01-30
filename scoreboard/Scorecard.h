@@ -15,10 +15,8 @@
 @class SBStarScene;
 
 @protocol ScorecardProtocol <NSObject>
-- (void)didScoreVictoryPointsTotalling:(NSInteger)vp;
-- (void)didTakeDamageTotalling:(NSInteger)hp;
-- (void)damageHasReachedZero;
-- (BOOL)allowChangingOfHealthAndVictoryPoints;
+- (BOOL)canIPerformTheStartOrHeartAnimation;
+- (void)imDoneAnimating;
 @end
 
 @interface Scorecard : UIView <UIPickerViewDataSource, UIPickerViewDelegate>

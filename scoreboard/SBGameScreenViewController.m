@@ -7,7 +7,6 @@
 //
 
 #import "SBGameScreenViewController.h"
-#import "Scorecard.h"
 #import "SBUser.h"
 #import "SBSetupViewController.h"
 #import "SBChangeMonsterViewController.h"
@@ -50,8 +49,9 @@
 @property (nonatomic) NSInteger numberOfPlayers;
 @property (strong, nonatomic) NSMutableArray *userKeys;
 @property (nonatomic) BOOL comingBackFromDisconnect;
-
 @property (nonatomic) BOOL viewResignedActive;
+
+@property (nonatomic) NSInteger queuedAnimations;
 
 - (IBAction)monsterImageTapped:(id)sender;
 - (void)aboutToLeaveTheScreen;
@@ -70,6 +70,7 @@
     self.userKeys = [NSMutableArray new];
     self.comingBackFromDisconnect = NO;
     self.viewResignedActive = NO;
+    self.queuedAnimations = 0;
     
     [self setupPickerViewsDelegateAndDataSource];
     [self setupMainPlayerScorecard];
@@ -77,6 +78,7 @@
     [self displayInitialLoad];
     [self setupNavigationBar];
     [self observeCertainNotifications];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -92,10 +94,40 @@
         
         for (Scorecard *sc in self.playerScorecards) {
             [sc createHeartAndStarViews];
+            sc.delegate = self;
         }
         
         self.view.userInteractionEnabled = YES;
     }
+}
+
+- (BOOL)canIPerformTheStartOrHeartAnimation {
+    
+    NSLog(@"Queue: %@", @(self.queuedAnimations));
+
+    
+    if (self.queuedAnimations <= 3) {
+        
+        
+        self.queuedAnimations +=1;
+        
+        NSLog(@"Queue after adding 1: %@", @(self.queuedAnimations));
+        
+        return YES;
+        
+    } else {
+        
+
+        NSLog(@"Wasn't able to enter the queue, it's full: %@", @(self.queuedAnimations));
+        
+        return NO;
+    }
+}
+
+- (void)imDoneAnimating {
+    
+    self.queuedAnimations -= 1;
+    
 }
 
 
@@ -177,13 +209,13 @@
     
     [self.navigationItem.leftBarButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
     
-    // [NSString stringWithFormat:@"%@", _roomDigits]
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"#%@", _roomDigits]
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:nil];
     
-//    NSDictionary *attributesForRightBar= @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
+
+    rightBarItem.enabled = NO;
     
     NSDictionary *attributesOther = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
     
@@ -201,33 +233,6 @@
     
     
     self.navigationItem.leftBarButtonItem.enabled = NO;
-    
-    
-    
-    //self.tabBar.tintColor = [UIColor colorWithRed:0.06 green:0.73 blue:0.86 alpha:1];
-    
-    //    UIImage *image = [UIImage imageNamed:@"KOTLOGO"];
-    //    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    //    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    //    imageView.image = image;
-    //
-    //    self.navigationItem.titleView = imageView;
-    //    self.navigationItem.titleView.center = self.navigationController.navigationBar.center;
-    
-    // FAKIonIcons *logoutIcon = [FAKIonIcons logOutIconWithSize:25];
-    // UIImage *logoutImage = [logoutIcon imageWithSize:CGSizeMake(25, 25)];
-    //UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithImage:logoutImage style:UIBarButtonItemStylePlain target:self action:@selector(presentLogOutConfirmation)];
-    //    logOutButton.tintColor = [UIColor colorWithRed:0.06 green:0.73 blue:0.86 alpha:1];
-    // ^handled by [UINavigationBar appearance] in app delegate. pretty cool.
-    //[self.navigationItem setRightBarButtonItem:logOutButton];
-    
-    //    UIBarButtonItem *fakeButton = [[UIBarButtonItem alloc] initWithImage:logoutImage style:UIBarButtonItemStylePlain target:nil action:nil];
-    //    fakeButton.tintColor = [UIColor clearColor];
-    //    [self.navigationItem setLeftBarButtonItem:fakeButton];
-    
-    
-    
-    
 }
 
 - (void)observeCertainNotifications {

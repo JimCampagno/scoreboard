@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Firebase/Firebase.h>
 #import "SBRoom.h"
+#import "Scorecard.h"
+
 
 
 @protocol MonsterChangeDelegate <NSObject>
@@ -16,7 +18,7 @@
 @end
 
 
-@interface SBGameScreenViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate, MonsterChangeDelegate>
+@interface SBGameScreenViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate, MonsterChangeDelegate, ScorecardProtocol>
 
 @property (strong, nonatomic) Firebase *ref;
 @property (strong, nonatomic) NSString *roomDigits;
