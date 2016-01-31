@@ -103,22 +103,13 @@
 
 - (BOOL)canIPerformTheStartOrHeartAnimation {
     
-    NSLog(@"Queue: %@", @(self.queuedAnimations));
-
-    
     if (self.queuedAnimations <= 3) {
         
-        
         self.queuedAnimations +=1;
-        
-        NSLog(@"Queue after adding 1: %@", @(self.queuedAnimations));
         
         return YES;
         
     } else {
-        
-
-        NSLog(@"Wasn't able to enter the queue, it's full: %@", @(self.queuedAnimations));
         
         return NO;
     }
@@ -127,7 +118,7 @@
 - (void)imDoneAnimating {
     
     self.queuedAnimations -= 1;
-    
+
 }
 
 
@@ -214,7 +205,7 @@
                                                                     target:self
                                                                     action:nil];
     
-
+    
     rightBarItem.enabled = NO;
     
     NSDictionary *attributesOther = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };
@@ -224,8 +215,8 @@
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:attributesOther forState:UIControlStateNormal];
     
     
-
-
+    
+    
     self.navigationItem.title = @"King of Tokyo";
     
     NSDictionary *attributesForTitleText = @{ NSForegroundColorAttributeName: [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1] };

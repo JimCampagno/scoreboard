@@ -45,6 +45,9 @@
 @property (nonatomic) BOOL itGotDoneDisconnected;
 @property (nonatomic) BOOL updatedBetweenDisc;
 
+@property (nonatomic) BOOL recentlyDidHeartAnimation;
+@property (nonatomic) BOOL recentlyDidStarAnimation;
+
 
 - (void)updateScorecardWithInfoFromUser:(SBUser *)user;
 - (void)updateScorecardWithNoAnimationFromUser:(SBUser *)user;

@@ -63,6 +63,8 @@
     self.wasDisconnected = NO;
     self.updatedBetweenDisc = NO;
     self.itGotDoneDisconnected = NO;
+    self.recentlyDidHeartAnimation = NO;
+    self.recentlyDidStarAnimation = NO;
     [self setupHealthAndVictoryPoints];
     [[NSBundle mainBundle] loadNibNamed:@"Scorecard"
                                   owner:self
@@ -200,25 +202,31 @@
         
         if ((currentHealthFromPickerView != [user.hp integerValue]) && !_firstTimeThrough) {
             
-            if ([self.delegate canIPerformTheStartOrHeartAnimation]) {
+            if (!_recentlyDidHeartAnimation && [self.delegate canIPerformTheStartOrHeartAnimation]) {
+                
+                self.recentlyDidHeartAnimation = YES;
                 
                 SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Confetti" inDirectory:nil];
                 [self.heartView.scene.rootNode addParticleSystem:new];
                 
                 [self performSelector:@selector(heartStarAnimationComplete) withObject:nil afterDelay:5.5];
-                
-                
+                [self performSelector:@selector(allowHeartAnimation) withObject:nil afterDelay:3.2];
+
             }
         }
         
         if ((currentVictoryFromPickerView != [user.vp integerValue]) && !_firstTimeThrough) {
             
-            if([self.delegate canIPerformTheStartOrHeartAnimation]) {
+            if(!_recentlyDidStarAnimation && [self.delegate canIPerformTheStartOrHeartAnimation]) {
+                
+                self.recentlyDidStarAnimation = YES;
                 
                 SCNParticleSystem *new = [SCNParticleSystem particleSystemNamed:@"Starfetti" inDirectory:nil];
                 [self.starView.scene.rootNode addParticleSystem:new];
                 
                 [self performSelector:@selector(heartStarAnimationComplete) withObject:nil afterDelay:5.5];
+                [self performSelector:@selector(allowStarAnimation) withObject:nil afterDelay:3.2];
+
             }
             
         }
@@ -227,10 +235,22 @@
     self.firstTimeThrough = NO;
 }
 
+
 - (void)heartStarAnimationComplete {
     
     [self.delegate imDoneAnimating];
     
+}
+
+- (void)allowHeartAnimation {
+    
+    self.recentlyDidHeartAnimation = NO;
+    
+}
+
+- (void)allowStarAnimation {
+    
+    self.recentlyDidStarAnimation = NO;
 }
 
 
