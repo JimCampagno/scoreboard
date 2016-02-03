@@ -73,9 +73,7 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
     
     self.navigationController.navigationBar.hidden = YES;
-    //    self.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:0.52 green:0.48 blue:0.67 alpha:1];
-    
-    //    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.98 green:0.8 blue:0 alpha:1];
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.35 green:0.38 blue:0.46 alpha:1];
@@ -133,13 +131,8 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.instructions = [UILabel new];
     self.instructions.textAlignment = NSTextAlignmentLeft;
     self.instructions.text = @"• one person creates a new game, then provides the game number\n• all others join that game\n• change monsters by tapping your monster image\n• you can't change your name in game\n• board game required";
-    //    [self.instructions setFont:[UIFont systemFontOfSize:18]];
     [self.instructions setFont:[UIFont fontWithName:@"Avenir Next" size:18]];
-    //    monsterLabel.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
-    
-    //    monsterLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    //    monsterLabel.layer.borderWidth = 0.6f;
-    //    monsterLabel.layer.cornerRadius = 10.0f;
+
     self.instructions.clipsToBounds = YES;
     self.instructions.textColor = [UIColor blackColor] ;
     
@@ -158,58 +151,6 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     
     
     self.instructions.alpha = 0.0;
-    
-//    self.info = [UIButton new];
-//    
-////    self.info = [UIButton buttonWithType:UIButtonTypeSystem];
-//    
-//    
-//    [self.info addTarget:self
-//                  action:@selector(instructionTapped)
-//        forControlEvents:UIControlEventTouchUpInside];
-    
-    //    newButton.backgroundColor = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
-    // newButton.layer.borderColor = [UIColor blackColor].CGColor;
-    //  newButton.layer.borderWidth = 0.6f;
-    // newButton.layer.cornerRadius = 10.0f;
-    
-    //    self.info.titleLabel.font = [UIFont systemFontOfSize:24.0];
-    //    [self.info setTitleColor:[UIColor colorWithRed:0.30 green:0.10 blue:0.95 alpha:1] forState:UIControlStateNormal];
-    
-    //    [self.info setTitle:@"ⓘ"
-    //               forState:UIControlStateNormal];
-    //
-    //    self.info.titleLabel.numberOfLines = 1;
-    //    self.info.titleLabel.adjustsFontSizeToFitWidth = YES;
-    //    self.info.titleLabel.lineBreakMode = NSLineBreakByClipping;
-    
-//    NSString *randomMonster = [SBConstants randomMonsterName];
-//    UIImage *imageOfMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", randomMonster]];
-//    
-//    [self.info setImage:imageOfMonster forState:UIControlStateNormal];
-//    [self.info.imageView setContentMode:UIViewContentModeScaleAspectFit];
-//    
-//    [self.view addSubview:self.info];
-//    
-//    [self.info mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.bottom.equalTo(self.view).with.offset(-20);
-//        make.right.equalTo(self.view).with.offset(-20);
-//        make.width.equalTo(@40);
-//        make.height.equalTo(@40);
-//    }];
-    
-
-    //
-    //
-    //
-    //
-    //    UILabel *enterRoomDigitsLabel = [UILabel new];
-    //    enterRoomDigitsLabel.text = @"tap your monster image to change ";
-    //    enterRoomDigitsLabel.font = [UIFont systemFontOfSize:20];
-    //    enterRoomDigitsLabel.adjustsFontSizeToFitWidth = YES;
-    //    enterRoomDigitsLabel.textColor = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
-    
 }
 
 
@@ -297,21 +238,11 @@ static const NSInteger kMaxNumberOfPlayers = 6;
     self.displayJoinGameDigits.layer.borderWidth = 0.2f;
     self.displayJoinGameDigits.layer.cornerRadius = 10.0f;
     
-    //    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"Enter Room Digits"];
-    //    [attributeString addAttribute:NSUnderlineStyleAttributeName
-    //                            value:[NSNumber numberWithInt:1]
-    //                            range:(NSRange){0,[attributeString length]}];
-    
-    //    [attributeString addAttribute:NSUnderlineColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, attributeString.length)];//TextColor
-    
-    
     UILabel *enterRoomDigitsLabel = [UILabel new];
     enterRoomDigitsLabel.text = @"Enter game number:";
     enterRoomDigitsLabel.font = [UIFont systemFontOfSize:20];
     enterRoomDigitsLabel.adjustsFontSizeToFitWidth = YES;
     enterRoomDigitsLabel.textColor = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
-    
-    //    enterRoomDigitsLabel.attributedText = attributeString;
     
     [self.displayJoinGameDigits addSubview:enterRoomDigitsLabel];
     
@@ -323,20 +254,15 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 
 - (void)setupTheConnectAndCancelButtons {
     UIColor *colorToUseHere = [UIColor colorWithRed:0 green:0.2 blue:0.4 alpha:1];
-    //    UIColor *colorToUseHere = [UIColor colorWithRed:0.42 green:0.45 blue:0.47 alpha:0.97];
     UIColor *backgroundColorsForBothButtons = [UIColor clearColor];
     
     UIColor *normalStateColor = [colorToUseHere copy];
-    //    UIColor *disabledStateColor= [[colorToUseHere copy] colorWithAlphaComponent:0.4];
     
     
     [self.cancelProp setTitleColor:normalStateColor forState:UIControlStateNormal];
     [self.cancelProp.titleLabel setTextAlignment:NSTextAlignmentCenter];
     self.cancelProp.titleLabel.font = [UIFont systemFontOfSize:20];
-    //    self.cancelProp.layer.borderWidth = 0.3;
-    //    self.cancelProp.layer.borderColor = [UIColor blackColor].CGColor;
-    //    self.cancelProp.layer.cornerRadius = 12.5;
-    //    self.cancelProp.clipsToBounds = YES;
+
     [self.cancelProp setTitle:@"X" forState:UIControlStateNormal];
     self.cancelProp.backgroundColor = backgroundColorsForBothButtons;
     
@@ -561,6 +487,10 @@ static const NSInteger kMaxNumberOfPlayers = 6;
                                    
                                } withFailureBlock:^(NSError *error) {
                                    NSLog(@"Error: %@", error.localizedDescription);
+                                   
+                                   // TODO: handle if firebase is down.  Confirm that this block is called if firebase servers are down.
+                                   // TODO: Handle timeouts if very slow interenet.
+                                   // TODO: Be cooler.
                                }];
 }
 
@@ -841,17 +771,12 @@ static const NSInteger kMaxNumberOfPlayers = 6;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     SBGameScreenViewController *destVC = (SBGameScreenViewController *)segue.destinationViewController;
     
-    //ToDo: Is referencing self.firebaseRef & self.currentUser here a retain cycle?
     destVC.ref = self.firebaseRef;
     destVC.currentPlayer = self.currentUser;
     destVC.roomDigits = [self.digitsToPassForward copy];
     destVC.IDOfCurrentPlayer = [self.IDOfCurrentUser copy];
     destVC.randomMonsterName = [self.currentUser.monster copy];
     destVC.currentPlayerName = [self.currentUser.name copy];
-    
-    
-    
-    
     
     [self.firebaseRef removeAllObservers];
     

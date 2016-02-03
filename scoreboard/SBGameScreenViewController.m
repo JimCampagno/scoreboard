@@ -621,13 +621,11 @@
     
     if ([pickerView isEqual:_victoryPoints]) {
         if ([self.currentPlayer.vp integerValue] != row) {
-            //            [self runTheStarParticles];
             [self updateTheVPOfTheCurrentUserOnFirebaseWithSelectedRow:row];
             self.currentPlayer.vp = @(row);
         }
     } else {
         if ([self.currentPlayer.hp integerValue] != row) {
-            //            [self runTheHeartParticles];
             [self updateTheHPOfTheCurrentUserOnFirebaseWithSelectedRow:row];
             self.currentPlayer.hp = @(row);
         }

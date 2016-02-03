@@ -31,8 +31,7 @@
 static NSString *const kCellIdentifier = @"MonsterCell";
 static const CGFloat SBChangeMVCWidthMultiplier = 0.8;
 static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
-//static const CGFloat HeightOfMonsterButtonDivisor = 3;
-//static const CGFloat WidthOfMonsterButtonDivisor = 0.5;
+
 
 @implementation SBChangeMonsterViewController
 
@@ -168,43 +167,6 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
     }];
 }
 
-//- (void)setupMonsterButtons {
-//    NSInteger numberOfAvailableMonsters = [self.monsterNames count];
-//    for (NSInteger i = 0; i < numberOfAvailableMonsters; ++i) {
-//
-//        switch (i) {
-//            case 0:
-//                self.monsterOne = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-//                [self.view addSubview:self.monsterOne];
-//                break;
-//            case 1:
-//                self.monsterTwo = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-//                [self.view addSubview:self.self.monsterTwo];
-//                break;
-//            case 2:
-//                self.monsterThree = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-//                [self.view addSubview:self.self.monsterThree];
-//                break;
-//            case 3:
-//                self.monsterFour = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-//                [self.view addSubview:self.monsterFour];
-//                break;
-//            case 4:
-//                self.monsterFive = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-//                [self.view addSubview:self.monsterFive];
-//                break;
-//            case 5:
-//                self.monsterSix = [self createMonsterButtonWithMonsterName:self.monsterNames[i]];
-//                [self.view addSubview:self.monsterSix];
-//                break;
-//            default:
-//                [NSException raise:NSInvalidArgumentException format:@"Array contains more than 6 monsters, this isn't correct.  Make sure the monsterName array contains 6 monsters."];
-//                break;
-//        }
-//    }
-//    [self setupConstraintsForMonsterButtons];
-//}
-
 - (void)setupLabel {
     UILabel *monsterLabel = [UILabel new];
     monsterLabel.textAlignment = NSTextAlignmentCenter;
@@ -262,61 +224,6 @@ static const CGFloat SBChangeMVCHeightMultiplier = 0.7;
     }];
 }
 
-
-#pragma mark - Helper Methods
-
-//- (UIButton *)createMonsterButtonWithMonsterName:(NSString *)monsterName {
-//    UIButton *monsterButton = [UIButton buttonWithType:UIButtonTypeSystem];
-//
-//    [monsterButton addTarget:self
-//                      action:@selector(monsterTapped:)
-//            forControlEvents:UIControlEventTouchUpInside];
-//
-//    [monsterButton setTitle:monsterName
-//                   forState:UIControlStateNormal];
-//    [monsterButton setTitleColor:[UIColor clearColor]
-//                        forState:UIControlStateNormal];
-//
-//    UIImage *robMonster = [UIImage imageNamed:[NSString stringWithFormat:@"%@_384", monsterName]];
-//    [monsterButton setBackgroundImage:robMonster
-//                             forState:UIControlStateNormal];
-//    return monsterButton;
-//}
-
-//- (void)setupConstraintsForMonsterButtons {
-//    [self.monsterOne mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-//        make.top.and.left.equalTo(self.changeMonsterView);
-//    }];
-//    [self.monsterTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-//        make.top.and.right.equalTo(self.changeMonsterView);
-//    }];
-//    [self.monsterThree mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-//        make.top.equalTo(self.monsterOne.mas_bottom);
-//        make.left.equalTo(self.changeMonsterView);
-//    }];
-//    [self.monsterFour mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-//        make.top.equalTo(self.monsterTwo.mas_bottom);
-//        make.right.equalTo(self.changeMonsterView);
-//    }];
-//    [self.monsterFive mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-//        make.bottom.and.left.equalTo(self.changeMonsterView);
-//    }];
-//    [self.monsterSix mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(self.changeMonsterView).multipliedBy(WidthOfMonsterButtonDivisor);
-//        make.height.equalTo(self.changeMonsterView).dividedBy(HeightOfMonsterButtonDivisor);
-//        make.bottom.and.right.equalTo(self.changeMonsterView);
-//    }];
-//}
 
 #pragma mark - Action Methods
 
