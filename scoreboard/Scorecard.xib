@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Scorecard">
@@ -23,35 +24,27 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monster Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="SkQ-Nh-BIf">
-                    <rect key="frame" x="0.0" y="0.0" width="217" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="OZt-5U-LkM" userLabel="Monster Name - Height"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="rfw-sK-C8Z">
-                    <rect key="frame" x="0.0" y="303" width="217" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="kuP-EV-GQ6" userLabel="Player Name - Height"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                    <color key="textColor" red="0.75558769702911377" green="0.75558769702911377" blue="0.75558769702911377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Dq-2HO" userLabel="Monster Image">
-                    <rect key="frame" x="0.0" y="20" width="217" height="283"/>
-                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-Dq-2HO" userLabel="Monster Image"/>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mj-Ng-cHE" userLabel="MAIN - holding top/bottom PV">
-                    <rect key="frame" x="217" y="0.0" width="217" height="323"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-Mp-bZm" userLabel="TOP - holding PV">
-                            <rect key="frame" x="86" y="16" width="125" height="130"/>
                             <subviews>
-                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-aE-agV" userLabel="Top Picker View">
-                                    <rect key="frame" x="-97" y="-43" width="320" height="216"/>
-                                </pickerView>
+                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-aE-agV" userLabel="Top Picker View"/>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="Dga-aE-agV" firstAttribute="centerX" secondItem="MhE-Mp-bZm" secondAttribute="centerX" id="QsS-D3-EqX" userLabel="Top Picker View - Center X"/>
@@ -59,25 +52,20 @@
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="Ueg-FQ-rtm">
-                            <rect key="frame" x="66" y="233" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="OYU-bb-JcA"/>
                                 <constraint firstAttribute="width" constant="20" id="Ool-f1-M7O"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="YZu-pP-hk8">
-                            <rect key="frame" x="66" y="71" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="9iY-fR-b2C"/>
                                 <constraint firstAttribute="width" constant="20" id="ydp-F0-bwZ"/>
                             </constraints>
                         </imageView>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCA-Ec-FRv" userLabel="BOTTOM - holding PV">
-                            <rect key="frame" x="86" y="178" width="125" height="130"/>
                             <subviews>
-                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View">
-                                    <rect key="frame" x="-97" y="-43" width="320" height="216"/>
-                                </pickerView>
+                                <pickerView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xe3-3W-iEg" userLabel="Bottom Picker View"/>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="Xe3-3W-iEg" firstAttribute="centerX" secondItem="sCA-Ec-FRv" secondAttribute="centerX" id="CMN-rx-naz" userLabel="Bottom Picker View - Center X"/>
@@ -85,16 +73,14 @@
                             </constraints>
                         </view>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIf-5Q-neB" userLabel="heartScene">
-                            <rect key="frame" x="11" y="177" width="130" height="130"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="130" id="oTE-wz-5G5"/>
                                 <constraint firstAttribute="height" constant="130" id="oac-m7-k4f"/>
                             </constraints>
                         </view>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tuo-He-cKv" userLabel="starScene">
-                            <rect key="frame" x="11" y="16" width="130" height="130"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="130" id="APj-JR-ISy"/>
                                 <constraint firstAttribute="height" constant="130" id="hCN-R1-nTN"/>
@@ -121,7 +107,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.10980392156862745" green="0.14509803921568629" blue="0.21568627450980393" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.10980392156862745" green="0.14509803921568629" blue="0.21568627450980393" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" constant="-40" id="0rh-BK-rbN"/>
                 <constraint firstItem="9eV-Dq-2HO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1qm-Hj-cxm" userLabel="Monster Image - Center Y"/>
